@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Pulsuojančio gradientinio CTA animacija */
+@keyframes pulseGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-pulseGradient {
+  background-size: 400% 400%;
+  animation: pulseGradient 15s ease infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
