@@ -26,15 +26,17 @@ export default function Ugdymas() {
 
   return (
     <main className="text-black font-sans">
-      {/* HERO */}
+      {/* HERO sekcija */}
       <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto"
+          className="max-w-5xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Ugdymo programa ir amžiaus grupės</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Ugdymo programa ir amžiaus grupės
+          </h1>
           <p className="text-lg font-light max-w-2xl">
             Susipažinkite su mūsų ugdymo principais ir treniruojamomis vaikų grupėmis.
           </p>
@@ -51,7 +53,9 @@ export default function Ugdymas() {
             transition={{ duration: 0.6 }}
             className="max-w-6xl mx-auto mb-24"
           >
-            <h2 className="text-3xl font-bold mb-6 text-[#007bb5] text-center">Mūsų ugdymo metodika</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[#007bb5] text-center">
+              Mūsų ugdymo metodika
+            </h2>
             <p className="text-lg text-gray-800 leading-relaxed mb-6 text-justify">
               FA Kaunas taiko <span className="font-semibold">Auri-Dohm</span> jaunimo ugdymo programą,
               orientuotą į visapusišką vaiko tobulėjimą. Daug dėmesio skiriama ne tik techniniams ir

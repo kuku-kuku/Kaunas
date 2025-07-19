@@ -7,12 +7,17 @@ export default function Kontaktai() {
     <main className="text-black font-sans">
       {/* HERO sekcija su gradientu */}
       <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-5xl mx-auto"
+        >
           <h1 className="text-4xl md:text-5xl font-bold drop-shadow-md">Kontaktai</h1>
           <p className="mt-4 text-lg font-light">
             Susisiekite su mumis – atsakysime į visus klausimus!
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* TURINYS su foninėm linijom */}

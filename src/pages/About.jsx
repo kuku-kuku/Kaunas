@@ -5,20 +5,19 @@ import BackgroundWrapper from '../components/BackgroundWrapper';
 export default function About() {
   return (
     <main className="text-black font-sans">
-      {/* HERO – išlieka be linijų */}
+      {/* HERO – be linijų, vienodai su kitais puslapiais */}
       <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Apie mus</h1>
-            <p className="text-lg font-light max-w-2xl">
-              Sužinokite, kaip gimė mūsų akademija ir kokiomis vertybėmis vadovaujamės kasdien.
-            </p>
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-5xl mx-auto"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Apie mus</h1>
+          <p className="text-lg font-light max-w-2xl">
+            Sužinokite, kaip gimė mūsų akademija ir kokiomis vertybėmis vadovaujamės kasdien.
+          </p>
+        </motion.div>
       </section>
 
       {/* TURINIO BLOKAS SU LINIJŲ FONU */}

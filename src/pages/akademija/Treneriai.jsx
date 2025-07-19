@@ -72,13 +72,13 @@ export default function Treneriai() {
 
   return (
     <main className="text-black font-sans">
-      {/* HERO */}
+      {/* HERO sekcija su gradientu */}
       <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto"
+          className="max-w-5xl mx-auto"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Mūsų treneriai</h1>
           <p className="text-lg font-light max-w-2xl">
