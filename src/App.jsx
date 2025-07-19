@@ -38,10 +38,11 @@ function LayoutWrapper({ children }) {
 function App() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Fiksuotas logotipas kairėje su šiek tiek tarpo nuo krašto */}
+      {/* Fiksuotas logotipas kairėje, responsyviai mažėjantis */}
       <Link
         to="/"
-        className="fixed top-4 left-0 z-[9999] ml-2 w-[120px] sm:w-[140px] md:w-[160px]"
+        className="fixed top-4 left-0 z-[9999] ml-2 
+                   w-[80px] sm:w-[100px] md:w-[120px] lg:w-[140px]"
       >
         <img
           src="/logo.png"
