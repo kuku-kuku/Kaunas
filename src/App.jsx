@@ -38,10 +38,10 @@ function LayoutWrapper({ children }) {
 function App() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Fiksuotas logotipas viršuje, prisitaikantis prie ekrano */}
+      {/* Fiksuotas logotipas kairėje su šiek tiek tarpo nuo krašto */}
       <Link
         to="/"
-        className="fixed top-4 left-4 sm:left-12 md:left-32 z-[9999] w-[80px] sm:w-[100px] md:w-[120px]"
+        className="fixed top-4 left-0 z-[9999] ml-2 w-[120px] sm:w-[140px] md:w-[160px]"
       >
         <img
           src="/logo.png"
@@ -53,7 +53,6 @@ function App() {
       <Navbar />
       <ScrollToTop />
 
-      {/* Layout turinys */}
       <LayoutWrapper>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -71,7 +70,6 @@ function App() {
         </Routes>
       </LayoutWrapper>
 
-      {/* Footer visiems puslapiams */}
       <Footer />
     </div>
   );
