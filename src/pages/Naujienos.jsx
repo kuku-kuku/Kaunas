@@ -45,16 +45,19 @@ function formatDate(dateStr) {
 export default function Naujienos() {
   return (
     <main className="text-black font-sans">
-      {/* HERO sekcija su tekstu KAIRĖJE */}
+      {/* HERO – centruotas, kaip kituose puslapiuose */}
       <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold drop-shadow-md">
-            Naujienos
-          </h1>
-          <p className="mt-4 text-lg font-light">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-5xl mx-auto text-center flex flex-col items-center"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Naujienos</h1>
+          <p className="text-lg font-light max-w-2xl">
             Naujausia informacija iš FA Kaunas gyvenimo
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* TURINYS */}

@@ -72,13 +72,13 @@ export default function Treneriai() {
 
   return (
     <main className="text-black font-sans">
-      {/* HERO sekcija su gradientu */}
+      {/* HERO */}
       <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto"
+          className="max-w-5xl mx-auto text-center flex flex-col items-center"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Mūsų treneriai</h1>
           <p className="text-lg font-light max-w-2xl">
@@ -97,7 +97,7 @@ export default function Treneriai() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                className="relative rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer"
                 onClick={() => setAktyvus(t.id)}
               >
                 <img
@@ -105,10 +105,9 @@ export default function Treneriai() {
                   alt={t.vardas}
                   className="w-full h-[360px] object-cover object-top"
                 />
-                <div className="p-4 flex flex-col gap-2">
-                  <h2 className="text-xl font-semibold text-[#0077cc]">{t.vardas}</h2>
-                  <p className="text-sm text-gray-600">Amžius: {t.amzius}</p>
-                  <p className="text-sm text-gray-700">{t.trumpai}</p>
+                {/* Permatomas vardas apačioje */}
+                <div className="absolute bottom-0 left-0 w-full bg-white/70 backdrop-blur-md text-black px-4 py-2">
+                  <h2 className="text-lg font-semibold">{t.vardas}</h2>
                 </div>
               </motion.div>
             ))}
@@ -141,9 +140,15 @@ export default function Treneriai() {
                 &times;
               </button>
 
-              <h2 className="text-2xl font-bold mb-4 text-[#007bb5]">
+              <h2 className="text-2xl font-bold mb-2 text-[#007bb5]">
                 {treneriai.find((t) => t.id === aktyvus)?.vardas}
               </h2>
+              <p className="text-sm text-gray-600 mb-2">
+                Amžius: {treneriai.find((t) => t.id === aktyvus)?.amzius}
+              </p>
+              <p className="text-base font-medium mb-4 text-gray-800">
+                {treneriai.find((t) => t.id === aktyvus)?.trumpai}
+              </p>
               <p className="whitespace-pre-line">
                 {treneriai.find((t) => t.id === aktyvus)?.aprasymas}
               </p>

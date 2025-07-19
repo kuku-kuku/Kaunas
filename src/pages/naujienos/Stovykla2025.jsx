@@ -19,11 +19,11 @@ export default function Stovykla2025() {
   }, []);
 
   return (
-    <section className="w-full min-h-screen bg-white px-6 py-16">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center min-h-[80vh]">
+    <section className="w-full bg-white px-6 py-16">
+      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 items-center">
         {/* Tekstas */}
         <motion.div
-          className="space-y-6 flex flex-col justify-center h-full"
+          className="space-y-6 flex flex-col justify-center"
           initial="hidden"
           animate="visible"
           variants={{
@@ -116,7 +116,7 @@ export default function Stovykla2025() {
         </motion.div>
 
         {/* Karuselė */}
-        <div className="relative h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
+        <div className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] overflow-hidden rounded-xl shadow-md flex items-center justify-center">
           {images.map((img, index) => (
             <img
               key={index}

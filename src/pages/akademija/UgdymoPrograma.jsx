@@ -32,7 +32,7 @@ export default function Ugdymas() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto"
+          className="max-w-5xl mx-auto text-center flex flex-col items-center"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Ugdymo programa ir amžiaus grupės
