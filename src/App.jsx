@@ -17,7 +17,6 @@ import Stovykla2025 from './pages/naujienos/Stovykla2025';
 import HegelmanTurnyras from "./pages/naujienos/HegelmanTurnyras";
 import SummerVictory2025 from './pages/naujienos/SummerVictory';
 
-
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -39,12 +38,15 @@ function LayoutWrapper({ children }) {
 function App() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Fiksuotas logotipas viršuje kairėje */}
-      <Link to="/" className="fixed top-4 left-56 z-[9999]">
+      {/* Fiksuotas logotipas viršuje, prisitaikantis prie ekrano */}
+      <Link
+        to="/"
+        className="fixed top-4 left-4 sm:left-12 md:left-32 z-[9999] w-[80px] sm:w-[100px] md:w-[120px]"
+      >
         <img
           src="/logo.png"
           alt="FA Kaunas logotipas"
-          className="h-32 w-auto object-contain"
+          className="w-full h-auto object-contain"
         />
       </Link>
 
