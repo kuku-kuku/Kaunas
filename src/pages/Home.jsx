@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+
+const MotionLink = motion(Link);
 
 const images = ['/hero.jpg', '/hero2.jpg', '/hero3.jpg'];
 
@@ -50,15 +53,15 @@ export default function HomePage() {
           >
             Kur ugdomos asmenybės, charakteris ir aistra futbolui.
           </motion.p>
-          <motion.a
-            href="/apie"
+          <MotionLink
+            to="/apie"
             className="bg-[#4fc3f7] hover:bg-[#29b6f6] text-black font-semibold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl inline-block"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
             Apie mus
-          </motion.a>
+          </MotionLink>
         </div>
       </section>
 
@@ -81,15 +84,15 @@ export default function HomePage() {
           >
             FA Kaunas kviečia vaikus į profesionalias ir linksmas futbolo treniruotes. Kartu auginkime talentą, komandinį dvasią ir meilę sportui.
           </motion.p>
-          <motion.a
-            href="/kontaktai"
+          <MotionLink
+            to="/kontaktai"
             className="bg-[#4fc3f7] hover:bg-[#29b6f6] text-black font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl inline-block"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
             Registruokis treniruotėms
-          </motion.a>
+          </MotionLink>
         </div>
 
         <div className="absolute -top-10 -right-10 w-96 h-96 bg-[#4fc3f7] opacity-20 rounded-full blur-3xl pointer-events-none" />
@@ -110,8 +113,8 @@ export default function HomePage() {
             <img src="/partners/unomeda.png" alt="Unomeda" className="h-20 mx-auto object-contain" />
           </a>
 
-          {[{
-            href: 'https://www.med-us.eu/', src: '/partners/medus.png', alt: 'Medus' },
+          {[
+            { href: 'https://www.med-us.eu/', src: '/partners/medus.png', alt: 'Medus' },
             { href: 'https://camelia.lt/', src: '/partners/camelia.png', alt: 'Camelia' },
             { href: 'https://brandus.lt/', src: '/partners/brandus.png', alt: 'Brandus' },
           ].map((partner, index) => (
