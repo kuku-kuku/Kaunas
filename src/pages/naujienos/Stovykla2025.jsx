@@ -19,8 +19,8 @@ export default function Stovykla2025() {
   }, []);
 
   return (
-    <section className="w-full bg-white px-6 py-16">
-      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 items-center">
+    <section className="w-full min-h-screen bg-white px-6 py-16">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
         {/* Tekstas */}
         <motion.div
           className="space-y-6 flex flex-col justify-center"
@@ -40,10 +40,11 @@ export default function Stovykla2025() {
               hidden: { opacity: 0, y: -20 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="inline-block bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md"
+            className="inline-block w-fit bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md mt-14 sm:mt-0"
           >
             Stovyklos apžvalga
           </motion.div>
+
 
           <motion.h1
             variants={{
@@ -52,8 +53,7 @@ export default function Stovykla2025() {
             }}
             className="text-3xl md:text-4xl font-bold text-gray-900"
           >
-            Dalis FA „Kaunas“ auklėtinių sezoną užbaigė smagioje dienos
-            stovykloje, o dalis turnyruose!
+            Dalis FA „Kaunas“ auklėtinių sezoną užbaigė smagioje dienos stovykloje, o dalis turnyruose!
           </motion.h1>
 
           <motion.p
@@ -71,22 +71,15 @@ export default function Stovykla2025() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="bg-gray-100 p-5 rounded-lg shadow-sm"
+            className="bg-gray-100 p-5 rounded-lg shadow-sm space-y-4"
           >
             <p className="text-lg text-gray-800 leading-relaxed">
               <strong>Trenerių Tomo ir Gabrieliaus komentaras:</strong>
             </p>
-            <p className="mt-3 text-lg text-gray-700 leading-relaxed">
-              „Vaikai ne tik aktyviai sportavo du kartus per dieną, bet ir
-              turiningai leido laiką įvairiose veiklose. Aplankėme kino teatrą,
-              dalyvavome viktorinoje, kūrėme kūrybinėse dirbtuvėse, tyrinėjome
-              Mokslo salą, lankėmės baseine, kur vaikai įgijo saugaus elgesio
-              vandenyje pažymėjimus, išbandėme VR kambario pramogas ir dar
-              daugiau.
-              <br />
-              <br />
-              Smagiausia matyti spindinčias vaikų akis, jų džiaugsmą, naujas
-              patirtis ir augantį pasitikėjimą savimi. Tai – neįkainojama.“
+            <p className="text-lg text-gray-700 leading-relaxed">
+              „Vaikai ne tik aktyviai sportavo du kartus per dieną, bet ir turiningai leido laiką įvairiose veiklose. Aplankėme kino teatrą, dalyvavome viktorinoje, kūrėme kūrybinėse dirbtuvėse, tyrinėjome Mokslo salą, lankėmės baseine, kur vaikai įgijo saugaus elgesio vandenyje pažymėjimus, išbandėme VR kambario pramogas ir dar daugiau.
+              <br /><br />
+              Smagiausia matyti spindinčias vaikų akis, jų džiaugsmą, naujas patirtis ir augantį pasitikėjimą savimi. Tai – neįkainojama.“
             </p>
           </motion.div>
 
@@ -116,7 +109,7 @@ export default function Stovykla2025() {
         </motion.div>
 
         {/* Karuselė */}
-        <div className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] overflow-hidden rounded-xl shadow-md flex items-center justify-center">
+        <div className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
           {images.map((img, index) => (
             <img
               key={index}

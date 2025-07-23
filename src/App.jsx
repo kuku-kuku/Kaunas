@@ -8,6 +8,7 @@ import Kontaktai from './pages/Kontaktai';
 import Tikslai from './pages/apie/Tikslai';
 import EtikosKodeksas from './pages/apie/EtikosKodeksas';
 
+import Akademija from './pages/Akademija';
 import Treneriai from './pages/akademija/Treneriai';
 import UgdymoPrograma from './pages/akademija/UgdymoPrograma';
 
@@ -60,6 +61,7 @@ function App() {
           <Route path="/apie" element={<About />} />
           <Route path="/apie/tikslai" element={<Tikslai />} />
           <Route path="/apie/etikos-kodeksas" element={<EtikosKodeksas />} />
+          <Route path="/akademija" element ={<Akademija />} />
           <Route path="/akademija/treneriai" element={<Treneriai />} />
           <Route path="/akademija/ugdymo-programa" element={<UgdymoPrograma />} />
           <Route path="/prisijunk" element={<Prisijunk />} />

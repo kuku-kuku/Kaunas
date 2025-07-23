@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const images = [
-  '/naujienos/summervictory.jpg', 
+  '/naujienos/summervictory.jpg',
   '/naujienos/summervictory1.jpg',
   '/naujienos/summervictory2.jpg',
   '/naujienos/summervictory3.jpg',
@@ -21,11 +21,11 @@ export default function SummerVictory2025() {
   }, []);
 
   return (
-    <section className="w-full min-h-screen bg-white px-6 py-16">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center min-h-[80vh]">
+    <section className="w-full min-h-screen bg-white px-4 sm:px-6 py-12 sm:py-16 flex items-center">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Tekstas */}
         <motion.div
-          className="space-y-6 flex flex-col justify-center h-full"
+          className="space-y-6 flex flex-col justify-center"
           initial="hidden"
           animate="visible"
           variants={{
@@ -42,17 +42,18 @@ export default function SummerVictory2025() {
               hidden: { opacity: 0, y: -20 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="inline-block bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md"
+            className="inline-block bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md mt-16 md:mt-0"
           >
             Summer Victory CUP
           </motion.div>
+
 
           <motion.h1
             variants={{
               hidden: { opacity: 0, y: -10 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="text-3xl md:text-4xl font-bold text-gray-900"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900"
           >
             Trijų komandų sezonas baigėsi turnyre Garliavoje
           </motion.h1>
@@ -111,7 +112,7 @@ export default function SummerVictory2025() {
         </motion.div>
 
         {/* Karuselė */}
-        <div className="relative h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
+        <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
           {images.map((img, index) => (
             <img
               key={index}

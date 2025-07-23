@@ -105,9 +105,9 @@ export default function Treneriai() {
                   alt={t.vardas}
                   className="w-full h-[360px] object-cover object-top"
                 />
-                {/* Permatomas vardas apačioje */}
                 <div className="absolute bottom-0 left-0 w-full bg-white/70 backdrop-blur-md text-black px-4 py-2">
                   <h2 className="text-lg font-semibold">{t.vardas}</h2>
+                  <p className="text-sm text-gray-700">Daugiau apie trenerį</p>
                 </div>
               </motion.div>
             ))}
