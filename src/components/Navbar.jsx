@@ -91,7 +91,7 @@ export default function Navbar() {
         {/* MOBILE BURGER */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-white absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-md hover:bg-white/10 transition-all"
+          className="md:hidden text-white absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-md transition-all"
           aria-label="Open menu"
         >
           {mobileOpen ? <X size={30} /> : <Menu size={30} />}
