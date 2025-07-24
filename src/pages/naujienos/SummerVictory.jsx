@@ -47,7 +47,6 @@ export default function SummerVictory2025() {
             Summer Victory CUP
           </motion.div>
 
-
           <motion.h1
             variants={{
               hidden: { opacity: 0, y: -10 },
@@ -95,34 +94,30 @@ export default function SummerVictory2025() {
           >
             FA Kaunas – nuo svajonės iki realybės!
           </motion.p>
-
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 5 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          >
-            <Link
-              to="/naujienos"
-              className="inline-block mt-6 text-sky-600 hover:underline font-medium"
-            >
-              ← Grįžti į naujienas
-            </Link>
-          </motion.div>
         </motion.div>
 
-        {/* Karuselė */}
-        <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
-          {images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt="Turnyro nuotrauka"
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                index === current ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
-          ))}
+        {/* Karuselė + mygtukas */}
+        <div className="flex flex-col items-center gap-6">
+          <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
+            {images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt="Turnyro nuotrauka"
+                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                  index === current ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Perkeltas mygtukas čia */}
+          <Link
+            to="/naujienos"
+            className="inline-block text-sky-600 hover:underline font-medium"
+          >
+            ← Grįžti į naujienas
+          </Link>
         </div>
       </div>
     </section>

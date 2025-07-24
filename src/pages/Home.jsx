@@ -38,7 +38,7 @@ export default function HomePage() {
         {/* Centruotas tekstas */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 text-white">
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg"
+            className="text-[16px] sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -100,20 +100,14 @@ export default function HomePage() {
       </section>
 
       {/* PARTNERIAI */}
-      <section className="bg-gray-50 py-20 px-6 text-center">
+      <section className="bg-white py-20 px-6 text-center">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 text-black">Mūsų partneriai</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 items-center justify-center">
-          {/* UNOMEDA – pagrindinis */}
-          <a
-            href="https://unomeda.lt/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transform transition hover:scale-110 hover:opacity-90 col-span-2"
-          >
-            <img src="/partners/unomeda.png" alt="Unomeda" className="h-20 mx-auto object-contain" />
-          </a>
-
+        <div
+          className="grid gap-8 justify-center"
+          style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}
+        >
           {[
+            { href: 'https://unomeda.lt/', src: '/partners/unomeda.png', alt: 'Unomeda' },
             { href: 'https://www.med-us.eu/', src: '/partners/medus.png', alt: 'Medus' },
             { href: 'https://camelia.lt/', src: '/partners/camelia.png', alt: 'Camelia' },
             { href: 'https://brandus.lt/', src: '/partners/brandus.png', alt: 'Brandus' },
@@ -123,9 +117,15 @@ export default function HomePage() {
               href={partner.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="transform transition hover:scale-110 hover:opacity-90"
+              className="transform transition duration-300 hover:scale-105 hover:opacity-100"
             >
-              <img src={partner.src} alt={partner.alt} className="h-16 mx-auto object-contain" />
+              <div className="flex items-center justify-center bg-white p-4 h-52">
+                <img
+                  src={partner.src}
+                  alt={partner.alt}
+                  className="h-40 object-contain mx-auto"
+                />
+              </div>
             </a>
           ))}
         </div>

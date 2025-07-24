@@ -37,7 +37,7 @@ export default function HegelmanTurnyras() {
               hidden: { opacity: 0, y: -20 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="inline-block w-fit bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md mt-14 sm:mt-0"
+            className="inline-block bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md mt-16 md:mt-0"
           >
             Hegelman turnyras
           </motion.div>
@@ -88,34 +88,30 @@ export default function HegelmanTurnyras() {
           >
             FA Kaunas – nuo svajonės iki realybės!
           </motion.p>
-
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 5 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          >
-            <Link
-              to="/naujienos"
-              className="inline-block mt-6 text-sky-600 hover:underline font-medium"
-            >
-              ← Grįžti į naujienas
-            </Link>
-          </motion.div>
         </motion.div>
 
-        {/* Karuselė */}
-        <div className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
-          {images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt="Hegelman turnyro nuotrauka"
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                index === current ? 'opacity-100' : 'opacity-0'
-              }`}
-            />
-          ))}
+        {/* Karuselė + mygtukas */}
+        <div className="flex flex-col items-center gap-6">
+          <div className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
+            {images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt="Hegelman turnyro nuotrauka"
+                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                  index === current ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Perkeltas mygtukas čia */}
+          <Link
+            to="/naujienos"
+            className="inline-block text-sky-600 hover:underline font-medium"
+          >
+            ← Grįžti į naujienas
+          </Link>
         </div>
       </div>
     </section>
