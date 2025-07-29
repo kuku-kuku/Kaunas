@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
   '/naujienos/summervictory.jpg',
@@ -12,13 +13,31 @@ const images = [
 
 export default function SummerVictory2025() {
   const [current, setCurrent] = useState(0);
+  const [isManual, setIsManual] = useState(false);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+    if (!isManual) {
+      intervalRef.current = setInterval(() => {
+        setCurrent((prev) => (prev + 1) % images.length);
+      }, 4000);
+    }
+
+    return () => clearInterval(intervalRef.current);
+  }, [isManual]);
+
+  const handleManualChange = (newIndex) => {
+    setIsManual(true);
+    setCurrent(newIndex);
+  };
+
+  const handlePrev = () => {
+    handleManualChange(current === 0 ? images.length - 1 : current - 1);
+  };
+
+  const handleNext = () => {
+    handleManualChange((current + 1) % images.length);
+  };
 
   return (
     <section className="w-full min-h-screen bg-white px-4 sm:px-6 py-12 sm:py-16 flex items-center">
@@ -96,7 +115,7 @@ export default function SummerVictory2025() {
           </motion.p>
         </motion.div>
 
-        {/* Karuselė + mygtukas */}
+        {/* Karuselė su rodyklėm ir orbais */}
         <div className="flex flex-col items-center gap-6">
           <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
             {images.map((img, index) => (
@@ -109,9 +128,35 @@ export default function SummerVictory2025() {
                 }`}
               />
             ))}
+
+            <button
+              onClick={handlePrev}
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md hover:scale-110 transition"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              onClick={handleNext}
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md hover:scale-110 transition"
+            >
+              <ChevronRight size={24} />
+            </button>
+
+            <div className="absolute bottom-4 w-full flex justify-center gap-2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleManualChange(index)}
+                  className={`w-3 h-3 rounded-full ${
+                    index === current
+                      ? 'bg-white'
+                      : 'bg-transparent border border-white'
+                  } transition transform hover:scale-110`}
+                ></button>
+              ))}
+            </div>
           </div>
 
-          {/* Perkeltas mygtukas čia */}
           <Link
             to="/naujienos"
             className="inline-block text-sky-600 hover:underline font-medium"

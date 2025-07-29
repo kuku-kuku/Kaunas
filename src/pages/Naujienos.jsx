@@ -45,7 +45,7 @@ function formatDate(dateStr) {
 export default function Naujienos() {
   return (
     <main className="text-black font-sans">
-      {/* HERO – centruotas, kaip kituose puslapiuose */}
+      {/* HERO sekcija */}
       <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -70,40 +70,40 @@ export default function Naujienos() {
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10"
           >
             {newsData.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.03 }}
-                transition={{
-                  delay: index * 0.1,
-                  duration: 0.4,
-                  ease: "easeOut",
-                }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="h-56 w-full object-cover"
-                />
-                <div className="p-6 flex flex-col justify-between flex-grow">
-                  <p className="text-sm text-gray-500 mb-2">
-                    {formatDate(item.date)}
-                  </p>
-                  <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                  <p className="text-gray-700 text-base mb-4 flex-grow">
-                    {item.summary}
-                  </p>
-                  <Link
-                    to={item.link}
-                    className="text-[#007bb5] font-medium hover:underline mt-auto"
-                  >
-                    Skaityti daugiau →
-                  </Link>
-                </div>
-              </motion.div>
+              <Link to={item.link} key={item.id}>
+                <motion.div
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{
+                    delay: index * 0.1,
+                    duration: 0.4,
+                    ease: "easeOut",
+                  }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col cursor-pointer"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-56 w-full object-cover"
+                  />
+                  <div className="p-6 flex flex-col justify-between flex-grow">
+                    <p className="text-sm text-gray-500 mb-2">
+                      {formatDate(item.date)}
+                    </p>
+                    <h3 className="text-xl font-semibold mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-700 text-base mb-4 flex-grow">
+                      {item.summary}
+                    </p>
+                    <p className="text-[#007bb5] font-medium mt-auto">
+                      Skaityti daugiau →
+                    </p>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
         </section>
