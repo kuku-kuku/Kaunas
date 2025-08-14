@@ -4,7 +4,7 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 
 export default function Prisijunk() {
   const shouldReduce = useReducedMotion();
-  const communityImg = "/public/bendruomene.jpg"; // <-- pakeisk, jei failas kitur
+  const communityImg = "/bendruomene.jpg"; // <-- pakeisk, jei failas kitur
 
   // Sklandžios, profesionalios animacijos
   const blockFade = {
