@@ -1,28 +1,66 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import BackgroundWrapper from '../../components/BackgroundWrapper';
 
 export default function Ugdymas() {
+  const shouldReduce = useReducedMotion();
+
+  // Nauja, tvarkinga struktūra pagal tavo sąrašą
   const grupes = [
     {
-      pavadinimas: 'U9',
       metai: '2015 / 2016',
+      pogrupis: 'A',
       vyrTreneris: 'Gabrielius Zagurskas',
-      treneriai: ['Lukas Sipavičius', 'Tomas Macelis'],
+      asistentai: ['Marius Činikas'],
     },
     {
-      pavadinimas: 'U7',
-      metai: '2017 / 2018',
-      vyrTreneris: 'Ernestas Bernota',
-      treneriai: ['Tomas Macelis'],
-    },
-    {
-      pavadinimas: 'U5',
-      metai: '2019 / 2020',
+      metai: '2015 / 2016',
+      pogrupis: 'B',
       vyrTreneris: 'Lukas Sipavičius',
-      treneriai: [],
+      asistentai: ['Tomas Macelis'],
+    },
+    {
+      metai: '2017 / 2018',
+      pogrupis: null,
+      vyrTreneris: 'Marius Činikas',
+      asistentai: ['Ernestas Bernota'],
+    },
+    {
+      metai: '2019 / 2020 / 2021',
+      pogrupis: null,
+      vyrTreneris: 'Tomas Macelis',
+      asistentai: ['Lukas Sipavičius', 'Gabrielius Zagurskas'],
     },
   ];
+
+  // Švelnios, profesionalios animacijos
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: shouldReduce
+      ? { opacity: 0 }
+      : { opacity: 0, scale: 0.985, filter: 'blur(6px)' },
+    show: shouldReduce
+      ? { opacity: 1, transition: { duration: 0.25 } }
+      : {
+          opacity: 1,
+          scale: 1,
+          filter: 'blur(0px)',
+          transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+        },
+  };
+
+  const blockVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { duration: 0.5 } },
+  };
 
   return (
     <main className="text-black font-sans">
@@ -48,9 +86,10 @@ export default function Ugdymas() {
         <section className="py-20 px-6 md:px-12 lg:px-24">
           {/* Ugdymo metodika */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={blockVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
             className="max-w-6xl mx-auto mb-24"
           >
             <h2 className="text-3xl font-bold mb-6 text-[#007bb5] text-center">
@@ -72,43 +111,57 @@ export default function Ugdymas() {
 
           {/* Amžiaus grupės */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={blockVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
           >
             <h2 className="text-3xl font-bold text-center mb-12 text-[#007bb5]">
               Treniruojamos amžiaus grupės
             </h2>
-            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-              {grupes.map((g, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+            >
+              {grupes.map((g, idx) => (
+                <motion.article
+                  key={`${g.metai}-${g.vyrTreneris}-${idx}`}
+                  variants={cardVariants}
                   className="bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-100 transition-all p-6"
                 >
-                  <h3 className="text-2xl font-bold text-[#007bb5] mb-2">{g.pavadinimas}</h3>
-                  <p className="text-gray-700 mb-2">
-                    <span className="font-medium">Gimimo metai:</span> {g.metai}
-                  </p>
+                  {/* Header: metai + pogrupis */}
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-2xl font-bold text-[#007bb5]">{g.metai}</h3>
+                    {g.pogrupis && (
+                      <span className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium bg-cyan-50 border-cyan-200 text-cyan-800">
+                        Pogrupis {g.pogrupis}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Vyr. treneris */}
                   <p className="text-gray-800 mb-2">
                     <span className="font-medium">Vyr. treneris:</span> {g.vyrTreneris}
                   </p>
-                  {g.treneriai.length > 0 && (
-                    <div>
-                      <p className="font-medium text-gray-800 mb-1">Kiti treneriai:</p>
-                      <ul className="list-disc list-inside text-gray-700">
-                        {g.treneriai.map((t, i) => (
-                          <li key={i}>{t}</li>
+
+                  {/* Asistentai */}
+                  {g.asistentai?.length > 0 && (
+                    <div className="mt-2">
+                      <p className="font-medium text-gray-800 mb-1">Trenerio asistentai:</p>
+                      <ul className="list-disc list-inside text-gray-700 space-y-1">
+                        {g.asistentai.map((v, i) => (
+                          <li key={i}>{v}</li>
                         ))}
                       </ul>
                     </div>
                   )}
-                </motion.div>
+                </motion.article>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         </section>
       </BackgroundWrapper>
