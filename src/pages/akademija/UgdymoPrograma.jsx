@@ -9,25 +9,25 @@ export default function Ugdymas() {
   const grupes = [
     {
       metai: '2015 / 2016',
-      pogrupis: 'A',
+      grupe: 'A',
       vyrTreneris: 'Gabrielius Zagurskas',
       asistentai: ['Marius Činikas'],
     },
     {
       metai: '2015 / 2016',
-      pogrupis: 'B',
+      grupe: 'B',
       vyrTreneris: 'Lukas Sipavičius',
       asistentai: ['Tomas Macelis'],
     },
     {
       metai: '2017 / 2018',
-      pogrupis: null,
+      grupe: null,
       vyrTreneris: 'Marius Činikas',
       asistentai: ['Ernestas Bernota'],
     },
     {
       metai: '2019 / 2020 / 2021',
-      pogrupis: null,
+      grupe: null,
       vyrTreneris: 'Tomas Macelis',
       asistentai: ['Lukas Sipavičius', 'Gabrielius Zagurskas'],
     },
@@ -136,9 +136,9 @@ export default function Ugdymas() {
                   {/* Header: metai + pogrupis */}
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-2xl font-bold text-[#007bb5]">{g.metai}</h3>
-                    {g.pogrupis && (
+                    {g.grupe && (
                       <span className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium bg-cyan-50 border-cyan-200 text-cyan-800">
-                        Pogrupis {g.pogrupis}
+                        Grupe {g.grupe}
                       </span>
                     )}
                   </div>
