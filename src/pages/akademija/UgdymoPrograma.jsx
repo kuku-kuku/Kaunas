@@ -5,7 +5,7 @@ import BackgroundWrapper from '../../components/BackgroundWrapper';
 export default function Ugdymas() {
   const shouldReduce = useReducedMotion();
 
-  // Nauja, tvarkinga struktūra pagal tavo sąrašą
+  // Tavo nurodytos grupės (palikta kaip buvo)
   const grupes = [
     {
       metai: '2015 / 2016',
@@ -33,28 +33,16 @@ export default function Ugdymas() {
     },
   ];
 
-  // Švelnios, profesionalios animacijos
   const containerVariants = {
     hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.08,
-      },
-    },
+    show: { transition: { staggerChildren: 0.08 } },
   };
 
   const cardVariants = {
-    hidden: shouldReduce
-      ? { opacity: 0 }
-      : { opacity: 0, scale: 0.985, filter: 'blur(6px)' },
+    hidden: shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 0.985, filter: 'blur(6px)' },
     show: shouldReduce
       ? { opacity: 1, transition: { duration: 0.25 } }
-      : {
-          opacity: 1,
-          scale: 1,
-          filter: 'blur(0px)',
-          transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-        },
+      : { opacity: 1, scale: 1, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
   };
 
   const blockVariants = {
@@ -95,18 +83,23 @@ export default function Ugdymas() {
             <h2 className="text-3xl font-bold mb-6 text-[#007bb5] text-center">
               Mūsų ugdymo metodika
             </h2>
+
+            {/* Paliktas tiksliai tavo tekstas */}
             <p className="text-lg text-gray-800 leading-relaxed mb-6 text-justify">
-              FA Kaunas taiko <span className="font-semibold">Auri-Dohm</span> jaunimo ugdymo programą,
-              orientuotą į visapusišką vaiko tobulėjimą. Daug dėmesio skiriama ne tik techniniams ir
-              taktiniams futbolo aspektams, bet ir asmenybės vystymui bei vertybėms:
+              FA Kaunas jaunimo ugdymo programa orientuota į visapusišką vaiko tobulėjimą. Daug dėmesio skiriama ne tik
+              techniniams ir taktiniams futbolo aspektams, bet ir asmenybės vystymui bei vertybėms:
             </p>
+
             <ul className="list-disc list-inside text-gray-800 space-y-2 text-lg">
-              <li>Fizinio pasirengimo lavinimas</li>
               <li>Techninių įgūdžių tobulinimas</li>
               <li>Taktinio mąstymo ugdymas</li>
               <li>Psichologinis stabilumas ir bendravimas</li>
               <li>Asmenybės ir vertybių formavimas</li>
+              <li>Fizinio pasirengimo lavinimas</li>
             </ul>
+
+            {/* Subtili skiriamoji linija */}
+            <div className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
           </motion.div>
 
           {/* Amžiaus grupės */}
@@ -138,7 +131,7 @@ export default function Ugdymas() {
                     <h3 className="text-2xl font-bold text-[#007bb5]">{g.metai}</h3>
                     {g.grupe && (
                       <span className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium bg-cyan-50 border-cyan-200 text-cyan-800">
-                        Grupe {g.grupe}
+                        Grupė {g.grupe}
                       </span>
                     )}
                   </div>

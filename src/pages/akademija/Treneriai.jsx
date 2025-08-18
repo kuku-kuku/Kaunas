@@ -7,8 +7,8 @@ const treneriai = [
     id: 1,
     vardas: 'Gabrielius Zagurskas',
     amzius: 35,
-    nuotrauka: '/treneriai/zagas.jpg',
-    trumpai: 'UEFA A licencijos treneris, buvęs profesionalas, dirbantis su vaikais nuo 2021 metų.',
+    nuotrauka: '/treneriai/cinikas.jpg', // laikinai visiems ta pati
+    trumpai: 'Buvęs profesionalus futbolininkas, nuo 2021 metų visą dėmesį skiriantis futbolininkų treniravimui.',
     aprasymas: `UEFA A licencija
 
 Gabrielius yra vienas iš akademijos įkūrėjų. Jaunas, kupinas energijos, nestokojantis geros nuotaikos treneris, profesionalaus futbolininko karjerą baigęs 2021 m. Nuo to laiko visą dėmesį skiria jaunųjų futbolininkų ugdymui.
@@ -35,36 +35,6 @@ Trenerio karjera:
 - 2023–dabar LFF Regioninių talentų centras U10/U11 — vyr. treneris
 - 2024–dabar LFF U15 — nacionalinės rinktinės asistentas
 - 2025–dabar LFF 2 lyga — Kybartų „Sveikata“ vyr. treneris`,
-  },
-  {
-    id: 2,
-    vardas: 'Lukas Sipavičius',
-    amzius: 32,
-    nuotrauka: '/treneriai/sipavicius.jpg',
-    trumpai: 'Lietuvos salės futbolo rinktinės narys, UEFA C licencijos treneris.',
-    aprasymas: `UEFA C licencija
-
-Lukas – jaunas treneris, sukaupęs didelę patirtį dirbdamas su jaunimu. Buvęs Kauno „Žalgirio“ futsal komandos žaidėjas, atstovavęs I lygos klubams.
-
-Pasiekimai:
-- Lietuvos salės futbolo čempionas
-- 2 kartus LFF taurės nugalėtojas
-- LFF supertaurės nugalėtojas
-- Baltijos taurės nugalėtojas`,
-  },
-  {
-    id: 3,
-    vardas: 'Ernestas Bernota',
-    amzius: 28,
-    nuotrauka: '/treneriai/bernota.jpg',
-    trumpai: 'Ambicingas vartininkų treneris, sukaupęs patirties Sūduvoje ir kituose klubuose.',
-    aprasymas: `Licencija: LFF D
-
-Ernestas – ambicingas ir žingeidus treneris, visada siekiantis tobulėti. Futbolininko karjerą pradėjo Marijampolėje, kur perėjo visas amžiaus grupes. Sukaupė nemažą patirtį kaip vartininkas, treniruotas vieno geriausių vartininkų trenerių Lietuvoje – Audriaus Ramono.
-
-Klubai:
-- Marijampolės „Sūduvos“ dubleriai
-- Įvairūs II lygos ir žemesnių lygų klubai`,
   },
   {
     id: 4,
@@ -94,6 +64,51 @@ Pasiekimai:
 - 2017–2019 FK „Sūduva“ (Lietuva) / FK „Jonava“ (Lietuva)
 - 2019–2021 FK „Atlantas“ (Lietuva) / FK „Jonava“ (Lietuva)`,
   },
+  {
+    id: 2,
+    vardas: 'Lukas Sipavičius',
+    amzius: 32,
+    nuotrauka: '/treneriai/cinikas.jpg',
+    trumpai: 'Lietuvos salės futbolo rinktinės narys, UEFA C licencijos treneris.',
+    aprasymas: `UEFA C licencija
+
+Lukas – jaunas treneris, sukaupęs didelę patirtį dirbdamas su jaunimu. Buvęs Kauno „Žalgirio“ futsal komandos žaidėjas, atstovavęs I lygos klubams.
+
+Pasiekimai:
+- Lietuvos salės futbolo čempionas
+- 2 kartus LFF taurės nugalėtojas
+- LFF supertaurės nugalėtojas
+- Baltijos taurės nugalėtojas`,
+  },
+  {
+    id: 5,
+    vardas: 'Tomas Macelis',
+    amzius: 0,
+    nuotrauka: '/treneriai/cinikas.jpg',
+    trumpai: 'Kauno Žalgirio akademijos auklėtinis, patirtį kaupęs jaunimo komandose ir LFF 2 lygoje.',
+    aprasymas: `UEFA C licencija
+
+Kauno Žalgirio akademijos auklėtinis rungtyniavęs jaunimo komandose. 
+Vėliau treneris rungtyniavo LFF 2 lygoje VJFM Fortūnos komandoje, tuo pačiu pradėjo treniruoti jaunąją kartą.
+
+2022 prisijungė prie FA KAUNAS.
+
+Studijuoja Lietuvos sporto universitete. Treniravimo sistemų programoje, pasirinkęs atletinio rengimo specializaciją.`,
+  },
+  {
+    id: 3,
+    vardas: 'Ernestas Bernota',
+    amzius: 28,
+    nuotrauka: '/treneriai/cinikas.jpg',
+    trumpai: 'Ambicingas treneris, sukaupęs patirties Marijampolės Sūduvoje ir kitose komandose.',
+    aprasymas: `Licencija: LFF D
+
+Ernestas – ambicingas ir žingeidus treneris, visada siekiantis tobulėti. Futbolininko karjerą pradėjo Marijampolėje, kur perėjo visas amžiaus grupes. Sukaupė nemažą patirtį kaip vartininkas, treniruotas vieno geriausių vartininkų trenerių Lietuvoje – Audriaus Ramono.
+
+Klubai:
+- Marijampolės „Sūduvos“ dubleriai
+- Įvairūs II lygos ir žemesnių lygų klubai`,
+  },
 ];
 
 export default function Treneriai() {
@@ -106,7 +121,6 @@ export default function Treneriai() {
     [aktyvus]
   );
 
-  // ESC uždarymas ir body scroll lock
   useEffect(() => {
     if (aktyvus !== null) {
       const onKeyDown = (e) => {
@@ -125,32 +139,24 @@ export default function Treneriai() {
     }
   }, [aktyvus]);
 
-  // --- PROFESIONALI KORTELIŲ ANIMACIJA (fade + micro-scale + blur) ---
   const cardVariants = {
     hidden: shouldReduce
       ? { opacity: 0 }
       : { opacity: 0, scale: 0.985, filter: 'blur(6px)' },
     show: (i) =>
       shouldReduce
-        ? {
-            opacity: 1,
-            transition: { duration: 0.25, delay: i * 0.03 },
-          }
+        ? { opacity: 1, transition: { duration: 0.25, delay: i * 0.03 } }
         : {
             opacity: 1,
             scale: 1,
             filter: 'blur(0px)',
-            transition: {
-              duration: 0.5,
-              ease: [0.22, 1, 0.36, 1], // „easeOutQuint“-like
-              delay: i * 0.06,
-            },
+            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.06 },
           },
   };
 
   return (
     <main className="text-black font-sans">
-      {/* HERO (neliečiame) */}
+      {/* HERO */}
       <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -197,7 +203,7 @@ export default function Treneriai() {
         </section>
       </BackgroundWrapper>
 
-      {/* MODALAS (neliečiame) */}
+      {/* MODALAS */}
       <AnimatePresence>
         {activeTrainer && (
           <motion.div
@@ -232,7 +238,7 @@ export default function Treneriai() {
               <h2 id="trainer-title" className="text-2xl font-bold mb-2 text-[#007bb5]">
                 {activeTrainer.vardas}
               </h2>
-              <p className="text-sm text-gray-600 mb-2">Amžius: {activeTrainer.amzius}</p>
+              <p className="text-sm text-gray-600 mb-2">Amžius: {activeTrainer.amzius || '—'}</p>
               <p className="text-base font-medium mb-4 text-gray-800">{activeTrainer.trumpai}</p>
               <p className="whitespace-pre-line">{activeTrainer.aprasymas}</p>
             </motion.div>

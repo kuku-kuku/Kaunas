@@ -43,7 +43,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            FA <span className="uppercase">KAUNAS</span> – futbolo akademija vaikams
+            Prisijunk prie mūsų futbolo šeimos
           </motion.h1>
           <motion.p
             className="text-base sm:text-lg md:text-xl text-white max-w-xl mb-6 drop-shadow px-2"
@@ -51,7 +51,8 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Kur ugdomos asmenybės, charakteris ir aistra futbolui.
+            FA Kaunas kviečia vaikus į profesionalias ir linksmas futbolo treniruotes.
+            Kartu auginkime asmenybes, talentą ir meilę sportui.
           </motion.p>
           <MotionLink
             to="/apie"
@@ -82,7 +83,8 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            FA Kaunas kviečia vaikus į profesionalias ir linksmas futbolo treniruotes. Kartu auginkime talentą, komandinį dvasią ir meilę sportui.
+            FA Kaunas kviečia vaikus į profesionalias ir linksmas futbolo treniruotes.
+            Kartu auginkime asmenybes, talentą ir meilę sportui.
           </motion.p>
           <MotionLink
             to="/kontaktai"
@@ -99,7 +101,7 @@ export default function HomePage() {
         <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-[#81d4fa] opacity-20 rounded-full blur-2xl pointer-events-none" />
       </section>
 
-      {/* PARTNERIAI */}
+      {/* PARTNERIAI (be Unomedos) */}
       <section className="bg-white py-20 px-6 text-center">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 text-black">Mūsų partneriai</h2>
         <div
@@ -107,7 +109,6 @@ export default function HomePage() {
           style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}
         >
           {[
-            { href: 'https://unomeda.lt/', src: '/partners/unomeda.png', alt: 'Unomeda' },
             { href: 'https://www.med-us.eu/', src: '/partners/medus.png', alt: 'Medus' },
             { href: 'https://camelia.lt/', src: '/partners/camelia.png', alt: 'Camelia' },
             { href: 'https://brandus.lt/', src: '/partners/brandus.png', alt: 'Brandus' },

@@ -86,13 +86,13 @@ export default function Kontaktai() {
               <p>
                 <strong>Telefonas:</strong>{" "}
                 <a href="tel:+37060000000" className="text-[#007bb5] hover:underline">
-                  +370 600 00 000
+                  +37066527501
                 </a>
               </p>
               <p>
                 <strong>El. paštas:</strong>{" "}
                 <a href="mailto:info@fakaunas.lt" className="text-[#007bb5] hover:underline">
-                  info@fakaunas.lt
+                  administracija@fakaunas.lt
                 </a>
               </p>
               <p>

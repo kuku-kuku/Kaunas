@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1 text-center md:text-left space-y-3">
             <h3 className="text-xl font-bold">FA Kaunas</h3>
             <p className="text-sm text-gray-400">
-              Jaunimo futbolo akademija, skirta ugdyti ne tik sportininkus, bet ir atsakingas asmenybes.
+              Jaunimo futbolo akademija, ugdanti ne tik sportininkus, bet ir atsakingas asmenybes.
             </p>
           </div>
 
@@ -35,8 +35,8 @@ export default function Footer() {
           <div className="text-left space-y-2">
             <h4 className="text-lg font-semibold">Kontaktai</h4>
             <p className="text-sm text-gray-300">Žeimenos g. 165, 49332 Kaunas</p>
-            <p className="text-sm text-gray-300">info@fakaunas.lt</p>
-            <p className="text-sm text-gray-300">+370 600 00000</p>
+            <p className="text-sm text-gray-300">administracija@fakaunas.lt</p>
+            <p className="text-sm text-gray-300">+37066527501</p>
           </div>
 
           {/* Sekite mus */}
