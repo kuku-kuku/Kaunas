@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useEffect, useState, forwardRef } from 'react';
+import React, { useRef, useLayoutEffect, useState, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import BackgroundWrapper from '../components/BackgroundWrapper';
 
@@ -56,12 +56,12 @@ export default function About() {
                 Vertybės
               </h2>
 
-              {/* Mobile: 100% SVG (tas pats vaizdas, visada telpa) */}
+              {/* Mobile: 100% SVG */}
               <div className="block md:hidden">
                 <ValuesMapSVGMobile />
               </div>
 
-              {/* Desktop/Tablet: absoliutus layoutas + tiesios linijos su identišku tarpu abiejuose galuose */}
+              {/* Desktop/Tablet: absoliutus layout + hover aprašymai */}
               <div className="hidden md:block">
                 <ValuesMapDesktop />
               </div>
@@ -76,21 +76,17 @@ export default function About() {
 /* ================== MOBILE: 100% SVG (skaluojasi) ================== */
 
 function ValuesMapSVGMobile() {
-  // Mazgų koordinatės (viewBox vienetais) – kaip turėjai, tik linijos skaičiuojamos pagal tikslų tarpelį.
-  const rx = 140; // kairė/dešinė nuo centro
-  const ry = 110; // viršus/apačia nuo centro
+  const rx = 140;
+  const ry = 110;
 
-  // „PAGARBA“ burbulo matmenys (pagal tavo kodą)
   const CENTER_W = 76;
   const CENTER_H = 32;
 
-  // Išorinio „pilio“ matmenų formulė – ta pati kaip NodePill žemiau
   const PADDING_X = 14;
   const APPROX_CHAR_W = 6;
   const MIN_W = 78;
   const PILL_H = 28;
 
-  // Vienodas tarpas nuo abiejų pusių (viewBox vienetais)
   const GAP = 10;
   const STROKE = 'rgb(14, 165, 233)';
   const STROKE_W = 5;
@@ -131,7 +127,7 @@ function ValuesMapSVGMobile() {
       >
         <title id="valuesMapMobile">FA Kaunas vertybių žemėlapis (mobilus)</title>
 
-        {/* Tiesios linijos su vienodu tarpu abiejuose galuose */}
+        {/* Linijos */}
         <g opacity="0.95" stroke={STROKE} strokeWidth={STROKE_W} strokeLinecap="round" fill="none">
           {nodes.map(n => {
             const { sx, sy, ex, ey } = segment(n);
@@ -148,7 +144,7 @@ function ValuesMapSVGMobile() {
           </text>
         </g>
 
-        {/* Išoriniai „piliai“ (tokio pat dydžio, kaip buvo) */}
+        {/* Išoriniai „piliai“ */}
         {nodes.map(n => (
           <NodePill key={`m-pill-${n.id}`} x={n.x} y={n.y} label={n.label} fontSize={10} minWidth={MIN_W} />
         ))}
@@ -160,15 +156,34 @@ function ValuesMapSVGMobile() {
 /* ================== DESKTOP/TABLET: absoliutus layoutas + tikslios linijos ================== */
 
 function ValuesMapDesktop() {
-  // Pozicijos (px) – kaip turėjai: idealiai per centrą
   const nodes = [
-    { id: 'top',    label: 'Bendruomeniškumas', x:   0, y: -220, dir: 'up' },
-    { id: 'right',  label: 'Aistra',            x: 320, y:    0, dir: 'right' },
-    { id: 'left',   label: 'Dėkingumas',        x:-320, y:    0, dir: 'left' },
-    { id: 'bottom', label: 'Supratingumas',     x:   0, y:  220, dir: 'down' },
+    {
+      id: 'top',
+      label: 'Bendruomeniškumas',
+      desc: 'Kuriame vieningą, palaikančią aplinką vaikams, tėvams ir treneriams.',
+      x: 0, y: -220, dir: 'up'
+    },
+    {
+      id: 'right',
+      label: 'Aistra',
+      desc: 'Žaidžiame su užsidegimu, motyvacija ir noru tobulėti kiekvieną dieną.',
+      x: 320, y: 0, dir: 'right'
+    },
+    {
+      id: 'left',
+      label: 'Dėkingumas',
+      desc: 'Vertiname darbą, pastangas ir galimybes, kurias turime kartu.',
+      x: -320, y: 0, dir: 'left'
+    },
+    {
+      id: 'bottom',
+      label: 'Supratingumas',
+      desc: 'Gerbiame skirtingus tempas ir poreikius, padedame vieni kitiems.',
+      x: 0, y: 220, dir: 'down'
+    },
   ];
 
-  const GAP = 12;                 // vienodas tarpelis nuo abiejų pusių (px)
+  const GAP = 12;
   const STROKE = 'rgb(14, 165, 233)';
   const STROKE_W = 6;
 
@@ -181,10 +196,9 @@ function ValuesMapDesktop() {
     bottom: useRef(null),
   };
 
-  const [lines, setLines] = useState([]); // [{id,x1,y1,x2,y2}]
+  const [lines, setLines] = useState([]);
   const [containerSize, setContainerSize] = useState({ w: 0, h: 0 });
 
-  // Perskaičiuojam, kai pasikeičia layoutas / dydžiai
   useLayoutEffect(() => {
     const calc = () => {
       if (!containerRef.current || !centerRef.current) return;
@@ -197,7 +211,8 @@ function ValuesMapDesktop() {
 
       setContainerSize({ w: crect.width, h: crect.height });
 
-      const getHalf = (dir, rect) => (dir === 'left' || dir === 'right') ? rect.width / 2 : rect.height / 2;
+      const getHalf = (dir, rect) =>
+        (dir === 'left' || dir === 'right') ? rect.width / 2 : rect.height / 2;
 
       const newLines = nodes.map(n => {
         const pillRect = pillRefs[n.id].current?.getBoundingClientRect();
@@ -206,13 +221,12 @@ function ValuesMapDesktop() {
         const centerHalf = getHalf(n.dir, centerRect);
         const pillHalf = getHalf(n.dir, pillRect);
 
-        // vektorius nuo centro iki mazgo (pikseliais, pagal tavo x,y)
         const dx = n.x;
         const dy = n.y;
         const len = Math.hypot(dx, dy) || 1;
 
-        const rStart = centerHalf + GAP;           // vienodas tarpelis nuo „PAGARBA“
-        const rEnd   = len - pillHalf - GAP;       // vienodas tarpelis iki „pilio“
+        const rStart = centerHalf + GAP;
+        const rEnd   = len - pillHalf - GAP;
 
         const x1 = cx + dx * (rStart / len);
         const y1 = cy + dy * (rStart / len);
@@ -225,9 +239,7 @@ function ValuesMapDesktop() {
       setLines(newLines);
     };
 
-    // pirmas skaičiavimas po layouto
     const rAF = requestAnimationFrame(calc);
-    // resizinimas
     window.addEventListener('resize', calc);
     return () => {
       cancelAnimationFrame(rAF);
@@ -237,7 +249,7 @@ function ValuesMapDesktop() {
 
   return (
     <div ref={containerRef} className="relative mx-auto max-w-6xl min-h-[520px]">
-      {/* SVG linijos – tikslios, pagal realius HTML „pilių“ matmenis */}
+      {/* SVG linijos */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
         viewBox={`0 0 ${Math.max(containerSize.w,1)} ${Math.max(containerSize.h,1)}`}
@@ -253,23 +265,31 @@ function ValuesMapDesktop() {
 
       {/* Centras */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-20">
-        <div ref={centerRef} className="px-10 py-6 rounded-full bg-[#0077cc] text-white shadow-lg ring-4 ring-sky-100">
+        <div
+          ref={centerRef}
+          className="px-10 py-6 rounded-full bg-[#0077cc] text-white shadow-lg ring-4 ring-sky-100"
+        >
           <p className="text-lg md:text-xl font-extrabold tracking-wide">PAGARBA</p>
         </div>
       </div>
 
-      {/* Išoriniai mazgai – kaip turėjai, su tikrais HTML dydžiais */}
-      <Pill ref={pillRefs.top}    x={  0} y={-220} label="Bendruomeniškumas" />
-      <Pill ref={pillRefs.right}  x={ 320} y={   0} label="Aistra" />
-      <Pill ref={pillRefs.left}   x={-320} y={   0} label="Dėkingumas" />
-      <Pill ref={pillRefs.bottom} x={  0} y={ 220} label="Supratingumas" />
+      {/* Išoriniai mazgai su hover aprašymu */}
+      {nodes.map(n => (
+        <HoverPill
+          key={n.id}
+          ref={pillRefs[n.id]}
+          x={n.x}
+          y={n.y}
+          label={n.label}
+          desc={n.desc}
+        />
+      ))}
     </div>
   );
 }
 
 /* ================== Bendros „pilio“/tekstų dalys ================== */
 
-/** SVG „pilio“ (mobile) – paliekam, kaip turėjai (plotis pagal tekstą), kad dydžiai nesikeistų */
 function NodePill({ x, y, label, fontSize = 10.5, minWidth = 80 }) {
   const paddingX = 14;
   const approxCharW = 6;
@@ -304,19 +324,38 @@ function NodePill({ x, y, label, fontSize = 10.5, minWidth = 80 }) {
   );
 }
 
-/** HTML „piliai“ (desktop) – lygiai tokie, kaip turėjai; pridedam ref matavimui */
-const Pill = forwardRef(function Pill({ x, y, label }, ref) {
+const HoverPill = forwardRef(function HoverPill(
+  { x, y, label, desc },
+  ref
+) {
   return (
     <div
       className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
       style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)` }}
     >
-      <div
+      <motion.div
         ref={ref}
-        className="px-6 py-3 rounded-full bg-white shadow-md border border-sky-100 hover:shadow-lg transition whitespace-nowrap"
+        whileHover={{ scale: 1.08 }}
+        transition={{ type: 'spring', stiffness: 240, damping: 16 }}
+        className="group relative"
       >
-        <p className="font-semibold text-gray-900">{label}</p>
-      </div>
+        {/* Pagrindinis burbulas */}
+        <div className="px-6 py-3 rounded-full bg-white shadow-md border border-sky-100 transition-all duration-200 group-hover:shadow-xl group-hover:ring-2 group-hover:ring-sky-200">
+          {/* Etiketė (matoma default) */}
+          <p className="font-semibold text-gray-900 transition-opacity duration-150 group-hover:opacity-0 whitespace-nowrap">
+            {label}
+          </p>
+
+          {/* Aprašymas (rodomas hover) */}
+          <div className="pointer-events-none absolute left-1/2 top-1/2 w-[16rem] -translate-x-1/2 -translate-y-1/2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200">
+            <div className="px-4 py-3 rounded-2xl bg-white/95 shadow-lg border border-sky-100">
+              <p className="text-sm text-gray-700 text-center leading-snug">
+                {desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 });
