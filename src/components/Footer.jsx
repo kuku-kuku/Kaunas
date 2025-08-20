@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {/* FA Kaunas */}
           <div className="col-span-2 md:col-span-1 text-center md:text-left space-y-3">
-            <h3 className="text-xl font-bold">FA Kaunas</h3>
+            <h3 className="text-xl font-bold">FA KAUNAS</h3>
             <p className="text-sm text-gray-400">
               Jaunimo futbolo akademija, ugdanti ne tik sportininkus, bet ir atsakingas asmenybes.
             </p>
@@ -56,7 +56,7 @@ export default function Footer() {
 
       {/* Apatinė eilutė */}
       <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
-        © {year} FA Kaunas. Visos teisės saugomos. <br />
+        © {year} FA KAUNAS. Visos teisės saugomos. <br />
         Padėkite auginti jaunąją kartą – skirkite 1,2% arba tapkite rėmėju.
       </div>
     </footer>

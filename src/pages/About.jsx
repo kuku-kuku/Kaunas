@@ -1,5 +1,5 @@
 import React, { useRef, useLayoutEffect, useState, forwardRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import BackgroundWrapper from '../components/BackgroundWrapper';
 
 export default function About() {
@@ -56,12 +56,12 @@ export default function About() {
                 Vertybės
               </h2>
 
-              {/* Mobile: 100% SVG */}
+              {/* Mobile: 100% SVG + centrinė kortelė apačioje */}
               <div className="block md:hidden">
                 <ValuesMapSVGMobile />
               </div>
 
-              {/* Desktop/Tablet: absoliutus layout + hover aprašymai */}
+              {/* Desktop/Tablet: burbulas plečiasi ir content’as keičiasi viduje */}
               <div className="hidden md:block">
                 <ValuesMapDesktop />
               </div>
@@ -73,9 +73,11 @@ export default function About() {
   );
 }
 
-/* ================== MOBILE: 100% SVG (skaluojasi) ================== */
+/* ================== MOBILE: SVG kaip buvo + aprašymas CENTRE apačioje ================== */
 
 function ValuesMapSVGMobile() {
+  const [active, setActive] = useState(null);
+
   const rx = 140;
   const ry = 110;
 
@@ -92,10 +94,16 @@ function ValuesMapSVGMobile() {
   const STROKE_W = 5;
 
   const nodes = [
-    { id: 'top',    label: 'Bendruomeniškumas', x: 0,    y: -ry, dir: 'up' },
-    { id: 'right',  label: 'Aistra',            x:  rx,  y:   0, dir: 'right' },
-    { id: 'left',   label: 'Dėkingumas',        x: -rx,  y:   0, dir: 'left' },
-    { id: 'bottom', label: 'Supratingumas',     x: 0,    y:  ry, dir: 'down' },
+    { id: 'center', label: 'PAGARBA', x: 0, y: 0, dir: 'center',
+      desc: 'Gerbti vieni kitus, komandos draugus, varžovus, aplinką kurioje esame.' },
+    { id: 'top',    label: 'Bendruomeniškumas', x: 0,    y: -ry, dir: 'up',
+      desc: 'Tik dirbdami drauge su partneriais, tėveliais ir visais futbolo entuziastais galime pasiekti savo tikslus.' },
+    { id: 'right',  label: 'Disciplina',        x:  rx,  y:   0, dir: 'right',
+      desc: 'Nuoseklus, kryptingas darbas su didele aistra ir motyvacija kiekvieną dieną.' },
+    { id: 'left',   label: 'Dėkingumas',        x: -rx,  y:   0, dir: 'left',
+      desc: 'Palaikyti vieni kitus kiekviename žingsnyje, atsidėkoti už suteiktas galimybes, pagalbą, paprastus, kasdienius dalykus.' },
+    { id: 'bottom', label: 'Supratingumas',     x: 0,    y:  ry, dir: 'down',
+      desc: 'Kantrybė vieni kitų atžvilgiu.' },
   ];
 
   const pillWidth = (label) => Math.max(MIN_W, label.length * APPROX_CHAR_W + PADDING_X * 2);
@@ -117,6 +125,8 @@ function ValuesMapSVGMobile() {
     return { sx, sy, ex, ey };
   };
 
+  const onPillClick = (id) => setActive((prev) => (prev === id ? null : id));
+
   return (
     <div className="mx-auto w-full max-w-[560px]">
       <svg
@@ -129,14 +139,14 @@ function ValuesMapSVGMobile() {
 
         {/* Linijos */}
         <g opacity="0.95" stroke={STROKE} strokeWidth={STROKE_W} strokeLinecap="round" fill="none">
-          {nodes.map(n => {
+          {nodes.filter(n => n.id !== 'center').map(n => {
             const { sx, sy, ex, ey } = segment(n);
-            return <line key={`m-${n.id}`} x1={sx} y1={sy} x2={ex} y2={ey} />;
+            return <line key={`m-line-${n.id}`} x1={sx} y1={sy} x2={ex} y2={ey} />;
           })}
         </g>
 
-        {/* Centras */}
-        <g transform="translate(0,0)">
+        {/* Centras (clickable) */}
+        <g transform="translate(0,0)" onClick={() => onPillClick('center')} style={{ cursor: 'pointer' }}>
           <rect x={-CENTER_W/2} y={-CENTER_H/2} width={CENTER_W} height={CENTER_H} rx={CENTER_H/2} ry={CENTER_H/2} fill="#0077cc" />
           <rect x={-CENTER_W/2 - 6} y={-CENTER_H/2 - 6} width={CENTER_W + 12} height={CENTER_H + 12} rx={(CENTER_H+12)/2} ry={(CENTER_H+12)/2} fill="none" stroke="rgba(125, 211, 252, 0.35)" strokeWidth="3" />
           <text x="0" y="5" textAnchor="middle" fontWeight="700" fill="#fff" style={{ fontSize: 12 }}>
@@ -144,44 +154,67 @@ function ValuesMapSVGMobile() {
           </text>
         </g>
 
-        {/* Išoriniai „piliai“ */}
-        {nodes.map(n => (
-          <NodePill key={`m-pill-${n.id}`} x={n.x} y={n.y} label={n.label} fontSize={10} minWidth={MIN_W} />
+        {/* Išoriniai „piliai“ (clickable) */}
+        {nodes.filter(n => n.id !== 'center').map(n => (
+          <ClickableNodePill key={`m-pill-${n.id}`} x={n.x} y={n.y} label={n.label} onClick={() => onPillClick(n.id)} />
         ))}
       </svg>
+
+      {/* CENTRINĖ kortelė apačioje — visada centre, su smooth animacija */}
+      <AnimatePresence mode="wait">
+        {active && (
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+            className="mt-4 px-4"
+          >
+            <div className="mx-auto max-w-[560px] rounded-2xl border border-sky-100 bg-white px-4 py-3 text-center text-sm text-gray-700 leading-snug shadow-md">
+              {nodes.find(n => n.id === active)?.desc}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-/* ================== DESKTOP/TABLET: absoliutus layoutas + tikslios linijos ================== */
+/* ================== DESKTOP/TABLET: burbulas plečiasi tiek, kiek reikia (label ↔ desc viduje) ================== */
 
 function ValuesMapDesktop() {
   const nodes = [
     {
       id: 'top',
       label: 'Bendruomeniškumas',
-      desc: 'Kuriame vieningą, palaikančią aplinką vaikams, tėvams ir treneriams.',
+      desc: 'Tik dirbdami drauge su partneriais, tėveliais ir visais futbolo entuziastais galime pasiekti savo tikslus.',
       x: 0, y: -220, dir: 'up'
     },
     {
       id: 'right',
-      label: 'Aistra',
-      desc: 'Žaidžiame su užsidegimu, motyvacija ir noru tobulėti kiekvieną dieną.',
+      label: 'Disciplina',
+      desc: 'Nuoseklus, kryptingas darbas su didele aistra ir motyvacija kiekvieną dieną.',
       x: 320, y: 0, dir: 'right'
     },
     {
       id: 'left',
       label: 'Dėkingumas',
-      desc: 'Vertiname darbą, pastangas ir galimybes, kurias turime kartu.',
+      desc: 'Palaikyti vieni kitus kiekviename žingsnyje, atsidėkoti už suteiktas galimybes, pagalbą, paprastus, kasdienius dalykus.',
       x: -320, y: 0, dir: 'left'
     },
     {
       id: 'bottom',
       label: 'Supratingumas',
-      desc: 'Gerbiame skirtingus tempas ir poreikius, padedame vieni kitiems.',
+      desc: 'Kantrybė vieni kitų atžvilgiu.',
       x: 0, y: 220, dir: 'down'
-    },
+    }
   ];
+
+  const center = {
+    label: 'PAGARBA',
+    desc: 'Gerbti vieni kitus, komandos draugus, varžovus, aplinką kurioje esame.',
+  };
 
   const GAP = 12;
   const STROKE = 'rgb(14, 165, 233)';
@@ -249,7 +282,7 @@ function ValuesMapDesktop() {
 
   return (
     <div ref={containerRef} className="relative mx-auto max-w-6xl min-h-[520px]">
-      {/* SVG linijos */}
+      {/* Linijos */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
         viewBox={`0 0 ${Math.max(containerSize.w,1)} ${Math.max(containerSize.h,1)}`}
@@ -264,18 +297,19 @@ function ValuesMapDesktop() {
       </svg>
 
       {/* Centras */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-20">
-        <div
-          ref={centerRef}
-          className="px-10 py-6 rounded-full bg-[#0077cc] text-white shadow-lg ring-4 ring-sky-100"
-        >
-          <p className="text-lg md:text-xl font-extrabold tracking-wide">PAGARBA</p>
-        </div>
-      </div>
+      <InlineHoverPill
+        center
+        ref={centerRef}
+        x={0}
+        y={0}
+        label={center.label}
+        desc={center.desc}
+        bg="blue"
+      />
 
-      {/* Išoriniai mazgai su hover aprašymu */}
+      {/* Išoriniai mazgai */}
       {nodes.map(n => (
-        <HoverPill
+        <InlineHoverPill
           key={n.id}
           ref={pillRefs[n.id]}
           x={n.x}
@@ -288,9 +322,53 @@ function ValuesMapDesktop() {
   );
 }
 
-/* ================== Bendros „pilio“/tekstų dalys ================== */
+/* ================== Burbulas, kuris tikrai prasiplečia ir sutalpina tekstą ================== */
 
-function NodePill({ x, y, label, fontSize = 10.5, minWidth = 80 }) {
+const InlineHoverPill = forwardRef(function InlineHoverPill(
+  { x, y, label, desc, center = false, bg = 'white' },
+  ref
+) {
+  const baseClasses =
+    bg === 'blue'
+      ? 'bg-[#0077cc] text-white ring-4 ring-sky-100'
+      : 'bg-white text-gray-900 border border-sky-100';
+
+  return (
+    <div
+      className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
+      style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)` }}
+    >
+      <motion.div
+        ref={ref}
+        layout
+        whileHover={{ scale: center ? 1.08 : 1.12 }}
+        transition={{ type: 'spring', stiffness: 220, damping: 20, mass: 0.8 }}
+        className={`group inline-flex items-center justify-center rounded-full shadow-md ${baseClasses}`}
+      >
+        {/* Vidaus dėžė plečiasi su turiniu */}
+        <div className={`${center ? 'px-8 py-4' : 'px-6 py-3'} max-w-[32rem]`}>
+          {/* Pavadinimas (default) */}
+          <div className="group-hover:hidden transition-opacity duration-250 ease-out">
+            <p className={`${center ? 'text-lg md:text-xl font-extrabold tracking-wide' : 'font-semibold'} text-center whitespace-nowrap`}>
+              {label}
+            </p>
+          </div>
+
+          {/* Aprašymas (hover) – NE absolute, kad konteineris išsiplėstų */}
+          <div className="hidden group-hover:block">
+            <p className={`text-sm md:text-base ${bg === 'blue' ? 'text-white' : 'text-gray-700'} text-center leading-snug whitespace-normal`}>
+              {desc}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+});
+
+/* ================== SVG „piliai“ (mobile) ================== */
+
+function ClickableNodePill({ x, y, label, onClick, fontSize = 10.5, minWidth = 80 }) {
   const paddingX = 14;
   const approxCharW = 6;
   const w = Math.max(minWidth, label.length * approxCharW + paddingX * 2);
@@ -298,7 +376,7 @@ function NodePill({ x, y, label, fontSize = 10.5, minWidth = 80 }) {
   const rx = h / 2;
 
   return (
-    <g transform={`translate(${x}, ${y})`}>
+    <g transform={`translate(${x}, ${y})`} onClick={onClick} style={{ cursor: 'pointer' }}>
       <rect
         x={-w/2}
         y={-h/2}
@@ -323,39 +401,3 @@ function NodePill({ x, y, label, fontSize = 10.5, minWidth = 80 }) {
     </g>
   );
 }
-
-const HoverPill = forwardRef(function HoverPill(
-  { x, y, label, desc },
-  ref
-) {
-  return (
-    <div
-      className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
-      style={{ left: `calc(50% + ${x}px)`, top: `calc(50% + ${y}px)` }}
-    >
-      <motion.div
-        ref={ref}
-        whileHover={{ scale: 1.08 }}
-        transition={{ type: 'spring', stiffness: 240, damping: 16 }}
-        className="group relative"
-      >
-        {/* Pagrindinis burbulas */}
-        <div className="px-6 py-3 rounded-full bg-white shadow-md border border-sky-100 transition-all duration-200 group-hover:shadow-xl group-hover:ring-2 group-hover:ring-sky-200">
-          {/* Etiketė (matoma default) */}
-          <p className="font-semibold text-gray-900 transition-opacity duration-150 group-hover:opacity-0 whitespace-nowrap">
-            {label}
-          </p>
-
-          {/* Aprašymas (rodomas hover) */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 w-[16rem] -translate-x-1/2 -translate-y-1/2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200">
-            <div className="px-4 py-3 rounded-2xl bg-white/95 shadow-lg border border-sky-100">
-              <p className="text-sm text-gray-700 text-center leading-snug">
-                {desc}
-              </p>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-});

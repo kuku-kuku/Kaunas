@@ -55,7 +55,7 @@ export default function Naujienos() {
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Naujienos</h1>
           <p className="text-lg font-light max-w-2xl">
-            Naujausia informacija iš FA Kaunas gyvenimo
+            Naujausia informacija iš FA KAUNAS gyvenimo
           </p>
         </motion.div>
       </section>

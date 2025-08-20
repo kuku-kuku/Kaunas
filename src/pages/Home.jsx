@@ -38,22 +38,23 @@ export default function HomePage() {
         {/* Centruotas tekstas */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 text-white">
           <motion.h1
-            className="text-[16px] sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg"
+            className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg uppercase"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Prisijunk prie mūsų futbolo šeimos
+            FA KAUNAS
           </motion.h1>
+
           <motion.p
-            className="text-base sm:text-lg md:text-xl text-white max-w-xl mb-6 drop-shadow px-2"
+            className="text-lg sm:text-2xl md:text-3xl text-white mb-6 drop-shadow"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            FA Kaunas kviečia vaikus į profesionalias ir linksmas futbolo treniruotes.
-            Kartu auginkime asmenybes, talentą ir meilę sportui.
+            Nuo svajonės iki realybės!
           </motion.p>
+
           <MotionLink
             to="/apie"
             className="bg-[#4fc3f7] hover:bg-[#29b6f6] text-black font-semibold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl inline-block"
@@ -70,7 +71,7 @@ export default function HomePage() {
       <section className="relative py-24 px-6 bg-gradient-to-br from-[#b3e5fc] via-[#e1f5fe] to-[#ffffff] animate-pulseGradient overflow-hidden">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-800"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-800 uppercase"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
@@ -83,7 +84,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            FA Kaunas kviečia vaikus į profesionalias ir linksmas futbolo treniruotes.
+            FA KAUNAS kviečia vaikus į profesionalias ir linksmas futbolo treniruotes.
             Kartu auginkime asmenybes, talentą ir meilę sportui.
           </motion.p>
           <MotionLink
@@ -101,7 +102,7 @@ export default function HomePage() {
         <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-[#81d4fa] opacity-20 rounded-full blur-2xl pointer-events-none" />
       </section>
 
-      {/* PARTNERIAI (be Unomedos) */}
+      {/* PARTNERIAI su UNOMEDA */}
       <section className="bg-white py-20 px-6 text-center">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 text-black">Mūsų partneriai</h2>
         <div
@@ -109,6 +110,7 @@ export default function HomePage() {
           style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}
         >
           {[
+            { href: 'https://unomeda.lt/', src: '/partners/unomeda.png', alt: 'Unomeda' },
             { href: 'https://www.med-us.eu/', src: '/partners/medus.png', alt: 'Medus' },
             { href: 'https://camelia.lt/', src: '/partners/camelia.png', alt: 'Camelia' },
             { href: 'https://brandus.lt/', src: '/partners/brandus.png', alt: 'Brandus' },
