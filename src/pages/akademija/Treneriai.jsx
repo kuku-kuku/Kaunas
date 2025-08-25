@@ -6,7 +6,7 @@ const treneriai = [
   {
     id: 1,
     vardas: 'Gabrielius Zagurskas',
-    amzius: 35,
+    amzius: 33,
     nuotrauka: '/treneriai/cinikas.jpg', // laikinai visiems ta pati
     trumpai: 'Buvęs profesionalus futbolininkas, nuo 2021 metų visą dėmesį skiriantis futbolininkų treniravimui.',
     aprasymas: `UEFA A licencija
@@ -39,7 +39,7 @@ Trenerio karjera:
   {
     id: 4,
     vardas: 'Marius Činikas',
-    amzius: 29,
+    amzius: 39,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Buvęs profesionalus futbolininkas, per savo karjerą sukaupęs nemenką žinių bagažą.',
     aprasymas: `UEFA B licencija
@@ -67,7 +67,7 @@ Pasiekimai:
   {
     id: 2,
     vardas: 'Lukas Sipavičius',
-    amzius: 32,
+    amzius: 26,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Lietuvos salės futbolo rinktinės narys, UEFA C licencijos treneris.',
     aprasymas: `UEFA C licencija
@@ -83,7 +83,7 @@ Pasiekimai:
   {
     id: 5,
     vardas: 'Tomas Macelis',
-    amzius: 0,
+    amzius: 22,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Kauno Žalgirio akademijos auklėtinis, patirtį kaupęs jaunimo komandose ir LFF 2 lygoje.',
     aprasymas: `UEFA C licencija
@@ -98,7 +98,7 @@ Studijuoja Lietuvos sporto universitete. Treniravimo sistemų programoje, pasiri
   {
     id: 3,
     vardas: 'Ernestas Bernota',
-    amzius: 28,
+    amzius: 32,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Ambicingas treneris, sukaupęs patirties Marijampolės Sūduvoje ir kitose komandose.',
     aprasymas: `Licencija: LFF D
