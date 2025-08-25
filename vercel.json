@@ -1,15 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "npm install && npm run build",
+  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm run build",
   "outputDirectory": "dist",
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/" }
+  "rewrites": [
+    { "source": "/api/:match*", "destination": "/api/:match*" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
