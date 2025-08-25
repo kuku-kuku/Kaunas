@@ -36,11 +36,18 @@ export default function Kontaktai() {
           name: form.name,
           email: form.email,
           message: form.message,
-          // honeypot į serverį nesiunčiam
         }),
       });
-      const data = await res.json();
-      if (!res.ok || !data?.ok) throw new Error(data?.error || "Nepavyko išsiųsti");
+
+      let data = null;
+      try { data = await res.json(); } catch { data = null; }
+
+      if (!res.ok || !data?.ok) {
+        const details =
+          typeof data?.details === "object" ? JSON.stringify(data.details) : (data?.details || "");
+        const serverMsg = details || data?.error || "Nepavyko išsiųsti";
+        throw new Error(serverMsg);
+      }
 
       setStatus({ loading: false, ok: true, msg: "Žinutė išsiųsta! Atsakysime kuo greičiau." });
       setForm({ name: "", email: "", message: "", website: "" });
@@ -84,7 +91,7 @@ export default function Kontaktai() {
                   </div>
                 )}
                 {status.ok === false && (
-                  <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-red-700">
+                  <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-red-700 break-words">
                     {status.msg || "Įvyko klaida. Bandykite dar kartą."}
                   </div>
                 )}
@@ -156,7 +163,7 @@ export default function Kontaktai() {
                     Siųsdami sutinkate su duomenų tvarkymu pagal FA Kaunas privatumo politiką.
                   </p>
 
-                  {/* Atsarginis variantas jei API neveiktų */}
+                  {/* Atsarginis variantas */}
                   <p className="text-center text-sm text-gray-500">
                     Arba parašykite tiesiogiai:{" "}
                     <a

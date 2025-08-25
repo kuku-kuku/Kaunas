@@ -1,4 +1,4 @@
-// api/mail.js — CJS, saugus GET + el. laiško siuntimas per Resend
+// api/mail.js — CJS, healthcheck + siuntimas per Resend (su aiškiais klaidų detalėm)
 
 function setCors(res) {
   try {
@@ -24,17 +24,38 @@ function parseBody(req) {
       return body || {};
     }
     if (!body || typeof body === "string") body = JSON.parse(body || "{}");
-  } catch (_) {
-    body = {};
-  }
+  } catch { body = {}; }
   return body || {};
+}
+
+function serializeDetails(err) {
+  try {
+    if (!err) return null;
+    if (typeof err === "string") return err;
+    const out = {};
+    for (const k of ["name", "message", "code", "statusCode", "type"]) {
+      if (err[k]) out[k] = err[k];
+    }
+    if (err.error) out.error = serializeDetails(err.error);
+    if (err.issues) out.issues = err.issues;
+    if (err.response) {
+      out.response = {
+        status: err.response.status,
+        data: err.response.data || err.response.body || null,
+      };
+    }
+    if (!Object.keys(out).length) return JSON.stringify(err);
+    return out;
+  } catch {
+    return String(err);
+  }
 }
 
 module.exports = async (req, res) => {
   setCors(res);
   if (req.method === "OPTIONS" || req.method === "HEAD") return res.status(200).end();
 
-  // Healthcheck — NEimportuoja Resend
+  // Healthcheck (NEimportuoja Resend)
   if (req.method === "GET") {
     return res.status(200).json({
       ok: true,
@@ -46,7 +67,7 @@ module.exports = async (req, res) => {
 
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  // Dinamiškas Resend importas (kad neužlūžtų modulis)
+  // Dinamiškas Resend importas (kad nekristų, jei tik GET)
   let ResendCtor = null;
   try {
     const m = await import("resend");
@@ -65,32 +86,44 @@ module.exports = async (req, res) => {
   if (!ResendCtor) return res.status(500).json({ error: "Resend import failed", details: "No constructor found" });
 
   const { name, email, message } = parseBody(req);
-
   if (!name || !email || !message) {
     return res.status(400).json({ error: "Užpildykite visus laukus (vardas, el. paštas, žinutė)" });
   }
   const emailOk = /\S+@\S+\.\S{2,}/.test(String(email).trim());
   if (!emailOk) return res.status(400).json({ error: "Neteisingas el. pašto formatas" });
 
-  if (!process.env.RESEND_API_KEY) return res.status(500).json({ error: "Missing RESEND_API_KEY (ENV)" });
+  if (!process.env.RESEND_API_KEY) {
+    return res.status(500).json({ error: "Missing RESEND_API_KEY (ENV)" });
+  }
 
   const resend = new ResendCtor(process.env.RESEND_API_KEY);
+
   const subject = `Nauja žinutė iš svetainės – ${name}`;
-  const text = [`Vardas: ${name}`, `El. paštas: ${email}`, "", "Žinutė:", message].join("\n");
+  const text = [
+    `Vardas: ${name}`,
+    `El. paštas: ${email}`,
+    ``,
+    `Žinutė:`,
+    message
+  ].join("\n");
+
+  // TEST režimas: siųsti į Resend testinį gavėją (visada sėkminga)
+  // Kai verifikuosi domeną Resend'e, pakeisk "from" ir "to" žemiau (žr. komentarą).
+  const emailData = {
+    from: "FA Kaunas <onboarding@resend.dev>", // vėliau: "FA Kaunas <noreply@fakaunas.lt>"
+    to: ["delivered@resend.dev"],               // vėliau: ["administracija@fakaunas.lt"]
+    subject,
+    text,
+    replyTo: email                               // TEISINGAS laukas (be "reply_to")
+  };
 
   try {
-    const { data, error } = await resend.emails.send({
-      from: "FA Kaunas <onboarding@resend.dev>", // po domain verify pasikeisi į administracija@fakaunas.lt
-      to: ["administracija@fakaunas.lt", "delivered@resend.dev"],
-      reply_to: email,
-      replyTo: email,
-      subject,
-      text
-    });
-    if (error) return res.status(500).json({ error: "Resend error", details: error });
-
+    const { data, error } = await resend.emails.send(emailData);
+    if (error) {
+      return res.status(502).json({ error: "Resend error", details: serializeDetails(error) });
+    }
     return res.status(200).json({ ok: true, id: data?.id || null });
   } catch (err) {
-    return res.status(500).json({ error: "Serverio klaida", details: String(err?.message || err) });
+    return res.status(500).json({ error: "Serverio klaida", details: serializeDetails(err) });
   }
 };
