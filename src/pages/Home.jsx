@@ -71,7 +71,7 @@ export default function HomePage() {
       <section className="relative py-24 px-6 bg-gradient-to-br from-[#b3e5fc] via-[#e1f5fe] to-[#ffffff] animate-pulseGradient overflow-hidden">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-800 uppercase"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-800 uppercase whitespace-nowrap"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}

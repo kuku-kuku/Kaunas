@@ -75,7 +75,7 @@ export default function Prisijunk() {
                   </p>
                   <p>
                     Prisidėdami jūs padedate mums organizuoti turnyrus, gerinti treniruočių bazę, aprūpinti
-                    inventorių ir atverti daugiau galimybių vaikams sporte bei gyvenime.
+                    inventoriumi ir atverti daugiau galimybių vaikams sporte bei gyvenime.
                   </p>
                 </div>
               </motion.div>
