@@ -29,7 +29,7 @@ export default function Kontaktai() {
     setStatus({ loading: true, ok: null, msg: "" });
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/mail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
