@@ -83,7 +83,7 @@ Pasiekimai:
   {
     id: 5,
     vardas: 'Tomas Macelis',
-    amzius: 22,
+    amzius: 23,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Kauno Žalgirio akademijos auklėtinis, patirtį kaupęs jaunimo komandose ir LFF 2 lygoje.',
     aprasymas: `UEFA C licencija
