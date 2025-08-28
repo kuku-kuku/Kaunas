@@ -4,14 +4,21 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
-  '/naujienos/summervictory.jpg',
-  '/naujienos/summervictory1.jpg',
-  '/naujienos/summervictory2.jpg',
-  '/naujienos/summervictory3.jpg',
-  '/naujienos/summervictory4.jpg',
+  '/naujienos/mragowo.jpg',
+  '/naujienos/mragowo1.jpg',
+  '/naujienos/mragowo2.jpg',
+  '/naujienos/mragowo3.jpg',
+  '/naujienos/mragowo4.jpg',
+  '/naujienos/mragowo5.jpg',
+  '/naujienos/mragowo6.jpg',
+  '/naujienos/mragowo7.jpg',
+  '/naujienos/mragowo8.jpg',
+  '/naujienos/mragowo9.jpg',
+  '/naujienos/mragowo10.jpg',
+  '/naujienos/mragowo11.jpg',
 ];
 
-export default function SummerVictory2025() {
+export default function VasarosStovyklaMragowo2025() {
   const [current, setCurrent] = useState(0);
   const [isManual, setIsManual] = useState(false);
   const intervalRef = useRef(null);
@@ -40,7 +47,7 @@ export default function SummerVictory2025() {
   };
 
   return (
-    <section className="w-full min-h-screen bg-white px-4 sm:px-6 py-12 sm:py-16 flex items-center">
+    <section className="w-full min-h-screen bg-white px-4 sm:px-6 pt-28 sm:pt-32 pb-12 sm:pb-16 flex items-center">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Tekstas */}
         <motion.div
@@ -63,7 +70,7 @@ export default function SummerVictory2025() {
             }}
             className="inline-block bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md mt-16 md:mt-0"
           >
-            Summer Victory CUP
+            Vasaros stovykla Lenkijoje
           </motion.div>
 
           <motion.h1
@@ -73,7 +80,7 @@ export default function SummerVictory2025() {
             }}
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900"
           >
-            Trijų komandų sezonas baigėsi turnyre Garliavoje
+            Sėkminga FA Kaunas vasaros stovykla Lenkijoje: kokybė, darbas ir komandinė dvasia.
           </motion.h1>
 
           <motion.p
@@ -83,7 +90,7 @@ export default function SummerVictory2025() {
             }}
             className="text-gray-500 font-medium -mt-2"
           >
-            23/06/2025
+            04/08/2025
           </motion.p>
 
           <motion.div
@@ -94,13 +101,22 @@ export default function SummerVictory2025() {
             className="bg-gray-100 p-5 rounded-lg shadow-sm space-y-4"
           >
             <p className="text-lg text-gray-800 leading-relaxed">
-              <strong>Trenerio komentaras (2015 m. grupė):</strong> „Labai džiaugiuosi vaikų nusiteikimu turnyrui – jie buvo labai motyvuoti, kovėsi dėl kiekvieno kamuolio...“
+              Vos pasibaigus vasaros atostogoms, FA Kaunas 2015 m. Mėlinųjų grupė išvyko į sportinę stovyklą Lenkijoje, Mrągowo mieste. Savaitę trukusi stovykla buvo skirta fiziniam pasirengimui, techninių įgūdžių tobulinimui bei komandos vienybės stiprinimui.
             </p>
             <p className="text-lg text-gray-800 leading-relaxed">
-              <strong>Trenerio Ernesto komentaras (2017/18 m.):</strong> „Turnyrą pradėjome pozityviai... žaidėme prieš vyresnius varžovus, tai buvo vertinga patirtis.“
+              <strong>Trenerio Gabrieliaus komentaras:</strong> „Po vasaros visi sugrįžta šiek tiek ,,apsunkę"– tai natūralu. Bet jau nuo pirmų dienų matėme, kaip greitai vaikai įeina į ritmą. Dirbome du kartus per dieną, o per savaitę sužaidėme net penkerias kontrolines rungtynes. Progresas – akivaizdus“.
             </p>
             <p className="text-lg text-gray-800 leading-relaxed">
-              <strong>Trenerio Tomo komentaras (2019/20 m.):</strong> „Turnyras buvo nelengvas, bet vaikai kovojo iš visų jėgų. Tobuliname 1v1 situacijas.“
+              Be intensyvių treniruočių, daug dėmesio skirta ir kokybiškam laisvalaikiui. Vaikai žaidė stalo žaidimus, mini golfą, linksminosi ant batutų, maudėsi baseine ir ežere, o svarbiausia – stiprino tarpusavio ryšius, kurie ne mažiau svarbūs aikštelėje nei už jos ribų.
+            </p>
+            <p className="text-lg text-gray-800 leading-relaxed">
+              „Tokios stovyklos prilygsta keliems mėnesiams įprasto darbo Lietuvoje. Per trumpą laiką galime padaryti daug: tiek fiziškai, tiek psichologiškai pasiruošti sezonui, sustiprinti komandą kaip vienetą. Tokių stovyklų norėtųsi kuo daugiau“, – akcentavo treneris.
+            </p>
+            <p className="text-lg text-gray-800 leading-relaxed">
+              Grįžusi komanda tęsia pasiruošimą artėjančiam sezonui Kaune, o jau šį savaitgalį vyks į tarptautinį turnyrą Latvijoje – Dobrecova CUP, kur galės pasitikrinti jėgas prieš stiprias užsienio komandas.
+            </p>
+            <p className="text-lg text-gray-800 leading-relaxed">
+              FA Kaunas vyr. treneris nuoširdžiai dėkoja visiems tėveliams už pasitikėjimą ir suteikiamas galimybes auginti jaunąją futbolo kartą!
             </p>
           </motion.div>
 
@@ -122,7 +138,7 @@ export default function SummerVictory2025() {
               <img
                 key={index}
                 src={img}
-                alt="Turnyro nuotrauka"
+                alt="Stovyklos nuotrauka"
                 className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
                   index === current ? 'opacity-100' : 'opacity-0'
                 }`}

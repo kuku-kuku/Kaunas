@@ -18,6 +18,10 @@ import Stovykla2025 from './pages/naujienos/Stovykla2025';
 import HegelmanTurnyras from "./pages/naujienos/HegelmanTurnyras";
 import SummerVictory2025 from './pages/naujienos/SummerVictory';
 
+// ⬇️ Nauji importai naujoms naujienoms
+import DobrecovaCup2025 from './pages/naujienos/DobrecovaCup2025';
+import VasarosStovyklaMragowo2025 from './pages/naujienos/VasarosStovyklaMragowo2025';
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -69,6 +73,9 @@ function App() {
           <Route path="/naujienos/stovykla-2025" element={<Stovykla2025 />} />
           <Route path="/naujienos/hegelman-turnyras" element={<HegelmanTurnyras />} />
           <Route path="/naujienos/summer-victory" element={<SummerVictory2025 />} />
+          {/* ⬇️ Nauji maršrutai */}
+          <Route path="/naujienos/dobrecova-cup-2025" element={<DobrecovaCup2025 />} />
+          <Route path="/naujienos/vasaros-stovykla-mragowo-2025" element={<VasarosStovyklaMragowo2025 />} />
           <Route path="/kontaktai" element={<Kontaktai />} />
         </Routes>
       </LayoutWrapper>

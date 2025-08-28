@@ -5,8 +5,27 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const newsData = [
   {
+    id: 5,
+    date: "2025-08-04", // koreguok, jei kita tiksli publikavimo data
+    title: "Sėkminga FA Kaunas vasaros stovykla Lenkijoje",
+    summary:
+      "Mrągowo mieste vykusi savaitės stovykla: fizinis pasirengimas, technikos tobulinimas ir stipri komandinė dvasia.",
+    link: "/naujienos/vasaros-stovykla-mragowo-2025",
+    image: "/naujienos/mragowo.jpg",
+  },
+  {
+    id: 4,
+    date: "2025-08-11", // Rugpjūčio 8–10 → naudojam 08-10 kaip sąrašo datą
+    title: "Dobrecova CUP Latvijoje (2015 m.)",
+    summary:
+      "Dvi FA Kaunas komandos tarp 48 dalyvių: " +
+      "White – 32 vieta, Blue – per plauką nuo prizininkų, 4 vieta.",
+    link: "/naujienos/dobrecova-cup-2025",
+    image: "/naujienos/dobrecova.jpg",
+  },
+  {
     id: 1,
-    date: "2025-07-17",
+    date: "2025-06-30",
     title: "Startavo vaikų vasaros stovykla!",
     summary:
       "Šią savaitę prasidėjo FA Kaunas vasaros stovykla, kurioje dalyvauja virš 60 vaikų iš įvairių amžiaus grupių.",
@@ -24,7 +43,7 @@ const newsData = [
   },
   {
     id: 3,
-    date: "2025-06-25",
+    date: "2025-06-23",
     title: "Summer Victory CUP Garliavoje",
     summary:
       "Trijų FA Kaunas komandų pasirodymai Garliavos turnyre – išskirtinis nusiteikimas ir bręstanti žaidimo kokybė.",
@@ -43,6 +62,9 @@ function formatDate(dateStr) {
 }
 
 export default function Naujienos() {
+  // rikiavimas pagal datą (nuo naujausios)
+  const sorted = [...newsData].sort((a, b) => b.date.localeCompare(a.date));
+
   return (
     <main className="text-black font-sans">
       {/* HERO sekcija */}
@@ -67,10 +89,10 @@ export default function Naujienos() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10"
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 items-stretch"
           >
-            {newsData.map((item, index) => (
-              <Link to={item.link} key={item.id}>
+            {sorted.map((item, index) => (
+              <Link to={item.link} key={item.id} className="block h-full">
                 <motion.div
                   initial={{ opacity: 0, x: -40 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -81,7 +103,7 @@ export default function Naujienos() {
                     ease: "easeOut",
                   }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col cursor-pointer"
+                  className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full cursor-pointer"
                 >
                   <img
                     src={item.image}
