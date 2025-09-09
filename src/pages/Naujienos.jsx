@@ -5,8 +5,17 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const newsData = [
   {
+    id: 6,
+    date: "2025-09-09",
+    title: "Net penki FA KAUNAS auklėtiniai – LFF regioniniame talentų centre!",
+    summary:
+      "2015–2016 m. gimimo grupės berniukai įveikė atrankas ir pradės treniruotis LFF regioniniame talentų centre, siekdami dar sparčiau tobulėti.",
+    link: "/naujienos/lff-talentu-centras",
+    image: "/naujienos/talentai.jpg",
+  },
+  {
     id: 5,
-    date: "2025-08-04", // koreguok, jei kita tiksli publikavimo data
+    date: "2025-08-04",
     title: "Sėkminga FA Kaunas vasaros stovykla Lenkijoje",
     summary:
       "Mrągowo mieste vykusi savaitės stovykla: fizinis pasirengimas, technikos tobulinimas ir stipri komandinė dvasia.",
@@ -15,11 +24,10 @@ const newsData = [
   },
   {
     id: 4,
-    date: "2025-08-11", // Rugpjūčio 8–10 → naudojam 08-10 kaip sąrašo datą
+    date: "2025-08-11",
     title: "Dobrecova CUP Latvijoje (2015 m.)",
     summary:
-      "Dvi FA Kaunas komandos tarp 48 dalyvių: " +
-      "White – 32 vieta, Blue – per plauką nuo prizininkų, 4 vieta.",
+      "Dvi FA Kaunas komandos tarp 48 dalyvių: White – 32 vieta, Blue – per plauką nuo prizininkų, 4 vieta.",
     link: "/naujienos/dobrecova-cup-2025",
     image: "/naujienos/dobrecova.jpg",
   },
@@ -62,7 +70,6 @@ function formatDate(dateStr) {
 }
 
 export default function Naujienos() {
-  // rikiavimas pagal datą (nuo naujausios)
   const sorted = [...newsData].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
@@ -114,9 +121,7 @@ export default function Naujienos() {
                     <p className="text-sm text-gray-500 mb-2">
                       {formatDate(item.date)}
                     </p>
-                    <h3 className="text-xl font-semibold mb-3">
-                      {item.title}
-                    </h3>
+                    <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
                     <p className="text-gray-700 text-base mb-4 flex-grow">
                       {item.summary}
                     </p>
