@@ -5,6 +5,15 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const newsData = [
   {
+    id: 7,
+    date: "2025-09-14",
+    title: "FA Kaunas komanda dalyvavo „Neodenta“ turnyre",
+    summary:
+      "Šį sekmadienį dalyvavome „Neodenta“ futbolo turnyre, kuris tapo tikra švente mūsų komandai. Džiaugsmas, kova ir noras tobulėti kartu!",
+    link: "/naujienos/neodenta-2025",
+    image: "/naujienos/neodenta.jpg",
+  },
+  {
     id: 6,
     date: "2025-09-09",
     title: "Net penki FA KAUNAS auklėtiniai – LFF regioniniame talentų centre!",
