@@ -5,6 +5,15 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const newsData = [
   {
+    id: 8,
+    date: "2025-09-21",
+    title: "FA Kaunas 2019/20 m. grupė dalyvavo „KAFF Prezidento taurėje“",
+    summary:
+      "Turnyras pažymėtas geromis nuotaikomis, puikiu oru ir drąsiais debiutais. Berniukai pademonstravo drąsą ir ryžtą!",
+    link: "/naujienos/kaff-prezidento-2025",
+    image: "/naujienos/kaff1.jpg",
+  },
+  {
     id: 7,
     date: "2025-09-14",
     title: "FA Kaunas komanda dalyvavo „Neodenta“ turnyre",

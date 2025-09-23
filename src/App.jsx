@@ -18,6 +18,7 @@ import Stovykla2025 from './pages/naujienos/Stovykla2025';
 import HegelmanTurnyras from "./pages/naujienos/HegelmanTurnyras";
 import SummerVictory2025 from './pages/naujienos/SummerVictory';
 import Neodenta2025 from './pages/naujienos/Neodenta2025';
+import KaffPrezidento2025 from './pages/naujienos/KaffPrezidento2025';
 
 import LFFTalentuCentras from './pages/naujienos/LFFTalentuCentras';
 import DobrecovaCup2025 from './pages/naujienos/DobrecovaCup2025';
@@ -78,6 +79,7 @@ function App() {
           <Route path="/naujienos/vasaros-stovykla-mragowo-2025" element={<VasarosStovyklaMragowo2025 />} />
           <Route path="/naujienos/lff-talentu-centras" element={<LFFTalentuCentras />} />
           <Route path="/naujienos/neodenta-2025" element={<Neodenta2025 />} />
+          <Route path="/naujienos/kaff-prezidento-2025" element={<KaffPrezidento2025 />} />
           <Route path="/kontaktai" element={<Kontaktai />} />
         </Routes>
       </LayoutWrapper>
