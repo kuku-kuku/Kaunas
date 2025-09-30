@@ -89,10 +89,10 @@ export default function RudensTaure() {
             2015 m. Juodųjų grupė šiame turnyre kovojo iki paskutinės minutės.
           </motion.p>
 
-          {/* Trenerių komentarai (vienoje dėžutėje – kaip Žalgirio naujienoje) */}
+          {/* Trenerio Tomo komentaras (pilka dėžutė) */}
           <motion.div
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-            className="bg-gray-100 p-5 rounded-lg shadow-sm space-y-6"
+            className="bg-gray-100 p-5 rounded-lg shadow-sm space-y-4"
           >
             <p className="text-lg text-gray-800 leading-relaxed">
               <strong>Trenerio Tomo komentaras:</strong><br />
@@ -101,23 +101,9 @@ export default function RudensTaure() {
               kitokiais iššūkiais nei treniruotėse. Artimiausiu metu stengsimės kuo daugiau dalyvauti varžybose,
               semtis patirties ir tobulėti.“
             </p>
-
-            <p className="text-lg text-gray-800 leading-relaxed">
-              <strong>Trenerio Ernesto komentaras:</strong><br />
-              „Dar prieš rungtynes su vaikais aptarėme žaidimo planą ir jo nuosekliai laikėmės. Džiaugiuosi, kad
-              gynyboje žaidėme drausmingai – vieni kitiems padėdami ir neleisdami varžovams lengvai pelnyti įvarčių.
-              Kovojome dėl kiekvieno kamuolio su maksimaliu atsidavimu.
-              <br /><br />
-              Taip pat pademonstravome, kad gebame ne tik gintis, bet ir kurti atakas. Pasinaudodami laisvu žaidėju
-              greitai keitėme žaidimo kryptį iš vieno krašto į kitą, o tai leido pelnyti nemažai įvarčių. Visą
-              turnyrą lydėjo gera nuotaika – vaikai mėgavosi žaidimu ir rodė norą tobulėti.
-              <br /><br />
-              Toliau treniruotėse nuosekliai dirbsime, kad kiekvienas žaidėjas stiprintų savo individualius futbolo
-              įgūdžius, o komandinis žaidimas taptų dar brandesnis.“
-            </p>
           </motion.div>
 
-          {/* 2018 m. grupė + padėka */}
+          {/* Perkelta pastraipa virš Ernesto komentaro */}
           <motion.p
             variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
             className="text-lg text-gray-800 leading-relaxed"
@@ -125,6 +111,29 @@ export default function RudensTaure() {
             Taip pat 2018 m. grupė grįžo namo be pralaimėjimų!
           </motion.p>
 
+          {/* Trenerio Ernesto komentaras (identiškas stilius kaip Tomo) */}
+          <motion.div
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            className="bg-gray-100 p-5 rounded-lg shadow-sm space-y-4"
+          >
+            <p className="text-lg text-gray-800 leading-relaxed">
+              <strong>Trenerio Ernesto komentaras:</strong><br />
+              „Dar prieš rungtynes su vaikais aptarėme žaidimo planą ir jo nuosekliai laikėmės. Džiaugiuosi, kad
+              gynyboje žaidėme drausmingai – vieni kitiems padėdami ir neleisdami varžovams lengvai pelnyti įvarčių.
+              Kovojome dėl kiekvieno kamuolio su maksimaliu atsidavimu.
+            </p>
+            <p className="text-lg text-gray-800 leading-relaxed">
+              Taip pat pademonstravome, kad gebame ne tik gintis, bet ir kurti atakas. Pasinaudodami laisvu žaidėju
+              greitai keitėme žaidimo kryptį iš vieno krašto į kitą, o tai leido pelnyti nemažai įvarčių. Visą
+              turnyrą lydėjo gera nuotaika – vaikai mėgavosi žaidimu ir rodė norą tobulėti.
+            </p>
+            <p className="text-lg text-gray-800 leading-relaxed">
+              Toliau treniruotėse nuosekliai dirbsime, kad kiekvienas žaidėjas stiprintų savo individualius futbolo
+              įgūdžius, o komandinis žaidimas taptų dar brandesnis.“
+            </p>
+          </motion.div>
+
+          {/* Padėka */}
           <motion.p
             variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
             className="font-medium text-gray-900"
@@ -132,7 +141,7 @@ export default function RudensTaure() {
             Didelis ačiū tėveliams už jų kantrybę ir nuolatinį palaikymą! ⚽
           </motion.p>
 
-          {/* Šūkis – kaip prašei */}
+          {/* Šūkis */}
           <motion.p
             variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
             className="text-xl text-black font-semibold"
@@ -141,7 +150,7 @@ export default function RudensTaure() {
           </motion.p>
         </motion.div>
 
-        {/* Karuselė su rodyklėm ir taškais – identiška kaip Žalgirio naujienoje */}
+        {/* Karuselė */}
         <div className="flex flex-col items-center gap-6">
           <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
             {images.map((img, index) => (
