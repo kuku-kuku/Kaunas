@@ -25,6 +25,7 @@ import DobrecovaCup2025 from './pages/naujienos/DobrecovaCup2025';
 import VasarosStovyklaMragowo2025 from './pages/naujienos/VasarosStovyklaMragowo2025';
 import RudensTaure from './pages/naujienos/RudensTaure';
 import ZalgirisFutsalCup from './pages/naujienos/ZalgirisFutsalCup';
+import BalciaCup2025 from './pages/naujienos/BalciaCup2025';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -88,6 +89,7 @@ function App() {
           <Route path="/naujienos/kaff-prezidento-2025" element={<KaffPrezidento2025 />} />
           <Route path="/naujienos/rudens-taure" element={<RudensTaure />} />
           <Route path="/naujienos/zalgiris-futsal-cup" element={<ZalgirisFutsalCup />} />
+          <Route path="/naujienos/balcia-cup-2025" element={<BalciaCup2025 />} />
           {/* Dinaminis naujienos puslapis */}
           <Route path="/naujienos/:slug" element={<NewsSingle />} />
           {/* Admin forma */}

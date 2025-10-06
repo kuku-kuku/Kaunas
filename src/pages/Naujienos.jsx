@@ -5,6 +5,15 @@ import { motion } from "framer-motion";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const fallbackNews = [
+    {
+    id: 11,
+    date: "2025-10-06",
+    title: "Puikus žaidimas ir vienybė aikštėje – „Balcia Cup“ 2019/20 m. turnyro akimirkos",
+    summary:
+      "Smagus sekmadienio rytas, daug įvarčių ir tikra komandinė dvasia. Treneris Tomas: „Turnyre pelnėme nemažai įvarčių ir džiaugsmingai juos šventėme. Džiaugiuosi, kad vaikai aikštėje elgiasi kaip tikri futbolininkai – švenčia įvarčius, palaiko vieni kitus. Turime nuostabius vaikus ir labai laukiame kitų turnyrų.“",
+    link: "/naujienos/balcia-cup-2025",
+    image: "/naujienos/balcia.jpg",
+  },
   {
     id: 10,
     date: "2025-09-28",
