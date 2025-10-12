@@ -1,3 +1,4 @@
+// src/App.jsx
 import React from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 
@@ -26,14 +27,16 @@ import VasarosStovyklaMragowo2025 from './pages/naujienos/VasarosStovyklaMragowo
 import RudensTaure from './pages/naujienos/RudensTaure';
 import ZalgirisFutsalCup from './pages/naujienos/ZalgirisFutsalCup';
 import BalciaCup2025 from './pages/naujienos/BalciaCup2025';
+import SportfanTurnyras from './pages/naujienos/SportfanTurnyras';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import BackgroundWrapper from './components/BackgroundWrapper';
 
-import AdminNews from './pages/AdminNews';   // ✅ pataisyta
-import NewsSingle from './pages/NewsSingle'; // ✅ pridėta
+// ❌ Pašalinta: AdminNews ir NewsSingle importai
+// import AdminNews from './pages/AdminNews';
+// import NewsSingle from './pages/NewsSingle';
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -78,6 +81,7 @@ function App() {
           <Route path="/akademija/ugdymo-programa" element={<UgdymoPrograma />} />
           <Route path="/prisijunk" element={<Prisijunk />} />
           <Route path="/naujienos" element={<Naujienos />} />
+
           {/* Statiniai naujienų puslapiai */}
           <Route path="/naujienos/stovykla-2025" element={<Stovykla2025 />} />
           <Route path="/naujienos/hegelman-turnyras" element={<HegelmanTurnyras />} />
@@ -90,10 +94,13 @@ function App() {
           <Route path="/naujienos/rudens-taure" element={<RudensTaure />} />
           <Route path="/naujienos/zalgiris-futsal-cup" element={<ZalgirisFutsalCup />} />
           <Route path="/naujienos/balcia-cup-2025" element={<BalciaCup2025 />} />
-          {/* Dinaminis naujienos puslapis */}
-          <Route path="/naujienos/:slug" element={<NewsSingle />} />
-          {/* Admin forma */}
-          <Route path="/admin" element={<AdminNews />} />
+          <Route path="/naujienos/sportfan-turnyras" element={<SportfanTurnyras />} />
+
+          {/* ❌ Pašalintas dinaminis /:slug maršrutas ir Admin puslapis
+              <Route path="/naujienos/:slug" element={<NewsSingle />} />
+              <Route path="/admin" element={<AdminNews />} />
+          */}
+
           <Route path="/kontaktai" element={<Kontaktai />} />
         </Routes>
       </LayoutWrapper>

@@ -5,6 +5,15 @@ import { motion } from "framer-motion";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const fallbackNews = [
+     {
+    id: 12,
+    date: "2025-10-12",
+    title: "2019/2020 m. grupės „Sportfan“ futbolo turnyras!",
+    summary:
+      "Trenerio Tomo komentaras: „Puikiai praleidome sekmadienio pirmąją dienos pusę. Vaikų atsidavimas – puikus. Jie kovoja, stengiasi žaisti protingai, klausosi trenerių patarimų ir iš jų mokosi. Nuoširdžiai dėkojame tėveliams – turnyrai kiekvieną savaitgalį skatina tobulėti ir jūsų nenuvilti.“",
+    link: "/naujienos/sportfan-turnyras",
+    image: "/naujienos/sportfan.jpg",
+    },
     {
     id: 11,
     date: "2025-10-06",
