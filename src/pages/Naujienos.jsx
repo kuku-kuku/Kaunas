@@ -11,7 +11,7 @@ const fallbackNews = [
         title: "Savaitgalinis „Ąžuolo rudens taurės“ turnyras!",
         summary:
             "2018 m. komanda dalyvavo „Ąžuolo“ turnyre. Treneris Tomas: „Pirmieji 5x5 žingsniai 2019 m. gimusiems vaikams – drąsa ir noras žaisti padėjo komandai.“ Treneris Ernestas: „Pakoregavus žaidimo stilių – visos likusios dvikovos laimėtos; augantis komandos susižaidimas ir brandumas aikštėje.“",
-        link: "/naujienos/azuolo-taure-2025",
+        link: "/naujienos/azuolo-rudens-taure-2025",
         image: "/naujienos/azuolo1.jpg"
     },
     {

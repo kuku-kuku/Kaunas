@@ -129,7 +129,7 @@ export default function AzuoloTaure2025() {
             }}
             className="text-xl text-black font-semibold"
           >
-            FA Kaunas – auga kartu su vaikais!
+            FA KAUNAS – nuo svajonės iki realybės!
           </motion.p>
         </motion.div>
 

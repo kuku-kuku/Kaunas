@@ -30,7 +30,7 @@ import BalciaCup2025 from './pages/naujienos/BalciaCup2025';
 import SportfanTurnyras from './pages/naujienos/SportfanTurnyras';
 import KickOff2025 from './pages/naujienos/KickOff2025';
 import KaunoRajonoTaure2025 from './pages/naujienos/KaunoRajonoTaure2025';
-import AzuoloTaure2025 from './pages/naujienos/AzuoloTaurė2025';
+import AzuoloTaure2025 from './pages/naujienos/AzuoloTaure2025';
 
 
 import Navbar from './components/Navbar';
