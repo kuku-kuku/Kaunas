@@ -30,6 +30,8 @@ import BalciaCup2025 from './pages/naujienos/BalciaCup2025';
 import SportfanTurnyras from './pages/naujienos/SportfanTurnyras';
 import KickOff2025 from './pages/naujienos/KickOff2025';
 import KaunoRajonoTaure2025 from './pages/naujienos/KaunoRajonoTaure2025';
+import AzuoloTaure2025 from './pages/naujienos/AzuoloTaurė2025';
+
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -99,6 +101,7 @@ function App() {
           <Route path="/naujienos/sportfan-turnyras" element={<SportfanTurnyras />} />
           <Route path="/naujienos/kick-off-2025" element={<KickOff2025 />} />
           <Route path="/naujienos/kauno-rajono-taure-2025" element={<KaunoRajonoTaure2025 />} />
+          <Route path="/naujienos/azuolo-rudens-taure-2025" element={<AzuoloTaure2025 />} />
 
           {/* ❌ Pašalintas dinaminis /:slug maršrutas ir Admin puslapis
               <Route path="/naujienos/:slug" element={<NewsSingle />} />

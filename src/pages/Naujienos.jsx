@@ -6,6 +6,15 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const fallbackNews = [
     {
+        id: 15, // kitas laisvas ID (nerekomenduoju rišti prie datos)
+        date: "2025-10-27",
+        title: "Savaitgalinis „Ąžuolo rudens taurės“ turnyras!",
+        summary:
+            "2018 m. komanda dalyvavo „Ąžuolo“ turnyre. Treneris Tomas: „Pirmieji 5x5 žingsniai 2019 m. gimusiems vaikams – drąsa ir noras žaisti padėjo komandai.“ Treneris Ernestas: „Pakoregavus žaidimo stilių – visos likusios dvikovos laimėtos; augantis komandos susižaidimas ir brandumas aikštėje.“",
+        link: "/naujienos/azuolo-taure-2025",
+        image: "/naujienos/azuolo1.jpg"
+    },
+    {
         id: 14,
         date: "2025-10-20", // Naujausia naujiena: Kauno rajono taurė
         title: "Tobulėjimas su kiekvienu turnyru: 2019/2020 m. grupės pasirodymas „Kauno rajono taurė“",

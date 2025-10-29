@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
-  '/naujienos/stovykla.jpg',
-  '/naujienos/stovykla2.jpg',
-  '/naujienos/stovykla3.jpg',
+  '/naujienos/azuolo1.jpg',
+  '/naujienos/azuolo2.jpg',
+  '/naujienos/azuolo3.jpg',
 ];
 
-export default function Stovykla2025() {
+export default function AzuoloTaure2025() {
   const [current, setCurrent] = useState(0);
   const [isManual, setIsManual] = useState(false);
   const intervalRef = useRef(null);
@@ -20,7 +20,6 @@ export default function Stovykla2025() {
         setCurrent((prev) => (prev + 1) % images.length);
       }, 4000);
     }
-
     return () => clearInterval(intervalRef.current);
   }, [isManual]);
 
@@ -38,18 +37,18 @@ export default function Stovykla2025() {
   };
 
   return (
-    <section className="w-full min-h-screen bg-white px-6 py-16">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-        {/* Tekstas */}
+    // ✅ svarbiausia — kompensuojam fixed navbar aukštį:
+    // pt-28 ~ 112px mobile, md:pt-36 ~ 144px desktop (pasireguliuok, jei tavo navbar kitokio aukščio)
+    <section className="w-full min-h-screen bg-white px-4 sm:px-6 pb-12 sm:pb-16 pt-28 md:pt-36 relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {/* Teksto dalis */}
         <motion.div
           className="space-y-6 flex flex-col justify-center"
           initial="hidden"
           animate="visible"
           variants={{
             hidden: {},
-            visible: {
-              transition: { staggerChildren: 0.2 },
-            },
+            visible: { transition: { staggerChildren: 0.2 } },
           }}
         >
           <motion.div
@@ -57,9 +56,10 @@ export default function Stovykla2025() {
               hidden: { opacity: 0, y: -20 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="inline-block bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md mt-16 md:mt-0"
+            // ❌ buvo mt-16 md:mt-0 — nuimam, kad dvigubai nekeltų turinio
+            className="inline-block bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md"
           >
-            Stovyklos apžvalga
+            Ąžuolo rudens taurė
           </motion.div>
 
           <motion.h1
@@ -67,9 +67,10 @@ export default function Stovykla2025() {
               hidden: { opacity: 0, y: -10 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="text-3xl md:text-4xl font-bold text-gray-900"
+            // scroll-mt, jei į šį headingą būtų skrolinama per anchor
+            className="scroll-mt-36 text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900"
           >
-            Dalis FA „Kaunas“ auklėtinių sezoną užbaigė smagioje dienos stovykloje, o dalis turnyruose!
+            Savaitgalinis „Ąžuolo rudens taurės“ turnyras!
           </motion.h1>
 
           <motion.p
@@ -79,7 +80,7 @@ export default function Stovykla2025() {
             }}
             className="text-gray-500 font-medium -mt-2"
           >
-            30/06/2025
+            14/10/2025
           </motion.p>
 
           <motion.div
@@ -90,12 +91,34 @@ export default function Stovykla2025() {
             className="bg-gray-100 p-5 rounded-lg shadow-sm space-y-4"
           >
             <p className="text-lg text-gray-800 leading-relaxed">
-              <strong>Trenerių Tomo ir Gabrieliaus komentaras:</strong>
+              <strong>2018 m. komanda dalyvavo „Ąžuolo“ turnyre.</strong>
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              „Vaikai ne tik aktyviai sportavo du kartus per dieną, bet ir turiningai leido laiką įvairiose veiklose. Aplankėme kino teatrą, dalyvavome viktorinoje, kūrėme kūrybinėse dirbtuvėse, tyrinėjome Mokslo salą, lankėmės baseine, kur vaikai įgijo saugaus elgesio vandenyje pažymėjimus, išbandėme VR kambario pramogas ir dar daugiau.
-              <br /><br />
-              Smagiausia matyti spindinčias vaikų akis, jų džiaugsmą, naujas patirtis ir augantį pasitikėjimą savimi. Tai – neįkainojama.“
+
+            <p className="text-lg text-gray-800 leading-relaxed">
+              <strong>Treneris Tomas:</strong> „Prie komandos prisijungė keli 2019 m. gimimo vaikai. 
+              Jiems tai buvo pirmieji kartai žaidžiant 5x5 futbolą, tačiau jie visiškai neišsigando – 
+              degė noru žaisti ir padėjo komandai. Manau, labai svarbu suteikti tokią progą tobulėti vaikams, 
+              kurie kiekvienoje treniruotėje rodo, kad nori ir jau gali žengti žingsnį į priekį, žaisdami su vyresniais. 
+              Likusiems vaikams turnyras taip pat buvo sėkmingas. Tikiu, kad kiekvienas išsinešė ką nors naudingo. 
+              Visi be išimties labai stengėsi – manau, tai ir yra svarbiausia. Visa kita paliekame treniruotėms.“
+            </p>
+
+            <p className="text-lg text-gray-800 leading-relaxed">
+              <strong>2017/2018 m. komanda – po čempionato į turnyrą!</strong>
+            </p>
+
+            <p className="text-lg text-gray-800 leading-relaxed">
+              <strong>Treneris Ernestas:</strong> „Po įtemptų čempionato rungtynių mūsų berniukams pavyko 
+              sėkmingai reabilituotis „Ąžuolo rudens taurės“ turnyre. Nors pirmąsias rungtynes pralaimėjome, 
+              pakoregavus žaidimo stilių visos likusios dvikovos buvo laimėtos. Smagu matyti, kad komanda vis 
+              labiau susižaidžia – žaidėjai vieni kitus labiau palaiko gynyboje, perėmę kamuolį stengiasi jį 
+              išlaikyti, o ne tiesiog spirt bet kur. Tai rodo augantį komandinį supratimą ir brandą aikštėje. 
+              Turnyras tapo puikia patirtimi visai komandai. Džiaugiamės, kad vaikai klausėsi, stengėsi įgyvendinti 
+              užduotis ir turnyrą užbaigė geros nuotaikos bei šiek tiek paaugę – tiek kaip žaidėjai, tiek kaip komandos nariai.“
+            </p>
+
+            <p className="text-lg text-gray-800 leading-relaxed">
+              <strong>Nuoširdžiai dėkojame tėveliams</strong> už didžiulį palaikymą ir buvimą kartu!
             </p>
           </motion.div>
 
@@ -106,18 +129,18 @@ export default function Stovykla2025() {
             }}
             className="text-xl text-black font-semibold"
           >
-            FA KAUNAS – nuo svajonės iki realybės!
+            FA Kaunas – auga kartu su vaikais!
           </motion.p>
         </motion.div>
 
-        {/* Karuselė su rodyklėm ir orbais */}
+        {/* Karuselė */}
         <div className="flex flex-col items-center gap-6">
-          <div className="relative h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
+          <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
             {images.map((img, index) => (
               <img
                 key={index}
                 src={img}
-                alt="Stovyklos nuotrauka"
+                alt="Turnyro nuotrauka"
                 className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
                   index === current ? 'opacity-100' : 'opacity-0'
                 }`}

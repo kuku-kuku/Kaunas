@@ -103,7 +103,7 @@ export default function KaffPrezidento2025() {
             variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
             className="text-xl text-black font-semibold"
           >
-            FA Kaunas – nuo svajonės iki realybės!
+            FA KAUNAS – nuo svajonės iki realybės!
           </motion.p>
         </motion.div>
 

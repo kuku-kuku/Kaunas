@@ -127,7 +127,7 @@ export default function VasarosStovyklaMragowo2025() {
             }}
             className="text-xl text-black font-semibold"
           >
-            FA Kaunas – nuo svajonės iki realybės!
+            FA KAUNAS – nuo svajonės iki realybės!
           </motion.p>
         </motion.div>
 
