@@ -1,10 +1,19 @@
 // src/pages/Naujienos.jsx
 import React, { useMemo } from "react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import BackgroundWrapper from "../components/BackgroundWrapper"; 
+import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const fallbackNews = [
+    {
+        id: 16,
+        date: "2025-11-30", // pakeisk į realią datą, jei turi
+        title: 'FA KAUNAS 2017 m. komandos turnyras „Resort Niegocin Cup“ Lenkijoje 🇵🇱',
+        summary:
+            'FA Kaunas 2017 m. komanda dalyvavo 3 dienų „Resort Niegocin Cup“ turnyre Lenkijoje. Treneris Ernestas Bernota džiaugėsi berniukų drausme, kovingumu, augančiu komandinio žaidimo supratimu ir stiprėjančiu tarpusavio ryšiu aikštėje ir už jos ribų. Rungtynių MVP apdovanojimus pelnė Radvilas Juodis, Matas Petkevičius, Arijus Ročka ir Marko Bjelan, o naudingiausiu žaidėju komandoje išrinktas Arijus Ročka.',
+        link: "/naujienos/resort-niegocin-cup-2025",
+        image: "/naujienos/lenkija1.jpg",
+    },
     {
         id: 15, // kitas laisvas ID (nerekomenduoju rišti prie datos)
         date: "2025-10-27",
@@ -158,7 +167,7 @@ export default function Naujienos() {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: { 
+            transition: {
                 duration: 0.1, // Labai greitas konteinerio atsiradimas
                 ease: [0.25, 0.1, 0.25, 1],
                 staggerChildren: 0.03, // Mažas vėlavimas tarp kortelių
@@ -168,13 +177,13 @@ export default function Naujienos() {
 
     const card = {
         hidden: { opacity: 0, y: 15 }, // Vizualiai ryškesnis judesys
-        visible: { 
-            opacity: 1, 
-            y: 0, 
-            transition: { 
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
                 duration: 0.3, // Kortelės animacija
-                ease: "easeOut" 
-            } 
+                ease: "easeOut"
+            }
         },
     };
 
@@ -184,8 +193,8 @@ export default function Naujienos() {
                 <motion.div
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                        duration: 0.5, 
+                    transition={{
+                        duration: 0.5,
                         ease: [0.25, 0.1, 0.25, 1],
                         delay: 0.05
                     }}
@@ -216,8 +225,8 @@ export default function Naujienos() {
                                     variants={card}
                                     className="bg-white rounded-xl border border-gray-200 shadow-soft hover:shadow-md transition-shadow h-full flex flex-col"
                                     // Pakeista į ryškesnę, bet greitą animaciją
-                                    whileHover={{ 
-                                        y: -5, 
+                                    whileHover={{
+                                        y: -5,
                                         transition: { duration: 0.15, ease: "easeOut" }
                                     }}
                                     whileTap={{ scale: 0.97 }}
