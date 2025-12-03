@@ -137,15 +137,14 @@ function ResortNiegocinCup2025() {
 
         {/* Karuselė */}
         <div className="flex flex-col items-center gap-6">
-          <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
+          <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center bg-gray-100">
             {images.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt="Turnyro nuotrauka"
-                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                  index === current ? 'opacity-100' : 'opacity-0'
-                }`}
+                className={`absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out ${index === current ? 'opacity-100' : 'opacity-0'
+                  }`}
               />
             ))}
 
@@ -167,11 +166,10 @@ function ResortNiegocinCup2025() {
                 <button
                   key={index}
                   onClick={() => handleManualChange(index)}
-                  className={`w-3 h-3 rounded-full ${
-                    index === current
+                  className={`w-3 h-3 rounded-full ${index === current
                       ? 'bg-white'
                       : 'bg-transparent border border-white'
-                  } transition transform hover:scale-110`}
+                    } transition transform hover:scale-110`}
                 ></button>
               ))}
             </div>
