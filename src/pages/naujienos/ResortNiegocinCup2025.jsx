@@ -70,7 +70,7 @@ function ResortNiegocinCup2025() {
             }}
             className="scroll-mt-36 text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900"
           >
-            FA KAUNAS 2017 m. komandos turnyras „Resort Niegocin Cup“ Lenkijoje 🇵🇱
+            FA KAUNAS 2017 m. komandos turnyras „Resort Niegocin Cup" Lenkijoje 🇵🇱
           </motion.h1>
 
           <motion.p
@@ -108,7 +108,7 @@ function ResortNiegocinCup2025() {
               vaikinų kovingumu aikštelėje, pradėjome rodyti charakterį ir daugiau
               komunikuoti tarpusavyje, kas yra didelė pagalba komandoje žaidimo metu.
               Grįžome namo su dideliu bagažu patirties, dar drąsesni, savarankiškesni
-              ir stipresni!“
+              ir stipresni!"
             </p>
 
             <p className="text-lg text-gray-800 leading-relaxed">
@@ -137,39 +137,55 @@ function ResortNiegocinCup2025() {
 
         {/* Karuselė */}
         <div className="flex flex-col items-center gap-6">
-          <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center bg-gray-100">
+          <div className="relative w-full aspect-[4/3] sm:aspect-video md:aspect-[4/3] overflow-hidden rounded-xl shadow-lg bg-gradient-to-br from-sky-50 to-blue-50">
             {images.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt="Turnyro nuotrauka"
-                className={`absolute top-0 left-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out ${index === current ? 'opacity-100' : 'opacity-0'
-                  }`}
-              />
+              <React.Fragment key={index}>
+                {/* Blurred background */}
+                <div
+                  className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === current ? 'opacity-100' : 'opacity-0'
+                    }`}
+                >
+                  <img
+                    src={img}
+                    alt=""
+                    className="w-full h-full object-cover blur-2xl scale-110 opacity-30"
+                  />
+                </div>
+                {/* Main image */}
+                <img
+                  src={img}
+                  alt="Turnyro nuotrauka"
+                  className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out ${index === current ? 'opacity-100' : 'opacity-0'
+                    } z-10`}
+                />
+              </React.Fragment>
             ))}
 
             <button
               onClick={handlePrev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md hover:scale-110 transition"
+              className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-black p-1.5 sm:p-2 rounded-full shadow-lg hover:scale-110 transition-all duration-200 z-20"
+              aria-label="Previous image"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
             </button>
             <button
               onClick={handleNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md hover:scale-110 transition"
+              className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-black p-1.5 sm:p-2 rounded-full shadow-lg hover:scale-110 transition-all duration-200 z-20"
+              aria-label="Next image"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} className="sm:w-6 sm:h-6" />
             </button>
 
-            <div className="absolute bottom-4 w-full flex justify-center gap-2">
+            <div className="absolute bottom-3 sm:bottom-4 w-full flex justify-center gap-1.5 sm:gap-2 z-20">
               {images.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => handleManualChange(index)}
-                  className={`w-3 h-3 rounded-full ${index === current
-                      ? 'bg-white'
-                      : 'bg-transparent border border-white'
-                    } transition transform hover:scale-110`}
+                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-200 ${index === current
+                      ? 'bg-white scale-110'
+                      : 'bg-white/50 hover:bg-white/75'
+                    }`}
+                  aria-label={`Go to image ${index + 1}`}
                 ></button>
               ))}
             </div>
@@ -177,7 +193,7 @@ function ResortNiegocinCup2025() {
 
           <Link
             to="/naujienos"
-            className="inline-block text-sky-600 hover:underline font-medium"
+            className="inline-block text-sky-600 hover:text-sky-700 hover:underline font-medium transition-colors"
           >
             ← Grįžti į naujienas
           </Link>
