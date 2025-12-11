@@ -6,6 +6,15 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const fallbackNews = [
     {
+        id: 19,
+        date: "2025-12-08",
+        title: 'Dviguba FA Kaunas 2015 m. komandos sėkmė „Kaunas Football Fest“ turnyre',
+        summary:
+            'FA Kaunas 2015 m. komanda dalyvavo tarptautiniame „Kaunas Football Fest“ turnyre, kuriame varžėsi komandos iš Lietuvos ir užsienio. FA Kaunas Blue tapo turnyro vicečempionais, o FA Kaunas White laimėjo „konferencijų lygą“. Treneriai džiaugėsi vaikų darbu gynyboje, kovingumu ir disciplina.',
+        link: "/naujienos/kaunas-football-fest-2025",
+        image: "/naujienos/kaunasfest1.jpg",
+    },
+    {
         id: 18,
         date: "2025-12-02",
         title: "Prie FA Kaunas prisijungė vartininkų treneris Remigijus Mikalainis 🧤⚽️",

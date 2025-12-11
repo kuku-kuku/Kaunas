@@ -34,6 +34,8 @@ import AzuoloTaure2025 from './pages/naujienos/AzuoloTaure2025';
 import ResortNiegocinCup2025 from './pages/naujienos/ResortNiegocinCup2025';
 import NeodentaBlitzCup2025 from './pages/naujienos/NeodentaBlitzCup2025';
 import RemigijusMikalainis2025 from './pages/naujienos/RemigijusMikalainis2025';
+import KaunasFootballFest2025 from "./pages/naujienos/KaunasFootballFest2025";
+
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -106,10 +108,8 @@ function App() {
           <Route path="/naujienos/azuolo-rudens-taure-2025" element={<AzuoloTaure2025 />} />
           <Route path="/naujienos/resort-niegocin-cup-2025" element={<ResortNiegocinCup2025 />} />
           <Route path="/naujienos/neodenta-blitz-cup-2025" element={<NeodentaBlitzCup2025 />} />
-          <Route
-            path="/naujienos/remigijus-mikalainis-2025"
-            element={<RemigijusMikalainis2025 />}
-          />
+          <Route path="/naujienos/remigijus-mikalainis-2025" element={<RemigijusMikalainis2025 />} />
+          <Route path="/naujienos/kaunas-football-fest-2025" element={<KaunasFootballFest2025 />} />
           {/* ❌ Pašalintas dinaminis /:slug maršrutas ir Admin puslapis
               <Route path="/naujienos/:slug" element={<NewsSingle />} />
               <Route path="/admin" element={<AdminNews />} />
