@@ -123,7 +123,7 @@ export default function KaunasFootballFest2025() {
             }}
             className="text-gray-500 font-medium -mt-2"
           >
-            08/12/2025
+            06/12/2025
           </motion.p>
 
           <motion.div

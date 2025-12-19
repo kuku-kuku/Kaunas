@@ -6,8 +6,17 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const fallbackNews = [
     {
+        id: 20,
+        date: "2025-12-07",
+        title: "FA Kaunas 2019–20 m. gim. grupė dalyvavo „Kids Cup“ turnyre Vilniuje",
+        summary:
+            "FA Kaunas 2019–20 m. gim. grupė gruodžio 7 d. dalyvavo „Kids Cup“ turnyre Vilniuje. Jauniausi akademijos futbolininkai sužaidė su komandomis iš visos Lietuvos ir pasisėmė vertingos patirties. Treneris Tomas Macelis pasidžiaugė vaikų pastangomis, progresu žaidime vienas prieš vieną ir akcentavo intensyvumo svarbą treniruotėse.",
+        link: "/naujienos/kids-cup-vilnius-2025",
+        image: "/naujienos/kidscup1.jpg",
+    },
+    {
         id: 19,
-        date: "2025-12-08",
+        date: "2025-12-06",
         title: 'Dviguba FA Kaunas 2015 m. komandos sėkmė „Kaunas Football Fest“ turnyre',
         summary:
             'FA Kaunas 2015 m. komanda dalyvavo tarptautiniame „Kaunas Football Fest“ turnyre, kuriame varžėsi komandos iš Lietuvos ir užsienio. FA Kaunas Blue tapo turnyro vicečempionais, o FA Kaunas White laimėjo „konferencijų lygą“. Treneriai džiaugėsi vaikų darbu gynyboje, kovingumu ir disciplina.',
