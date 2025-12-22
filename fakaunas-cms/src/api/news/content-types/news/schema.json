@@ -48,6 +48,10 @@
     },
     "content": {
       "type": "blocks"
+    },
+    "highlight": {
+      "type": "string",
+      "required": true
     }
   }
 }
