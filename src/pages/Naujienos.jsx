@@ -6,6 +6,33 @@ import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const fallbackNews = [
     {
+        id: 23,
+        date: "2025-12-21",
+        title: "FA Kaunas 2015 m. komanda dalyvavo „Ąžuolo“ turnyre",
+        summary:
+            "Trenerio Tomo Macelio treniruojama FA Kaunas 2015 m. gimimo komanda dalyvavo „Ąžuolo“ turnyre. Komanda siekė išlikti susikaupusi ir žaisti maksimaliomis pastangomis viso turnyro metu. Treneris pasidžiaugė vaikų nusiteikimu, pažymėjo tobulintinas vietas ir akcentavo tokių turnyrų svarbą jaunųjų futbolininkų ugdymui.",
+        link: "/naujienos/azuolo-turnyras-2015",
+        image: "/naujienos/azuolas1.jpg",
+    },
+    {
+        id: 22,
+        date: "2025-12-20",
+        title: "FA Kaunas auklėtiniai sužaidė draugiškas rungtynes su IBRA Football Academy",
+        summary:
+            "Mažieji FA Kaunas auklėtiniai sužaidė draugiškas rungtynes su IBRA Football Academy komanda, siekdami įgauti daugiau patirties. Treneris Tomas Macelis pasidžiaugė vaikų progresu žaidžiant 4 prieš 4, didėjančiu įvarčių skaičiumi ir jaunųjų futbolininkų noru mokytis bei tobulėti.",
+        link: "/naujienos/friendly-match-ibra",
+        image: "/naujienos/ibra1.jpg",
+    },
+    {
+        id: 21,
+        date: "2025-12-19",
+        title: "FA Kaunas 2017 m. komanda dalyvavo „Kaunas Football Fest“ turnyre",
+        summary:
+            "FA Kaunas 2017 m. gimimo komanda dalyvavo dviejų dienų „Kaunas Football Fest“ turnyre. Jaunieji futbolininkai sužaidė daug rungtynių, įgijo vertingos patirties ir parodė progresą aikštėje. Treneris Ernestas Bernota akcentavo komandos nusiteikimą antrąją turnyro dieną bei džiaugėsi vaikų pastangomis ir tėvų palaikymu.",
+        link: "/naujienos/kaunas-football-fest-2017",
+        image: "/naujienos/kff2017_1.jpg",
+    },
+    {
         id: 20,
         date: "2025-12-07",
         title: "FA Kaunas 2019–20 m. gim. grupė dalyvavo „Kids Cup“ turnyre Vilniuje",
