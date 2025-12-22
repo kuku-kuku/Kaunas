@@ -44,6 +44,7 @@ function normalizeNewsItem(n) {
     content: n.content || [],
 
     badgeTitle: n.badgeTitle || null,
+    highlight: n.highlight || null,           // ← PRIDĖTA!
     highlightQuote: n.highlightQuote || null,
 
     coverImage: coverUrl ? { url: coverUrl } : null,
