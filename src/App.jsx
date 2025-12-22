@@ -5,7 +5,7 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Kontaktai from './pages/Kontaktai';
-
+import Naujiena from "./pages/naujienos/Naujiena";
 import Tikslai from './pages/apie/Tikslai';
 import EtikosKodeksas from './pages/apie/EtikosKodeksas';
 
@@ -93,6 +93,7 @@ function App() {
           <Route path="/akademija/ugdymo-programa" element={<UgdymoPrograma />} />
           <Route path="/prisijunk" element={<Prisijunk />} />
           <Route path="/naujienos" element={<Naujienos />} />
+          <Route path="/naujienos/:slug" element={<Naujiena />} />
 
           {/* Statiniai naujienų puslapiai */}
           <Route path="/naujienos/stovykla-2025" element={<Stovykla2025 />} />

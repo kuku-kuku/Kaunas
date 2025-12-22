@@ -1,5 +1,5 @@
 // src/pages/Naujienos.jsx
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import BackgroundWrapper from "../components/BackgroundWrapper";
@@ -213,7 +213,6 @@ const fallbackNews = [
         image: "/naujienos/summervictory.jpg",
     },
 ];
-
 function formatDate(dateStr) {
     const date = new Date(dateStr);
     return date.toLocaleDateString("lt-LT", {
@@ -227,8 +226,83 @@ function sortByDateDesc(arr) {
     return [...arr].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 }
 
+function cmsUrl(path) {
+    const base = import.meta.env.VITE_CMS_URL;
+    if (!path) return null;
+    if (path.startsWith("http")) return path;
+    return `${base}${path}`;
+}
+
 export default function Naujienos() {
-    const items = useMemo(() => sortByDateDesc(fallbackNews), []);
+    const [cmsItems, setCmsItems] = useState(null); // null = dar nekrauta
+    const [cmsError, setCmsError] = useState(false);
+
+    useEffect(() => {
+        let alive = true;
+
+        async function load() {
+            try {
+                setCmsError(false);
+                const base = import.meta.env.VITE_CMS_URL;
+                const res = await fetch(`${base}/api/news-items?populate=*`);
+                if (!res.ok) throw new Error(`CMS fetch failed: ${res.status}`);
+                const json = await res.json();
+
+                // Strapi v5: data yra array, laukai tiesiogiai ant objekto
+                const normalized = (json.data || []).map((n) => {
+                    const cover = n.coverImage?.url ? cmsUrl(n.coverImage.url) : null;
+
+                    return {
+                        id: n.id,
+                        date: n.date,
+                        title: n.title,
+                        summary: n.excerpt || "", // kortelei
+                        slug: n.slug,
+                        image: cover,
+                        source: "cms",
+                    };
+                });
+
+                if (!alive) return;
+                setCmsItems(normalized);
+            } catch (e) {
+                console.error(e);
+                if (!alive) return;
+                setCmsError(true);
+                setCmsItems([]); // kad useMemo nesprogtų
+            }
+        }
+
+        load();
+        return () => {
+            alive = false;
+        };
+    }, []);
+
+    // Jei CMS turi bent vieną įrašą – rodom CMS.
+    // Jei CMS nepasiekiamas / tuščias – rodom fallback.
+    // Rodom VISAS: CMS + statines (fallback). Rikiuojam pagal datą.
+    const items = useMemo(() => {
+        const cms = Array.isArray(cmsItems) && !cmsError ? cmsItems : [];
+
+        // sujungiame
+        const merged = [
+            ...cms,
+            ...fallbackNews.map((n) => ({ ...n, source: "static" })),
+        ];
+
+        // (optional) dedupe – kad netyčia neatsirastų du kartus
+        const seen = new Set();
+        const deduped = merged.filter((n) => {
+            const key = n.slug ? `cms:${n.slug}` : `static:${n.link}`;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
+
+        return sortByDateDesc(deduped);
+    }, [cmsItems, cmsError]);
+
 
     const container = {
         hidden: { opacity: 0 },
@@ -249,8 +323,8 @@ export default function Naujienos() {
             y: 0,
             transition: {
                 duration: 0.3,
-                ease: "easeOut"
-            }
+                ease: "easeOut",
+            },
         },
     };
 
@@ -263,12 +337,21 @@ export default function Naujienos() {
                     transition={{
                         duration: 0.5,
                         ease: [0.25, 0.1, 0.25, 1],
-                        delay: 0.05
+                        delay: 0.05,
                     }}
                     className="max-w-5xl mx-auto text-center"
                 >
                     <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-3">Naujienos</h1>
-                    <p className="text-lg/7 font-light">Naujausia informacija iš FA KAUNAS gyvenimo</p>
+                    <p className="text-lg/7 font-light">
+                        Naujausia informacija iš FA KAUNAS gyvenimo
+                    </p>
+
+                    {/* Optional: mažas indikatorius, kad rodo fallback */}
+                    {cmsError ? (
+                        <p className="mt-4 text-white/90 text-sm">
+                            Šiuo metu rodomos statinės naujienos (CMS nepasiekiamas).
+                        </p>
+                    ) : null}
                 </motion.div>
             </section>
 
@@ -280,53 +363,61 @@ export default function Naujienos() {
                         animate="visible"
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch"
                     >
-                        {items.map((item) => (
-                            <Link
-                                to={item.link}
-                                key={item.id}
-                                className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded-xl"
-                            >
-                                <motion.div
-                                    variants={card}
-                                    className="bg-white rounded-xl border border-gray-200 shadow-soft hover:shadow-md transition-shadow h-full flex flex-col overflow-hidden"
-                                    whileHover={{
-                                        y: -5,
-                                        transition: { duration: 0.15, ease: "easeOut" }
-                                    }}
-                                    whileTap={{ scale: 0.97 }}
-                                >
-                                    <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-xl bg-gray-100">
-                                        {item.image ? (
-                                            <img
-                                                src={item.image}
-                                                alt={item.title}
-                                                className="w-full h-full object-cover"
-                                                loading="lazy"
-                                                decoding="async"
-                                            />
-                                        ) : null}
-                                    </div>
+                        {items.map((item) => {
+                            const link =
+                                item.slug
+                                    ? `/naujienos/${item.slug}` // CMS kelias
+                                    : item.link; // fallbackNews turi item.link
 
-                                    <div className="p-5 flex flex-col flex-1">
-                                        <p className="text-sm text-gray-500 mb-1">
-                                            {formatDate(item.date)}
-                                        </p>
-                                        <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mb-2">
-                                            {item.title}
-                                        </h3>
-                                        <p className="text-gray-700 text-sm sm:text-base mb-4 line-clamp-4">
-                                            {item.summary}
-                                        </p>
-                                        <span className="mt-auto inline-flex items-center gap-1 text-sky-700 font-medium">
-                                            Skaityti daugiau <span aria-hidden>→</span>
-                                        </span>
-                                    </div>
-                                </motion.div>
-                            </Link>
-                        ))}
+                            return (
+                                <Link
+                                    to={link}
+                                    key={item.id}
+                                    className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded-xl"
+                                >
+                                    <motion.div
+                                        variants={card}
+                                        className="bg-white rounded-xl border border-gray-200 shadow-soft hover:shadow-md transition-shadow h-full flex flex-col overflow-hidden"
+                                        whileHover={{
+                                            y: -5,
+                                            transition: { duration: 0.15, ease: "easeOut" },
+                                        }}
+                                        whileTap={{ scale: 0.97 }}
+                                    >
+                                        <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-xl bg-gray-100">
+                                            {item.image ? (
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.title}
+                                                    className="w-full h-full object-cover"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                />
+                                            ) : null}
+                                        </div>
+
+                                        <div className="p-5 flex flex-col flex-1">
+                                            <p className="text-sm text-gray-500 mb-1">
+                                                {formatDate(item.date)}
+                                            </p>
+                                            <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mb-2">
+                                                {item.title}
+                                            </h3>
+                                            <p className="text-gray-700 text-sm sm:text-base mb-4 line-clamp-4">
+                                                {item.summary}
+                                            </p>
+                                            <span className="mt-auto inline-flex items-center gap-1 text-sky-700 font-medium">
+                                                Skaityti daugiau <span aria-hidden>→</span>
+                                            </span>
+                                        </div>
+                                    </motion.div>
+                                </Link>
+                            );
+                        })}
                     </motion.div>
                 </section>
             </BackgroundWrapper>
         </main>
     );
 }
+
