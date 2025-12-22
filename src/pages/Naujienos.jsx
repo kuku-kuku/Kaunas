@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import BackgroundWrapper from "../components/BackgroundWrapper";
+import { fetchNewsList, cmsUrl } from "../lib/cms"; // ✅ vienas šaltinis
 
 const fallbackNews = [
   {
@@ -147,7 +148,8 @@ const fallbackNews = [
     id: 8,
     date: "2025-09-21",
     title: "FA Kaunas 2019/20 m. grupė dalyvavo KAFF Prezidento taurėje",
-    summary: "Turnyras pažymėtas geromis nuotaikomis, puikiu oru ir drąsiais debiutais. Berniukai pademonstravo drąsą ir ryžtą!",
+    summary:
+      "Turnyras pažymėtas geromis nuotaikomis, puikiu oru ir drąsiais debiutais. Berniukai pademonstravo drąsą ir ryžtą!",
     link: "/naujienos/kaff-prezidento-2025",
     image: "/naujienos/kaff1.jpg",
   },
@@ -229,13 +231,6 @@ function sortByDateDesc(arr) {
   return [...arr].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 }
 
-function cmsUrl(path) {
-  const base = import.meta.env.VITE_STRAPI_URL;
-  if (!path) return null;
-  if (path.startsWith("http")) return path;
-  return `${base}${path}`;
-}
-
 export default function Naujienos() {
   const [cmsItems, setCmsItems] = useState(null); // null = dar nekrauta
   const [cmsError, setCmsError] = useState(false);
@@ -247,31 +242,16 @@ export default function Naujienos() {
       try {
         setCmsError(false);
 
-        const base = import.meta.env.VITE_STRAPI_URL;
-        if (!base) throw new Error("Missing VITE_STRAPI_URL env var");
+        const list = await fetchNewsList();
 
-        const res = await fetch(`${base}/api/news-items?populate=*`);
-        if (!res.ok) throw new Error(`CMS fetch failed: ${res.status}`);
-        const json = await res.json();
-
-        // Strapi v5: data yra array, laukai tiesiogiai ant objekto
-        const normalized = (json.data || []).map((n) => {
-          // palaikome abu pavadinimus: coverImage arba cover (jei laukas vadinasi kitaip)
-          const mediaUrl =
-            n.coverImage?.url ||
-            n.cover?.url ||
-            n.image?.url ||
-            n.coverImage?.formats?.medium?.url ||
-            n.cover?.formats?.medium?.url ||
-            null;
-
-          const cover = mediaUrl ? cmsUrl(mediaUrl) : null;
+        const normalized = (list || []).map((n) => {
+          const cover = n.coverImage?.url ? cmsUrl(n.coverImage.url) : null;
 
           return {
             id: n.id,
             date: n.date,
             title: n.title,
-            summary: n.excerpt || "", // kortelei
+            summary: n.excerpt || "",
             slug: n.slug,
             image: cover,
             source: "cms",
@@ -284,7 +264,7 @@ export default function Naujienos() {
         console.error(e);
         if (!alive) return;
         setCmsError(true);
-        setCmsItems([]); // kad useMemo nesprogtų
+        setCmsItems([]);
       }
     }
 
@@ -294,16 +274,10 @@ export default function Naujienos() {
     };
   }, []);
 
-  // Jei CMS turi bent vieną įrašą – rodom CMS.
-  // Jei CMS nepasiekiamas / tuščias – rodom fallback.
-  // Rodom VISAS: CMS + statines (fallback). Rikiuojam pagal datą.
   const items = useMemo(() => {
     const cms = Array.isArray(cmsItems) && !cmsError ? cmsItems : [];
 
-    const merged = [
-      ...cms,
-      ...fallbackNews.map((n) => ({ ...n, source: "static" })),
-    ];
+    const merged = [...cms, ...fallbackNews.map((n) => ({ ...n, source: "static" }))];
 
     const seen = new Set();
     const deduped = merged.filter((n) => {

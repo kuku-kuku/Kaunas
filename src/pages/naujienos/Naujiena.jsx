@@ -171,7 +171,7 @@ export default function Naujiena() {
             variants={{ hidden: { opacity: 0, y: -5 }, visible: { opacity: 1, y: 0 } }}
             className="text-gray-500 font-medium -mt-2"
           >
-            {news.date}
+            {news.date ? new Date(news.date).toLocaleDateString("lt-LT") : ""}
           </motion.p>
 
           <motion.div
