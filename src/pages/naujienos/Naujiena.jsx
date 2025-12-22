@@ -163,7 +163,7 @@ export default function Naujiena() {
   const isSingle = images.length <= 1;
 
   // 🔵 Mėlynas tekstukas (kol kas naudojam badgeTitle; vėliau galėsi pakeisti į news.highlight)
-  const blueLabel = news.badgeTitle; // arba: news.highlight || news.badgeTitle
+  const blueLabel = news.highlight; // arba: news.highlight || news.badgeTitle
 
   return (
     <section className="w-full min-h-screen bg-white px-4 sm:px-6 pb-12 sm:pb-16 pt-28 md:pt-36 relative z-10">
