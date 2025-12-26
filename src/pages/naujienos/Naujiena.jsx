@@ -4,6 +4,9 @@ import { Link, useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fetchNewsBySlug, cmsUrl } from "../../lib/cms";
 
+const DEFAULT_HIGHLIGHT_QUOTE = "FA Kaunas - Nuo svajonės iki realybės 💙🤍";
+
+
 // Minimalus Strapi Blocks rendereris (kad pastraipos atrodytų normaliai)
 function Blocks({ blocks }) {
   if (!Array.isArray(blocks)) return null;
@@ -219,17 +222,15 @@ export default function Naujiena() {
             <Blocks blocks={news.content} />
           </motion.div>
 
-          {news.highlightQuote ? (
-            <motion.p
-              variants={{
-                hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              className="text-xl text-black font-semibold"
-            >
-              {news.highlightQuote}
-            </motion.p>
-          ) : null}
+          <motion.p
+            variants={{
+              hidden: { opacity: 0, y: 10 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            className="text-xl text-black font-semibold"
+          >
+            {DEFAULT_HIGHLIGHT_QUOTE}
+          </motion.p>
         </motion.div>
 
         {/* Karuselė */}
@@ -241,9 +242,8 @@ export default function Naujiena() {
                   key={index}
                   src={img}
                   alt={news.title}
-                  className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                    index === current ? "opacity-100" : "opacity-0"
-                  }`}
+                  className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === current ? "opacity-100" : "opacity-0"
+                    }`}
                 />
               ))
             ) : (
@@ -254,11 +254,10 @@ export default function Naujiena() {
               onClick={handlePrev}
               disabled={isSingle}
               aria-disabled={isSingle}
-              className={`absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md transition ${
-                isSingle
+              className={`absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md transition ${isSingle
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:scale-110"
-              }`}
+                }`}
             >
               <ChevronLeft size={24} />
             </button>
@@ -267,11 +266,10 @@ export default function Naujiena() {
               onClick={handleNext}
               disabled={isSingle}
               aria-disabled={isSingle}
-              className={`absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md transition ${
-                isSingle
+              className={`absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md transition ${isSingle
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:scale-110"
-              }`}
+                }`}
             >
               <ChevronRight size={24} />
             </button>
@@ -281,15 +279,13 @@ export default function Naujiena() {
                 <button
                   key={index}
                   onClick={() => handleManualChange(index)}
-                  className={`w-3 h-3 rounded-full ${
-                    index === current
+                  className={`w-3 h-3 rounded-full ${index === current
                       ? "bg-white"
                       : "bg-transparent border border-white"
-                  } transition transform ${
-                    isSingle
+                    } transition transform ${isSingle
                       ? "opacity-50 cursor-default"
                       : "hover:scale-110"
-                  }`}
+                    }`}
                   disabled={isSingle}
                   aria-disabled={isSingle}
                 />
