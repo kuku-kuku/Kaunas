@@ -4,10 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fetchNewsBySlug, cmsUrl } from "../../lib/cms";
 
-const DEFAULT_HIGHLIGHT_QUOTE = "FA Kaunas - Nuo svajonės iki realybės 💙🤍";
+const DEFAULT_HIGHLIGHT_QUOTE = "FA Kaunas - Nuo svajonės iki realybės";
 
-
-// Minimalus Strapi Blocks rendereris (kad pastraipos atrodytų normaliai)
 function Blocks({ blocks }) {
   if (!Array.isArray(blocks)) return null;
 
@@ -15,7 +13,7 @@ function Blocks({ blocks }) {
     (children || []).map((c, i) => {
       if (c.type === "text") {
         const text = c.text || "";
-        if (c.bold) return <strong key={i}>{text}</strong>;
+        if (c.bold) return <strong key={i} className="text-white font-semibold">{text}</strong>;
         if (c.italic) return <em key={i}>{text}</em>;
         return <React.Fragment key={i}>{text}</React.Fragment>;
       }
@@ -23,30 +21,27 @@ function Blocks({ blocks }) {
     });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {blocks.map((b, idx) => {
         if (b.type === "paragraph") {
           return (
-            <p key={idx} className="text-lg text-gray-800 leading-relaxed">
+            <p key={idx} className="text-lg text-white/70 leading-relaxed">
               {renderChildrenText(b.children)}
             </p>
           );
         }
-
         if (b.type === "heading") {
           const level = b.level || 2;
           const Tag = `h${Math.min(Math.max(level, 2), 4)}`;
-          const cls =
-            level <= 2
-              ? "text-xl font-bold text-gray-900"
-              : "text-lg font-semibold text-gray-900";
+          const cls = level <= 2
+            ? "text-2xl font-display font-bold text-white uppercase tracking-tight"
+            : "text-xl font-display font-semibold text-white";
           return (
             <Tag key={idx} className={cls}>
               {renderChildrenText(b.children)}
             </Tag>
           );
         }
-
         return null;
       })}
     </div>
@@ -55,48 +50,37 @@ function Blocks({ blocks }) {
 
 export default function Naujiena() {
   const { slug } = useParams();
-
   const [news, setNews] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  // Karuselė
   const [current, setCurrent] = useState(0);
   const [isManual, setIsManual] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const intervalRef = useRef(null);
+  const articleRef = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!articleRef.current) return;
+      const rect = articleRef.current.getBoundingClientRect();
+      const total = articleRef.current.scrollHeight - window.innerHeight;
+      const scrolled = -rect.top;
+      setScrollProgress(Math.min(1, Math.max(0, scrolled / total)));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     let alive = true;
-
-    // išvalom intervalą, jei persijungia slug
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-
+    if (intervalRef.current) { clearInterval(intervalRef.current); intervalRef.current = null; }
     setLoading(true);
     fetchNewsBySlug(slug)
-      .then((item) => {
-        if (!alive) return;
-        setNews(item);
-        setCurrent(0);
-        setIsManual(false);
-      })
+      .then((item) => { if (alive) { setNews(item); setCurrent(0); setIsManual(false); } })
       .catch((e) => console.error(e))
-      .finally(() => {
-        if (!alive) return;
-        setLoading(false);
-      });
-
-    return () => {
-      alive = false;
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    };
+      .finally(() => { if (alive) setLoading(false); });
+    return () => { alive = false; if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [slug]);
 
-  // images iš gallery, jei nėra – fallback į coverImage
   const images = (() => {
     const g = (news?.gallery || []).map((img) => cmsUrl(img.url));
     if (g.length) return g;
@@ -105,202 +89,186 @@ export default function Naujiena() {
   })();
 
   useEffect(() => {
-    if (!news) return;
-    if (isManual) return;
-    if (images.length <= 1) return;
-
+    if (!news || isManual || images.length <= 1) return;
     intervalRef.current = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
     }, 4000);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    };
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [news, isManual, images.length]);
 
-  const handleManualChange = (newIndex) => {
-    if (images.length <= 1) return;
-    setIsManual(true);
-    setCurrent(newIndex);
-  };
-
-  const handlePrev = () => {
-    if (images.length <= 1) return;
-    setIsManual(true);
-    setCurrent(current === 0 ? images.length - 1 : current - 1);
-  };
-
-  const handleNext = () => {
-    if (images.length <= 1) return;
-    setIsManual(true);
-    setCurrent((current + 1) % images.length);
-  };
+  const isSingle = images.length <= 1;
 
   if (loading) {
     return (
-      <section className="w-full min-h-screen bg-white pt-28 px-4">
-        Kraunama...
-      </section>
+      <div className="min-h-screen bg-academy-black flex items-center justify-center">
+        <div className="w-8 h-px bg-academy-blue animate-pulse" />
+      </div>
     );
   }
 
   if (!news) {
     return (
-      <section className="w-full min-h-screen bg-white pt-28 px-4">
+      <div className="min-h-screen bg-academy-black pt-32 px-6">
         <div className="max-w-4xl mx-auto">
-          <p className="text-gray-700">Naujiena nerasta.</p>
-          <Link
-            to="/naujienos"
-            className="inline-block mt-4 text-sky-600 hover:underline font-medium"
-          >
-            ← Grįžti į naujienas
+          <p className="text-white/50">Naujiena nerasta.</p>
+          <Link to="/naujienos" className="inline-flex items-center gap-2 text-academy-blue text-sm uppercase tracking-wider mt-4 hover:underline">
+            &larr; Grįžti į naujienas
           </Link>
         </div>
-      </section>
+      </div>
     );
   }
 
-  const isSingle = images.length <= 1;
   const blueLabel = news.highlight;
 
   return (
-    <section className="w-full min-h-screen bg-white px-4 sm:px-6 pb-12 sm:pb-16 pt-28 md:pt-36 relative z-10">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* Tekstas */}
-        <motion.div
-          className="space-y-6 flex flex-col justify-center"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.2 } },
-          }}
-        >
-          {/* Mėlynas blokas */}
-          {blueLabel ? (
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: -20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              className="inline-block bg-gradient-to-r from-sky-500 to-sky-300 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md mt-16 md:mt-0"
-            >
-              {blueLabel}
-            </motion.div>
-          ) : null}
+    <article ref={articleRef} className="min-h-screen bg-academy-black">
+      {/* Reading progress indicator */}
+      <div className="fixed top-0 left-0 w-full h-px z-[60]">
+        <motion.div className="h-full bg-academy-blue origin-left" style={{ scaleX: scrollProgress }} />
+      </div>
 
-          <motion.h1
-            variants={{
-              hidden: { opacity: 0, y: -10 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900"
-          >
-            {news.title}
-          </motion.h1>
-
-          <motion.p
-            variants={{
-              hidden: { opacity: 0, y: -5 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="text-gray-500 font-medium -mt-2"
-          >
-            {news.date ? new Date(news.date).toLocaleDateString("lt-LT") : ""}
-          </motion.p>
-
+      {/* Side progress (desktop) */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-2">
+        <div className="relative w-px h-24 bg-academy-line">
           <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="bg-gray-100 p-5 rounded-lg shadow-sm space-y-4"
+            className="absolute top-0 left-0 w-full bg-academy-blue origin-top"
+            style={{ height: `${scrollProgress * 100}%` }}
+          />
+        </div>
+        <span className="text-[10px] font-mono text-white/20">{Math.round(scrollProgress * 100)}%</span>
+      </div>
+
+      {/* ═══ HEADER ═══ */}
+      <div className="pt-28 md:pt-36 pb-8 px-6 md:px-12 lg:px-24">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <Link to="/naujienos" className="text-[11px] uppercase tracking-[0.15em] text-white/30 hover:text-white transition-colors">
+                Naujienos
+              </Link>
+              <span className="text-white/15">/</span>
+              <span className="text-[11px] uppercase tracking-[0.12em] text-white/20 font-mono">
+                {news.date ? new Date(news.date).toLocaleDateString("lt-LT") : ""}
+              </span>
+            </div>
+
+            {blueLabel && (
+              <span className="inline-block text-[10px] uppercase tracking-[0.2em] bg-academy-blue text-white px-3 py-1 font-medium mb-5">
+                {blueLabel}
+              </span>
+            )}
+
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-display text-white leading-[0.95] mb-6">
+              {news.title}
+            </h1>
+
+            <div className="h-px bg-academy-line mt-8" />
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ═══ HERO IMAGE / GALLERY ═══ */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="relative px-6 md:px-12 lg:px-24 mb-12"
+      >
+        <div className="max-w-6xl mx-auto relative aspect-[16/9] overflow-hidden bg-academy-dark">
+          {images.length > 0 ? (
+            images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={news.title}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                  index === current ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ))
+          ) : (
+            <div className="flex items-center justify-center h-full text-white/20">Nėra nuotraukų</div>
+          )}
+
+          {!isSingle && (
+            <>
+              <button
+                onClick={() => { setIsManual(true); setCurrent(current === 0 ? images.length - 1 : current - 1); }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/50 transition-all bg-black/20 backdrop-blur-sm"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={() => { setIsManual(true); setCurrent((current + 1) % images.length); }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/50 transition-all bg-black/20 backdrop-blur-sm"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </>
+          )}
+
+          {/* Image counter */}
+          {images.length > 1 && (
+            <div className="absolute bottom-4 right-4 flex items-center gap-2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => { setIsManual(true); setCurrent(index); }}
+                  className={`h-px transition-all duration-400 ${
+                    index === current ? 'w-8 bg-white' : 'w-4 bg-white/30'
+                  }`}
+                />
+              ))}
+              <span className="text-[10px] font-mono text-white/40 ml-2">
+                {String(current + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+              </span>
+            </div>
+          )}
+        </div>
+      </motion.div>
+
+      {/* ═══ CONTENT ═══ */}
+      <div className="px-6 md:px-12 lg:px-24 pb-16">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
             <Blocks blocks={news.content} />
           </motion.div>
 
-          <motion.p
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="text-xl text-black font-semibold"
+          {/* Quote */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="mt-16 pt-8 border-t border-academy-line"
           >
-            {DEFAULT_HIGHLIGHT_QUOTE}
-          </motion.p>
-        </motion.div>
-
-        {/* Karuselė */}
-        <div className="flex flex-col items-center gap-6">
-          <div className="relative h-64 sm:h-96 md:h-[500px] w-full overflow-hidden rounded-xl shadow-md flex items-center justify-center">
-            {images.length ? (
-              images.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={news.title}
-                  className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === current ? "opacity-100" : "opacity-0"
-                    }`}
-                />
-              ))
-            ) : (
-              <div className="text-gray-600">Nėra nuotraukų</div>
-            )}
-
-            <button
-              onClick={handlePrev}
-              disabled={isSingle}
-              aria-disabled={isSingle}
-              className={`absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md transition ${isSingle
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:scale-110"
-                }`}
-            >
-              <ChevronLeft size={24} />
-            </button>
-
-            <button
-              onClick={handleNext}
-              disabled={isSingle}
-              aria-disabled={isSingle}
-              className={`absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 text-black p-2 rounded-full shadow-md transition ${isSingle
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:scale-110"
-                }`}
-            >
-              <ChevronRight size={24} />
-            </button>
-
-            <div className="absolute bottom-4 w-full flex justify-center gap-2">
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleManualChange(index)}
-                  className={`w-3 h-3 rounded-full ${index === current
-                      ? "bg-white"
-                      : "bg-transparent border border-white"
-                    } transition transform ${isSingle
-                      ? "opacity-50 cursor-default"
-                      : "hover:scale-110"
-                    }`}
-                  disabled={isSingle}
-                  aria-disabled={isSingle}
-                />
-              ))}
+            <div className="flex items-start gap-4">
+              <div className="w-1 h-12 bg-academy-blue flex-shrink-0" />
+              <p className="text-xl md:text-2xl font-display font-bold text-white uppercase tracking-tight">
+                {news.highlightQuote || DEFAULT_HIGHLIGHT_QUOTE}
+              </p>
             </div>
-          </div>
+          </motion.div>
 
-          <Link
-            to="/naujienos"
-            className="inline-block text-sky-600 hover:underline font-medium"
-          >
-            ← Grįžti į naujienas
-          </Link>
+          {/* Back to news */}
+          <div className="mt-16 pt-8 border-t border-academy-line">
+            <Link
+              to="/naujienos"
+              className="inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.15em] text-white/40 hover:text-academy-blue transition-colors duration-200 font-medium"
+            >
+              &larr; Grįžti į naujienas
+            </Link>
+          </div>
         </div>
       </div>
-    </section>
+    </article>
   );
 }

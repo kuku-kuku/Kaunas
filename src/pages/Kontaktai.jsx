@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import BackgroundWrapper from "../components/BackgroundWrapper";
 
 export default function Kontaktai() {
   const [form, setForm] = useState({ name: "", email: "", message: "", website: "" });
@@ -27,28 +26,18 @@ export default function Kontaktai() {
     e.preventDefault();
     if (!isFormValid) return;
     setStatus({ loading: true, ok: null, msg: "" });
-
     try {
       const res = await fetch("/api/mail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message,
-        }),
+        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
       });
-
       let data = null;
       try { data = await res.json(); } catch { data = null; }
-
       if (!res.ok || !data?.ok) {
-        const details =
-          typeof data?.details === "object" ? JSON.stringify(data.details) : (data?.details || "");
-        const serverMsg = details || data?.error || "Nepavyko išsiųsti";
-        throw new Error(serverMsg);
+        const details = typeof data?.details === "object" ? JSON.stringify(data.details) : (data?.details || "");
+        throw new Error(details || data?.error || "Nepavyko išsiųsti");
       }
-
       setStatus({ loading: false, ok: true, msg: "Žinutė išsiųsta! Atsakysime kuo greičiau." });
       setForm({ name: "", email: "", message: "", website: "" });
     } catch (err) {
@@ -57,171 +46,140 @@ export default function Kontaktai() {
   };
 
   return (
-    <main className="text-black font-sans">
-      {/* HERO */}
-      <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto text-center flex flex-col items-center"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold drop-shadow-md">Kontaktai</h1>
-          <p className="mt-4 text-lg font-light">Susisiekite su mumis – atsakysime į visus klausimus!</p>
-        </motion.div>
+    <main className="bg-academy-black min-h-screen">
+      {/* ═══ HERO ═══ */}
+      <section className="pt-28 md:pt-36 pb-16 px-6 md:px-12 lg:px-24 border-b border-academy-line">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="section-label mb-4">05 / Kontaktai</p>
+            <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
+              Kontaktai
+            </h1>
+            <p className="text-lg text-white/40 font-light max-w-xl">
+              Susisiekite su mumis – atsakysime į visus klausimus!
+            </p>
+          </motion.div>
+        </div>
       </section>
 
-      {/* TURINYS */}
-      <BackgroundWrapper>
-        <section className="min-h-screen px-6 py-24 text-black select-none">
-          <div className="max-w-7xl mx-auto space-y-16">
-            <motion.div
-              className="grid md:grid-cols-2 gap-12"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              {/* Forma */}
-              <div className="bg-[#f8fdff] p-8 rounded-xl shadow-md space-y-6">
-                <h2 className="text-2xl font-semibold text-[#007bb5]">Parašykite mums</h2>
+      {/* ═══ CONTENT ═══ */}
+      <section className="px-6 md:px-12 lg:px-24 py-20">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-2 gap-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            {/* Form */}
+            <div>
+              <p className="section-number mb-3">01</p>
+              <h2 className="text-2xl font-display font-bold text-white uppercase tracking-tight mb-8">
+                Parašykite mums
+              </h2>
 
-                {status.ok === true && (
-                  <div className="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-green-700">
-                    {status.msg}
-                  </div>
-                )}
-                {status.ok === false && (
-                  <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-red-700 break-words">
-                    {status.msg || "Įvyko klaida. Bandykite dar kartą."}
-                  </div>
-                )}
+              {status.ok === true && (
+                <div className="border border-green-500/30 bg-green-500/10 px-5 py-3 text-green-400 text-sm mb-6">
+                  {status.msg}
+                </div>
+              )}
+              {status.ok === false && (
+                <div className="border border-red-500/30 bg-red-500/10 px-5 py-3 text-red-400 text-sm mb-6 break-words">
+                  {status.msg || "Įvyko klaida. Bandykite dar kartą."}
+                </div>
+              )}
 
-                <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-                  {/* Honeypot */}
-                  <input
-                    type="text"
-                    name="website"
-                    value={form.website}
-                    onChange={handleChange}
-                    tabIndex="-1"
-                    autoComplete="off"
-                    className="hidden"
-                    aria-hidden="true"
+              <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+                <input type="text" name="website" value={form.website} onChange={handleChange}
+                  tabIndex="-1" autoComplete="off" className="hidden" aria-hidden="true" />
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">Vardas</label>
+                  <input type="text" name="name" value={form.name} onChange={handleChange}
+                    className={`w-full bg-transparent border-b ${errors.name ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:outline-none focus:border-academy-blue transition-colors`}
                   />
+                  {errors.name && <p className="mt-1 text-[11px] text-red-400">{errors.name}</p>}
+                </div>
 
-                  <div>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Vardas"
-                      value={form.name}
-                      onChange={handleChange}
-                      className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 
-                        ${errors.name ? "border-red-300 focus:ring-red-300" : "border-gray-300 focus:ring-[#007bb5]"}`}
-                    />
-                    {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
-                  </div>
+                <div>
+                  <label className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">El. paštas</label>
+                  <input type="email" name="email" value={form.email} onChange={handleChange}
+                    className={`w-full bg-transparent border-b ${errors.email ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:outline-none focus:border-academy-blue transition-colors`}
+                  />
+                  {errors.email && <p className="mt-1 text-[11px] text-red-400">{errors.email}</p>}
+                </div>
 
-                  <div>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="El. paštas"
-                      value={form.email}
-                      onChange={handleChange}
-                      className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 
-                        ${errors.email ? "border-red-300 focus:ring-red-300" : "border-gray-300 focus:ring-[#007bb5]"}`}
-                    />
-                    {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
-                  </div>
+                <div>
+                  <label className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">Jūsų žinutė</label>
+                  <textarea name="message" rows="4" value={form.message} onChange={handleChange}
+                    className={`w-full bg-transparent border-b ${errors.message ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:outline-none focus:border-academy-blue transition-colors resize-none`}
+                  />
+                  {errors.message && <p className="mt-1 text-[11px] text-red-400">{errors.message}</p>}
+                </div>
 
-                  <div>
-                    <textarea
-                      name="message"
-                      placeholder="Jūsų žinutė..."
-                      rows="4"
-                      value={form.message}
-                      onChange={handleChange}
-                      className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 
-                        ${errors.message ? "border-red-300 focus:ring-red-300" : "border-gray-300 focus:ring-[#007bb5]"}`}
-                    />
-                    {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
-                  </div>
+                <button type="submit" disabled={!isFormValid || status.loading}
+                  className={`btn-blue w-full justify-center ${(!isFormValid || status.loading) ? 'opacity-40 cursor-not-allowed' : ''}`}>
+                  {status.loading ? "Siunčiama..." : "Siųsti žinutę"}
+                </button>
 
-                  <button
-                    type="submit"
-                    disabled={!isFormValid || status.loading}
-                    className={`w-full text-white font-semibold px-6 py-2 rounded-md transition 
-                      ${!isFormValid || status.loading
-                        ? "bg-[#007bb5]/60 cursor-not-allowed"
-                        : "bg-[#007bb5] hover:bg-[#00689f]"}`}
-                  >
-                    {status.loading ? "Siunčiama..." : "Siųsti žinutę"}
-                  </button>
+                <p className="text-[11px] text-white/20 text-center">
+                  Siųsdami sutinkate su duomenų tvarkymu pagal FA Kaunas privatumo politiką.
+                </p>
 
-                  <p className="text-xs text-gray-500 text-center">
-                    Siųsdami sutinkate su duomenų tvarkymu pagal FA Kaunas privatumo politiką.
-                  </p>
+                <p className="text-center text-[12px] text-white/30">
+                  Arba parašykite tiesiogiai:{" "}
+                  <a className="text-academy-blue hover:underline"
+                    href={`mailto:administracija@fakaunas.lt?subject=Kontaktas%20iš%20svetainės&body=Vardas:%20${encodeURIComponent(form.name || "")}%0AEl.%20paštas:%20${encodeURIComponent(form.email || "")}%0A%0AŽinutė:%0A${encodeURIComponent(form.message || "")}`}>
+                    administracija@fakaunas.lt
+                  </a>
+                </p>
+              </form>
+            </div>
 
-                  {/* Atsarginis variantas */}
-                  <p className="text-center text-sm text-gray-500">
-                    Arba parašykite tiesiogiai:{" "}
-                    <a
-                      className="text-[#007bb5] underline"
-                      href={`mailto:administracija@fakaunas.lt?subject=Kontaktas%20iš%20svetainės&body=Vardas:%20${encodeURIComponent(
-                        form.name || ""
-                      )}%0AEl.%20paštas:%20${encodeURIComponent(
-                        form.email || ""
-                      )}%0A%0AŽinutė:%0A${encodeURIComponent(form.message || "")}`}
-                    >
-                      administracija@fakaunas.lt
-                    </a>
-                  </p>
-                </form>
+            {/* Map + Contact info */}
+            <div className="space-y-10">
+              <div>
+                <p className="section-number mb-3">02</p>
+                <h2 className="text-2xl font-display font-bold text-white uppercase tracking-tight mb-8">
+                  Lokacija
+                </h2>
+                <div className="aspect-[4/3] w-full overflow-hidden border border-academy-line">
+                  <iframe
+                    title="FA Kaunas lokacija"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2295.5365087714223!2d23.915254976763413!3d54.938988372840025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e722a202feec5d%3A0x9e8f7c28479d5d76!2s%C5%BDeimenos%20g.%20165%2C%2049332%20Kaunas!5e0!3m2!1slt!2slt!4v1721208852185!5m2!1slt!2slt"
+                    width="100%" height="100%" style={{ border: 0 }}
+                    allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+                    className="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                  />
+                </div>
               </div>
 
-              {/* Google Maps */}
-              <div className="w-full h-[400px]">
-                <iframe
-                  title="FA Kaunas lokacija"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2295.5365087714223!2d23.915254976763413!3d54.938988372840025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e722a202feec5d%3A0x9e8f7c28479d5d76!2s%C5%BDeimenos%20g.%20165%2C%2049332%20Kaunas!5e0!3m2!1slt!2slt!4v1721208852185!5m2!1slt!2slt"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="rounded-xl shadow-md"
-                ></iframe>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-academy-line">
+                {[
+                  { label: 'Telefonas', value: '+37066527501', href: 'tel:+37066527501' },
+                  { label: 'El. paštas', value: 'administracija@fakaunas.lt', href: 'mailto:administracija@fakaunas.lt' },
+                  { label: 'Adresas', value: 'Žeimenos g. 165, 49332 Kaunas', href: null },
+                ].map((item, i) => (
+                  <div key={i} className="bg-academy-black p-6">
+                    <p className="text-[11px] uppercase tracking-[0.15em] text-white/30 mb-2">{item.label}</p>
+                    {item.href ? (
+                      <a href={item.href} className="text-white hover:text-academy-blue transition-colors text-sm break-all">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p className="text-white text-sm">{item.value}</p>
+                    )}
+                  </div>
+                ))}
               </div>
-            </motion.div>
-
-            {/* Kontaktinė info */}
-            <motion.div
-              className="text-lg space-y-3 text-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-            >
-              <p>
-                <strong>Telefonas:</strong>{" "}
-                <a href="tel:+37066527501" className="text-[#007bb5] hover:underline">
-                  +37066527501
-                </a>
-              </p>
-              <p>
-                <strong>El. paštas:</strong>{" "}
-                <a href="mailto:administracija@fakaunas.lt" className="text-[#007bb5] hover:underline">
-                  administracija@fakaunas.lt
-                </a>
-              </p>
-              <p>
-                <strong>Adresas:</strong> Žeimenos g. 165, 49332 Kaunas
-              </p>
-            </motion.div>
-          </div>
-        </section>
-      </BackgroundWrapper>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </main>
   );
 }

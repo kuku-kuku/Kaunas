@@ -1,163 +1,136 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import BackgroundWrapper from '../../components/BackgroundWrapper';
+import { motion } from 'framer-motion';
 
 export default function Ugdymas() {
-  const shouldReduce = useReducedMotion();
-
-  // Tavo nurodytos grupės (palikta kaip buvo)
   const grupes = [
-    {
-      metai: '2015 / 2016',
-      grupe: 'A',
-      vyrTreneris: 'Gabrielius Zagurskas',
-      asistentai: ['Marius Činikas'],
-    },
-    {
-      metai: '2015 / 2016',
-      grupe: 'B',
-      vyrTreneris: 'Lukas Sipavičius',
-      asistentai: ['Tomas Macelis'],
-    },
-    {
-      metai: '2017 / 2018',
-      grupe: null,
-      vyrTreneris: 'Marius Činikas',
-      asistentai: ['Ernestas Bernota'],
-    },
-    {
-      metai: '2019 / 2020 / 2021',
-      grupe: null,
-      vyrTreneris: 'Tomas Macelis',
-      asistentai: ['Lukas Sipavičius', 'Gabrielius Zagurskas'],
-    },
+    { metai: '2015 / 2016', grupe: 'A', vyrTreneris: 'Gabrielius Zagurskas', asistentai: ['Marius Činikas'] },
+    { metai: '2015 / 2016', grupe: 'B', vyrTreneris: 'Lukas Sipavičius', asistentai: ['Tomas Macelis'] },
+    { metai: '2017 / 2018', grupe: null, vyrTreneris: 'Marius Činikas', asistentai: ['Ernestas Bernota'] },
+    { metai: '2019 / 2020 / 2021', grupe: null, vyrTreneris: 'Tomas Macelis', asistentai: ['Lukas Sipavičius', 'Gabrielius Zagurskas'] },
   ];
 
-  const containerVariants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08 } },
-  };
-
-  const cardVariants = {
-    hidden: shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 0.985, filter: 'blur(6px)' },
-    show: shouldReduce
-      ? { opacity: 1, transition: { duration: 0.25 } }
-      : { opacity: 1, scale: 1, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
-  };
-
-  const blockVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { duration: 0.5 } },
-  };
+  const methodology = [
+    'Techninių įgūdžių tobulinimas',
+    'Taktinio mąstymo ugdymas',
+    'Psichologinis stabilumas ir bendravimas',
+    'Asmenybės ir vertybių formavimas',
+    'Fizinio pasirengimo lavinimas',
+  ];
 
   return (
-    <main className="text-black font-sans">
-      {/* HERO sekcija */}
-      <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto text-center flex flex-col items-center"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Ugdymo programa ir amžiaus grupės
-          </h1>
-          <p className="text-lg font-light max-w-2xl">
-            Susipažinkite su mūsų ugdymo principais ir treniruojamomis vaikų grupėmis.
-          </p>
-        </motion.div>
+    <main className="bg-academy-black min-h-screen">
+      {/* ═══ HERO ═══ */}
+      <section className="pt-28 md:pt-36 pb-16 px-6 md:px-12 lg:px-24 border-b border-academy-line">
+        <div className="max-w-7xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <p className="section-label mb-4">02 / Ugdymo programa</p>
+            <h1 className="text-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-4">
+              Ugdymo programa ir amžiaus grupės
+            </h1>
+            <p className="text-lg text-white/40 font-light max-w-xl">
+              Susipažinkite su mūsų ugdymo principais ir treniruojamomis vaikų grupėmis.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
-      {/* TURINYS */}
-      <BackgroundWrapper>
-        <section className="py-20 px-6 md:px-12 lg:px-24">
-          {/* Ugdymo metodika */}
+      {/* ═══ METHODOLOGY ═══ */}
+      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28 border-b border-academy-line">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <motion.div
-            variants={blockVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="max-w-6xl mx-auto mb-24"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-5"
           >
-            <h2 className="text-3xl font-bold mb-6 text-[#007bb5] text-center">
-              Mūsų ugdymo metodika
-            </h2>
-
-            {/* Paliktas tiksliai tavo tekstas */}
-            <p className="text-lg text-gray-800 leading-relaxed mb-6 text-justify">
+            <p className="section-number mb-3">01</p>
+            <h2 className="text-display text-3xl md:text-4xl text-white mb-6">Mūsų ugdymo metodika</h2>
+            <div className="w-12 h-px bg-academy-blue mb-8" />
+            <p className="text-lg text-white/60 leading-relaxed">
               FA Kaunas jaunimo ugdymo programa orientuota į visapusišką vaiko tobulėjimą. Daug dėmesio skiriama ne tik
               techniniams ir taktiniams futbolo aspektams, bet ir asmenybės vystymui bei vertybėms:
             </p>
-
-            <ul className="list-disc list-inside text-gray-800 space-y-2 text-lg">
-              <li>Techninių įgūdžių tobulinimas</li>
-              <li>Taktinio mąstymo ugdymas</li>
-              <li>Psichologinis stabilumas ir bendravimas</li>
-              <li>Asmenybės ir vertybių formavimas</li>
-              <li>Fizinio pasirengimo lavinimas</li>
-            </ul>
-
-            {/* Subtili skiriamoji linija */}
-            <div className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
           </motion.div>
 
-          {/* Amžiaus grupės */}
+          <div className="lg:col-span-7">
+            {methodology.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="flex items-center gap-6 py-5 border-b border-academy-line group"
+              >
+                <span className="text-[13px] font-mono text-academy-blue w-8 flex-shrink-0">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="text-white/70 group-hover:text-white transition-colors text-lg">{item}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ AGE GROUPS ═══ */}
+      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            variants={blockVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16"
           >
-            <h2 className="text-3xl font-bold text-center mb-12 text-[#007bb5]">
+            <p className="section-number mb-3">02</p>
+            <h2 className="text-display text-3xl md:text-4xl text-white">
               Treniruojamos amžiaus grupės
             </h2>
-
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
-            >
-              {grupes.map((g, idx) => (
-                <motion.article
-                  key={`${g.metai}-${g.vyrTreneris}-${idx}`}
-                  variants={cardVariants}
-                  className="bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-100 transition-all p-6"
-                >
-                  {/* Header: metai + pogrupis */}
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-2xl font-bold text-[#007bb5]">{g.metai}</h3>
-                    {g.grupe && (
-                      <span className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium bg-cyan-50 border-cyan-200 text-cyan-800">
-                        Grupė {g.grupe}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Vyr. treneris */}
-                  <p className="text-gray-800 mb-2">
-                    <span className="font-medium">Vyr. treneris:</span> {g.vyrTreneris}
-                  </p>
-
-                  {/* Asistentai */}
-                  {g.asistentai?.length > 0 && (
-                    <div className="mt-2">
-                      <p className="font-medium text-gray-800 mb-1">Trenerio asistentai:</p>
-                      <ul className="list-disc list-inside text-gray-700 space-y-1">
-                        {g.asistentai.map((v, i) => (
-                          <li key={i}>{v}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </motion.article>
-              ))}
-            </motion.div>
           </motion.div>
-        </section>
-      </BackgroundWrapper>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-academy-line">
+            {grupes.map((g, idx) => (
+              <motion.div
+                key={`${g.metai}-${g.vyrTreneris}-${idx}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                className="bg-academy-black p-8 md:p-10"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <span className="text-[11px] font-mono text-academy-blue">{String(idx + 1).padStart(2, '0')}</span>
+                    <h3 className="text-2xl md:text-3xl font-display font-bold text-white uppercase tracking-tight mt-1">
+                      {g.metai}
+                    </h3>
+                  </div>
+                  {g.grupe && (
+                    <span className="text-[11px] uppercase tracking-[0.15em] border border-academy-line text-white/40 px-3 py-1">
+                      Grupė {g.grupe}
+                    </span>
+                  )}
+                </div>
+
+                <div className="h-px bg-academy-line mb-4" />
+
+                <p className="text-white/60 mb-2">
+                  <span className="text-[11px] uppercase tracking-[0.12em] text-white/30">Vyr. treneris</span>
+                  <br />{g.vyrTreneris}
+                </p>
+
+                {g.asistentai?.length > 0 && (
+                  <div className="mt-3">
+                    <span className="text-[11px] uppercase tracking-[0.12em] text-white/30">Asistentai</span>
+                    {g.asistentai.map((v, i) => (
+                      <p key={i} className="text-white/50">{v}</p>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

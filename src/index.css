@@ -1,25 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Pulsuojančio gradientinio CTA animacija */
-@keyframes pulseGradient {
-  0% {
-    background-position: 0% 50%;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  50% {
-    background-position: 100% 50%;
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #0a0a0a;
+    color: #f5f5f5;
   }
-  100% {
-    background-position: 0% 50%;
+
+  ::selection {
+    background: rgba(26, 92, 255, 0.4);
+    color: #fff;
   }
 }
 
-.animate-pulseGradient {
-  background-size: 400% 400%;
-  animation: pulseGradient 15s ease infinite;
+@layer components {
+  .btn-academy {
+    @apply relative inline-flex items-center gap-3 px-7 py-3 rounded-full border border-white/30 text-white text-sm uppercase tracking-[0.15em] font-medium transition-all duration-300;
+  }
+  .btn-academy:hover {
+    @apply border-white bg-white text-academy-black;
+  }
+  .btn-academy .btn-arrow {
+    @apply transition-transform duration-300;
+  }
+  .btn-academy:hover .btn-arrow {
+    @apply translate-x-1;
+  }
+
+  .btn-blue {
+    @apply relative inline-flex items-center gap-3 px-7 py-3 rounded-full bg-academy-blue text-white text-sm uppercase tracking-[0.15em] font-medium transition-all duration-300 border border-academy-blue;
+  }
+  .btn-blue:hover {
+    @apply bg-academy-blue-light border-academy-blue-light;
+  }
+
+  .section-label {
+    @apply text-[11px] uppercase tracking-[0.25em] text-academy-gray font-medium;
+  }
+
+  .section-number {
+    @apply text-[11px] uppercase tracking-[0.25em] text-academy-gray/50 font-mono;
+  }
+
+  .line-h {
+    @apply h-px bg-academy-line;
+  }
+
+  .line-v {
+    @apply w-px bg-academy-line;
+  }
+
+  .text-display {
+    @apply font-display font-black uppercase leading-[0.9] tracking-[-0.03em];
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@layer utilities {
+  .clip-reveal {
+    clip-path: inset(0 100% 0 0);
+  }
+  .clip-reveal-visible {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

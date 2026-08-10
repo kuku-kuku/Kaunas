@@ -1,6 +1,5 @@
-// src/App.jsx
 import React from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -40,49 +39,17 @@ import KaunasFootballFest2017FAKaunas from "./pages/naujienos/KaunasFootballFest
 import IBRAFriendlyMatch from "./pages/naujienos/IBRAFriendlyMatch";
 import AzuolasTurnyras2015 from "./pages/naujienos/AzuolasTurnyras2015";
 
-
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import BackgroundWrapper from './components/BackgroundWrapper';
-
-// ❌ Pašalinta: AdminNews ir NewsSingle importai
-// import AdminNews from './pages/AdminNews';
-// import NewsSingle from './pages/NewsSingle';
-
-function LayoutWrapper({ children }) {
-  const location = useLocation();
-  const isHome = location.pathname === '/';
-
-  return isHome ? (
-    children
-  ) : (
-    <BackgroundWrapper>
-      <div className="flex-grow">{children}</div>
-    </BackgroundWrapper>
-  );
-}
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Fiksuotas logotipas kairėje */}
-      <Link
-        to="/"
-        className="fixed top-4 left-0 z-[9999] ml-2 
-                   w-[80px] sm:w-[100px] md:w-[120px] lg:w-[140px]"
-      >
-        <img
-          src="/logo.png"
-          alt="FA Kaunas logotipas"
-          className="w-full h-auto object-contain"
-        />
-      </Link>
-
+    <div className="min-h-screen flex flex-col bg-academy-black">
       <Navbar />
       <ScrollToTop />
 
-      <LayoutWrapper>
+      <div className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/apie" element={<About />} />
@@ -116,26 +83,13 @@ function App() {
           <Route path="/naujienos/remigijus-mikalainis-2025" element={<RemigijusMikalainis2025 />} />
           <Route path="/naujienos/kaunas-football-fest-2025" element={<KaunasFootballFest2025 />} />
           <Route path="/naujienos/kids-cup-vilnius-2025" element={<KidsCupVilnius2025 />} />
-          <Route
-            path="/naujienos/kaunas-football-fest-2017"
-            element={<KaunasFootballFest2017FAKaunas />}
-          />
-          <Route
-            path="/naujienos/friendly-match-ibra"
-            element={<IBRAFriendlyMatch />}
-          />
-          <Route
-            path="/naujienos/azuolo-turnyras-2015"
-            element={<AzuolasTurnyras2015 />}
-          />
-          {/* ❌ Pašalintas dinaminis /:slug maršrutas ir Admin puslapis
-              <Route path="/naujienos/:slug" element={<NewsSingle />} />
-              <Route path="/admin" element={<AdminNews />} />
-          */}
+          <Route path="/naujienos/kaunas-football-fest-2017" element={<KaunasFootballFest2017FAKaunas />} />
+          <Route path="/naujienos/friendly-match-ibra" element={<IBRAFriendlyMatch />} />
+          <Route path="/naujienos/azuolo-turnyras-2015" element={<AzuolasTurnyras2015 />} />
 
           <Route path="/kontaktai" element={<Kontaktai />} />
         </Routes>
-      </LayoutWrapper>
+      </div>
 
       <Footer />
     </div>

@@ -1,157 +1,289 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X } from 'lucide-react';
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+
+const NAV_ITEMS = [
+  {
+    to: '/apie', label: 'Apie mus',
+    sub: [
+      { to: '/apie/tikslai', label: 'Tikslai / Vizija' },
+      { to: '/apie/etikos-kodeksas', label: 'Etikos kodeksas' },
+    ],
+  },
+  {
+    to: '/akademija', label: 'Akademija',
+    sub: [
+      { to: '/akademija/treneriai', label: 'Treneriai' },
+      { to: '/akademija/ugdymo-programa', label: 'Ugdymo programa' },
+    ],
+  },
+  { to: '/prisijunk', label: 'Prisijunk' },
+  { to: '/naujienos', label: 'Naujienos' },
+  { to: '/kontaktai', label: 'Kontaktai' },
+];
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [forceClose, setForceClose] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const location = useLocation();
 
-  const handleDropdownClick = () => {
-    setForceClose(true);
-    setTimeout(() => setForceClose(false), 200);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 120);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
     setMobileOpen(false);
+    setHoveredItem(null);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
+  const isActive = (item) => {
+    if (location.pathname === item.to) return true;
+    if (item.sub) return item.sub.some(s => location.pathname === s.to);
+    return false;
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-black text-white px-6 py-5 md:py-4 z-50 shadow-md">
-      <div className="flex justify-between items-center max-w-7xl mx-auto">
-        {/* DESKTOP NAVIGATION */}
-        <nav className="hidden md:flex items-center gap-8 text-lg font-medium mx-auto">
-          {/* Apie mus */}
-          <div className={`relative group ${forceClose ? 'pointer-events-none' : ''}`}>
-            <Link
-              to="/apie"
-              className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-[#1a1a1a] hover:text-[#4fc3f7] transition-all"
-            >
-              Apie mus
-              <ChevronDown size={16} />
-            </Link>
-            <div className="absolute top-full left-0 mt-2 w-56 bg-white text-black rounded-lg shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <Link
-                to="/apie/tikslai"
-                onClick={handleDropdownClick}
-                className="block px-5 py-3 hover:bg-[#e0f7ff] hover:text-[#007bb5] transition"
+    <>
+      {/* ─── DESKTOP: Horizontal top bar (visible when not scrolled) ─── */}
+      <motion.header
+        initial={false}
+        animate={{
+          y: scrolled ? -100 : 0,
+          opacity: scrolled ? 0 : 1,
+        }}
+        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+        className="fixed top-0 left-0 w-full z-50 hidden lg:block pointer-events-auto bg-gradient-to-b from-black/70 to-transparent"
+      >
+        <div className="flex items-center justify-between px-8 py-4">
+          <Link to="/" className="flex-shrink-0">
+            <img src="/logo.png" alt="FA Kaunas" className="h-16 w-auto" />
+          </Link>
+
+          <nav className="flex items-center gap-1">
+            {NAV_ITEMS.map((item) => (
+              <div
+                key={item.to}
+                className="relative"
+                onMouseEnter={() => setHoveredItem(item.to)}
+                onMouseLeave={() => setHoveredItem(null)}
               >
-                Tikslai / Vizija
-              </Link>
-              <Link
-                to="/apie/etikos-kodeksas"
-                onClick={handleDropdownClick}
-                className="block px-5 py-3 hover:bg-[#e0f7ff] hover:text-[#007bb5] transition"
-              >
-                Etikos kodeksas
-              </Link>
-            </div>
+                <Link
+                  to={item.to}
+                  className={`group flex items-center gap-1.5 px-4 py-2 text-[13px] uppercase tracking-[0.15em] font-bold transition-colors duration-200 ${
+                    isActive(item) ? 'text-white' : 'text-white/90 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                  {item.sub && <ChevronDown size={13} className="text-white/40" />}
+                </Link>
+
+                {isActive(item) && (
+                  <motion.div
+                    layoutId="nav-indicator"
+                    className="absolute bottom-0 left-4 right-4 h-px bg-academy-blue"
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
+
+                <AnimatePresence>
+                  {item.sub && hoveredItem === item.to && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-2 min-w-[220px] bg-academy-dark border border-academy-line py-2 z-50 rounded-2xl overflow-hidden"
+                    >
+                      {item.sub.map((sub) => (
+                        <Link
+                          key={sub.to}
+                          to={sub.to}
+                          className={`block px-5 py-2.5 text-[12px] uppercase tracking-[0.12em] transition-colors duration-200 ${
+                            location.pathname === sub.to
+                              ? 'text-academy-blue'
+                              : 'text-white/60 hover:text-white hover:bg-white/5'
+                          }`}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-5">
+            <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noopener noreferrer"
+              className="text-white/90 hover:text-white transition-colors">
+              <FaFacebookF size={14} />
+            </a>
+            <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noopener noreferrer"
+              className="text-white/90 hover:text-white transition-colors">
+              <FaInstagram size={15} />
+            </a>
           </div>
+        </div>
+        <div className="h-px bg-white/10" />
+      </motion.header>
 
-          {/* Akademija */}
-          <div className={`relative group ${forceClose ? 'pointer-events-none' : ''}`}>
+      {/* ─── DESKTOP: Vertical side nav (visible when scrolled) ─── */}
+      <motion.nav
+        initial={false}
+        animate={{
+          x: scrolled ? 0 : -200,
+          opacity: scrolled ? 1 : 0,
+        }}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+        className="fixed left-0 top-0 h-screen z-50 hidden lg:flex flex-col items-start py-6 pl-5 pr-4 w-auto pointer-events-auto"
+      >
+        <Link to="/" className="mb-8">
+          <img src="/logo.png" alt="FA Kaunas" className="h-14 w-auto" />
+        </Link>
+
+        <div className="flex flex-col gap-1 flex-1 justify-center">
+          {NAV_ITEMS.map((item) => (
             <Link
-              to="/akademija"
-              className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-[#1a1a1a] hover:text-[#4fc3f7] transition-all"
+              key={item.to}
+              to={item.to}
+              className={`relative flex items-center px-3 py-2 text-[12px] uppercase tracking-[0.12em] font-semibold transition-colors duration-200 whitespace-nowrap ${
+                isActive(item) ? 'text-white' : 'text-white/50 hover:text-white/80'
+              }`}
             >
-              Akademija
-              <ChevronDown size={16} />
+              {isActive(item) && (
+                <motion.div
+                  layoutId="side-indicator"
+                  className="absolute -left-3 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-academy-blue"
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+              {item.label}
             </Link>
-            <div className="absolute top-full left-0 mt-2 w-64 bg-white text-black rounded-lg shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <Link
-                to="/akademija/treneriai"
-                onClick={handleDropdownClick}
-                className="block px-5 py-3 hover:bg-[#e0f7ff] hover:text-[#007bb5] transition"
-              >
-                Treneriai
-              </Link>
-              <Link
-                to="/akademija/ugdymo-programa"
-                onClick={handleDropdownClick}
-                className="block px-5 py-3 hover:bg-[#e0f7ff] hover:text-[#007bb5] transition"
-              >
-                Ugdymo programa
-              </Link>
-            </div>
-          </div>
-
-          <Link to="/prisijunk" className="hover:text-[#4fc3f7] transition">Tapk akademijos dalimi</Link>
-          <Link to="/naujienos" className="hover:text-[#4fc3f7] transition">Naujienos</Link>
-          <Link to="/kontaktai" className="hover:text-[#4fc3f7] transition">Kontaktai</Link>
-        </nav>
-
-        {/* DESKTOP ICONS */}
-        <div className="hidden md:flex items-center gap-4">
-          <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noopener noreferrer">
-            <FaFacebookF className="hover:text-[#4fc3f7]" size={20} />
-          </a>
-          <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="hover:text-[#4fc3f7]" size={22} />
-          </a>
+          ))}
         </div>
 
-        {/* MOBILE BURGER */}
+        <div className="flex flex-col items-start gap-4 pl-3">
+          <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noopener noreferrer"
+            className="text-white/90 hover:text-white transition-colors">
+            <FaFacebookF size={16} />
+          </a>
+          <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noopener noreferrer"
+            className="text-white/90 hover:text-white transition-colors">
+            <FaInstagram size={17} />
+          </a>
+        </div>
+      </motion.nav>
+
+      {/* ─── MOBILE: Burger + fullscreen menu ─── */}
+      <div className="lg:hidden fixed top-0 left-0 w-full z-50 flex items-center justify-between px-5 py-4">
+        <Link to="/">
+          <img src="/logo.png" alt="FA Kaunas" className="h-12 w-auto" />
+        </Link>
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-white absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-md transition-all"
-          aria-label="Open menu"
+          className="relative w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50"
+          aria-label="Toggle menu"
         >
-          {mobileOpen ? <X size={30} /> : <Menu size={30} />}
+          <motion.span
+            animate={mobileOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
+            className="block w-6 h-px bg-white origin-center"
+          />
+          <motion.span
+            animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
+            className="block w-6 h-px bg-white"
+          />
+          <motion.span
+            animate={mobileOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
+            className="block w-6 h-px bg-white origin-center"
+          />
         </button>
       </div>
 
-      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden absolute top-full left-0 w-full bg-black text-white py-6 px-6 space-y-2 text-right z-40 shadow-lg"
+            initial={{ clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            className="fixed inset-0 z-40 bg-academy-black flex flex-col justify-center px-8 lg:hidden"
           >
-            {[
-              { to: "/apie", label: "Apie mus" },
-              { to: "/apie/tikslai", label: "Tikslai / Vizija" },
-              { to: "/apie/etikos-kodeksas", label: "Etikos kodeksas" },
-              { to: "/akademija", label: "Akademija" },
-              { to: "/akademija/treneriai", label: "Treneriai" },
-              { to: "/akademija/ugdymo-programa", label: "Ugdymo programa" },
-              { to: "/prisijunk", label: "Tapk akademijos dalimi" },
-              { to: "/naujienos", label: "Naujienos" },
-              { to: "/kontaktai", label: "Kontaktai" },
-            ].map((item, index) => (
-              <Link
-                key={index}
-                to={item.to}
-                onClick={() => setMobileOpen(false)}
-                className="block text-lg font-medium py-2 border-b border-white/10 hover:text-blue-400 transition-all"
-              >
-                {item.label}
-              </Link>
-            ))}
+            <nav className="space-y-1">
+              {NAV_ITEMS.map((item, i) => (
+                <div key={item.to}>
+                  <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
+                  >
+                    <Link
+                      to={item.to}
+                      onClick={() => setMobileOpen(false)}
+                      className={`flex items-center py-3 border-b border-academy-line group ${
+                        isActive(item) ? 'text-white' : 'text-white/50'
+                      }`}
+                    >
+                      <span className="text-2xl font-display font-bold uppercase tracking-wide group-hover:text-white transition-colors">
+                        {item.label}
+                      </span>
+                    </Link>
+                  </motion.div>
 
-            {/* MOBILE SOCIAL ICONS */}
-            <div className="flex justify-end items-center gap-6 pt-6 pr-1">
-              <a
-                href="https://www.facebook.com/people/FA-Kaunas/100087548214643/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-[#4fc3f7]"
-              >
-                <FaFacebookF size={20} />
+                  {item.sub && item.sub.map((sub, j) => (
+                    <motion.div
+                      key={sub.to}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.15 + i * 0.05 + j * 0.03, duration: 0.3 }}
+                    >
+                      <Link
+                        to={sub.to}
+                        onClick={() => setMobileOpen(false)}
+                        className={`flex items-center py-2 pl-6 text-sm uppercase tracking-[0.12em] border-b border-academy-line/50 ${
+                          location.pathname === sub.to ? 'text-academy-blue' : 'text-white/30 hover:text-white/70'
+                        }`}
+                      >
+                        {sub.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              ))}
+            </nav>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="flex items-center gap-6 mt-12"
+            >
+              <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noopener noreferrer"
+                className="text-white/40 hover:text-white">
+                <FaFacebookF size={16} />
               </a>
-              <a
-                href="https://www.instagram.com/fakaunas/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-[#4fc3f7]"
-              >
-                <FaInstagram size={22} />
+              <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noopener noreferrer"
+                className="text-white/40 hover:text-white">
+                <FaInstagram size={17} />
               </a>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

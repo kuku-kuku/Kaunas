@@ -1,138 +1,118 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import BackgroundWrapper from '../components/BackgroundWrapper';
 
 export default function Akademija() {
+  const techItems = [
+    {
+      num: '01',
+      title: 'Stats4Sport',
+      desc: 'Siekdami nuolat tobulėti, kasdieniame darbe naudojame „Stats4Sport" sistemą. Ši platforma leidžia planuoti treniruotes, kurti žaidėjo profilį, sekti kiekvieno auklėtinio progresą ir stebėti ilgalaikius pokyčius. Sistema naudinga ne tik treneriams – tai ir puikus įrankis tėvams, leidžiantis matyti treniruočių grafiką, lankomumą bei artėjančius renginius.',
+    },
+    {
+      num: '02',
+      title: 'VEO Sports technology',
+      desc: 'VEO Sports technology – pažangių technologijų pagalba filmuojamos treniruotės ir rungtynės. Dirbtinis intelektas apdoroja medžiagą, kurios pagalba galime peržiūrėti, analizuoti, koreguoti ir pritaikyti surinktą informaciją kasdieniame treniruočių procese.',
+    },
+    {
+      num: '03',
+      title: 'LiveTagPRO',
+      desc: 'LiveTagPRO – video analizių programa, leidžianti efektyviai ir sklandžiai perteikti informaciją žaidėjams, vykdyti treniruočių ir rungtynių analizes su treneriais.',
+    },
+  ];
+
   return (
-    <main className="text-black font-sans">
-      {/* HERO */}
-      <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto text-center flex flex-col items-center"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Akademija</h1>
-          <p className="text-lg font-light max-w-2xl">
-            FA KAUNAS – daugiau nei futbolas. Čia ugdome stiprias asmenybes, ne tik žaidėjus.
-          </p>
-        </motion.div>
+    <main className="bg-academy-black min-h-screen">
+      {/* ═══ HERO ═══ */}
+      <section className="pt-28 md:pt-36 pb-16 px-6 md:px-12 lg:px-24 border-b border-academy-line">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="section-label mb-4">02 / Akademija</p>
+            <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
+              Akademija
+            </h1>
+            <p className="text-lg text-white/40 font-light max-w-xl">
+              FA KAUNAS – daugiau nei futbolas. Čia ugdome stiprias asmenybes, ne tik žaidėjus.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
-      {/* TURINYS */}
-      <BackgroundWrapper>
-        <section className="py-20 px-6 md:px-12 lg:px-24 max-w-5xl mx-auto space-y-16 leading-relaxed text-lg">
-          {/* Asmenybės ugdymas */}
+      {/* ═══ PERSONALITY DEVELOPMENT ═══ */}
+      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28 border-b border-academy-line">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="lg:col-span-4"
           >
-            <h2 className="text-2xl font-bold text-[#0077cc] mb-4">Asmenybės ugdymas</h2>
-            <p className="text-gray-800">
-              Akademijos prioritetas – ne tik sportiniai rezultatai, bet ir <strong>vaikų asmenybės augimas</strong>.
+            <p className="section-number mb-3">01</p>
+            <h2 className="text-display text-3xl md:text-4xl text-white mb-2">Asmenybės ugdymas</h2>
+            <div className="w-12 h-px bg-academy-blue mt-4" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="lg:col-span-8"
+          >
+            <p className="text-lg text-white/60 leading-relaxed">
+              Akademijos prioritetas – ne tik sportiniai rezultatai, bet ir <span className="text-white font-medium">vaikų asmenybės augimas</span>.
               Treniruočių metu treneriai vengia griežtų nurodymų – vietoj to užduoda atvirus klausimus, kurie skatina vaikus mąstyti,
               priimti savarankiškus sprendimus ir ugdyti pasitikėjimą savimi bei kūrybiškumą.
             </p>
-
-            {/* Skiriamoji linija */}
-            <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
           </motion.div>
-
-          {/* Technologijos */}
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{
-              hidden: { opacity: 0, y: 24 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-            }}
-          >
-            <h2 className="text-2xl font-bold text-[#0077cc] mb-8">Technologijos</h2>
-
-            <div className="relative pl-14">
-              {/* Jungiamoji vertikali linija */}
-              <div
-                className="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-sky-300 via-sky-100 to-transparent"
-                aria-hidden
-              />
-
-              <ul className="space-y-8">
-                <TechItem
-                  title="Stats4Sport"
-                  icon={
-                    <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden>
-                      <path d="M4 20h16M6 16V8m6 8V4m6 16v-6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                    </svg>
-                  }
-                >
-                  Siekdami nuolat tobulėti, kasdieniame darbe naudojame „Stats4Sport“ sistemą. Ši platforma leidžia planuoti
-                  treniruotes, kurti žaidėjo profilį, sekti kiekvieno auklėtinio progresą ir stebėti ilgalaikius pokyčius.
-                  Sistema naudinga ne tik treneriams – tai ir puikus įrankis tėvams, leidžiantis matyti treniruočių grafiką,
-                  lankomumą bei artėjančius renginius.
-                </TechItem>
-
-                <TechItem
-                  title="VEO Sports technology"
-                  icon={
-                    <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden>
-                      <path d="M4 7h16l-2 10H6L4 7z" stroke="currentColor" strokeWidth="2" fill="none" strokeLinejoin="round"/>
-                      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
-                    </svg>
-                  }
-                >
-                  VEO Sports technology – pažangių technologijų pagalba filmuojamos treniruotės ir rungtynės.
-                  Dirbtinis intelektas apdoroja medžiagą, kurios pagalba galime peržiūrėti, analizuoti, koreguoti ir pritaikyti
-                  surinktą informaciją kasdieniame treniruočių procese.
-                </TechItem>
-
-                <TechItem
-                  title="LiveTagPRO"
-                  icon={
-                    <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden>
-                      <path d="M5 7h10a4 4 0 0 1 0 8H5z" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                      <path d="M15 12l4 3V9z" fill="currentColor"/>
-                    </svg>
-                  }
-                >
-                  LiveTagPRO – video analizių programa, leidžianti efektyviai ir sklandžiai perteikti informaciją žaidėjams,
-                  vykdyti treniruočių ir rungtynių analizes su treneriais.
-                </TechItem>
-              </ul>
-            </div>
-          </motion.div>
-        </section>
-      </BackgroundWrapper>
-    </main>
-  );
-}
-
-/* ====== Mažos, elegantiškos „media“ eilutės su skiriamąja linija ====== */
-function TechItem({ title, icon, children }) {
-  return (
-    <motion.li
-      variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
-      transition={{ duration: 0.45 }}
-      className="relative"
-    >
-      {/* Ženkliukas */}
-      <div className="absolute left-0 top-1">
-        <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-50 text-sky-600 ring-1 ring-sky-100">
-          {icon}
         </div>
-      </div>
+      </section>
 
-      {/* Tekstas */}
-      <div className="pl-14">
-        <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-        <p className="text-gray-800 mt-1">{children}</p>
+      {/* ═══ TECHNOLOGY ═══ */}
+      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            <p className="section-number mb-3">02</p>
+            <h2 className="text-display text-3xl md:text-4xl text-white">Technologijos</h2>
+          </motion.div>
 
-        {/* subtili skiriamoji linija po elementu */}
-        <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-sky-100 to-transparent" />
-      </div>
-    </motion.li>
+          <div className="space-y-0">
+            {techItems.map((item, i) => (
+              <motion.div
+                key={item.num}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="border-t border-academy-line py-10 grid grid-cols-1 md:grid-cols-12 gap-6"
+              >
+                <div className="md:col-span-1">
+                  <span className="text-[11px] font-mono text-academy-blue">{item.num}</span>
+                </div>
+                <div className="md:col-span-3">
+                  <h3 className="text-xl font-display font-bold text-white uppercase tracking-tight">
+                    {item.title}
+                  </h3>
+                </div>
+                <div className="md:col-span-8">
+                  <p className="text-white/50 leading-relaxed">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+            <div className="border-t border-academy-line" />
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

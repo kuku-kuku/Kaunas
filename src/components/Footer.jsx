@@ -6,58 +6,98 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-white py-12 px-6 md:px-12 lg:px-24">
-      <div className="max-w-7xl mx-auto">
-        {/* Grid struktūra – 2 kolonos per mobile, 4 per md ir aukščiau */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+    <footer className="relative bg-academy-black border-t border-academy-line">
+      {/* Large CTA typography */}
+      <div className="px-6 md:px-12 lg:px-24 pt-24 pb-16">
+        <div className="max-w-7xl mx-auto">
+          <p className="section-label mb-4">Prisijunk</p>
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-display text-white leading-[0.95] mb-8">
+            Padėkite auginti<br />
+            jaunąją kartą
+          </h2>
+          <div className="flex flex-wrap gap-4">
+            <Link to="/prisijunk" className="btn-academy">
+              Skirti 1,2% <span className="btn-arrow">&rarr;</span>
+            </Link>
+            <Link to="/kontaktai" className="btn-blue">
+              Susisiekti <span className="btn-arrow">&rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="mx-6 md:mx-12 lg:mx-24 h-px bg-academy-line" />
+
+      {/* Footer grid */}
+      <div className="px-6 md:px-12 lg:px-24 py-12">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
           {/* FA Kaunas */}
-          <div className="col-span-2 md:col-span-1 text-center md:text-left space-y-3">
-            <h3 className="text-xl font-bold">FA KAUNAS</h3>
-            <p className="text-sm text-gray-400">
+          <div className="col-span-2 md:col-span-1 space-y-4">
+            <img src="/logo.png" alt="FA Kaunas" className="h-14 w-auto" />
+            <p className="text-sm text-white/40 leading-relaxed max-w-[240px]">
               Jaunimo futbolo akademija, ugdanti ne tik sportininkus, bet ir atsakingas asmenybes.
             </p>
           </div>
 
-          {/* Puslapiai */}
-          <div className="text-left space-y-3">
-            <h4 className="text-lg font-semibold">Puslapiai</h4>
-            <ul className="space-y-1 text-sm text-gray-300">
-              <li><Link to="/apie" className="hover:text-white">Apie mus</Link></li>
-              <li><Link to="/akademija/treneriai" className="hover:text-white">Treneriai</Link></li>
-              <li><Link to="/akademija/ugdymo-programa" className="hover:text-white">Ugdymo programa</Link></li>
-              <li><Link to="/naujienos" className="hover:text-white">Naujienos</Link></li>
-              <li><Link to="/kontaktai" className="hover:text-white">Kontaktai</Link></li>
-              <li><Link to="/prisijunk" className="hover:text-white">Parama ir rėmimas</Link></li>
-            </ul>
+          {/* Navigation */}
+          <div className="space-y-3">
+            <p className="section-label mb-4">Navigacija</p>
+            {[
+              { to: '/apie', label: 'Apie mus' },
+              { to: '/akademija/treneriai', label: 'Treneriai' },
+              { to: '/akademija/ugdymo-programa', label: 'Ugdymo programa' },
+              { to: '/naujienos', label: 'Naujienos' },
+              { to: '/kontaktai', label: 'Kontaktai' },
+              { to: '/prisijunk', label: 'Parama ir rėmimas' },
+            ].map(link => (
+              <Link key={link.to} to={link.to}
+                className="block text-sm text-white/40 hover:text-white transition-colors duration-200">
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Kontaktai */}
-          <div className="text-left space-y-2">
-            <h4 className="text-lg font-semibold">Kontaktai</h4>
-            <p className="text-sm text-gray-300">Žeimenos g. 165, 49332 Kaunas</p>
-            <p className="text-sm text-gray-300">administracija@fakaunas.lt</p>
-            <p className="text-sm text-gray-300">+37066527501</p>
+          {/* Contact */}
+          <div className="space-y-3">
+            <p className="section-label mb-4">Kontaktai</p>
+            <p className="text-sm text-white/40">Žeimenos g. 165, 49332 Kaunas</p>
+            <a href="mailto:administracija@fakaunas.lt" className="block text-sm text-white/40 hover:text-white transition-colors">
+              administracija@fakaunas.lt
+            </a>
+            <a href="tel:+37066527501" className="block text-sm text-white/40 hover:text-white transition-colors">
+              +37066527501
+            </a>
           </div>
 
-          {/* Sekite mus */}
-          <div className="text-left space-y-3">
-            <h4 className="text-lg font-semibold">Sekite mus</h4>
+          {/* Social */}
+          <div className="space-y-3">
+            <p className="section-label mb-4">Sekite mus</p>
             <div className="flex gap-4">
-              <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-white text-xl">
-                <FaFacebookF />
+              <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noreferrer"
+                className="w-10 h-10 border border-academy-line flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all duration-200">
+                <FaFacebookF size={14} />
               </a>
-              <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-white text-xl">
-                <FaInstagram />
+              <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noreferrer"
+                className="w-10 h-10 border border-academy-line flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all duration-200">
+                <FaInstagram size={15} />
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Apatinė eilutė */}
-      <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
-        © {year} FA KAUNAS. Visos teisės saugomos. <br />
-        Padėkite auginti jaunąją kartą – skirkite 1,2% arba tapkite rėmėju.
+      {/* Bottom bar */}
+      <div className="mx-6 md:mx-12 lg:mx-24 h-px bg-academy-line" />
+      <div className="px-6 md:px-12 lg:px-24 py-6">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+          <p className="text-[11px] text-white/25 uppercase tracking-[0.1em]">
+            &copy; {year} FA KAUNAS. Visos teisės saugomos.
+          </p>
+          <p className="text-[11px] text-white/25 uppercase tracking-[0.1em]">
+            Padėkite auginti jaunąją kartą – skirkite 1,2% arba tapkite rėmėju.
+          </p>
+        </div>
       </div>
     </footer>
   );
