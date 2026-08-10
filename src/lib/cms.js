@@ -80,7 +80,7 @@ export async function fetchNewsList() {
   const base = getCmsBase();
   if (!base) throw new Error("Missing CMS base URL. Set VITE_STRAPI_URL on Vercel.");
 
-  const url = `${base}/api/${NEWS_ENDPOINT}?populate=*`;
+  const url = `${base}/api/${NEWS_ENDPOINT}?populate=*&pagination[pageSize]=200`;
   const json = await fetchJson(url);
   return (json.data || []).map(normalizeNewsItem).filter(Boolean);
 }
