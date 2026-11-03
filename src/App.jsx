@@ -19,6 +19,7 @@ const EtikosKodeksas = lazy(() => import('./pages/apie/EtikosKodeksas'));
 const Akademija = lazy(() => import('./pages/Akademija'));
 const Treneriai = lazy(() => import('./pages/akademija/Treneriai'));
 const UgdymoPrograma = lazy(() => import('./pages/akademija/UgdymoPrograma'));
+const Baze = lazy(() => import('./pages/akademija/Baze'));
 
 const Prisijunk = lazy(() => import('./pages/Prisijunk'));
 const Naujienos = lazy(() => import('./pages/Naujienos'));
@@ -67,6 +68,7 @@ function App() {
           <Route path="/akademija" element={<Akademija />} />
           <Route path="/akademija/treneriai" element={<Treneriai />} />
           <Route path="/akademija/ugdymo-programa" element={<UgdymoPrograma />} />
+          <Route path="/akademija/baze" element={<Baze />} />
           <Route path="/prisijunk" element={<Prisijunk />} />
           <Route path="/naujienos" element={<Naujienos />} />
           <Route path="/naujienos/:slug" element={<Naujiena />} />

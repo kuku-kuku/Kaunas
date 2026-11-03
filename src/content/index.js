@@ -12,3 +12,4 @@ export * from './lt/news';
 export * from './lt/home';
 export * from './lt/programs';
 export * from './lt/trial';
+export * from './lt/facilities';

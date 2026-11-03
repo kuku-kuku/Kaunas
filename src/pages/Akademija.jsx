@@ -1,24 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { technology } from '../content';
 
 export default function Akademija() {
-  const techItems = [
-    {
-      num: '01',
-      title: 'Stats4Sport',
-      desc: 'Siekdami nuolat tobulėti, kasdieniame darbe naudojame „Stats4Sport" sistemą. Ši platforma leidžia planuoti treniruotes, kurti žaidėjo profilį, sekti kiekvieno auklėtinio progresą ir stebėti ilgalaikius pokyčius. Sistema naudinga ne tik treneriams – tai ir puikus įrankis tėvams, leidžiantis matyti treniruočių grafiką, lankomumą bei artėjančius renginius.',
-    },
-    {
-      num: '02',
-      title: 'VEO Sports technology',
-      desc: 'VEO Sports technology – pažangių technologijų pagalba filmuojamos treniruotės ir rungtynės. Dirbtinis intelektas apdoroja medžiagą, kurios pagalba galime peržiūrėti, analizuoti, koreguoti ir pritaikyti surinktą informaciją kasdieniame treniruočių procese.',
-    },
-    {
-      num: '03',
-      title: 'LiveTagPRO',
-      desc: 'LiveTagPRO – video analizių programa, leidžianti efektyviai ir sklandžiai perteikti informaciją žaidėjams, vykdyti treniruočių ir rungtynių analizes su treneriais.',
-    },
-  ];
 
   return (
     <main className="bg-academy-black min-h-screen">
@@ -87,7 +71,7 @@ export default function Akademija() {
           </motion.div>
 
           <div className="space-y-0">
-            {techItems.map((item, i) => (
+            {technology.map((item, i) => (
               <motion.div
                 key={item.num}
                 initial={{ opacity: 0, y: 30 }}

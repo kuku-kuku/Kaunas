@@ -15,6 +15,7 @@ export const mainNav = [
     sub: [
       { to: '/akademija/treneriai', label: 'Treneriai' },
       { to: '/akademija/ugdymo-programa', label: 'Ugdymo programa' },
+      { to: '/akademija/baze', label: 'Bazė ir technologijos' },
     ],
   },
   { to: '/prisijunk', label: 'Prisijunk' },
@@ -26,6 +27,7 @@ export const footerNav = [
   { to: '/apie', label: 'Apie mus' },
   { to: '/akademija/treneriai', label: 'Treneriai' },
   { to: '/akademija/ugdymo-programa', label: 'Ugdymo programa' },
+  { to: '/akademija/baze', label: 'Bazė ir technologijos' },
   { to: '/naujienos', label: 'Naujienos' },
   { to: '/kontaktai', label: 'Kontaktai' },
   { to: '/prisijunk', label: 'Parama ir rėmimas' },

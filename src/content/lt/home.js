@@ -96,6 +96,7 @@ export const facilities = {
     { label: 'Žiemos treniruočių vieta', aspect: 'aspect-[4/5]' },
   ],
   mapsLink: 'https://www.google.com/maps/search/?api=1&query=%C5%BDeimenos+g.+165%2C+Kaunas',
+  link: { to: '/akademija/baze', label: 'Bazė ir technologijos' },
 };
 
 // TODO(content): 3–6 real quotes with parent's first name + initial, child's group and
