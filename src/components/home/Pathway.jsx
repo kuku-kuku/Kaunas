@@ -1,26 +1,11 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { pathway, groups } from '../../content';
+import { pathway } from '../../content';
+import { getGroupBands } from '../../lib/groups';
 import { Section, SectionHeader, Reveal } from '../ui';
 
-// Groups are stored oldest-first and split into A/B teams; the pathway reads youngest-first
-// with one step per birth-year band.
-function useSteps() {
-  return useMemo(() => {
-    const byYears = new Map();
-    for (const g of groups) {
-      const step = byYears.get(g.metai) ?? { years: g.metai, teams: [] };
-      step.teams.push(g);
-      byYears.set(g.metai, step);
-    }
-    return [...byYears.values()].reverse();
-  }, []);
-}
-
-const birthYears = (metai) => metai.replace(/\s*\/\s*/g, '–').replace(/–(\d{4})–/, '–');
-
 export default function Pathway() {
-  const steps = useSteps();
+  const steps = getGroupBands();
   const total = steps.length + 1;
 
   return (
@@ -45,7 +30,7 @@ export default function Pathway() {
 
       <ol className="relative mt-16 grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2 lg:mt-20 lg:grid-cols-4">
         {steps.map((step, i) => (
-          <Reveal as="li" key={step.years} delay={i * 0.08} className="flex flex-col bg-surface-raised p-7 md:p-8">
+          <Reveal as="li" key={step.id} delay={i * 0.08} className="flex flex-col bg-surface-raised p-7 md:p-8">
             <div className="flex items-center justify-between">
               <span className="font-mono text-sm text-accent-bright">
                 {String(i + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
@@ -58,7 +43,7 @@ export default function Pathway() {
             </div>
 
             <h3 className="mt-10 font-display text-display-sm font-extrabold uppercase text-fg">
-              {birthYears(step.years)}
+              {step.label}
               <span className="mt-2 block font-body text-eyebrow font-medium uppercase text-fg-subtle">gimimo metai</span>
             </h3>
 

@@ -10,3 +10,4 @@ export * from './lt/coaches';
 export * from './lt/groups';
 export * from './lt/news';
 export * from './lt/home';
+export * from './lt/programs';
