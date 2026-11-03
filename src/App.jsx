@@ -29,7 +29,7 @@ function App() {
     // reducedMotion="user": framer-motion skips transform animations for visitors who
     // ask their OS for reduced motion (CSS transitions are handled in index.css)
     <MotionConfig reducedMotion="user">
-    <div className="min-h-screen flex flex-col bg-academy-black">
+    <div className="min-h-screen flex flex-col bg-surface">
       <a href="#turinys" className="skip-link">Pereiti prie turinio</a>
       <Navbar />
       <ScrollToTop />

@@ -13,3 +13,5 @@ export * from './lt/home';
 export * from './lt/programs';
 export * from './lt/trial';
 export * from './lt/facilities';
+export * from './lt/about';
+export * from './lt/support';

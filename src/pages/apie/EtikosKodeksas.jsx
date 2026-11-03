@@ -1,110 +1,59 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-
-const sections = [
-  {
-    num: '01',
-    title: 'FA KAUNAS UŽSIĖMIMUS LANKANTIEMS VAIKAMS',
-    items: [
-      "Žaiskite dėl paties žaidimo džiaugsmo, ne dėl noro įsiteikti treneriams ar tėvams.",
-      "Visada prisiminkite, jog futbolo žaidimo tikslas yra gerai praleisti laiką, pagerinti savo įgūdžius ir jaustis gerai tarp kitų.",
-      "Žaiskite pagal žaidimo taisykles, laikykitės žaidimo „Fair Play“ taisyklių.",
-      "Visada gerbkite ir priimkite teisėjų sprendimus, net ir tada kai su jais nesutinkate.",
-      "Gerbkite savo varžovą, kad ir koks jis būtų. Rodykite jam pagarbą, nepriklausomai nuo varžovo atsako.",
-      "Bendradarbiaukite su treneriu, komandos draugais ir net varžovais ne tik aikštelėje, bet ir už jos ribų.",
-      "Žaidimo metu nevartokite necenzūrinių žodžių, nerodykite nepadorių gestų, nedemonstruokite paniekos ar nepagarbos.",
-      "Niekada specialiai netraumuokite savo oponento dėl rezultato ar kitų savanaudiškų tikslų.",
-      "Pasibaigus varžyboms, būtinai padėkokite varžovams, jų treneriui, teisėjui, sirgaliams.",
-      "Nepaisant atstovaujamos, bei varžovų komandos lygio, stenkitės panaudoti visus savo įgūdžius ir pasimėgauti žaidimu.",
-      "Rungtynių metu net ir būdami už aikštės palaikykite savo komandos draugus.",
-      "Laimėkite su šypsena, tačiau mokėkite ir oriai pralaimėti.",
-    ],
-  },
-  {
-    num: '02',
-    title: 'FA KAUNAS VAIKŲ TĖVAMS',
-    items: [
-      "Leiskite savo vaikui žaisti ir mėgautis žaidimu taip, kaip nori Jūsų vaikas ir komandos treneris, o ne Jūs.",
-      "Vaikas negali vienu metu vykdyti trenerio, Jūsų ir savo sprendimų – pasitikėkite treneriu.",
-      "Skatinkite ir palaikykite vaiką pozityviai, nešaukite ir nežeminkite.",
-      "Rodykite pagarbą visiems: teisėjui, varžovui, komandai.",
-      "Nevartokite neleistinų medžiagų ar alkoholio aplink vaikų sportą.",
-      "Pagirkite už pastangas, nesureikšminkite pralaimėjimų ar rezultatų.",
-      "Gerbkite trenerių darbą, laikykitės taisyklių ir futbolo vertybių.",
-      "Visada elkitės taip, kaip norėtumėte, kad vaikas elgtųsi aikštelėje.",
-      "Nepamirškite – svarbiausia ugdymas, ne pergalės.",
-    ],
-  },
-  {
-    num: '03',
-    title: 'FA KAUNAS TRENERIAMS',
-    items: [
-      "Vaiko saugumas ir gera emocija svarbiausia.",
-      "Rezultatas nėra svarbiau nei tobulėjimas.",
-      "Suteikite galimybę žaisti visiems.",
-      "Būkite pavyzdys ir autoritetas vaikams.",
-      "Ugdykite vertybes ir motyvuokite pagyrimais, ne kritika.",
-      "Skatinkite „Fair Play“, gerbkite visus žaidimo dalyvius.",
-      "Saugokite vaikus nuo grubių veiksmų ir sukčiavimo.",
-      "Būkite atsakingi ir už vaikų tėvų elgesį rungtynių metu.",
-    ],
-  },
-];
+import Seo from '../../components/Seo';
+import { PageHeader, Section, Reveal } from '../../components/ui';
+import { ethicsPage as page, ethicsSections } from '../../content';
 
 export default function EtikosKodeksas() {
   return (
-    <main className="bg-academy-black min-h-screen">
-      {/* ═══ HERO ═══ */}
-      <section className="pt-28 md:pt-36 pb-16 px-6 md:px-12 lg:px-24 border-b border-academy-line">
-        <div className="max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="section-label mb-4">01 / Etika</p>
-            <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
-              Etikos kodeksas
-            </h1>
-            <p className="text-lg text-fg-subtle font-light max-w-xl">
-              Vaikams, tėvams ir treneriams skirti bendri elgesio principai
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══ SECTIONS ═══ */}
-      {sections.map((section, sIdx) => (
-        <section key={section.num} className={`px-6 md:px-12 lg:px-24 py-16 md:py-20 ${sIdx < sections.length - 1 ? 'border-b border-academy-line' : ''}`}>
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-10"
-            >
-              <span className="text-[11px] font-mono text-accent-bright">{section.num}</span>
-              <h2 className="text-xl md:text-2xl font-display font-bold text-white uppercase tracking-tight mt-2">
-                {section.title}
-              </h2>
-              <div className="w-12 h-px bg-academy-blue mt-4" />
-            </motion.div>
-
-            <div className="space-y-0">
-              {section.items.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -15 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.03 }}
-                  className="flex items-start gap-5 py-4 border-b border-academy-line/50"
+    <main>
+      <Seo title={page.seo.title} description={page.seo.description} />
+      <PageHeader eyebrow={page.eyebrow} title={page.title} lead={page.lead}>
+        {/* Jump links: parents usually want only their part */}
+        <nav aria-label="Etikos kodekso dalys" className="mt-10">
+          <ul className="flex flex-wrap gap-2">
+            {ethicsSections.map((s) => (
+              <li key={s.id}>
+                <a
+                  href={`#${s.id}`}
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line-strong px-5 text-sm uppercase tracking-[0.12em] text-fg-muted transition-colors hover:border-white/40 hover:text-white"
                 >
-                  <span className="text-[12px] font-mono text-fg-subtle w-6 flex-shrink-0 mt-0.5">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p className="text-white/60 leading-relaxed">{item}</p>
-                </motion.div>
+                  <span className="font-mono text-accent-bright">{s.num}</span> {s.short}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </PageHeader>
+
+      {ethicsSections.map((section, si) => (
+        <Section
+          key={section.id}
+          id={section.id}
+          labelledBy={`${section.id}-title`}
+          tone={si % 2 === 1 ? 'raised' : 'base'}
+          divider
+          className="scroll-mt-20"
+        >
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <Reveal className="lg:col-span-4">
+              <div className="lg:sticky lg:top-28">
+                <span className="font-mono text-sm text-accent-bright">{section.num}</span>
+                <h2 id={`${section.id}-title`} className="mt-4 font-display text-display-md font-extrabold uppercase text-fg">
+                  {section.short}
+                </h2>
+                <p className="mt-3 text-eyebrow uppercase text-fg-subtle">{section.title}</p>
+              </div>
+            </Reveal>
+            <ol className="border-t border-line lg:col-span-7 lg:col-start-6">
+              {section.items.map((item, i) => (
+                <li key={item} className="flex gap-5 border-b border-line py-5">
+                  <span className="w-7 shrink-0 pt-1 font-mono text-xs text-fg-subtle">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="text-lg leading-relaxed text-fg">{item}</span>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
-        </section>
+        </Section>
       ))}
     </main>
   );

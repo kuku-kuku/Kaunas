@@ -1,195 +1,129 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { site } from "../content";
-import { ResponsiveImage } from "../components/ui";
+import React, { useState } from "react";
+import { Check, Copy } from "lucide-react";
+import Seo from "../components/Seo";
+import { PageHeader, Section, SectionHeader, Reveal, ResponsiveImage } from "../components/ui";
+import { supportPage as page, site, partners } from "../content";
+
+function CopyValue({ value }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className="inline-flex min-h-[40px] items-center gap-2 rounded-full border border-line-strong px-4 text-sm text-fg-muted transition-colors hover:border-white/40 hover:text-white"
+    >
+      {copied ? <Check size={14} aria-hidden="true" /> : <Copy size={14} aria-hidden="true" />}
+      <span aria-live="polite">{copied ? "Nukopijuota" : "Kopijuoti"}</span>
+      <span className="sr-only"> kodą {value}</span>
+    </button>
+  );
+}
 
 export default function Prisijunk() {
+  const { community, taxSupport, sponsors } = page;
+
   return (
-    <main className="bg-academy-black min-h-screen">
-      {/* ═══ HERO ═══ */}
-      <section className="pt-28 md:pt-36 pb-16 px-6 md:px-12 lg:px-24 border-b border-academy-line">
-        <div className="max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="section-label mb-4">03 / Prisijunk</p>
-            <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
-              Prisijunk prie mūsų šeimos
-            </h1>
-            <p className="text-lg text-fg-subtle font-light max-w-2xl">
-              Kviečiame tapti mūsų akademijos dalimi – skirdami 1,2% GPM arba tapdami rėmėjais, prisidedate
-              prie vaikų svajonių įgyvendinimo.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <main>
+      <Seo title={page.seo.title} description={page.seo.description} />
+      <PageHeader eyebrow={page.eyebrow} title={page.title} lead={page.lead} />
 
       {/* ═══ COMMUNITY ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28 border-b border-academy-line">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="section-number mb-3">01</p>
-            <h2 className="text-display text-3xl md:text-4xl text-white mb-6">Mūsų bendruomenė</h2>
-            <div className="w-12 h-px bg-academy-blue mb-8" />
-            <div className="space-y-5 text-lg text-white/60 leading-relaxed">
-              <p>
-                Kartu kuriame aplinką, kurioje vaikai jaučiasi saugiai, drąsiai ir motyvuotai. Mūsų
-                bendruomenė – tai tėvai, treneriai, savanoriai ir rėmėjai, kasdien prisidedantys prie
-                augančių talentų.
-              </p>
-              <p>
-                Prisidėdami jūs padedate mums organizuoti turnyrus, gerinti treniruočių bazę, aprūpinti
-                inventoriumi ir atverti daugiau galimybių vaikams sporte bei gyvenime.
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="relative"
-          >
+      <Section labelledBy="community-title" divider>
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeader id="community-title" index={community.index} eyebrow={community.eyebrow} title={community.title} size="lg" />
+            <Reveal delay={0.1} className="mt-8 space-y-5 text-lg leading-relaxed text-fg-muted">
+              {community.paragraphs.map((p) => <p key={p}>{p}</p>)}
+            </Reveal>
+          </div>
+          <Reveal delay={0.1} className="lg:col-span-7">
             <ResponsiveImage
-              src="/bendruomene.jpg"
-              alt="FA Kaunas bendruomenė"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="block"
-              imgClassName="w-full h-auto object-cover"
+              src={community.image}
+              alt={community.imageAlt}
+              sizes="(min-width: 1024px) 55vw, 100vw"
+              className="block overflow-hidden rounded-lg"
+              imgClassName="h-auto w-full object-cover"
             />
-            <div className="absolute inset-0 border border-academy-line pointer-events-none" />
-          </motion.div>
+          </Reveal>
         </div>
-      </section>
+      </Section>
 
-      {/* ═══ 1.2% SUPPORT ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28 border-b border-academy-line">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-4"
-          >
-            <p className="section-number mb-3">02</p>
-            <h2 className="text-display text-5xl md:text-6xl text-accent-bright mb-2">1,2%</h2>
-            <h3 className="text-display text-2xl text-white">Parama</h3>
-            <div className="w-12 h-px bg-academy-line mt-6" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="lg:col-span-8 space-y-6"
-          >
-            <p className="text-lg text-white/60 leading-relaxed">
-              Skirdami 1,2% savo pajamų mokesčio FA Kaunas, prisidedate prie jaunimo ugdymo, sportinių
-              sąlygų gerinimo ir vaikų svajonių įgyvendinimo.
-            </p>
-            <p className="text-white/60">
-              VMI Elektroninio deklaravimo sistema (EDS):{" "}
-              <a href="https://deklaravimas.vmi.lt/" target="_blank" rel="noopener noreferrer"
-                className="text-accent-bright hover:underline">
-                https://deklaravimas.vmi.lt/
+      {/* ═══ 1.2% ═══ */}
+      <Section labelledBy="tax-title" tone="raised" divider>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <Reveal>
+              <p className="section-label mb-5 flex items-center gap-3">
+                <span className="font-mono text-accent-bright">{taxSupport.index}</span>
+                <span aria-hidden="true" className="h-px w-8 bg-line-strong" />
+                {taxSupport.eyebrow}
+              </p>
+              <p aria-hidden="true" className="font-display text-[clamp(6rem,16vw,11rem)] font-extrabold leading-none text-accent-bright">1,2%</p>
+              <h2 id="tax-title" className="mt-4 text-display text-display-sm text-fg">{taxSupport.title}</h2>
+              <p className="mt-6 text-lg leading-relaxed text-fg-muted">{taxSupport.text}</p>
+              <a href={taxSupport.eds.href} target="_blank" rel="noopener noreferrer" className="btn-blue mt-8">
+                Atidaryti EDS <span className="sr-only">({taxSupport.eds.label}, atsidaro naujame lange)</span>
+                <span className="btn-arrow" aria-hidden="true">&#8599;</span>
               </a>
-            </p>
-          </motion.div>
-        </div>
-      </section>
+            </Reveal>
+          </div>
 
-      {/* ═══ INSTRUCTIONS ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28 border-b border-academy-line">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <p className="section-number mb-3">03</p>
-            <h2 className="text-display text-2xl md:text-3xl text-white mb-10">
-              Kaip skirti 1,2% – žingsnis po žingsnio:
-            </h2>
-
-            <div className="space-y-0">
-              {[
-                "Prisijunkite prie EDS sistemos",
-                "Pasirinkite: Prašymas skirti paramą",
-                "Forma: FR0512 v.5",
-                "E1: 2 (paramos gavėjas)",
-                `E2: ${site.companyCode}`,
-                "E3: FA Kaunas",
-                "E4: 1,2%",
-                "Pateikite deklaraciją",
-              ].map((step, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className="flex items-center gap-6 py-4 border-b border-academy-line group"
-                >
-                  <span className="text-[13px] font-mono text-accent-bright w-8 flex-shrink-0">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-white/70 group-hover:text-white transition-colors">{step}</span>
-                </motion.div>
+          <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-7">
+            <h3 className="font-display text-xl font-extrabold uppercase text-fg">{taxSupport.stepsTitle}</h3>
+            <ol className="mt-6 border-t border-line">
+              {taxSupport.steps.map((step, i) => (
+                <li key={step.text} className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-line py-4">
+                  <span className="w-7 font-mono text-sm text-accent-bright">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="flex-1 text-fg-muted">{step.text}</span>
+                  {step.value && <span className="font-mono text-lg font-semibold text-fg">{step.value}</span>}
+                  {step.copy && <CopyValue value={step.value} />}
+                </li>
               ))}
-            </div>
-          </motion.div>
+            </ol>
+          </Reveal>
         </div>
-      </section>
+      </Section>
 
-      {/* ═══ PARTNERSHIP ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-4"
-          >
-            <p className="section-number mb-3">04</p>
-            <h2 className="text-display text-2xl md:text-3xl text-white">
-              Norite tapti rėmėjais ar partneriais?
-            </h2>
-            <div className="w-12 h-px bg-academy-blue mt-6" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="lg:col-span-8"
-          >
-            <p className="text-lg text-white/60 leading-relaxed mb-8">
-              Juridiniai ir fiziniai asmenys, norintys remti futbolo vystymą ir jaunimo ugdymą –
-              susisiekite su mumis:
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-academy-line">
-              <div className="bg-academy-black p-6">
-                <p className="text-[11px] uppercase tracking-[0.15em] text-fg-subtle mb-2">Telefonas</p>
-                <a href={site.contact.phoneHref} className="text-white hover:text-accent-bright transition-colors">
-                  {site.contact.phone}
-                </a>
+      {/* ═══ SPONSORS ═══ */}
+      <Section labelledBy="sponsors-title" divider>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeader id="sponsors-title" index={sponsors.index} eyebrow={sponsors.eyebrow} title={sponsors.title} size="md" />
+            <Reveal delay={0.1} className="mt-6 text-lg leading-relaxed text-fg-muted">{sponsors.text}</Reveal>
+          </div>
+          <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-7">
+            <dl className="divide-y divide-line rounded-lg border border-line">
+              <div className="p-6">
+                <dt className="text-eyebrow uppercase text-fg-subtle">Telefonas</dt>
+                <dd className="mt-2 text-xl"><a href={site.contact.phoneHref} className="text-fg hover:text-accent-bright">{site.contact.phone}</a></dd>
               </div>
-              <div className="bg-academy-black p-6">
-                <p className="text-[11px] uppercase tracking-[0.15em] text-fg-subtle mb-2">El. paštas</p>
-                <a href={site.contact.emailHref} className="text-white hover:text-accent-bright transition-colors">
-                  {site.contact.email}
-                </a>
+              <div className="p-6">
+                <dt className="text-eyebrow uppercase text-fg-subtle">El. paštas</dt>
+                <dd className="mt-2 text-xl"><a href={site.contact.emailHref} className="text-fg hover:text-accent-bright">{site.contact.email}</a></dd>
               </div>
-            </div>
-          </motion.div>
+            </dl>
+            <p className="mt-8 text-eyebrow uppercase text-fg-subtle">Mus jau remia</p>
+            <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {partners.map((p) => (
+                <li key={p.name}>
+                  <a href={p.href} target="_blank" rel="noopener noreferrer" className="flex h-20 items-center justify-center rounded-lg bg-white p-2 hover:opacity-90">
+                    <ResponsiveImage src={p.logo} alt={`${p.name} (atsidaro naujame lange)`} sizes="120px" imgClassName="h-16 w-full object-contain" style={{ backgroundColor: "transparent" }} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

@@ -1,80 +1,40 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-
-const goals = [
-  <>
-    <span className="text-white font-medium">Masiškumas –</span> į futbolo užsiėmimus pritraukti kuo daugiau berniukų bei mergaičių.
-    Kiekvienoje treniruojamoje amžiaus grupėje turėti minimum po 2 komandas – taip kursime konkurencingą
-    aplinką, kurioje vaikai greičiau tobulės.
-  </>,
-  <>
-    <span className="text-white font-medium">Individualus dėmesys kiekvienam sportininkui –</span> komandos parinkimas atsižvelgiant į
-    futbolininko stažą, motyvaciją, fizinę brandą ir kt.
-  </>,
-  <>
-    <span className="text-white font-medium">Iš visų sportuojančių vaikų pastebėti „deimantus" –</span> jiems skirti papildomą dėmesį ir dėti visas pastangas,
-    kad sportininkas ateityje turėtų kuo didesnius šansus tapti profesionaliu futbolininku.
-  </>,
-  <>
-    <span className="text-white font-medium">Užauginti elitinio lygio futbolininką –</span> Lietuvos nacionalinei rinktinei bei užsienio klubams,
-    rungtyniaujantiems TOP Europos lygose.
-  </>,
-];
+import Seo from '../../components/Seo';
+import TrialCta from '../../components/home/TrialCta';
+import { PageHeader, Section, Reveal } from '../../components/ui';
+import { goalsPage as page } from '../../content';
 
 export default function Tikslai() {
   return (
-    <main className="bg-academy-black min-h-screen">
-      {/* ═══ HERO ═══ */}
-      <section className="pt-28 md:pt-36 pb-16 px-6 md:px-12 lg:px-24 border-b border-academy-line">
-        <div className="max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="section-label mb-4">01 / Tikslai</p>
-            <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
-              Tikslai ir vizija
-            </h1>
-            <p className="text-lg text-fg-subtle font-light max-w-xl">
-              FA Kaunas augimo kryptys ir vertybiniai siekiai
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <main>
+      <Seo title={page.seo.title} description={page.seo.description} />
+      <PageHeader eyebrow={page.eyebrow} title={page.title} lead={page.lead} />
 
-      {/* ═══ CONTENT ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-16"
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-1 h-10 bg-academy-blue flex-shrink-0 mt-1" />
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-white uppercase tracking-tight">
-                Futbolo, kaip sporto šakos populiarinimas ir puoselėjimas
-              </h2>
-            </div>
-          </motion.div>
+      <Section labelledBy="goals-title" divider>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <Reveal className="lg:col-span-4">
+            <h2 id="goals-title" className="font-display text-display-sm font-extrabold uppercase text-fg lg:sticky lg:top-28">
+              {page.heading}
+            </h2>
+          </Reveal>
 
-          <div className="space-y-0">
-            {goals.map((content, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex items-start gap-6 py-6 border-b border-academy-line"
-              >
-                <span className="text-[13px] font-mono text-accent-bright w-8 flex-shrink-0 mt-1">
+          <ol className="border-t border-line lg:col-span-7 lg:col-start-6">
+            {page.goals.map((goal, i) => (
+              <Reveal as="li" key={goal.title} delay={i * 0.06} className="grid gap-4 border-b border-line py-10 sm:grid-cols-[5rem_1fr]">
+                <span className="font-display text-display-md font-extrabold leading-none text-accent-bright">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-lg text-white/60 leading-relaxed">{content}</p>
-              </motion.div>
+                <div>
+                  <h3 className="font-display text-2xl font-extrabold uppercase text-fg">{goal.title}</h3>
+                  <p className="mt-3 text-lg leading-relaxed text-fg-muted">{goal.text}</p>
+                </div>
+              </Reveal>
             ))}
-          </div>
+          </ol>
         </div>
-      </section>
+      </Section>
+
+      <TrialCta />
     </main>
   );
 }

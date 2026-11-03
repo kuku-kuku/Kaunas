@@ -1,123 +1,63 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-
-const VALUES = [
-  { id: 'center', label: 'PAGARBA', desc: 'Gerbti vieni kitus, komandos draugus, varžovus, aplinką kurioje esame.' },
-  { id: 'top', label: 'Bendruomeniškumas', desc: 'Tik dirbdami drauge su partneriais, tėveliais ir visais futbolo entuziastais galime pasiekti savo tikslus.' },
-  { id: 'right', label: 'Disciplina', desc: 'Nuoseklus, kryptingas darbas su didele aistra ir motyvacija kiekvieną dieną.' },
-  { id: 'bottom', label: 'Supratingumas', desc: 'Kantrybė vieni kitų atžvilgiu.' },
-  { id: 'left', label: 'Dėkingumas', desc: 'Palaikyti vieni kitus kiekviename žingsnyje, atsidėkoti už suteiktas galimybes, pagalbą, paprastus, kasdienius dalykus.' },
-];
+import React from 'react';
+import Seo from '../components/Seo';
+import { PageHeader, Section, SectionHeader, Reveal, RichText } from '../components/ui';
+import LinkCards from '../components/ui/LinkCards';
+import { aboutPage as page, values, site } from '../content';
 
 export default function About() {
-  const [activeValue, setActiveValue] = useState(null);
+  const { history, valuesSection } = page;
+  // Core value ("center") first
+  const ordered = [...values].sort((a, b) => (a.id === 'center' ? -1 : b.id === 'center' ? 1 : 0));
+  const [core, ...rest] = ordered;
 
   return (
-    <main className="bg-academy-black min-h-screen">
-      {/* ═══ HERO ═══ */}
-      <section className="pt-28 md:pt-36 pb-16 px-6 md:px-12 lg:px-24 border-b border-academy-line">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="section-label mb-4">01 / Apie mus</p>
-            <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
-              Apie mus
-            </h1>
-            <p className="text-lg text-fg-subtle font-light max-w-xl">
-              Sužinokite, kaip gimė mūsų akademija ir kokiomis vertybėmis vadovaujamės kasdien.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <main>
+      <Seo title={page.seo.title} description={page.seo.description} />
+      <PageHeader eyebrow={page.eyebrow} title={page.title} lead={page.lead} />
 
       {/* ═══ HISTORY ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28 border-b border-academy-line">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-4"
-          >
-            <p className="section-number mb-3">01</p>
-            <h2 className="text-display text-3xl md:text-4xl text-white mb-2">Istorija</h2>
-            <div className="w-12 h-px bg-academy-blue mt-4" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-8 space-y-6"
-          >
-            <p className="text-lg text-white/60 leading-relaxed">
-              „FA KAUNAS" įkurta 2022 m. lapkritį. Akademijos steigėjais tapo buvęs profesionalus
-              futbolininkas <span className="text-white font-medium">Gabrielius Zagurskas</span> ir medikas, futbolo entuziastas{' '}
-              <span className="text-white font-medium">Vytautas Jakubauskas</span>.
-            </p>
-            <p className="text-lg text-white/60 leading-relaxed">
-              Vedami milžiniško entuziazmo ir svajonės suteikti galimybę jauniesiems futbolininkams
-              tapti profesionalais, steigėjai įkūrė savo futbolo akademiją, kurioje dirbama pagal
-              europinius standartus, siekiant vaikų svajonę paversti realybe.
-            </p>
-          </motion.div>
+      <Section labelledBy="history-title" divider>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionHeader id="history-title" index={history.index} eyebrow={history.eyebrow} title={history.title} size="lg" />
+            <Reveal delay={0.1} aria-hidden="true" className="mt-10 font-display text-[clamp(6rem,18vw,14rem)] font-extrabold leading-none text-white/[0.06]">
+              {site.foundingYear}
+            </Reveal>
+          </div>
+          <Reveal delay={0.1} className="space-y-6 text-lead text-fg-muted lg:col-span-6 lg:col-start-7 lg:pt-14">
+            {history.paragraphs.map((p) => (
+              <p key={p}><RichText text={p} /></p>
+            ))}
+          </Reveal>
         </div>
-      </section>
+      </Section>
 
       {/* ═══ VALUES ═══ */}
-      <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <p className="section-number mb-3">02</p>
-            <h2 className="text-display text-3xl md:text-4xl text-white">Vertybės</h2>
-          </motion.div>
+      <Section labelledBy="values-title" tone="raised" divider>
+        <SectionHeader id="values-title" index={valuesSection.index} eyebrow={valuesSection.eyebrow} title={valuesSection.title} size="lg" />
 
-          {/* Values grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-academy-line">
-            {VALUES.map((value, i) => (
-              <motion.button
-                key={value.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className={`bg-academy-black p-8 text-left group transition-colors duration-300 ${
-                  activeValue === value.id ? 'bg-academy-blue/10' : 'hover:bg-white/[0.02]'
-                } ${value.id === 'center' ? 'sm:col-span-2 lg:col-span-1' : ''}`}
-                onClick={() => setActiveValue(activeValue === value.id ? null : value.id)}
-              >
-                <p className={`text-[11px] uppercase tracking-[0.2em] mb-3 transition-colors duration-300 ${
-                  activeValue === value.id ? 'text-accent-bright' : 'text-fg-subtle'
-                }`}>
-                  {String(i + 1).padStart(2, '0')}
-                </p>
-                <h3 className={`text-lg font-display font-bold uppercase tracking-tight mb-3 transition-colors duration-300 ${
-                  value.id === 'center' ? 'text-accent-bright' : activeValue === value.id ? 'text-white' : 'text-white/80'
-                }`}>
-                  {value.label}
-                </h3>
-                <div className={`w-8 h-px mb-4 transition-all duration-300 ${
-                  activeValue === value.id ? 'bg-academy-blue w-12' : 'bg-academy-line'
-                }`} />
-                <p className="text-sm text-fg-subtle leading-relaxed">
-                  {value.desc}
-                </p>
-              </motion.button>
-            ))}
-          </div>
-        </div>
-      </section>
+        <Reveal className="mt-14 rounded-lg bg-accent p-8 md:p-12">
+          <p className="text-eyebrow font-semibold uppercase text-white">Pagrindinė vertybė</p>
+          <h3 className="mt-4 font-display text-display-lg font-extrabold uppercase text-white">{core.label}</h3>
+          <p className="mt-4 max-w-prose text-lg text-white">{core.desc}</p>
+        </Reveal>
+
+        <ul className="mt-px grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {rest.map((value, i) => (
+            <Reveal as="li" key={value.id} delay={i * 0.06} className="bg-surface-raised p-7 md:p-8">
+              <span className="font-mono text-sm text-accent-bright">{String(i + 2).padStart(2, '0')}</span>
+              <h3 className="mt-6 font-display text-2xl font-extrabold uppercase text-fg">{value.label}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-fg-muted">{value.desc}</p>
+            </Reveal>
+          ))}
+        </ul>
+      </Section>
+
+      {/* ═══ MORE ═══ */}
+      <Section labelledBy="more-title" size="compact" divider>
+        <h2 id="more-title" className="sr-only">Daugiau apie mus</h2>
+        <LinkCards links={page.more} headingLevel={3} />
+      </Section>
     </main>
   );
 }

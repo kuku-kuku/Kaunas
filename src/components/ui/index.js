@@ -8,3 +8,5 @@ export { default as SocialLinks } from './SocialLinks';
 export { default as MapEmbed } from './MapEmbed';
 export { default as PhotoPlaceholder } from './PhotoPlaceholder';
 export { default as StatCounter } from './StatCounter';
+export { default as PageHeader } from './PageHeader';
+export { default as RichText } from './RichText';

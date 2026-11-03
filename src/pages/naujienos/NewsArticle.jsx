@@ -2,24 +2,13 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Seo from '../../components/Seo';
 import Lightbox from '../../components/Lightbox';
-import { Container, Reveal, ResponsiveImage } from '../../components/ui';
+import { Container, Reveal, ResponsiveImage, RichText } from '../../components/ui';
 import { articles } from '../../content/lt/articles';
 import { site } from '../../content';
 import { fetchNewsBySlug, cmsUrl } from '../../lib/cms';
 import { useNews, formatNewsDate, newsHref } from '../../lib/useNews';
 
 const SIGN_OFF = 'FA Kaunas – nuo svajonės iki realybės!';
-
-// **bold** → <strong>
-function Rich({ text }) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
-    part.startsWith('**') && part.endsWith('**') ? (
-      <strong key={i} className="font-semibold text-fg">{part.slice(2, -2)}</strong>
-    ) : (
-      <React.Fragment key={i}>{part}</React.Fragment>
-    ),
-  );
-}
 
 // Strapi rich-text children → inline nodes
 function StrapiInline({ nodes }) {
@@ -35,13 +24,13 @@ function Body({ blocks }) {
   return (
     <div className="space-y-6 text-lg leading-relaxed text-fg-muted">
       {blocks.map((b, i) => {
-        if (b.type === 'p') return <p key={i}><Rich text={b.text} /></p>;
+        if (b.type === 'p') return <p key={i}><RichText text={b.text} /></p>;
         if (b.type === 'quote') {
           return (
             <figure key={i} className="my-10 border-l-2 border-accent pl-6 md:pl-8">
               <figcaption className="text-eyebrow uppercase text-accent-bright">{b.by}</figcaption>
               <blockquote className="mt-4 space-y-4 text-lg leading-relaxed text-fg md:text-xl">
-                {b.paragraphs.map((p) => <p key={p}><Rich text={p} /></p>)}
+                {b.paragraphs.map((p) => <p key={p}><RichText text={p} /></p>)}
               </blockquote>
             </figure>
           );
