@@ -30,3 +30,16 @@ export const footerNav = [
   { to: '/kontaktai', label: 'Kontaktai' },
   { to: '/prisijunk', label: 'Parama ir rėmimas' },
 ];
+
+// Primary call to action shown in every header variant.
+// TODO(phase 7): point to /registracija once the trial registration page exists.
+export const trialCta = {
+  to: '/kontaktai',
+  label: 'Registracija',
+  longLabel: 'Registracija į treniruotę',
+};
+
+export const legalNav = [
+  { to: '/privatumo-politika', label: 'Privatumo politika' },
+  { to: '/apie/etikos-kodeksas', label: 'Etikos kodeksas' },
+];

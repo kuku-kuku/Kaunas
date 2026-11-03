@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { site } from "../content";
 
@@ -128,7 +129,8 @@ export default function Kontaktai() {
                 </button>
 
                 <p className="text-[11px] text-fg-subtle text-center">
-                  Siųsdami sutinkate su duomenų tvarkymu pagal FA Kaunas privatumo politiką.
+                  Siųsdami sutinkate su duomenų tvarkymu pagal FA Kaunas{" "}
+                  <Link to="/privatumo-politika" className="underline underline-offset-2 hover:text-white">privatumo politiką</Link>.
                 </p>
 
                 <p className="text-center text-[12px] text-fg-subtle">

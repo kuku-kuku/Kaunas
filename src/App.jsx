@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -9,6 +10,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 const About = lazy(() => import('./pages/About'));
 const Kontaktai = lazy(() => import('./pages/Kontaktai'));
+const PrivatumoPolitika = lazy(() => import('./pages/PrivatumoPolitika'));
 const Naujiena = lazy(() => import("./pages/naujienos/Naujiena"));
 const Tikslai = lazy(() => import('./pages/apie/Tikslai'));
 const EtikosKodeksas = lazy(() => import('./pages/apie/EtikosKodeksas'));
@@ -46,6 +48,9 @@ const AzuolasTurnyras2015 = lazy(() => import("./pages/naujienos/AzuolasTurnyras
 
 function App() {
   return (
+    // reducedMotion="user": framer-motion skips transform animations for visitors who
+    // ask their OS for reduced motion (CSS transitions are handled in index.css)
+    <MotionConfig reducedMotion="user">
     <div className="min-h-screen flex flex-col bg-academy-black">
       <a href="#turinys" className="skip-link">Pereiti prie turinio</a>
       <Navbar />
@@ -91,12 +96,14 @@ function App() {
           <Route path="/naujienos/azuolo-turnyras-2015" element={<AzuolasTurnyras2015 />} />
 
           <Route path="/kontaktai" element={<Kontaktai />} />
+          <Route path="/privatumo-politika" element={<PrivatumoPolitika />} />
         </Routes>
         </Suspense>
       </div>
 
       <Footer />
     </div>
+    </MotionConfig>
   );
 }
 
