@@ -53,6 +53,7 @@ career highlights, and permission to show their age (or we drop the age).
 - [ ] Training principles beyond the existing five, if any
 
 ## Facilities
+- [ ] Confirm training happens at Žeimenos g. 165 (the home page says so, based on the contacts address)
 - [ ] Names and surfaces of the pitches (natural / artificial, size, floodlights)
 - [ ] Winter training venue
 - [ ] Parking and public transport notes for parents
@@ -63,6 +64,8 @@ the child's age group, and written permission to publish.
 - [ ] Testimonial 1
 - [ ] Testimonial 2
 - [ ] Testimonial 3
+
+The home page testimonials section stays hidden until at least one is added to `src/content/lt/home.js`.
 
 ## Trial registration flow
 - [ ] Which email inbox should receive trial requests? (the form currently sends to `CONTACT_TO`, default `info@fakaunas.lt`)
