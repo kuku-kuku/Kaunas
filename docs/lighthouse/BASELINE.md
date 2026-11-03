@@ -45,3 +45,17 @@ Mobile only, same setup as above.
 
 Still open: render-blocking CSS (~0.9 s), logo `<img>` without width/height, CMS news covers
 served at full size from Cloudinary (`/naujienos`, ~590 KiB).
+
+## After Phase 4 (home page rebuild)
+
+Home page only; the page now has nine sections instead of three.
+
+| Device | Perf | A11y | Best pr. | SEO | FCP | LCP |
+|---|---|---|---|---|---|---|
+| mobile | 88–89 | 100 | 96 | 100 | 2.1 s | 3.5 s |
+| desktop | 99 | 100 | 96 | 100 | – | 0.9 s |
+
+Best practices 96 = console error from the local CMS URL not being reachable during the test.
+Remaining mobile gap to 90+: the app renders client-side, so nothing paints until the
+327 kB main bundle has run. Options for Phase 11: prerender pages at build time, and/or
+switch framer-motion to `LazyMotion` to shrink the bundle.

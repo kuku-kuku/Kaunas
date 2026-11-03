@@ -1,4 +1,5 @@
-// Coach profiles. Field names stay Lithuanian to match the existing pages.
+// Coach profiles. Older fields are Lithuanian to match the existing pages.
+// licencija / highlight are taken from each coach's own bio below.
 // TODO(content): every coach currently uses the same photo on purpose ("laikinai visiems ta pati").
 // Matching portraits are on the shoot list in TODO-content.md. Remigijus Mikalainis is not listed yet.
 
@@ -6,6 +7,11 @@ export const coaches = [
   {
     id: 1,
     vardas: 'Gabrielius Zagurskas',
+    licencija: 'UEFA A',
+    role: 'Akademijos įkūrėjas',
+    highlight: 'LFF U15 rinktinės trenerio asistentas',
+    // TODO(content): real portrait; null renders an initials tile on the home page
+    portrait: null,
     amzius: 33,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Buvęs profesionalus futbolininkas, nuo 2021 metų visą dėmesį skiriantis futbolininkų treniravimui.',
@@ -39,6 +45,10 @@ Trenerio karjera:
   {
     id: 4,
     vardas: 'Marius Činikas',
+    licencija: 'UEFA B',
+    highlight: '3 kartus Lietuvos čempionas',
+    // TODO(content): real portrait; null renders an initials tile on the home page
+    portrait: null,
     amzius: 39,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Buvęs profesionalus futbolininkas, per savo karjerą sukaupęs nemenką žinių bagažą.',
@@ -67,6 +77,10 @@ Pasiekimai:
   {
     id: 2,
     vardas: 'Lukas Sipavičius',
+    licencija: 'UEFA C',
+    highlight: 'Lietuvos salės futbolo čempionas',
+    // TODO(content): real portrait; null renders an initials tile on the home page
+    portrait: null,
     amzius: 26,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Lietuvos salės futbolo rinktinės narys, UEFA C licencijos treneris.',
@@ -83,6 +97,10 @@ Pasiekimai:
   {
     id: 5,
     vardas: 'Tomas Macelis',
+    licencija: 'UEFA C',
+    highlight: 'Kauno „Žalgirio“ akademijos auklėtinis',
+    // TODO(content): real portrait; null renders an initials tile on the home page
+    portrait: null,
     amzius: 23,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Kauno Žalgirio akademijos auklėtinis, patirtį kaupęs jaunimo komandose ir LFF 2 lygoje.',
@@ -98,6 +116,10 @@ Studijuoja Lietuvos sporto universitete. Treniravimo sistemų programoje, pasiri
   {
     id: 3,
     vardas: 'Ernestas Bernota',
+    licencija: 'LFF D',
+    highlight: 'Buvęs vartininkas, Marijampolės „Sūduvos“ auklėtinis',
+    // TODO(content): real portrait; null renders an initials tile on the home page
+    portrait: null,
     amzius: 32,
     nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Ambicingas treneris, sukaupęs patirties Marijampolės Sūduvoje ir kitose komandose.',

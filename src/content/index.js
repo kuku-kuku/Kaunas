@@ -8,3 +8,5 @@ export * from './lt/partners';
 export * from './lt/stats';
 export * from './lt/coaches';
 export * from './lt/groups';
+export * from './lt/news';
+export * from './lt/home';

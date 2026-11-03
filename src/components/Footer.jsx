@@ -36,7 +36,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {/* FA Kaunas */}
           <div className="col-span-2 md:col-span-1 space-y-4">
-            <img src="/logo.png" alt="FA Kaunas" width={59} height={56} loading="lazy" className="h-14 w-auto" />
+            <img src="/logo.webp" alt="FA Kaunas" width={59} height={56} loading="lazy" className="h-14 w-auto" />
             <p className="text-sm text-fg-subtle leading-relaxed max-w-[240px]">
               Jaunimo futbolo akademija, ugdanti ne tik sportininkus, bet ir atsakingas asmenybes.
             </p>

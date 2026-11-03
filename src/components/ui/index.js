@@ -5,3 +5,6 @@ export { default as Reveal } from './Reveal';
 export { default as Section } from './Section';
 export { default as SectionHeader } from './SectionHeader';
 export { default as SocialLinks } from './SocialLinks';
+export { default as MapEmbed } from './MapEmbed';
+export { default as PhotoPlaceholder } from './PhotoPlaceholder';
+export { default as StatCounter } from './StatCounter';

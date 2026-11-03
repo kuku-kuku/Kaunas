@@ -210,7 +210,7 @@ export default function Navbar() {
         <div className={`flex items-center justify-between gap-6 px-8 transition-[padding] duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
           <Link to="/" className="flex-shrink-0">
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="FA Kaunas – į pradžią"
               width={67}
               height={64}
@@ -249,7 +249,7 @@ export default function Navbar() {
           className="fixed left-0 top-0 h-screen z-50 flex flex-col items-start py-6 pl-5 pr-6 w-auto bg-surface/95 backdrop-blur-md border-r border-line"
         >
           <Link to="/" className="mb-8">
-            <img src="/logo.png" alt="FA Kaunas – į pradžią" width={59} height={56} className="h-14 w-auto" />
+            <img src="/logo.webp" alt="FA Kaunas – į pradžią" width={59} height={56} className="h-14 w-auto" />
           </Link>
 
           <ul className="flex flex-col gap-1 flex-1 justify-center">
@@ -298,7 +298,7 @@ export default function Navbar() {
         >
           <Link to="/" className="flex-shrink-0">
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="FA Kaunas – į pradžią"
               width={50}
               height={48}
