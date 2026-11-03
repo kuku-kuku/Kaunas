@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { site } from "../content";
+import { ResponsiveImage } from "../components/ui";
 
 export default function Prisijunk() {
   return (
@@ -53,11 +54,12 @@ export default function Prisijunk() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="relative"
           >
-            <img
+            <ResponsiveImage
               src="/bendruomene.jpg"
               alt="FA Kaunas bendruomenė"
-              loading="lazy"
-              className="w-full h-auto object-cover"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="block"
+              imgClassName="w-full h-auto object-cover"
             />
             <div className="absolute inset-0 border border-academy-line pointer-events-none" />
           </motion.div>

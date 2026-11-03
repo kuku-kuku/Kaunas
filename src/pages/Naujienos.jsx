@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fetchNewsList, cmsUrl } from "../lib/cms";
+import { ResponsiveImage } from "../components/ui";
 
 const fallbackNews = [
   { id: 23, date: "2025-12-21", title: "FA Kaunas 2015 m. komanda dalyvavo „Ąžuolo“ turnyre", summary: "Trenerio Tomo Macelio treniruojama FA Kaunas 2015 m. gimimo komanda dalyvavo „Ąžuolo“ turnyre. Komanda siekė išlikti susikaupusi ir žaisti maksimaliomis pastangomis viso turnyro metu. Treneris pasidžiaugė vaikų nusiteikimu, pažymėjo tobulintinas vietas ir akcentavo tokių turnyrų svarbą jaunųjų futbolininkų ugdymui.", link: "/naujienos/azuolo-turnyras-2015", image: "/naujienos/azuolas1.jpg" },
@@ -123,10 +124,13 @@ export default function Naujienos() {
                   className="relative aspect-[4/3] overflow-hidden bg-academy-dark rounded-lg"
                 >
                   {featured.image && (
-                    <img
+                    <ResponsiveImage
                       src={featured.image}
                       alt={featured.title}
-                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                      priority
+                      sizes="(min-width: 1024px) 60vw, 100vw"
+                      className="block w-full h-full"
+                      imgClassName="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
                     />
                   )}
                   <div className="absolute top-4 left-4">
@@ -183,11 +187,12 @@ export default function Naujienos() {
                   <Link to={link} className="group block py-8">
                     <div className="relative aspect-video overflow-hidden bg-academy-dark rounded-lg mb-6">
                       {item.image && (
-                        <img
+                        <ResponsiveImage
                           src={item.image}
                           alt={item.title}
-                          className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
-                          loading="lazy"
+                          sizes="(min-width: 768px) 50vw, 100vw"
+                          className="block w-full h-full"
+                          imgClassName="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
                         />
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-academy-black/60 to-transparent" />
@@ -227,11 +232,12 @@ export default function Naujienos() {
                     <div className={`${isReversed ? 'md:col-start-7 md:col-span-6 md:order-2' : 'md:col-span-5'}`}>
                       <div className="relative aspect-[4/3] overflow-hidden bg-academy-dark rounded-lg">
                         {item.image && (
-                          <img
+                          <ResponsiveImage
                             src={item.image}
                             alt={item.title}
-                            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                            loading="lazy"
+                            sizes="(min-width: 768px) 50vw, 100vw"
+                            className="block w-full h-full"
+                            imgClassName="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
                           />
                         )}
                       </div>

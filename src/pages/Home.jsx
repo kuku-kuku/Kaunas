@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { partners, stats } from "../content";
+import { ResponsiveImage } from "../components/ui";
 
 const images = ["/hero.jpg", "/hero2.jpg", "/hero3.jpg"];
 
@@ -45,16 +46,22 @@ export default function HomePage() {
       <section className="relative w-full h-screen overflow-hidden bg-academy-black">
         {/* Background image */}
         <AnimatePresence mode="wait">
-          <motion.img
+          <motion.div
             key={images[currentImage]}
-            src={images[currentImage]}
-            alt="FA Kaunas"
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+            className="absolute inset-0"
+          >
+            <ResponsiveImage
+              src={images[currentImage]}
+              alt="FA Kaunas auklėtiniai rungtynėse"
+              priority={currentImage === 0}
+              className="block w-full h-full"
+              imgClassName="w-full h-full object-cover"
+            />
+          </motion.div>
         </AnimatePresence>
 
         {/* Gradient overlays */}
@@ -213,10 +220,12 @@ export default function HomePage() {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >
-                <img
+                <ResponsiveImage
                   src={partner.logo}
                   alt={partner.name}
-                  className="h-20 md:h-28 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                  sizes="(min-width: 768px) 224px, 160px"
+                  imgClassName="h-20 md:h-28 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ backgroundColor: 'transparent' }}
                 />
               </motion.a>
             ))}

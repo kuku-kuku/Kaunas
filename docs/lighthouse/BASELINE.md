@@ -31,3 +31,17 @@ Targets: Performance 90+, Accessibility 95+, SEO 95+ (on mobile).
 - `link-name`: icon-only social links have no accessible name
 - `unsized-images`: images without width/height
 - `meta-description`: none on any page
+
+## After Phase 2 (fonts, tokens, code splitting, image pipeline)
+
+Mobile only, same setup as above.
+
+| Page | Perf | A11y | Best pr. | SEO | LCP | Page weight |
+|---|---|---|---|---|---|---|
+| `/` | 87 (+15) | 100 | 100 | 100 | 3.6 s | 395 KiB |
+| `/akademija/treneriai` | 89 (+7) | 100 | 100 | 100 | 3.3 s | 361 KiB |
+| `/kontaktai` | 89 (+19) | 96 | 96 | 100 | 3.3 s | 801 KiB |
+| `/naujienos` | 76 (+10) | 100 | 96 | 100 | 5.8 s | 1,136 KiB |
+
+Still open: render-blocking CSS (~0.9 s), logo `<img>` without width/height, CMS news covers
+served at full size from Cloudinary (`/naujienos`, ~590 KiB).

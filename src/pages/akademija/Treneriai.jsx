@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { coaches as treneriai } from '../../content';
+import { ResponsiveImage } from '../../components/ui';
 
 export default function Treneriai() {
   const [aktyvus, setAktyvus] = useState(null);
@@ -65,11 +66,12 @@ export default function Treneriai() {
 
                 <div className="col-span-3 md:col-span-2">
                   <div className="w-16 h-16 md:w-20 md:h-20 overflow-hidden">
-                    <img
+                    <ResponsiveImage
                       src={t.nuotrauka}
                       alt={t.vardas}
-                      loading="lazy"
-                      className="w-full h-full object-cover object-top group-hover:scale-[1.05] transition-transform duration-500"
+                      sizes="80px"
+                      className="block w-full h-full"
+                      imgClassName="w-full h-full object-cover object-top group-hover:scale-[1.05] transition-transform duration-500"
                     />
                   </div>
                 </div>
@@ -126,7 +128,7 @@ export default function Treneriai() {
 
               <div className="flex items-start gap-6 mb-6">
                 <div className="w-20 h-20 flex-shrink-0 overflow-hidden">
-                  <img src={activeTrainer.nuotrauka} alt={activeTrainer.vardas} className="w-full h-full object-cover object-top" />
+                  <ResponsiveImage src={activeTrainer.nuotrauka} alt={activeTrainer.vardas} sizes="80px" className="block w-full h-full" imgClassName="w-full h-full object-cover object-top" />
                 </div>
                 <div>
                   <h2 id="trainer-title" className="text-2xl font-display font-bold text-white uppercase tracking-tight">
