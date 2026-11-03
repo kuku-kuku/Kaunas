@@ -95,11 +95,11 @@ export default function Naujienos() {
             <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
               Naujienos
             </h1>
-            <p className="text-lg text-white/40 font-light max-w-xl">
+            <p className="text-lg text-fg-subtle font-light max-w-xl">
               Naujausia informacija iš FA KAUNAS gyvenimo
             </p>
             {cmsError && (
-              <p className="mt-4 text-[12px] text-white/30 uppercase tracking-wider">
+              <p className="mt-4 text-[12px] text-fg-subtle uppercase tracking-wider">
                 Šiuo metu rodomos statinės naujienos (CMS nepasiekiamas).
               </p>
             )}
@@ -142,16 +142,16 @@ export default function Naujienos() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="space-y-4"
                 >
-                  <p className="text-[12px] uppercase tracking-[0.15em] text-white/30 font-mono">
+                  <p className="text-[12px] uppercase tracking-[0.15em] text-fg-subtle font-mono">
                     {formatDateShort(featured.date)}
                   </p>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white group-hover:text-academy-blue transition-colors duration-300 leading-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white group-hover:text-accent-bright transition-colors duration-300 leading-tight">
                     {featured.title}
                   </h2>
-                  <p className="text-white/40 leading-relaxed line-clamp-3">
+                  <p className="text-fg-subtle leading-relaxed line-clamp-3">
                     {featured.summary}
                   </p>
-                  <span className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.15em] text-academy-blue font-medium pt-2">
+                  <span className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.15em] text-accent-bright font-medium pt-2">
                     Skaityti daugiau <span className="group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
                   </span>
                 </motion.div>
@@ -197,14 +197,14 @@ export default function Naujienos() {
                     </div>
                     <div className="flex items-start justify-between gap-8">
                       <div className="flex-1">
-                        <p className="text-[11px] uppercase tracking-[0.15em] text-white/25 font-mono mb-2">
+                        <p className="text-[11px] uppercase tracking-[0.15em] text-fg-subtle font-mono mb-2">
                           {formatDateShort(item.date)}
                         </p>
-                        <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white group-hover:text-academy-blue transition-colors duration-300 leading-tight">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white group-hover:text-accent-bright transition-colors duration-300 leading-tight">
                           {item.title}
                         </h3>
                       </div>
-                      <span className="text-white/20 group-hover:text-academy-blue group-hover:translate-x-1 transition-all duration-200 mt-2 flex-shrink-0">
+                      <span className="text-fg-subtle group-hover:text-accent-bright group-hover:translate-x-1 transition-all duration-200 mt-2 flex-shrink-0">
                         &rarr;
                       </span>
                     </div>
@@ -241,17 +241,17 @@ export default function Naujienos() {
                       <div className="flex items-center gap-4">
                         <span className="section-number">{num}</span>
                         <div className="h-px flex-1 bg-academy-line" />
-                        <span className="text-[11px] uppercase tracking-[0.12em] text-white/25 font-mono">
+                        <span className="text-[11px] uppercase tracking-[0.12em] text-fg-subtle font-mono">
                           {formatDateShort(item.date)}
                         </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-display font-bold text-white group-hover:text-academy-blue transition-colors duration-300 leading-tight">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-display font-bold text-white group-hover:text-accent-bright transition-colors duration-300 leading-tight">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-white/30 leading-relaxed line-clamp-2 hidden md:block">
+                      <p className="text-sm text-fg-subtle leading-relaxed line-clamp-2 hidden md:block">
                         {item.summary}
                       </p>
-                      <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.12em] text-white/25 group-hover:text-academy-blue font-medium transition-colors duration-200">
+                      <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.12em] text-fg-subtle group-hover:text-accent-bright font-medium transition-colors duration-200">
                         Skaityti daugiau <span className="group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
                       </span>
                     </div>

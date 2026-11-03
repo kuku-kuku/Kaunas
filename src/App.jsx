@@ -1,55 +1,58 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import Home from './pages/Home';
-import About from './pages/About';
-import Kontaktai from './pages/Kontaktai';
-import Naujiena from "./pages/naujienos/Naujiena";
-import Tikslai from './pages/apie/Tikslai';
-import EtikosKodeksas from './pages/apie/EtikosKodeksas';
-
-import Akademija from './pages/Akademija';
-import Treneriai from './pages/akademija/Treneriai';
-import UgdymoPrograma from './pages/akademija/UgdymoPrograma';
-
-import Prisijunk from './pages/Prisijunk';
-import Naujienos from './pages/Naujienos';
-import Stovykla2025 from './pages/naujienos/Stovykla2025';
-import HegelmanTurnyras from './pages/naujienos/HegelmanTurnyras';
-import SummerVictory2025 from './pages/naujienos/SummerVictory';
-import Neodenta2025 from './pages/naujienos/Neodenta2025';
-import KaffPrezidento2025 from './pages/naujienos/KaffPrezidento2025';
-
-import LFFTalentuCentras from './pages/naujienos/LFFTalentuCentras';
-import DobrecovaCup2025 from './pages/naujienos/DobrecovaCup2025';
-import VasarosStovyklaMragowo2025 from './pages/naujienos/VasarosStovyklaMragowo2025';
-import RudensTaure from './pages/naujienos/RudensTaure';
-import ZalgirisFutsalCup from './pages/naujienos/ZalgirisFutsalCup';
-import BalciaCup2025 from './pages/naujienos/BalciaCup2025';
-import SportfanTurnyras from './pages/naujienos/SportfanTurnyras';
-import KickOff2025 from './pages/naujienos/KickOff2025';
-import KaunoRajonoTaure2025 from './pages/naujienos/KaunoRajonoTaure2025';
-import AzuoloTaure2025 from './pages/naujienos/AzuoloTaure2025';
-import ResortNiegocinCup2025 from './pages/naujienos/ResortNiegocinCup2025';
-import NeodentaBlitzCup2025 from './pages/naujienos/NeodentaBlitzCup2025';
-import RemigijusMikalainis2025 from './pages/naujienos/RemigijusMikalainis2025';
-import KaunasFootballFest2025 from "./pages/naujienos/KaunasFootballFest2025";
-import KidsCupVilnius2025 from './pages/naujienos/KidsCupVilnius2025';
-import KaunasFootballFest2017FAKaunas from "./pages/naujienos/KaunasFootballFest2017FAKaunas";
-import IBRAFriendlyMatch from "./pages/naujienos/IBRAFriendlyMatch";
-import AzuolasTurnyras2015 from "./pages/naujienos/AzuolasTurnyras2015";
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
+// Home is eager (most visits land there); every other route is its own chunk.
+import Home from './pages/Home';
+const About = lazy(() => import('./pages/About'));
+const Kontaktai = lazy(() => import('./pages/Kontaktai'));
+const Naujiena = lazy(() => import("./pages/naujienos/Naujiena"));
+const Tikslai = lazy(() => import('./pages/apie/Tikslai'));
+const EtikosKodeksas = lazy(() => import('./pages/apie/EtikosKodeksas'));
+
+const Akademija = lazy(() => import('./pages/Akademija'));
+const Treneriai = lazy(() => import('./pages/akademija/Treneriai'));
+const UgdymoPrograma = lazy(() => import('./pages/akademija/UgdymoPrograma'));
+
+const Prisijunk = lazy(() => import('./pages/Prisijunk'));
+const Naujienos = lazy(() => import('./pages/Naujienos'));
+const Stovykla2025 = lazy(() => import('./pages/naujienos/Stovykla2025'));
+const HegelmanTurnyras = lazy(() => import('./pages/naujienos/HegelmanTurnyras'));
+const SummerVictory2025 = lazy(() => import('./pages/naujienos/SummerVictory'));
+const Neodenta2025 = lazy(() => import('./pages/naujienos/Neodenta2025'));
+const KaffPrezidento2025 = lazy(() => import('./pages/naujienos/KaffPrezidento2025'));
+
+const LFFTalentuCentras = lazy(() => import('./pages/naujienos/LFFTalentuCentras'));
+const DobrecovaCup2025 = lazy(() => import('./pages/naujienos/DobrecovaCup2025'));
+const VasarosStovyklaMragowo2025 = lazy(() => import('./pages/naujienos/VasarosStovyklaMragowo2025'));
+const RudensTaure = lazy(() => import('./pages/naujienos/RudensTaure'));
+const ZalgirisFutsalCup = lazy(() => import('./pages/naujienos/ZalgirisFutsalCup'));
+const BalciaCup2025 = lazy(() => import('./pages/naujienos/BalciaCup2025'));
+const SportfanTurnyras = lazy(() => import('./pages/naujienos/SportfanTurnyras'));
+const KickOff2025 = lazy(() => import('./pages/naujienos/KickOff2025'));
+const KaunoRajonoTaure2025 = lazy(() => import('./pages/naujienos/KaunoRajonoTaure2025'));
+const AzuoloTaure2025 = lazy(() => import('./pages/naujienos/AzuoloTaure2025'));
+const ResortNiegocinCup2025 = lazy(() => import('./pages/naujienos/ResortNiegocinCup2025'));
+const NeodentaBlitzCup2025 = lazy(() => import('./pages/naujienos/NeodentaBlitzCup2025'));
+const RemigijusMikalainis2025 = lazy(() => import('./pages/naujienos/RemigijusMikalainis2025'));
+const KaunasFootballFest2025 = lazy(() => import("./pages/naujienos/KaunasFootballFest2025"));
+const KidsCupVilnius2025 = lazy(() => import('./pages/naujienos/KidsCupVilnius2025'));
+const KaunasFootballFest2017FAKaunas = lazy(() => import("./pages/naujienos/KaunasFootballFest2017FAKaunas"));
+const IBRAFriendlyMatch = lazy(() => import("./pages/naujienos/IBRAFriendlyMatch"));
+const AzuolasTurnyras2015 = lazy(() => import("./pages/naujienos/AzuolasTurnyras2015"));
+
 function App() {
   return (
     <div className="min-h-screen flex flex-col bg-academy-black">
+      <a href="#turinys" className="skip-link">Pereiti prie turinio</a>
       <Navbar />
       <ScrollToTop />
 
-      <div className="flex-grow">
+      <div id="turinys" tabIndex={-1} className="flex-grow outline-none">
+        <Suspense fallback={<div className="min-h-screen bg-surface" aria-busy="true" />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/apie" element={<About />} />
@@ -89,6 +92,7 @@ function App() {
 
           <Route path="/kontaktai" element={<Kontaktai />} />
         </Routes>
+        </Suspense>
       </div>
 
       <Footer />

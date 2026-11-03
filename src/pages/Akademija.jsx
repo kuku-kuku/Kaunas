@@ -34,7 +34,7 @@ export default function Akademija() {
             <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
               Akademija
             </h1>
-            <p className="text-lg text-white/40 font-light max-w-xl">
+            <p className="text-lg text-fg-subtle font-light max-w-xl">
               FA KAUNAS – daugiau nei futbolas. Čia ugdome stiprias asmenybes, ne tik žaidėjus.
             </p>
           </motion.div>
@@ -97,7 +97,7 @@ export default function Akademija() {
                 className="border-t border-academy-line py-10 grid grid-cols-1 md:grid-cols-12 gap-6"
               >
                 <div className="md:col-span-1">
-                  <span className="text-[11px] font-mono text-academy-blue">{item.num}</span>
+                  <span className="text-[11px] font-mono text-accent-bright">{item.num}</span>
                 </div>
                 <div className="md:col-span-3">
                   <h3 className="text-xl font-display font-bold text-white uppercase tracking-tight">

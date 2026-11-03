@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
+import { partners, stats } from "../content";
 
 const images = ["/hero.jpg", "/hero2.jpg", "/hero3.jpg"];
 
@@ -37,13 +38,6 @@ export default function HomePage() {
     }, 5000);
     return () => clearInterval(interval);
   }, []);
-
-  const stats = [
-    { value: 100, suffix: "+", label: "AUKLĖTINIŲ" },
-    { value: 5, suffix: "", label: "TRENERIŲ" },
-    { value: 4, suffix: "", label: "AMŽIAUS GRUPĖS" },
-    { value: 2022, suffix: "", label: "METAI ĮKURTA" },
-  ];
 
   return (
     <>
@@ -129,7 +123,7 @@ export default function HomePage() {
               aria-label={`Image ${i + 1}`}
             />
           ))}
-          <span className="text-[11px] font-mono text-white/40 ml-2">
+          <span className="text-[11px] font-mono text-fg-subtle ml-2">
             {String(currentImage + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
           </span>
         </div>
@@ -188,7 +182,7 @@ export default function HomePage() {
                 <p className="text-3xl sm:text-4xl md:text-5xl font-display font-black text-white mb-2">
                   <Counter target={stat.value} suffix={stat.suffix} />
                 </p>
-                <p className="text-[11px] uppercase tracking-[0.2em] text-white/40">{stat.label}</p>
+                <p className="text-[11px] uppercase tracking-[0.2em] text-fg-subtle">{stat.label}</p>
               </div>
             ))}
           </motion.div>
@@ -209,14 +203,9 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-academy-line">
-            {[
-              { href: "https://unomeda.lt/", src: "/partners/unomeda.png", alt: "Unomeda" },
-              { href: "https://www.med-us.eu/", src: "/partners/medus.png", alt: "Medus" },
-              { href: "https://camelia.lt/", src: "/partners/camelia.png", alt: "Camelia" },
-              { href: "https://brandus.lt/", src: "/partners/brandus.png", alt: "Brandus" },
-            ].map((partner, index) => (
+            {partners.map((partner) => (
               <motion.a
-                key={index}
+                key={partner.name}
                 href={partner.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -225,8 +214,8 @@ export default function HomePage() {
                 transition={{ duration: 0.2 }}
               >
                 <img
-                  src={partner.src}
-                  alt={partner.alt}
+                  src={partner.logo}
+                  alt={partner.name}
                   className="h-20 md:h-28 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                 />
               </motion.a>

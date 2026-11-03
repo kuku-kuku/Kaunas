@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { site } from "../content";
 
 export default function Prisijunk() {
   return (
@@ -12,7 +13,7 @@ export default function Prisijunk() {
             <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
               Prisijunk prie mūsų šeimos
             </h1>
-            <p className="text-lg text-white/40 font-light max-w-2xl">
+            <p className="text-lg text-fg-subtle font-light max-w-2xl">
               Kviečiame tapti mūsų akademijos dalimi – skirdami 1,2% GPM arba tapdami rėmėjais, prisidedate
               prie vaikų svajonių įgyvendinimo.
             </p>
@@ -73,7 +74,7 @@ export default function Prisijunk() {
             className="lg:col-span-4"
           >
             <p className="section-number mb-3">02</p>
-            <h2 className="text-display text-5xl md:text-6xl text-academy-blue mb-2">1,2%</h2>
+            <h2 className="text-display text-5xl md:text-6xl text-accent-bright mb-2">1,2%</h2>
             <h3 className="text-display text-2xl text-white">Parama</h3>
             <div className="w-12 h-px bg-academy-line mt-6" />
           </motion.div>
@@ -92,7 +93,7 @@ export default function Prisijunk() {
             <p className="text-white/60">
               VMI Elektroninio deklaravimo sistema (EDS):{" "}
               <a href="https://deklaravimas.vmi.lt/" target="_blank" rel="noopener noreferrer"
-                className="text-academy-blue hover:underline">
+                className="text-accent-bright hover:underline">
                 https://deklaravimas.vmi.lt/
               </a>
             </p>
@@ -119,7 +120,7 @@ export default function Prisijunk() {
                 "Pasirinkite: Prašymas skirti paramą",
                 "Forma: FR0512 v.5",
                 "E1: 2 (paramos gavėjas)",
-                "E2: 306181717",
+                `E2: ${site.companyCode}`,
                 "E3: FA Kaunas",
                 "E4: 1,2%",
                 "Pateikite deklaraciją",
@@ -132,7 +133,7 @@ export default function Prisijunk() {
                   transition={{ delay: i * 0.05 }}
                   className="flex items-center gap-6 py-4 border-b border-academy-line group"
                 >
-                  <span className="text-[13px] font-mono text-academy-blue w-8 flex-shrink-0">
+                  <span className="text-[13px] font-mono text-accent-bright w-8 flex-shrink-0">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <span className="text-white/70 group-hover:text-white transition-colors">{step}</span>
@@ -172,15 +173,15 @@ export default function Prisijunk() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-academy-line">
               <div className="bg-academy-black p-6">
-                <p className="text-[11px] uppercase tracking-[0.15em] text-white/30 mb-2">Telefonas</p>
-                <a href="tel:+37066527501" className="text-white hover:text-academy-blue transition-colors">
-                  +370 665 27501
+                <p className="text-[11px] uppercase tracking-[0.15em] text-fg-subtle mb-2">Telefonas</p>
+                <a href={site.contact.phoneHref} className="text-white hover:text-accent-bright transition-colors">
+                  {site.contact.phone}
                 </a>
               </div>
               <div className="bg-academy-black p-6">
-                <p className="text-[11px] uppercase tracking-[0.15em] text-white/30 mb-2">El. paštas</p>
-                <a href="mailto:administracija@fakaunas.lt" className="text-white hover:text-academy-blue transition-colors">
-                  administracija@fakaunas.lt
+                <p className="text-[11px] uppercase tracking-[0.15em] text-fg-subtle mb-2">El. paštas</p>
+                <a href={site.contact.emailHref} className="text-white hover:text-accent-bright transition-colors">
+                  {site.contact.email}
                 </a>
               </div>
             </div>

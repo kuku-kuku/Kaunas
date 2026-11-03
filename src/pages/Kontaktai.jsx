@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
+import { site } from "../content";
 
 export default function Kontaktai() {
   const [form, setForm] = useState({ name: "", email: "", message: "", website: "" });
@@ -59,7 +60,7 @@ export default function Kontaktai() {
             <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
               Kontaktai
             </h1>
-            <p className="text-lg text-white/40 font-light max-w-xl">
+            <p className="text-lg text-fg-subtle font-light max-w-xl">
               Susisiekite su mumis – atsakysime į visus klausimus!
             </p>
           </motion.div>
@@ -98,25 +99,25 @@ export default function Kontaktai() {
                   tabIndex="-1" autoComplete="off" className="hidden" aria-hidden="true" />
 
                 <div>
-                  <label htmlFor="contact-name" className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">Vardas</label>
+                  <label htmlFor="contact-name" className="block text-[11px] uppercase tracking-[0.15em] text-fg-subtle mb-2">Vardas</label>
                   <input id="contact-name" type="text" name="name" value={form.name} onChange={handleChange}
-                    className={`w-full bg-transparent border-b ${errors.name ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:outline-none focus:border-academy-blue transition-colors`}
+                    className={`w-full bg-transparent border-b ${errors.name ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:border-academy-blue transition-colors`}
                   />
                   {errors.name && <p className="mt-1 text-[11px] text-red-400">{errors.name}</p>}
                 </div>
 
                 <div>
-                  <label htmlFor="contact-email" className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">El. paštas</label>
+                  <label htmlFor="contact-email" className="block text-[11px] uppercase tracking-[0.15em] text-fg-subtle mb-2">El. paštas</label>
                   <input id="contact-email" type="email" name="email" value={form.email} onChange={handleChange}
-                    className={`w-full bg-transparent border-b ${errors.email ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:outline-none focus:border-academy-blue transition-colors`}
+                    className={`w-full bg-transparent border-b ${errors.email ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:border-academy-blue transition-colors`}
                   />
                   {errors.email && <p className="mt-1 text-[11px] text-red-400">{errors.email}</p>}
                 </div>
 
                 <div>
-                  <label htmlFor="contact-message" className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">Jūsų žinutė</label>
+                  <label htmlFor="contact-message" className="block text-[11px] uppercase tracking-[0.15em] text-fg-subtle mb-2">Jūsų žinutė</label>
                   <textarea id="contact-message" name="message" rows="4" value={form.message} onChange={handleChange}
-                    className={`w-full bg-transparent border-b ${errors.message ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:outline-none focus:border-academy-blue transition-colors resize-none`}
+                    className={`w-full bg-transparent border-b ${errors.message ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:border-academy-blue transition-colors resize-none`}
                   />
                   {errors.message && <p className="mt-1 text-[11px] text-red-400">{errors.message}</p>}
                 </div>
@@ -126,13 +127,13 @@ export default function Kontaktai() {
                   {status.loading ? "Siunčiama..." : "Siųsti žinutę"}
                 </button>
 
-                <p className="text-[11px] text-white/20 text-center">
+                <p className="text-[11px] text-fg-subtle text-center">
                   Siųsdami sutinkate su duomenų tvarkymu pagal FA Kaunas privatumo politiką.
                 </p>
 
-                <p className="text-center text-[12px] text-white/30">
+                <p className="text-center text-[12px] text-fg-subtle">
                   Arba parašykite tiesiogiai:{" "}
-                  <a className="text-academy-blue hover:underline"
+                  <a className="text-accent-bright hover:underline"
                     href={`mailto:administracija@fakaunas.lt?subject=Kontaktas%20iš%20svetainės&body=Vardas:%20${encodeURIComponent(form.name || "")}%0AEl.%20paštas:%20${encodeURIComponent(form.email || "")}%0A%0AŽinutė:%0A${encodeURIComponent(form.message || "")}`}>
                     administracija@fakaunas.lt
                   </a>
@@ -150,7 +151,7 @@ export default function Kontaktai() {
                 <div className="aspect-[4/3] w-full overflow-hidden border border-academy-line">
                   <iframe
                     title="FA Kaunas lokacija"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2295.5365087714223!2d23.915254976763413!3d54.938988372840025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e722a202feec5d%3A0x9e8f7c28479d5d76!2s%C5%BDeimenos%20g.%20165%2C%2049332%20Kaunas!5e0!3m2!1slt!2slt!4v1721208852185!5m2!1slt!2slt"
+                    src={site.address.mapEmbed}
                     width="100%" height="100%" style={{ border: 0 }}
                     allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                     className="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
@@ -160,14 +161,14 @@ export default function Kontaktai() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-academy-line">
                 {[
-                  { label: 'Telefonas', value: '+37066527501', href: 'tel:+37066527501' },
-                  { label: 'El. paštas', value: 'administracija@fakaunas.lt', href: 'mailto:administracija@fakaunas.lt' },
-                  { label: 'Adresas', value: 'Žeimenos g. 165, 49332 Kaunas', href: null },
+                  { label: 'Telefonas', value: site.contact.phone, href: site.contact.phoneHref },
+                  { label: 'El. paštas', value: site.contact.email, href: site.contact.emailHref },
+                  { label: 'Adresas', value: site.address.full, href: null },
                 ].map((item, i) => (
                   <div key={i} className="bg-academy-black p-6">
-                    <p className="text-[11px] uppercase tracking-[0.15em] text-white/30 mb-2">{item.label}</p>
+                    <p className="text-[11px] uppercase tracking-[0.15em] text-fg-subtle mb-2">{item.label}</p>
                     {item.href ? (
-                      <a href={item.href} className="text-white hover:text-academy-blue transition-colors text-sm break-all">
+                      <a href={item.href} className="text-white hover:text-accent-bright transition-colors text-sm break-all">
                         {item.value}
                       </a>
                     ) : (

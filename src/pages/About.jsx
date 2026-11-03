@@ -26,7 +26,7 @@ export default function About() {
             <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
               Apie mus
             </h1>
-            <p className="text-lg text-white/40 font-light max-w-xl">
+            <p className="text-lg text-fg-subtle font-light max-w-xl">
               Sužinokite, kaip gimė mūsų akademija ir kokiomis vertybėmis vadovaujamės kasdien.
             </p>
           </motion.div>
@@ -98,19 +98,19 @@ export default function About() {
                 onClick={() => setActiveValue(activeValue === value.id ? null : value.id)}
               >
                 <p className={`text-[11px] uppercase tracking-[0.2em] mb-3 transition-colors duration-300 ${
-                  activeValue === value.id ? 'text-academy-blue' : 'text-white/30'
+                  activeValue === value.id ? 'text-accent-bright' : 'text-fg-subtle'
                 }`}>
                   {String(i + 1).padStart(2, '0')}
                 </p>
                 <h3 className={`text-lg font-display font-bold uppercase tracking-tight mb-3 transition-colors duration-300 ${
-                  value.id === 'center' ? 'text-academy-blue' : activeValue === value.id ? 'text-white' : 'text-white/80'
+                  value.id === 'center' ? 'text-accent-bright' : activeValue === value.id ? 'text-white' : 'text-white/80'
                 }`}>
                   {value.label}
                 </h3>
                 <div className={`w-8 h-px mb-4 transition-all duration-300 ${
                   activeValue === value.id ? 'bg-academy-blue w-12' : 'bg-academy-line'
                 }`} />
-                <p className="text-sm text-white/40 leading-relaxed">
+                <p className="text-sm text-fg-subtle leading-relaxed">
                   {value.desc}
                 </p>
               </motion.button>

@@ -2,27 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { mainNav } from '../content';
+import { SocialLinks } from './ui';
 
-const NAV_ITEMS = [
-  {
-    to: '/apie', label: 'Apie mus',
-    sub: [
-      { to: '/apie/tikslai', label: 'Tikslai / Vizija' },
-      { to: '/apie/etikos-kodeksas', label: 'Etikos kodeksas' },
-    ],
-  },
-  {
-    to: '/akademija', label: 'Akademija',
-    sub: [
-      { to: '/akademija/treneriai', label: 'Treneriai' },
-      { to: '/akademija/ugdymo-programa', label: 'Ugdymo programa' },
-    ],
-  },
-  { to: '/prisijunk', label: 'Prisijunk' },
-  { to: '/naujienos', label: 'Naujienos' },
-  { to: '/kontaktai', label: 'Kontaktai' },
-];
+const NAV_ITEMS = mainNav;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -88,7 +71,7 @@ export default function Navbar() {
                   }`}
                 >
                   {item.label}
-                  {item.sub && <ChevronDown size={13} className="text-white/40" />}
+                  {item.sub && <ChevronDown size={13} className="text-fg-subtle" />}
                 </Link>
 
                 {isActive(item) && (
@@ -114,7 +97,7 @@ export default function Navbar() {
                           to={sub.to}
                           className={`block px-5 py-2.5 text-[12px] uppercase tracking-[0.12em] transition-colors duration-200 ${
                             location.pathname === sub.to
-                              ? 'text-academy-blue'
+                              ? 'text-accent-bright'
                               : 'text-white/60 hover:text-white hover:bg-white/5'
                           }`}
                         >
@@ -128,16 +111,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-5">
-            <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noopener noreferrer"
-              className="text-white/90 hover:text-white transition-colors">
-              <FaFacebookF size={14} />
-            </a>
-            <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noopener noreferrer"
-              className="text-white/90 hover:text-white transition-colors">
-              <FaInstagram size={15} />
-            </a>
-          </div>
+          <SocialLinks className="gap-1" linkClassName="text-white/90 hover:text-white" size={15} />
         </div>
         <div className="h-px bg-white/10" />
       </motion.header>
@@ -177,16 +151,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="flex flex-col items-start gap-4 pl-3">
-          <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noopener noreferrer"
-            className="text-white/90 hover:text-white transition-colors">
-            <FaFacebookF size={16} />
-          </a>
-          <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noopener noreferrer"
-            className="text-white/90 hover:text-white transition-colors">
-            <FaInstagram size={17} />
-          </a>
-        </div>
+        <SocialLinks className="flex-col items-start" linkClassName="text-white/90 hover:text-white" size={16} />
       </motion.nav>
 
       {/* ─── MOBILE: Burger + fullscreen menu ─── */}
@@ -197,7 +162,9 @@ export default function Navbar() {
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="relative w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50"
-          aria-label="Toggle menu"
+          aria-label={mobileOpen ? 'Uždaryti meniu' : 'Atidaryti meniu'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
         >
           <motion.span
             animate={mobileOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
@@ -221,6 +188,7 @@ export default function Navbar() {
             animate={{ clipPath: 'inset(0 0 0% 0)' }}
             exit={{ clipPath: 'inset(0 0 100% 0)' }}
             transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            id="mobile-menu"
             className="fixed inset-0 z-40 bg-academy-black flex flex-col justify-center px-8 lg:hidden"
           >
             <nav className="space-y-1">
@@ -255,7 +223,7 @@ export default function Navbar() {
                         to={sub.to}
                         onClick={() => setMobileOpen(false)}
                         className={`flex items-center py-2 pl-6 text-sm uppercase tracking-[0.12em] border-b border-academy-line/50 ${
-                          location.pathname === sub.to ? 'text-academy-blue' : 'text-white/30 hover:text-white/70'
+                          location.pathname === sub.to ? 'text-accent-bright' : 'text-fg-subtle hover:text-white/70'
                         }`}
                       >
                         {sub.label}
@@ -272,14 +240,7 @@ export default function Navbar() {
               transition={{ delay: 0.5 }}
               className="flex items-center gap-6 mt-12"
             >
-              <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noopener noreferrer"
-                className="text-white/40 hover:text-white">
-                <FaFacebookF size={16} />
-              </a>
-              <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noopener noreferrer"
-                className="text-white/40 hover:text-white">
-                <FaInstagram size={17} />
-              </a>
+              <SocialLinks className="gap-2 -ml-3" linkClassName="text-fg-muted hover:text-white" size={17} />
             </motion.div>
           </motion.div>
         )}

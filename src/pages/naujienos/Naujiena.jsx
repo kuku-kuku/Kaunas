@@ -111,7 +111,7 @@ export default function Naujiena() {
       <div className="min-h-screen bg-academy-black pt-32 px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-white/50">Naujiena nerasta.</p>
-          <Link to="/naujienos" className="inline-flex items-center gap-2 text-academy-blue text-sm uppercase tracking-wider mt-4 hover:underline">
+          <Link to="/naujienos" className="inline-flex items-center gap-2 text-accent-bright text-sm uppercase tracking-wider mt-4 hover:underline">
             &larr; Grįžti į naujienas
           </Link>
         </div>
@@ -136,7 +136,7 @@ export default function Naujiena() {
             style={{ height: `${scrollProgress * 100}%` }}
           />
         </div>
-        <span className="text-[10px] font-mono text-white/20">{Math.round(scrollProgress * 100)}%</span>
+        <span className="text-[10px] font-mono text-fg-subtle">{Math.round(scrollProgress * 100)}%</span>
       </div>
 
       {/* ═══ HEADER ═══ */}
@@ -148,11 +148,11 @@ export default function Naujiena() {
             transition={{ duration: 0.6 }}
           >
             <div className="flex items-center gap-4 mb-6">
-              <Link to="/naujienos" className="text-[11px] uppercase tracking-[0.15em] text-white/30 hover:text-white transition-colors">
+              <Link to="/naujienos" className="text-[11px] uppercase tracking-[0.15em] text-fg-subtle hover:text-white transition-colors">
                 Naujienos
               </Link>
               <span className="text-white/15">/</span>
-              <span className="text-[11px] uppercase tracking-[0.12em] text-white/20 font-mono">
+              <span className="text-[11px] uppercase tracking-[0.12em] text-fg-subtle font-mono">
                 {news.date ? new Date(news.date).toLocaleDateString("lt-LT") : ""}
               </span>
             </div>
@@ -192,7 +192,7 @@ export default function Naujiena() {
               />
             ))
           ) : (
-            <div className="flex items-center justify-center h-full text-white/20">Nėra nuotraukų</div>
+            <div className="flex items-center justify-center h-full text-fg-subtle">Nėra nuotraukų</div>
           )}
 
           {!isSingle && (
@@ -224,7 +224,7 @@ export default function Naujiena() {
                   }`}
                 />
               ))}
-              <span className="text-[10px] font-mono text-white/40 ml-2">
+              <span className="text-[10px] font-mono text-fg-subtle ml-2">
                 {String(current + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
               </span>
             </div>
@@ -262,7 +262,7 @@ export default function Naujiena() {
           <div className="mt-16 pt-8 border-t border-academy-line">
             <Link
               to="/naujienos"
-              className="inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.15em] text-white/40 hover:text-academy-blue transition-colors duration-200 font-medium"
+              className="inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.15em] text-fg-subtle hover:text-accent-bright transition-colors duration-200 font-medium"
             >
               &larr; Grįžti į naujienas
             </Link>

@@ -32,7 +32,7 @@ export default function Tikslai() {
             <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
               Tikslai ir vizija
             </h1>
-            <p className="text-lg text-white/40 font-light max-w-xl">
+            <p className="text-lg text-fg-subtle font-light max-w-xl">
               FA Kaunas augimo kryptys ir vertybiniai siekiai
             </p>
           </motion.div>
@@ -66,7 +66,7 @@ export default function Tikslai() {
                 transition={{ delay: i * 0.08 }}
                 className="flex items-start gap-6 py-6 border-b border-academy-line"
               >
-                <span className="text-[13px] font-mono text-academy-blue w-8 flex-shrink-0 mt-1">
+                <span className="text-[13px] font-mono text-accent-bright w-8 flex-shrink-0 mt-1">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p className="text-lg text-white/60 leading-relaxed">{content}</p>

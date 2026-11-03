@@ -1,22 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { groups as grupes, methodology } from '../../content';
 
 export default function Ugdymas() {
-  const grupes = [
-    { metai: '2015 / 2016', grupe: 'A', vyrTreneris: 'Gabrielius Zagurskas', asistentai: ['Marius Činikas'] },
-    { metai: '2015 / 2016', grupe: 'B', vyrTreneris: 'Lukas Sipavičius', asistentai: ['Tomas Macelis'] },
-    { metai: '2017 / 2018', grupe: null, vyrTreneris: 'Marius Činikas', asistentai: ['Ernestas Bernota'] },
-    { metai: '2019 / 2020 / 2021', grupe: null, vyrTreneris: 'Tomas Macelis', asistentai: ['Lukas Sipavičius', 'Gabrielius Zagurskas'] },
-  ];
-
-  const methodology = [
-    'Techninių įgūdžių tobulinimas',
-    'Taktinio mąstymo ugdymas',
-    'Psichologinis stabilumas ir bendravimas',
-    'Asmenybės ir vertybių formavimas',
-    'Fizinio pasirengimo lavinimas',
-  ];
-
   return (
     <main className="bg-academy-black min-h-screen">
       {/* ═══ HERO ═══ */}
@@ -27,7 +13,7 @@ export default function Ugdymas() {
             <h1 className="text-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-4">
               Ugdymo programa ir amžiaus grupės
             </h1>
-            <p className="text-lg text-white/40 font-light max-w-xl">
+            <p className="text-lg text-fg-subtle font-light max-w-xl">
               Susipažinkite su mūsų ugdymo principais ir treniruojamomis vaikų grupėmis.
             </p>
           </motion.div>
@@ -62,7 +48,7 @@ export default function Ugdymas() {
                 transition={{ delay: i * 0.06 }}
                 className="flex items-center gap-6 py-5 border-b border-academy-line group"
               >
-                <span className="text-[13px] font-mono text-academy-blue w-8 flex-shrink-0">
+                <span className="text-[13px] font-mono text-accent-bright w-8 flex-shrink-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span className="text-white/70 group-hover:text-white transition-colors text-lg">{item}</span>
@@ -99,13 +85,13 @@ export default function Ugdymas() {
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <span className="text-[11px] font-mono text-academy-blue">{String(idx + 1).padStart(2, '0')}</span>
+                    <span className="text-[11px] font-mono text-accent-bright">{String(idx + 1).padStart(2, '0')}</span>
                     <h3 className="text-2xl md:text-3xl font-display font-bold text-white uppercase tracking-tight mt-1">
                       {g.metai}
                     </h3>
                   </div>
                   {g.grupe && (
-                    <span className="text-[11px] uppercase tracking-[0.15em] border border-academy-line text-white/40 px-3 py-1">
+                    <span className="text-[11px] uppercase tracking-[0.15em] border border-academy-line text-fg-subtle px-3 py-1">
                       Grupė {g.grupe}
                     </span>
                   )}
@@ -114,13 +100,13 @@ export default function Ugdymas() {
                 <div className="h-px bg-academy-line mb-4" />
 
                 <p className="text-white/60 mb-2">
-                  <span className="text-[11px] uppercase tracking-[0.12em] text-white/30">Vyr. treneris</span>
+                  <span className="text-[11px] uppercase tracking-[0.12em] text-fg-subtle">Vyr. treneris</span>
                   <br />{g.vyrTreneris}
                 </p>
 
                 {g.asistentai?.length > 0 && (
                   <div className="mt-3">
-                    <span className="text-[11px] uppercase tracking-[0.12em] text-white/30">Asistentai</span>
+                    <span className="text-[11px] uppercase tracking-[0.12em] text-fg-subtle">Asistentai</span>
                     {g.asistentai.map((v, i) => (
                       <p key={i} className="text-white/50">{v}</p>
                     ))}

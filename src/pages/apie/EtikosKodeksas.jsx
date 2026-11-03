@@ -62,7 +62,7 @@ export default function EtikosKodeksas() {
             <h1 className="text-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
               Etikos kodeksas
             </h1>
-            <p className="text-lg text-white/40 font-light max-w-xl">
+            <p className="text-lg text-fg-subtle font-light max-w-xl">
               Vaikams, tėvams ir treneriams skirti bendri elgesio principai
             </p>
           </motion.div>
@@ -79,7 +79,7 @@ export default function EtikosKodeksas() {
               viewport={{ once: true }}
               className="mb-10"
             >
-              <span className="text-[11px] font-mono text-academy-blue">{section.num}</span>
+              <span className="text-[11px] font-mono text-accent-bright">{section.num}</span>
               <h2 className="text-xl md:text-2xl font-display font-bold text-white uppercase tracking-tight mt-2">
                 {section.title}
               </h2>
@@ -96,7 +96,7 @@ export default function EtikosKodeksas() {
                   transition={{ delay: i * 0.03 }}
                   className="flex items-start gap-5 py-4 border-b border-academy-line/50"
                 >
-                  <span className="text-[12px] font-mono text-white/20 w-6 flex-shrink-0 mt-0.5">
+                  <span className="text-[12px] font-mono text-fg-subtle w-6 flex-shrink-0 mt-0.5">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <p className="text-white/60 leading-relaxed">{item}</p>
