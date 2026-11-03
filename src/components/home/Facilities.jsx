@@ -38,7 +38,7 @@ export default function Facilities() {
 
         <div className="grid grid-cols-5 gap-4 lg:col-span-7 lg:gap-6">
           <Reveal className="col-span-5 sm:col-span-3">
-            <PhotoPlaceholder label={main.label} aspect={main.aspect} className="h-full" />
+            <PhotoPlaceholder label={main.label} aspect={main.aspect} />
           </Reveal>
           <Reveal delay={0.1} className="col-span-5 sm:col-span-2 sm:mt-16">
             <PhotoPlaceholder label={secondary.label} aspect={secondary.aspect} />

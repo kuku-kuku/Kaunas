@@ -58,7 +58,7 @@ module.exports = {
         // Fluid display scale for condensed uppercase headlines
         'display-2xl': ['clamp(3.75rem, 13vw, 11rem)', { lineHeight: '0.85', letterSpacing: '-0.01em' }],
         'display-xl': ['clamp(3rem, 9vw, 7.5rem)', { lineHeight: '0.88', letterSpacing: '-0.01em' }],
-        'display-lg': ['clamp(2.5rem, 6.5vw, 5.5rem)', { lineHeight: '0.9', letterSpacing: '-0.005em' }],
+        'display-lg': ['clamp(2.5rem, 5vw, 5.5rem)', { lineHeight: '0.9', letterSpacing: '-0.005em' }],
         'display-md': ['clamp(2rem, 4.5vw, 3.5rem)', { lineHeight: '0.95' }],
         'display-sm': ['clamp(1.5rem, 2.8vw, 2.25rem)', { lineHeight: '1' }],
         'stat': ['clamp(3rem, 8vw, 6rem)', { lineHeight: '0.85', letterSpacing: '-0.01em' }],

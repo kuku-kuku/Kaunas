@@ -46,7 +46,7 @@ export default function About() {
           <p className="mt-4 max-w-prose text-lg text-white">{core.desc}</p>
         </Reveal>
 
-        <ul className="mt-px grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-px grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 xl:grid-cols-4">
           {rest.map((value, i) => (
             <Reveal as="li" key={value.id} delay={i * 0.06} className="bg-surface-raised p-7 md:p-8">
               <span className="font-mono text-sm text-accent-bright">{String(i + 2).padStart(2, '0')}</span>

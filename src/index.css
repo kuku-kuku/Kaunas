@@ -141,6 +141,8 @@
 
   .text-display {
     @apply font-display font-extrabold uppercase leading-[0.9] tracking-[-0.005em];
+    /* Long Lithuanian words (e.g. TRENIRUOJAMĖS) wrap instead of overflowing narrow columns */
+    overflow-wrap: break-word;
   }
 
   /* Rules */
