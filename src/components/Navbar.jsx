@@ -7,14 +7,33 @@ import { SocialLinks } from './ui';
 
 const NAV_ITEMS = mainNav;
 
+// The vertical side nav only fits in the page margin on very wide screens: content is
+// 80rem wide and centred, so at 1680px the margin is 200px and the ~155px rail clears it.
+// Below that the top bar stays pinned and condenses instead.
+const SIDEBAR_QUERY = '(min-width: 1680px)';
+
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const onChange = (e) => setMatches(e.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, [query]);
+  return matches;
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
   const location = useLocation();
+  const wide = useMediaQuery(SIDEBAR_QUERY);
+  const sidebarMode = scrolled && wide;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 120);
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -41,19 +60,31 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ─── DESKTOP: Horizontal top bar (visible when not scrolled) ─── */}
+      {/* ─── DESKTOP: Horizontal top bar. Condenses on scroll; on very wide screens it
+           hands over to the side rail instead. ─── */}
       <motion.header
         initial={false}
         animate={{
-          y: scrolled ? -100 : 0,
-          opacity: scrolled ? 0 : 1,
+          y: sidebarMode ? -120 : 0,
+          opacity: sidebarMode ? 0 : 1,
         }}
         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-        className="fixed top-0 left-0 w-full z-50 hidden lg:block pointer-events-auto bg-gradient-to-b from-black/70 to-transparent"
+        inert={sidebarMode ? '' : undefined}
+        className={`fixed top-0 left-0 w-full z-50 hidden lg:block transition-[background-color,border-color,backdrop-filter] duration-300 border-b ${
+          scrolled
+            ? 'bg-surface/90 backdrop-blur-md border-line'
+            : 'bg-gradient-to-b from-black/70 to-transparent border-white/10'
+        }`}
       >
-        <div className="flex items-center justify-between px-8 py-4">
+        <div className={`flex items-center justify-between px-8 transition-[padding] duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
           <Link to="/" className="flex-shrink-0">
-            <img src="/logo.png" alt="FA Kaunas" className="h-16 w-auto" />
+            <img
+              src="/logo.png"
+              alt="FA Kaunas – į pradžią"
+              width={67}
+              height={64}
+              className={`w-auto transition-[height] duration-300 ${scrolled ? 'h-11' : 'h-16'}`}
+            />
           </Link>
 
           <nav className="flex items-center gap-1">
@@ -113,21 +144,23 @@ export default function Navbar() {
 
           <SocialLinks className="gap-1" linkClassName="text-white/90 hover:text-white" size={15} />
         </div>
-        <div className="h-px bg-white/10" />
       </motion.header>
 
       {/* ─── DESKTOP: Vertical side nav (visible when scrolled) ─── */}
+      {wide && (
       <motion.nav
         initial={false}
         animate={{
-          x: scrolled ? 0 : -200,
-          opacity: scrolled ? 1 : 0,
+          x: sidebarMode ? 0 : -200,
+          opacity: sidebarMode ? 1 : 0,
         }}
         transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-        className="fixed left-0 top-0 h-screen z-50 hidden lg:flex flex-col items-start py-6 pl-5 pr-4 w-auto pointer-events-auto"
+        inert={sidebarMode ? undefined : ''}
+        aria-label="Pagrindinė navigacija"
+        className="fixed left-0 top-0 h-screen z-50 flex flex-col items-start py-6 pl-5 pr-6 w-auto bg-surface/95 backdrop-blur-md border-r border-line"
       >
         <Link to="/" className="mb-8">
-          <img src="/logo.png" alt="FA Kaunas" className="h-14 w-auto" />
+          <img src="/logo.png" alt="FA Kaunas – į pradžią" width={59} height={56} className="h-14 w-auto" />
         </Link>
 
         <div className="flex flex-col gap-1 flex-1 justify-center">
@@ -153,11 +186,24 @@ export default function Navbar() {
 
         <SocialLinks className="flex-col items-start" linkClassName="text-white/90 hover:text-white" size={16} />
       </motion.nav>
+      )}
 
       {/* ─── MOBILE: Burger + fullscreen menu ─── */}
-      <div className="lg:hidden fixed top-0 left-0 w-full z-50 flex items-center justify-between px-5 py-4">
+      <div
+        className={`lg:hidden fixed top-0 left-0 w-full z-50 flex items-center justify-between px-5 border-b transition-[padding,background-color,border-color] duration-300 ${
+          scrolled || mobileOpen
+            ? 'py-2 bg-surface/90 backdrop-blur-md border-line'
+            : 'py-4 bg-gradient-to-b from-black/60 to-transparent border-transparent'
+        }`}
+      >
         <Link to="/">
-          <img src="/logo.png" alt="FA Kaunas" className="h-12 w-auto" />
+          <img
+            src="/logo.png"
+            alt="FA Kaunas – į pradžią"
+            width={50}
+            height={48}
+            className={`w-auto transition-[height] duration-300 ${scrolled || mobileOpen ? 'h-10' : 'h-12'}`}
+          />
         </Link>
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
