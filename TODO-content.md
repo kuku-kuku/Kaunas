@@ -84,3 +84,9 @@ The home page testimonials section stays hidden until at least one is added to `
 ## Partners
 - [ ] Logos as SVG or transparent PNG for Unomeda, Medus, Camelia, Brandus
 - [ ] Any new partners or sponsor tiers
+
+## News archive
+- [ ] „Ąžuolo rudens taurė“ article: the old page said 14/10/2025, the news list said 2025-10-27. The site now uses
+      2025-10-27 everywhere; correct it in `src/content/lt/news.js` and `articles.js` if wrong.
+- [ ] New articles should go into the CMS (Strapi). The 23 older ones live in `src/content/lt/articles.js`.
+
