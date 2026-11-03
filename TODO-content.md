@@ -16,7 +16,9 @@ placeholder. Nothing here will be invented. Tick items off as they arrive.
       Current `hero*.jpg` are only 1920×756, which is too short for a full-screen hero on phones.
 - [ ] One action photo per age group (2015/16, 2017/18, 2019–21)
 - [ ] Coach portraits: same background, lighting and framing for everyone, waist-up, at least 1200 px tall.
-      Missing or wrong: Tomas Macelis (none), Remigijus Mikalainis (none). The others exist but don't match.
+      Use Remigijus Mikalainis' photo (club training top, plain light wall, arms crossed) as the reference.
+      Needed for: Gabrielius Zagurskas, Marius Činikas, Lukas Sipavičius, Tomas Macelis, Ernestas Bernota.
+      Until then the site shows an initials tile for them.
 - [ ] Facilities: each pitch, the gym or indoor hall, changing rooms, the entrance at Žeimenos g. 165
 - [ ] Group / team photo for the "about" and pathway sections
 - [ ] Open Graph share image, 1200×630 (we can design it once we have a good photo)
@@ -39,13 +41,13 @@ main focus, head coach and assistants, monthly fee (or "on request"), max group 
 
 ## Coaches
 For each coach: role, licence (UEFA A/B/C, LFF D), licence year, short bio (2–3 sentences),
-career highlights, and permission to show their age (or we drop the age).
+career highlights. Ages were removed from the site (they went stale); add back only if wanted.
 - [ ] Gabrielius Zagurskas
 - [ ] Marius Činikas
 - [ ] Lukas Sipavičius
 - [ ] Tomas Macelis
 - [ ] Ernestas Bernota
-- [ ] Remigijus Mikalainis (goalkeeper coach, joined 2025-12)
+- [ ] Remigijus Mikalainis (goalkeeper coach, joined 2025-12): licence, fuller bio. Profile is live with the facts from the news article.
 
 ## Methodology / pathway
 - [ ] The development pathway in your words: what each stage focuses on, from the youngest group to the oldest

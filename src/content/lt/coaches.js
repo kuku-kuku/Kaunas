@@ -1,19 +1,19 @@
 // Coach profiles. Older fields are Lithuanian to match the existing pages.
 // licencija / highlight are taken from each coach's own bio below.
-// TODO(content): every coach currently uses the same photo on purpose ("laikinai visiems ta pati").
-// Matching portraits are on the shoot list in TODO-content.md. Remigijus Mikalainis is not listed yet.
+// TODO(content): portraits for everyone except Remigijus Mikalainis are on the shoot list in
+// TODO-content.md; his photo (club kit, plain wall) is the reference style. Coaches without
+// a `portrait` show an initials tile.
 
 export const coaches = [
   {
     id: 1,
     vardas: 'Gabrielius Zagurskas',
+    slug: 'gabrielius-zagurskas',
     licencija: 'UEFA A',
     role: 'Akademijos įkūrėjas',
     highlight: 'LFF U15 rinktinės trenerio asistentas',
     // TODO(content): real portrait; null renders an initials tile on the home page
     portrait: null,
-    amzius: 33,
-    nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Buvęs profesionalus futbolininkas, nuo 2021 metų visą dėmesį skiriantis futbolininkų treniravimui.',
     aprasymas: `UEFA A licencija
 
@@ -45,12 +45,11 @@ Trenerio karjera:
   {
     id: 4,
     vardas: 'Marius Činikas',
+    slug: 'marius-cinikas',
     licencija: 'UEFA B',
     highlight: '3 kartus Lietuvos čempionas',
     // TODO(content): real portrait; null renders an initials tile on the home page
     portrait: null,
-    amzius: 39,
-    nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Buvęs profesionalus futbolininkas, per savo karjerą sukaupęs nemenką žinių bagažą.',
     aprasymas: `UEFA B licencija
 
@@ -77,12 +76,11 @@ Pasiekimai:
   {
     id: 2,
     vardas: 'Lukas Sipavičius',
+    slug: 'lukas-sipavicius',
     licencija: 'UEFA C',
     highlight: 'Lietuvos salės futbolo čempionas',
     // TODO(content): real portrait; null renders an initials tile on the home page
     portrait: null,
-    amzius: 26,
-    nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Lietuvos salės futbolo rinktinės narys, UEFA C licencijos treneris.',
     aprasymas: `UEFA C licencija
 
@@ -97,12 +95,11 @@ Pasiekimai:
   {
     id: 5,
     vardas: 'Tomas Macelis',
+    slug: 'tomas-macelis',
     licencija: 'UEFA C',
     highlight: 'Kauno „Žalgirio“ akademijos auklėtinis',
     // TODO(content): real portrait; null renders an initials tile on the home page
     portrait: null,
-    amzius: 23,
-    nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Kauno Žalgirio akademijos auklėtinis, patirtį kaupęs jaunimo komandose ir LFF 2 lygoje.',
     aprasymas: `UEFA C licencija
 
@@ -116,12 +113,11 @@ Studijuoja Lietuvos sporto universitete. Treniravimo sistemų programoje, pasiri
   {
     id: 3,
     vardas: 'Ernestas Bernota',
+    slug: 'ernestas-bernota',
     licencija: 'LFF D',
     highlight: 'Buvęs vartininkas, Marijampolės „Sūduvos“ auklėtinis',
     // TODO(content): real portrait; null renders an initials tile on the home page
     portrait: null,
-    amzius: 32,
-    nuotrauka: '/treneriai/cinikas.jpg',
     trumpai: 'Ambicingas treneris, sukaupęs patirties Marijampolės Sūduvoje ir kitose komandose.',
     aprasymas: `Licencija: LFF D
 
@@ -131,4 +127,33 @@ Klubai:
 - Marijampolės „Sūduvos" dubleriai
 - Įvairūs II lygos ir žemesnių lygų klubai`,
   },
+  {
+    id: 6,
+    vardas: 'Remigijus Mikalainis',
+    slug: 'remigijus-mikalainis',
+    // TODO(content): licence not published yet
+    licencija: null,
+    role: 'Vartininkų treneris',
+    highlight: 'Žaidė FK „Sūduva“, Hedensted IF (Danija) ir FC Hegelmann',
+    // From the 2025-12-02 news article announcing his arrival
+    portrait: '/naujienos/remigijus1.jpg',
+    trumpai: 'Vartininkų treneris, akademijoje rūpinasi vartininkų įgūdžių tobulinimu.',
+    aprasymas: `Remigijus turi sukaupęs nemažą patirtį jaunųjų futbolininkų ir ypač vartininkų ugdyme. Prie FA Kaunas trenerių kolektyvo prisijungė 2025 m. gruodį.
+
+Žaidėjo karjera:
+- FK „Sūduva“ (Lietuva)
+- Hedensted IF (Danija)
+- FC Hegelmann (Lietuva)`,
+  },
 ];
+
+export const coachesPage = {
+  seo: {
+    title: 'Treneriai',
+    description:
+      'FA Kaunas treneriai: buvę profesionalūs futbolininkai ir jaunimo rinktinių nariai su UEFA A, B ir C licencijomis.',
+  },
+  eyebrow: 'Akademija',
+  title: 'Treneriai',
+  lead: 'Susipažinkite su mūsų komandos nariais – atsidavusiais, patyrusiais ir įkvepiančiais treneriais.',
+};
