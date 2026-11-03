@@ -98,24 +98,24 @@ export default function Kontaktai() {
                   tabIndex="-1" autoComplete="off" className="hidden" aria-hidden="true" />
 
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">Vardas</label>
-                  <input type="text" name="name" value={form.name} onChange={handleChange}
+                  <label htmlFor="contact-name" className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">Vardas</label>
+                  <input id="contact-name" type="text" name="name" value={form.name} onChange={handleChange}
                     className={`w-full bg-transparent border-b ${errors.name ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:outline-none focus:border-academy-blue transition-colors`}
                   />
                   {errors.name && <p className="mt-1 text-[11px] text-red-400">{errors.name}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">El. paštas</label>
-                  <input type="email" name="email" value={form.email} onChange={handleChange}
+                  <label htmlFor="contact-email" className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">El. paštas</label>
+                  <input id="contact-email" type="email" name="email" value={form.email} onChange={handleChange}
                     className={`w-full bg-transparent border-b ${errors.email ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:outline-none focus:border-academy-blue transition-colors`}
                   />
                   {errors.email && <p className="mt-1 text-[11px] text-red-400">{errors.email}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">Jūsų žinutė</label>
-                  <textarea name="message" rows="4" value={form.message} onChange={handleChange}
+                  <label htmlFor="contact-message" className="block text-[11px] uppercase tracking-[0.15em] text-white/40 mb-2">Jūsų žinutė</label>
+                  <textarea id="contact-message" name="message" rows="4" value={form.message} onChange={handleChange}
                     className={`w-full bg-transparent border-b ${errors.message ? 'border-red-500/50' : 'border-academy-line'} px-0 py-3 text-white focus:outline-none focus:border-academy-blue transition-colors resize-none`}
                   />
                   {errors.message && <p className="mt-1 text-[11px] text-red-400">{errors.message}</p>}

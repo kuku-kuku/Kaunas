@@ -29,11 +29,6 @@ const fallbackNews = [
   { id: 3, date: "2025-06-23", title: "Summer Victory CUP Garliavoje", summary: "Trijų FA Kaunas komandų pasirodymai Garliavos turnyre - išskirtinis nusiteikimas ir bręstanti žaidimo kokybė.", link: "/naujienos/summer-victory", image: "/naujienos/summervictory.jpg" },
 ];
 
-function formatDate(dateStr) {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("lt-LT", { day: "2-digit", month: "long", year: "numeric" });
-}
-
 function formatDateShort(dateStr) {
   const date = new Date(dateStr);
   return date.toLocaleDateString("lt-LT", { year: "numeric", month: "2-digit", day: "2-digit" });

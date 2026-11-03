@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const VALUES = [
   { id: 'center', label: 'PAGARBA', desc: 'Gerbti vieni kitus, komandos draugus, varžovus, aplinką kurioje esame.' },

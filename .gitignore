@@ -38,3 +38,6 @@ Desktop.ini
 
 # Coverage
 coverage/
+
+# Lighthouse raw reports
+docs/lighthouse/**/*.json
