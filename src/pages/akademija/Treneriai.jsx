@@ -78,7 +78,7 @@ export default function Treneriai() {
       {/* ═══ HEADER + ROSTER ═══ */}
       <section aria-labelledby="page-title" className="pb-section-sm pt-32 md:pt-40">
         <Container>
-          <SectionHeader level={1} id="page-title" eyebrow={page.eyebrow} title={page.title} intro={page.lead} size="xl" />
+          <SectionHeader level={1} id="page-title" eyebrow={page.eyebrow} title={page.title} intro={page.lead} size="xl" animate={false} />
 
           <nav aria-label="Trenerių sąrašas" className="mt-14">
             <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-6 lg:gap-x-5">

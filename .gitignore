@@ -41,3 +41,6 @@ coverage/
 
 # Lighthouse raw reports
 docs/lighthouse/**/*.json
+
+# Build-time server bundle for prerendering
+dist-ssr

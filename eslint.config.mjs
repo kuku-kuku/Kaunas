@@ -54,7 +54,7 @@ export default [
     },
   },
   {
-    files: ["scripts/**/*.mjs", "*.config.mjs"],
+    files: ["scripts/**/*.mjs", "*.config.mjs", "vite.config.js"],
     languageOptions: { sourceType: "module" },
   },
 ];

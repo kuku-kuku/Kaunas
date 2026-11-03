@@ -86,7 +86,7 @@ export default function UgdymoPrograma() {
       <section aria-labelledby="page-title" className="border-b border-line pb-section-sm pt-32 md:pt-40">
         <Container className="grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionHeader level={1} id="page-title" eyebrow={page.hero.eyebrow} title={page.hero.title} size="xl" intro={page.hero.lead} />
+            <SectionHeader level={1} id="page-title" eyebrow={page.hero.eyebrow} title={page.hero.title} size="xl" intro={page.hero.lead} animate={false} />
           </div>
           <Reveal delay={0.1} className="lg:col-span-5">
             <GroupFinder bands={bands} selected={selectedYear} onSelect={setSelectedYear} />

@@ -60,7 +60,7 @@ export default function Kontaktai() {
 
       <section aria-labelledby="page-title" className="pb-section pt-32 md:pt-40">
         <Container>
-          <Reveal className="max-w-3xl">
+          <div className="max-w-3xl">
             <p className="section-label mb-5">Kontaktai</p>
             <h1 id="page-title" className="text-display text-display-xl text-fg">Susisiekite</h1>
             <p className="mt-6 text-lead text-fg-muted">Atsakysime į visus klausimus apie treniruotes, grupes ir akademiją.</p>
@@ -70,7 +70,7 @@ export default function Kontaktai() {
                 {trialCta.longLabel}
               </Link>
             </p>
-          </Reveal>
+          </div>
 
           <div className="mt-14 grid gap-14 lg:grid-cols-12 lg:gap-16">
             {/* ─── Form ─── */}

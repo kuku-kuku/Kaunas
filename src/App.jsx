@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { MotionConfig } from 'framer-motion';
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -12,6 +12,7 @@ const About = lazy(() => import('./pages/About'));
 const Kontaktai = lazy(() => import('./pages/Kontaktai'));
 const PrivatumoPolitika = lazy(() => import('./pages/PrivatumoPolitika'));
 const Registracija = lazy(() => import('./pages/Registracija'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 const Tikslai = lazy(() => import('./pages/apie/Tikslai'));
 const EtikosKodeksas = lazy(() => import('./pages/apie/EtikosKodeksas'));
 
@@ -26,8 +27,12 @@ const NewsArticle = lazy(() => import('./pages/naujienos/NewsArticle'));
 
 function App() {
   return (
+    // LazyMotion + `m` components load only the animation features we use (no layout
+    // animations), which keeps framer-motion small in the main bundle. `strict` makes a
+    // stray full `motion` import fail loudly.
     // reducedMotion="user": framer-motion skips transform animations for visitors who
     // ask their OS for reduced motion (CSS transitions are handled in index.css)
+    <LazyMotion features={domAnimation} strict>
     <MotionConfig reducedMotion="user">
     <div className="min-h-screen flex flex-col bg-surface">
       <a href="#turinys" className="skip-link">Pereiti prie turinio</a>
@@ -53,6 +58,7 @@ function App() {
           <Route path="/kontaktai" element={<Kontaktai />} />
           <Route path="/privatumo-politika" element={<PrivatumoPolitika />} />
           <Route path="/registracija" element={<Registracija />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
       </div>
@@ -60,6 +66,7 @@ function App() {
       <Footer />
     </div>
     </MotionConfig>
+    </LazyMotion>
   );
 }
 

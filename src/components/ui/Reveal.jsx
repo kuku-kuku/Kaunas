@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ease, duration, revealOffset } from '../../lib/motion';
 
 const offsets = {
@@ -10,8 +10,9 @@ const offsets = {
   none: {},
 };
 
-// Fades content in once it scrolls into view. With prefers-reduced-motion the content
-// renders immediately with no transform.
+// Fades content in once it scrolls into view. Reduced motion is handled globally by
+// <MotionConfig reducedMotion="user"> (no movement, fade only), which keeps the markup
+// identical on the server and the client.
 export default function Reveal({
   as = 'div',
   from = 'up',
@@ -21,13 +22,7 @@ export default function Reveal({
   children,
   ...rest
 }) {
-  const reduce = useReducedMotion();
-  const Tag = motion[as] ?? motion.div;
-
-  if (reduce) {
-    const Plain = as;
-    return <Plain className={className} {...rest}>{children}</Plain>;
-  }
+  const Tag = m[as] ?? m.div;
 
   return (
     <Tag

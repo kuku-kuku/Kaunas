@@ -7,11 +7,15 @@ export default function StatCounter({ value, suffix = '', animate = true, durati
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const reduce = useReducedMotion();
-  const shouldAnimate = animate && !reduce;
-  const [display, setDisplay] = useState(shouldAnimate ? 0 : value);
+  // Initial value depends only on props, so prerendered HTML matches the first client render
+  const [display, setDisplay] = useState(animate ? 0 : value);
 
   useEffect(() => {
-    if (!shouldAnimate || !inView) return undefined;
+    if (!animate || !inView) return undefined;
+    if (reduce) {
+      setDisplay(value);
+      return undefined;
+    }
     let frame;
     const start = performance.now();
     const tick = (now) => {
@@ -22,7 +26,7 @@ export default function StatCounter({ value, suffix = '', animate = true, durati
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [inView, shouldAnimate, value, duration]);
+  }, [inView, animate, reduce, value, duration]);
 
   return (
     <span ref={ref} className="tabular">

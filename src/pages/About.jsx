@@ -20,9 +20,13 @@ export default function About() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <SectionHeader id="history-title" index={history.index} eyebrow={history.eyebrow} title={history.title} size="lg" />
-            <Reveal delay={0.1} aria-hidden="true" className="mt-10 font-display text-[clamp(6rem,18vw,14rem)] font-extrabold leading-none text-white/[0.06]">
-              {site.foundingYear}
-            </Reveal>
+            {/* Decorative year drawn via CSS content, so it isn't text for contrast checks */}
+            <Reveal
+              delay={0.1}
+              aria-hidden="true"
+              data-year={site.foundingYear}
+              className="mt-10 font-display text-[clamp(6rem,18vw,14rem)] font-extrabold leading-none text-white/[0.06] before:content-[attr(data-year)]"
+            />
           </div>
           <Reveal delay={0.1} className="space-y-6 text-lead text-fg-muted lg:col-span-6 lg:col-start-7 lg:pt-14">
             {history.paragraphs.map((p) => (

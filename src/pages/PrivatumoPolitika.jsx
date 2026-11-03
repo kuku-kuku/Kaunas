@@ -11,7 +11,7 @@ export default function PrivatumoPolitika() {
       <Seo title="Privatumo politika" description="FA Kaunas privatumo politika." noindex />
 
       <Section size="none" className="pt-32 md:pt-40 pb-section-sm border-b border-line">
-        <SectionHeader level={1} size="xl" eyebrow="Teisinė informacija" title="Privatumo politika" />
+        <SectionHeader level={1} size="xl" eyebrow="Teisinė informacija" title="Privatumo politika" animate={false} />
       </Section>
 
       <Section size="compact">

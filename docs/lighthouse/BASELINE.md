@@ -59,3 +59,23 @@ Best practices 96 = console error from the local CMS URL not being reachable dur
 Remaining mobile gap to 90+: the app renders client-side, so nothing paints until the
 327 kB main bundle has run. Options for Phase 11: prerender pages at build time, and/or
 switch framer-motion to `LazyMotion` to shrink the bundle.
+
+## After Phase 11 (prerendering, LazyMotion, image sizes)
+
+Production build served with clean URLs and Brotli (a local stand-in for Vercel).
+Mobile | desktop scores; LCP is the mobile value.
+
+| Page | Perf | A11y | Best pr. | SEO | LCP (mobile) |
+|---|---|---|---|---|---|
+| `/` | **91** / 100 | 100 / 100 | 96 / 96 | 100 / 100 | 3.0 s |
+| `/akademija/treneriai` | **94** / 100 | 100 / 100 | 100 / 100 | 100 / 100 | 2.7 s |
+| `/akademija/ugdymo-programa` | **92** / 100 | 100 / 100 | 100 / 100 | 100 / 100 | 2.9 s |
+| `/apie` | **91** / 100 | 100 / 100 | 100 / 100 | 100 / 100 | 3.2 s |
+| `/kontaktai` | **95** / 100 | 100 / 100 | 100 / 100 | 100 / 100 | 2.6 s |
+| `/naujienos` | **90** / 100 | 100 / 100 | 96 / 96 | 100 / 100 | 3.3 s |
+| `/naujienos/kick-off-2025` | **88** / 100 | 100 / 100 | 96 / 96 | 100 / 100 | 3.6 s |
+| `/registracija` | **95** / 100 | 100 / 100 | 100 / 100 | 100 / 100 | 2.6 s |
+
+Baseline for comparison (mobile performance): home 72, treneriai 82, kontaktai 70, naujienos 66.
+Best practices 96 = console error from the local CMS URL being unreachable during the test.
+Re-check with PageSpeed Insights after deploying: real CDN numbers will differ.

@@ -20,13 +20,17 @@ export default function SectionHeader({
   size = 'md',
   align = 'left',
   className = '',
+  animate = true,
   children,
 }) {
   const Heading = `h${level}`;
+  // Above-the-fold headers (animate={false}) render visible in the prerendered HTML instead
+  // of waiting for JavaScript to fade them in; that wait was most of the mobile LCP time.
+  const Wrapper = animate ? Reveal : 'div';
   const centered = align === 'center';
 
   return (
-    <Reveal className={`${centered ? 'mx-auto text-center' : ''} max-w-3xl ${className}`}>
+    <Wrapper className={`${centered ? 'mx-auto text-center' : ''} max-w-3xl ${className}`}>
       {(index || eyebrow) && (
         <p className={`section-label mb-5 flex items-center gap-3 ${centered ? 'justify-center' : ''}`}>
           {index && <span className="font-mono text-accent-bright">{index}</span>}
@@ -39,6 +43,6 @@ export default function SectionHeader({
       </Heading>
       {intro && <p className="mt-6 text-lead text-fg-muted max-w-prose">{intro}</p>}
       {children}
-    </Reveal>
+    </Wrapper>
   );
 }

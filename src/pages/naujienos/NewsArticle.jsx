@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Seo from '../../components/Seo';
 import Lightbox from '../../components/Lightbox';
-import { Container, Reveal, ResponsiveImage, RichText } from '../../components/ui';
+import { Container, ResponsiveImage, RichText } from '../../components/ui';
 import { articles } from '../../content/lt/articles';
 import { site } from '../../content';
 import { fetchNewsBySlug, cmsUrl } from '../../lib/cms';
@@ -154,7 +154,7 @@ export default function NewsArticle() {
             <Link to="/naujienos" className="inline-flex min-h-[44px] items-center gap-2 text-sm uppercase tracking-[0.15em] text-fg-muted hover:text-white">
               <span aria-hidden="true">&larr;</span> Naujienos
             </Link>
-            <Reveal className="mt-8 max-w-4xl">
+            <div className="mt-8 max-w-4xl">
               <p className="flex flex-wrap items-center gap-x-4 gap-y-2 text-eyebrow uppercase text-fg-subtle">
                 {article.badge && <span className="text-accent-bright">{article.badge}</span>}
                 <time dateTime={article.date} className="font-mono normal-case tracking-normal">{formatNewsDate(article.date)}</time>
@@ -162,7 +162,7 @@ export default function NewsArticle() {
               <h1 id="article-title" className="mt-5 text-display text-display-md text-fg md:text-display-lg">
                 {article.title}
               </h1>
-            </Reveal>
+            </div>
           </Container>
         </header>
 

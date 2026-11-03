@@ -29,7 +29,9 @@ export default function ResponsiveImage({
     width: width ?? entry?.width,
     height: height ?? entry?.height,
     loading: priority ? 'eager' : 'lazy',
-    decoding: priority ? 'sync' : 'async',
+    // Always async: "sync" made the browser hold the whole first paint until the hero
+    // image was decoded (≈1 s on a throttled phone).
+    decoding: 'async',
     fetchpriority: priority ? 'high' : undefined,
     ...rest,
   };

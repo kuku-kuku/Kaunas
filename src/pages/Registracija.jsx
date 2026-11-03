@@ -95,11 +95,11 @@ export default function Registracija() {
           {/* Grid items are ordered intro → form → steps so the form comes right after the
               heading on phones; on desktop intro and steps share the left column. */}
           {/* ─── Intro ─── */}
-          <Reveal className="lg:col-span-5 lg:col-start-1 lg:row-start-1">
+          <div className="lg:col-span-5 lg:col-start-1 lg:row-start-1">
             <p className="section-label mb-5">{page.eyebrow}</p>
             <h1 id="page-title" className="text-display text-display-lg text-fg">{page.title}</h1>
             <p className="mt-6 text-lead text-fg-muted">{page.lead}</p>
-          </Reveal>
+          </div>
 
           {/* ─── Form / success ─── */}
           <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1">

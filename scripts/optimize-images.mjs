@@ -1,9 +1,9 @@
 // Image pipeline: `npm run images`
 //
 // For every JPEG/PNG under public/ (except the folders in SKIP_DIRS) it:
-//   1. Shrinks the original in place to at most MAX_EDGE px on the long side and re-encodes
-//      it (mozjpeg / max-compression PNG), but only if that makes the file smaller. This
-//      file stays the <img> fallback, so existing direct links keep working.
+//   1. The first time it sees an image, shrinks the original in place to at most MAX_EDGE px
+//      on the long side and re-encodes it (mozjpeg / max-compression PNG), but only if that
+//      makes the file smaller. This file stays the <img> fallback for non-AVIF browsers.
 //   2. Writes AVIF variants to public/optimized/<path>-<width>.avif.
 //   3. Records size, widths and a placeholder color in src/generated/images.json,
 //      which <ResponsiveImage> reads to build <picture> sources.
@@ -30,8 +30,14 @@ const MAX_EDGE = 1920;
 const AVIF = { quality: 50, effort: 4 };
 const JPEG = { quality: 80, mozjpeg: true };
 
-// Hero-sized images at the public root get a 1920 variant; content images stop at 1280.
-const widthsFor = (rel) => (rel.includes('/') ? [640, 1280] : [640, 1280, 1920]);
+// Hero-sized images at the public root get a 1920 variant; content images stop at 1280 and
+// add a 320 variant for thumbnails (news list rows, coach cards). 960 covers full-width
+// images on typical phones (≈410 CSS px at 2–2.6× density).
+const widthsFor = (rel) => (rel.includes('/') ? [320, 640, 960, 1280] : [640, 960, 1280, 1920]);
+const plannedWidths = (rel, width) => {
+  const w = widthsFor(rel).filter((x) => x <= width);
+  return w.length ? w : [width];
+};
 
 const force = process.argv.includes('--force');
 
@@ -82,7 +88,7 @@ async function main() {
     const prev = manifest[key];
     const base = '/optimized/' + rel.replace(/\.[^.]+$/, '');
 
-    if (prev && prev.hash === hash(buf)) {
+    if (prev && prev.hash === hash(buf) && plannedWidths(rel, prev.width).join() === prev.widths.join()) {
       const allThere = await Promise.all(prev.widths.map((w) => exists(path.join(PUBLIC, `${base}-${w}.avif`))));
       if (allThere.every(Boolean)) {
         next[key] = prev;
@@ -90,13 +96,16 @@ async function main() {
       }
     }
 
-    const before = buf.length;
-    buf = await shrinkOriginal(file, buf);
-    saved += before - buf.length;
+    // Shrink each original only once (when it first appears): re-encoding an already
+    // processed JPEG on every run would slowly degrade it.
+    if (!prev) {
+      const before = buf.length;
+      buf = await shrinkOriginal(file, buf);
+      saved += before - buf.length;
+    }
 
     const meta = await sharp(buf).metadata();
-    const widths = widthsFor(rel).filter((w) => w <= meta.width);
-    if (widths.length === 0) widths.push(meta.width);
+    const widths = plannedWidths(rel, meta.width);
 
     await fs.mkdir(path.dirname(path.join(PUBLIC, base)), { recursive: true });
     for (const w of widths) {

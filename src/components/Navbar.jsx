@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { mainNav, trialCta } from '../content';
 import { SocialLinks } from './ui';
 
@@ -12,10 +12,13 @@ const NAV_ITEMS = mainNav;
 // Below that the top bar stays pinned and condenses instead.
 const SIDEBAR_QUERY = '(min-width: 1680px)';
 
+// Starts false and updates after mount, so the prerendered HTML and the first client
+// render match (the side rail only appears after scrolling anyway).
 function useMediaQuery(query) {
-  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
+  const [matches, setMatches] = useState(false);
   useEffect(() => {
     const mql = window.matchMedia(query);
+    setMatches(mql.matches);
     const onChange = (e) => setMatches(e.matches);
     mql.addEventListener('change', onChange);
     return () => mql.removeEventListener('change', onChange);
@@ -84,18 +87,12 @@ function DesktopNavItem({ item, active, pathname }) {
         </button>
       )}
 
-      {active && (
-        <motion.div
-          layoutId="nav-indicator"
-          className="absolute bottom-0 left-3 right-3 xl:left-4 xl:right-4 h-px bg-accent"
-          transition={{ duration: 0.3 }}
-        />
-      )}
+      {active && <span aria-hidden="true" className="absolute bottom-0 left-3 right-3 xl:left-4 xl:right-4 h-px bg-accent" />}
 
       <AnimatePresence>
         {item.sub && open && (
           // pt-2 instead of a margin keeps the hover area continuous between link and panel
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
@@ -117,7 +114,7 @@ function DesktopNavItem({ item, active, pathname }) {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </li>
@@ -193,7 +190,7 @@ export default function Navbar() {
     <>
       {/* ─── DESKTOP: Horizontal top bar. Condenses on scroll; on very wide screens it
            hands over to the side rail instead. ─── */}
-      <motion.header
+      <m.header
         initial={false}
         animate={{
           y: sidebarMode ? -120 : 0,
@@ -233,11 +230,11 @@ export default function Navbar() {
             </Link>
           </div>
         </div>
-      </motion.header>
+      </m.header>
 
       {/* ─── WIDE DESKTOP: Vertical side rail (visible when scrolled) ─── */}
       {wide && (
-        <motion.nav
+        <m.nav
           initial={false}
           animate={{
             x: sidebarMode ? 0 : -200,
@@ -262,13 +259,7 @@ export default function Navbar() {
                     isActive(item) ? 'text-white' : 'text-fg-subtle hover:text-white'
                   }`}
                 >
-                  {isActive(item) && (
-                    <motion.div
-                      layoutId="side-indicator"
-                      className="absolute -left-3 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-accent"
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
+                  {isActive(item) && <span aria-hidden="true" className="absolute -left-3 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-accent" />}
                   {item.label}
                 </Link>
               </li>
@@ -284,7 +275,7 @@ export default function Navbar() {
           </ul>
 
           <SocialLinks className="flex-col items-start" linkClassName="text-white/90 hover:text-white" size={16} />
-        </motion.nav>
+        </m.nav>
       )}
 
       {/* ─── MOBILE: Bar with CTA + burger, fullscreen menu ─── */}
@@ -322,15 +313,15 @@ export default function Navbar() {
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
             >
-              <motion.span
+              <m.span
                 animate={mobileOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
                 className="block w-6 h-px bg-white origin-center"
               />
-              <motion.span
+              <m.span
                 animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
                 className="block w-6 h-px bg-white"
               />
-              <motion.span
+              <m.span
                 animate={mobileOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
                 className="block w-6 h-px bg-white origin-center"
               />
@@ -340,7 +331,7 @@ export default function Navbar() {
 
         <AnimatePresence>
           {mobileOpen && (
-            <motion.div
+            <m.div
               initial={{ clipPath: 'inset(0 0 100% 0)' }}
               animate={{ clipPath: 'inset(0 0 0% 0)' }}
               exit={{ clipPath: 'inset(0 0 100% 0)' }}
@@ -355,7 +346,7 @@ export default function Navbar() {
                 <ul>
                   {NAV_ITEMS.map((item, i) => (
                     <li key={item.to}>
-                      <motion.div
+                      <m.div
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
@@ -372,12 +363,12 @@ export default function Navbar() {
                             {item.label}
                           </span>
                         </Link>
-                      </motion.div>
+                      </m.div>
 
                       {item.sub && (
                         <ul>
                           {item.sub.map((sub, j) => (
-                            <motion.li
+                            <m.li
                               key={sub.to}
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
@@ -393,7 +384,7 @@ export default function Navbar() {
                               >
                                 {sub.label}
                               </Link>
-                            </motion.li>
+                            </m.li>
                           ))}
                         </ul>
                       )}
@@ -402,7 +393,7 @@ export default function Navbar() {
                 </ul>
               </nav>
 
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
@@ -412,8 +403,8 @@ export default function Navbar() {
                   {trialCta.longLabel} <span className="btn-arrow" aria-hidden="true">&rarr;</span>
                 </Link>
                 <SocialLinks className="gap-2 -ml-3" linkClassName="text-fg-muted hover:text-white" size={17} />
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

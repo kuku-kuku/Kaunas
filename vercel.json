@@ -2,9 +2,10 @@
   "version": 2,
   "buildCommand": "pnpm install --no-frozen-lockfile && pnpm run build",
   "outputDirectory": "dist",
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/api/contact", "destination": "/api/mail" },
     { "source": "/api/:match*", "destination": "/api/:match*" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/spa.html" }
   ]
 }

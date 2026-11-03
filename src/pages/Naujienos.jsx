@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Seo from "../components/Seo";
-import { Container, Reveal, ResponsiveImage, SectionHeader } from "../components/ui";
+import { Container, ResponsiveImage, SectionHeader } from "../components/ui";
 import { useNews, formatNewsDate, newsHref } from "../lib/useNews";
 
 function Featured({ item }) {
@@ -76,16 +76,14 @@ export default function Naujienos() {
 
       <section aria-labelledby="page-title" className="pb-section-sm pt-32 md:pt-40">
         <Container>
-          <SectionHeader level={1} id="page-title" eyebrow="Akademijos gyvenimas" title="Naujienos" intro="Turnyrai, stovyklos ir trenerių komentarai iš aikštės." size="xl" />
+          <SectionHeader level={1} id="page-title" eyebrow="Akademijos gyvenimas" title="Naujienos" intro="Turnyrai, stovyklos ir trenerių komentarai iš aikštės." size="xl" animate={false} />
         </Container>
       </section>
 
       {featured && (
         <section aria-label="Naujausia naujiena" className="border-t border-line py-section-sm">
           <Container>
-            <Reveal>
-              <Featured item={featured} />
-            </Reveal>
+            <Featured item={featured} />
           </Container>
         </section>
       )}

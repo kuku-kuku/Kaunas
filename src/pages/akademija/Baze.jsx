@@ -13,7 +13,7 @@ export default function Baze() {
 
       <section aria-labelledby="page-title" className="pb-section-sm pt-32 md:pt-40">
         <Container>
-          <SectionHeader level={1} id="page-title" eyebrow={page.eyebrow} title={page.title} intro={page.lead} size="xl" />
+          <SectionHeader level={1} id="page-title" eyebrow={page.eyebrow} title={page.title} intro={page.lead} size="xl" animate={false} />
         </Container>
       </section>
 
