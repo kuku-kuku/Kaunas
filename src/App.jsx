@@ -11,6 +11,7 @@ import Home from './pages/Home';
 const About = lazy(() => import('./pages/About'));
 const Kontaktai = lazy(() => import('./pages/Kontaktai'));
 const PrivatumoPolitika = lazy(() => import('./pages/PrivatumoPolitika'));
+const Registracija = lazy(() => import('./pages/Registracija'));
 const Naujiena = lazy(() => import("./pages/naujienos/Naujiena"));
 const Tikslai = lazy(() => import('./pages/apie/Tikslai'));
 const EtikosKodeksas = lazy(() => import('./pages/apie/EtikosKodeksas'));
@@ -97,6 +98,7 @@ function App() {
 
           <Route path="/kontaktai" element={<Kontaktai />} />
           <Route path="/privatumo-politika" element={<PrivatumoPolitika />} />
+          <Route path="/registracija" element={<Registracija />} />
         </Routes>
         </Suspense>
       </div>

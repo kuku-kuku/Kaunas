@@ -31,10 +31,9 @@ export const footerNav = [
   { to: '/prisijunk', label: 'Parama ir rėmimas' },
 ];
 
-// Primary call to action shown in every header variant.
-// TODO(phase 7): point to /registracija once the trial registration page exists.
+// Primary call to action shown in every header variant and trial CTA band.
 export const trialCta = {
-  to: '/kontaktai',
+  to: '/registracija',
   label: 'Registracija',
   longLabel: 'Registracija į treniruotę',
 };

@@ -70,7 +70,9 @@ the child's age group, and written permission to publish.
 The home page testimonials section stays hidden until at least one is added to `src/content/lt/home.js`.
 
 ## Trial registration flow
-- [ ] Which email inbox should receive trial requests? (the form currently sends to `CONTACT_TO`, default `info@fakaunas.lt`)
+- [ ] Which email inbox should receive trial requests and contact messages? Both go to the Vercel env var
+      `CONTACT_TO` (falls back to `info@fakaunas.lt`, while the site shows `administracija@fakaunas.lt`). Check it is set.
+- [ ] Send one real test registration from the deployed site to confirm Resend delivers it
 - [ ] What happens after a parent applies: who calls them, how fast, what to bring to the first session
 - [ ] Is the first trial session free?
 

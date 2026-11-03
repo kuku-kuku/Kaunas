@@ -8,7 +8,59 @@ function setCors(res) {
 }
 
 function escapeHtml(s) {
-  return String(s ?? "").replace(/[&<>]/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[m]));
+  return String(s ?? "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+}
+
+const clip = (v, max = 2000) => String(v ?? "").trim().slice(0, max);
+const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+function emailLayout(title, rows, message) {
+  const rowsHtml = rows
+    .filter(([, v]) => v)
+    .map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0;color:#666;vertical-align:top">${escapeHtml(k)}</td><td style="padding:6px 0"><b>${escapeHtml(v)}</b></td></tr>`)
+    .join("");
+  return `
+  <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6">
+    <h2>${escapeHtml(title)}</h2>
+    <table style="border-collapse:collapse">${rowsHtml}</table>
+    ${message ? `<hr/><p style="white-space:pre-wrap">${escapeHtml(message)}</p>` : ""}
+  </div>`.trim();
+}
+
+// General contact form (/kontaktai)
+function buildContact(b) {
+  const name = clip(b.name, 200), email = clip(b.email, 200), phone = clip(b.phone, 50);
+  const message = clip(b.message, 5000), preferredContact = clip(b.preferredContact, 100);
+  if (!message || (!email && !phone)) {
+    return { error: "Reikia žinutės ir bent el. pašto arba telefono" };
+  }
+  return {
+    subject: "Nauja žinutė iš FA Kaunas svetainės",
+    html: emailLayout("Nauja užklausa iš svetainės", [
+      ["Vardas", name], ["El. paštas", email], ["Telefonas", phone], ["Pageidaujamas kontaktavimas", preferredContact],
+    ], message),
+    replyTo: isEmail(email) ? email : null,
+  };
+}
+
+// Trial training registration (/registracija)
+function buildTrial(b) {
+  const childName = clip(b.childName, 200), birthYear = clip(b.birthYear, 20), group = clip(b.group, 50);
+  const parentName = clip(b.parentName, 200), phone = clip(b.phone, 50), email = clip(b.email, 200);
+  const message = clip(b.message, 5000);
+  if (!childName || !birthYear || !parentName || phone.replace(/\D/g, "").length < 8 || b.consent !== true) {
+    return { error: "Trūksta privalomų laukų" };
+  }
+  if (email && !isEmail(email)) return { error: "Neteisingas el. pašto adresas" };
+  return {
+    subject: `Registracija į treniruotę: ${childName} (${birthYear})`,
+    html: emailLayout("Registracija į bandomąją treniruotę", [
+      ["Vaikas", childName], ["Gimimo metai", birthYear], ["Grupė", group],
+      ["Tėvai / globėjai", parentName], ["Telefonas", phone], ["El. paštas", email],
+      ["Sutikimas", "Sutiko su duomenų tvarkymu (privatumo politika)"],
+    ], message),
+    replyTo: email || null,
+  };
 }
 
 async function readJson(req) {
@@ -41,30 +93,19 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok:false, error:"CONTACT_FROM must be @fakaunas.lt (else Resend 403)" });
   }
 
-  const { name="", email="", phone="", preferredContact="", message="", subject="Nauja žinutė iš FA Kaunas" } =
-    await readJson(req);
-
-  if (!message || (!email && !phone)) {
-    return res.status(400).json({ ok:false, error:"Reikia žinutės ir bent el. pašto arba telefono" });
+  const body = await readJson(req);
+  const built = body.type === "trial" ? buildTrial(body) : buildContact(body);
+  if (built.error) {
+    return res.status(400).json({ ok:false, error: built.error });
   }
-
-  const html = `
-  <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6">
-    <h2>Nauja užklausa iš svetainės</h2>
-    <p><b>Vardas:</b> ${escapeHtml(name)}</p>
-    <p><b>El. paštas:</b> ${escapeHtml(email)}</p>
-    <p><b>Telefonas:</b> ${escapeHtml(phone)}</p>
-    <p><b>Pageidaujamas kontaktavimas:</b> ${escapeHtml(preferredContact)}</p>
-    <hr/>
-    <p style="white-space:pre-wrap">${escapeHtml(message)}</p>
-  </div>`.trim();
+  const { subject, html, replyTo } = built;
 
   const payload = {
     from: `FA Kaunas <${FROM}>`,
     to: [TO],
     subject,
     html,
-    reply_to: email ? [email] : undefined
+    reply_to: replyTo ? [replyTo] : undefined
   };
 
   try {
