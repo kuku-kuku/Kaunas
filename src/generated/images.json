@@ -1,0 +1,1401 @@
+{
+  "/bendruomene.jpg": {
+    "width": 1440,
+    "height": 1080,
+    "widths": [
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/bendruomene",
+    "placeholder": "#b8b8b8",
+    "hash": "bd5667785a80"
+  },
+  "/hero.jpg": {
+    "width": 1920,
+    "height": 756,
+    "widths": [
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "base": "/optimized/hero",
+    "placeholder": "#587838",
+    "hash": "2a3112214748"
+  },
+  "/hero2.jpg": {
+    "width": 1920,
+    "height": 756,
+    "widths": [
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "base": "/optimized/hero2",
+    "placeholder": "#9898b8",
+    "hash": "f3d262ae252d"
+  },
+  "/hero3.jpg": {
+    "width": 1920,
+    "height": 756,
+    "widths": [
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "base": "/optimized/hero3",
+    "placeholder": "#c8c8c8",
+    "hash": "758ea1ecdbd1"
+  },
+  "/naujienos/azuolas1.jpg": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/azuolas1",
+    "placeholder": "#181818",
+    "hash": "7d6e7c99ef4f"
+  },
+  "/naujienos/azuolas2.jpg": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/azuolas2",
+    "placeholder": "#181818",
+    "hash": "f42bfd7f17db"
+  },
+  "/naujienos/azuolo1.jpg": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/azuolo1",
+    "placeholder": "#080808",
+    "hash": "874e9b06dad8"
+  },
+  "/naujienos/azuolo2.jpg": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/azuolo2",
+    "placeholder": "#080808",
+    "hash": "b09094b3096c"
+  },
+  "/naujienos/azuolo3.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/azuolo3",
+    "placeholder": "#788858",
+    "hash": "48ac48e22605"
+  },
+  "/naujienos/balcia.jpg": {
+    "width": 1352,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/balcia",
+    "placeholder": "#080808",
+    "hash": "a3df3dc5442d"
+  },
+  "/naujienos/balcia1.jpg": {
+    "width": 1440,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/balcia1",
+    "placeholder": "#485888",
+    "hash": "96e7292befa8"
+  },
+  "/naujienos/balcia2.jpg": {
+    "width": 1440,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/balcia2",
+    "placeholder": "#c8c8c8",
+    "hash": "5e1e7efaf73b"
+  },
+  "/naujienos/blitz1.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/blitz1",
+    "placeholder": "#080808",
+    "hash": "4d5f74cd044e"
+  },
+  "/naujienos/blitz2.jpg": {
+    "width": 1440,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/blitz2",
+    "placeholder": "#a89888",
+    "hash": "7bbfa25a26d5"
+  },
+  "/naujienos/blitz3.jpg": {
+    "width": 1080,
+    "height": 1350,
+    "widths": [
+      320,
+      640,
+      960
+    ],
+    "base": "/optimized/naujienos/blitz3",
+    "placeholder": "#885828",
+    "hash": "82031d3a1e74"
+  },
+  "/naujienos/blitz4.jpg": {
+    "width": 689,
+    "height": 860,
+    "widths": [
+      320,
+      640
+    ],
+    "base": "/optimized/naujienos/blitz4",
+    "placeholder": "#887858",
+    "hash": "f22b726923c8"
+  },
+  "/naujienos/blitz5.jpg": {
+    "width": 1152,
+    "height": 1440,
+    "widths": [
+      320,
+      640,
+      960
+    ],
+    "base": "/optimized/naujienos/blitz5",
+    "placeholder": "#787868",
+    "hash": "eff809a2139f"
+  },
+  "/naujienos/blitz6.jpg": {
+    "width": 1080,
+    "height": 1350,
+    "widths": [
+      320,
+      640,
+      960
+    ],
+    "base": "/optimized/naujienos/blitz6",
+    "placeholder": "#e8b868",
+    "hash": "0763f1075757"
+  },
+  "/naujienos/dobrecova.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/dobrecova",
+    "placeholder": "#688838",
+    "hash": "517affcda5b6"
+  },
+  "/naujienos/dobrecova1.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/dobrecova1",
+    "placeholder": "#181828",
+    "hash": "bd6a6e229b8d"
+  },
+  "/naujienos/dobrecova2.jpg": {
+    "width": 2040,
+    "height": 942,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/dobrecova2",
+    "placeholder": "#c87858",
+    "hash": "632157e98634"
+  },
+  "/naujienos/dobrecova3.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/dobrecova3",
+    "placeholder": "#383838",
+    "hash": "c6cda1afe483"
+  },
+  "/naujienos/dobrecova4.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/dobrecova4",
+    "placeholder": "#f8f8f8",
+    "hash": "b7e7bd11f758"
+  },
+  "/naujienos/dobrecova5.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/dobrecova5",
+    "placeholder": "#7888a8",
+    "hash": "dc2320310240"
+  },
+  "/naujienos/hegelman.jpg": {
+    "width": 1920,
+    "height": 1440,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/hegelman",
+    "placeholder": "#6888a8",
+    "hash": "347100016329"
+  },
+  "/naujienos/hegelman2.jpg": {
+    "width": 1920,
+    "height": 1440,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/hegelman2",
+    "placeholder": "#a83828",
+    "hash": "9c4c33548508"
+  },
+  "/naujienos/ibra1.jpg": {
+    "width": 1153,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960
+    ],
+    "base": "/optimized/naujienos/ibra1",
+    "placeholder": "#e8d8d8",
+    "hash": "88cdd471a450"
+  },
+  "/naujienos/ibra2.jpg": {
+    "width": 2048,
+    "height": 1153,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/ibra2",
+    "placeholder": "#486828",
+    "hash": "cbf28de0a84e"
+  },
+  "/naujienos/ibra3.jpg": {
+    "width": 2048,
+    "height": 1153,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/ibra3",
+    "placeholder": "#587838",
+    "hash": "8a46d7de6f4b"
+  },
+  "/naujienos/ibra4.jpg": {
+    "width": 2048,
+    "height": 1153,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/ibra4",
+    "placeholder": "#688848",
+    "hash": "46cea726fb8c"
+  },
+  "/naujienos/kaff1.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaff1",
+    "placeholder": "#080808",
+    "hash": "17dfa1578900"
+  },
+  "/naujienos/kaff2.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaff2",
+    "placeholder": "#383838",
+    "hash": "03fc53cffce4"
+  },
+  "/naujienos/kaff3.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaff3",
+    "placeholder": "#283828",
+    "hash": "5eb61b52c2e5"
+  },
+  "/naujienos/kaff4.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaff4",
+    "placeholder": "#282828",
+    "hash": "abd569fcfc2a"
+  },
+  "/naujienos/kaff5.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaff5",
+    "placeholder": "#a8c8e8",
+    "hash": "479c86937b15"
+  },
+  "/naujienos/kaunasfest1.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest1",
+    "placeholder": "#c8d8e8",
+    "hash": "ab432194df3a"
+  },
+  "/naujienos/kaunasfest10.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest10",
+    "placeholder": "#080808",
+    "hash": "135b1dd1141d"
+  },
+  "/naujienos/kaunasfest2.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest2",
+    "placeholder": "#080808",
+    "hash": "a301a17aeacb"
+  },
+  "/naujienos/kaunasfest3.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest3",
+    "placeholder": "#e8e8f8",
+    "hash": "b8e0d328a448"
+  },
+  "/naujienos/kaunasfest4.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest4",
+    "placeholder": "#d8d8d8",
+    "hash": "aaec3fd502a4"
+  },
+  "/naujienos/kaunasfest5.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest5",
+    "placeholder": "#081818",
+    "hash": "00e05cdf29a2"
+  },
+  "/naujienos/kaunasfest6.jpg": {
+    "width": 1698,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest6",
+    "placeholder": "#c8c8c8",
+    "hash": "95bf6ddc2ee2"
+  },
+  "/naujienos/kaunasfest7.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest7",
+    "placeholder": "#d8d8e8",
+    "hash": "119f39d18e81"
+  },
+  "/naujienos/kaunasfest8.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest8",
+    "placeholder": "#080808",
+    "hash": "3f9b3ef526f9"
+  },
+  "/naujienos/kaunasfest9.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunasfest9",
+    "placeholder": "#080808",
+    "hash": "5bb7909d31ba"
+  },
+  "/naujienos/kaunotaure1.jpg": {
+    "width": 1800,
+    "height": 1629,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunotaure1",
+    "placeholder": "#4878b8",
+    "hash": "44c852d32260"
+  },
+  "/naujienos/kaunotaure2.jpg": {
+    "width": 1541,
+    "height": 1800,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kaunotaure2",
+    "placeholder": "#180808",
+    "hash": "d8bb298c6da5"
+  },
+  "/naujienos/kff2017_1.jpg": {
+    "width": 1240,
+    "height": 1244,
+    "widths": [
+      320,
+      640,
+      960
+    ],
+    "base": "/optimized/naujienos/kff2017_1",
+    "placeholder": "#080808",
+    "hash": "c1c332569eee"
+  },
+  "/naujienos/kff2017_2.jpg": {
+    "width": 2048,
+    "height": 1363,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kff2017_2",
+    "placeholder": "#f8f8f8",
+    "hash": "13e8911996cf"
+  },
+  "/naujienos/kff2017_3.jpg": {
+    "width": 2048,
+    "height": 1363,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kff2017_3",
+    "placeholder": "#c8c8d8",
+    "hash": "9f30e788a6a8"
+  },
+  "/naujienos/kff2017_4.jpg": {
+    "width": 2048,
+    "height": 1363,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kff2017_4",
+    "placeholder": "#b8b8b8",
+    "hash": "4e6a92ab38b0"
+  },
+  "/naujienos/kickoff1.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kickoff1",
+    "placeholder": "#483898",
+    "hash": "8f6576e8c0fb"
+  },
+  "/naujienos/kickoff2.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kickoff2",
+    "placeholder": "#98a848",
+    "hash": "3ff93d0a3f54"
+  },
+  "/naujienos/kickoff3.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kickoff3",
+    "placeholder": "#689838",
+    "hash": "e304b227c17a"
+  },
+  "/naujienos/kickoff4.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kickoff4",
+    "placeholder": "#688828",
+    "hash": "7ddb89f9e035"
+  },
+  "/naujienos/kickoff5.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kickoff5",
+    "placeholder": "#d8d8e8",
+    "hash": "6040888db27f"
+  },
+  "/naujienos/kidscup1.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/kidscup1",
+    "placeholder": "#c8b8a8",
+    "hash": "c735768a4f76"
+  },
+  "/naujienos/lenkija1.jpg": {
+    "width": 2048,
+    "height": 1973,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/lenkija1",
+    "placeholder": "#384868",
+    "hash": "f33e42463d8a"
+  },
+  "/naujienos/lenkija2.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/lenkija2",
+    "placeholder": "#e8e8d8",
+    "hash": "ca4ac778d9bb"
+  },
+  "/naujienos/lenkija3.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/lenkija3",
+    "placeholder": "#d8d8d8",
+    "hash": "d68120afd536"
+  },
+  "/naujienos/lenkija4.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/lenkija4",
+    "placeholder": "#d8d8c8",
+    "hash": "689e85a9baa0"
+  },
+  "/naujienos/lenkija5.jpg": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/lenkija5",
+    "placeholder": "#787848",
+    "hash": "16e86dda0d11"
+  },
+  "/naujienos/lenkija6.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/lenkija6",
+    "placeholder": "#180808",
+    "hash": "f58396550bb3"
+  },
+  "/naujienos/mragowo.jpg": {
+    "width": 1920,
+    "height": 1441,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo",
+    "placeholder": "#183808",
+    "hash": "8b2b5bb4f8ad"
+  },
+  "/naujienos/mragowo1.jpg": {
+    "width": 1920,
+    "height": 1441,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo1",
+    "placeholder": "#182808",
+    "hash": "729dd6afd3a6"
+  },
+  "/naujienos/mragowo10.jpg": {
+    "width": 1442,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo10",
+    "placeholder": "#384818",
+    "hash": "bdc780f4b962"
+  },
+  "/naujienos/mragowo11.jpg": {
+    "width": 1442,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo11",
+    "placeholder": "#a89898",
+    "hash": "12ebc08fbd9d"
+  },
+  "/naujienos/mragowo2.jpg": {
+    "width": 1920,
+    "height": 1441,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo2",
+    "placeholder": "#586858",
+    "hash": "9d92304f7cec"
+  },
+  "/naujienos/mragowo3.jpg": {
+    "width": 1920,
+    "height": 1441,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo3",
+    "placeholder": "#081808",
+    "hash": "6fb00c8d71b7"
+  },
+  "/naujienos/mragowo4.jpg": {
+    "width": 1920,
+    "height": 1441,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo4",
+    "placeholder": "#d8e8e8",
+    "hash": "64456cd79d0c"
+  },
+  "/naujienos/mragowo5.jpg": {
+    "width": 1442,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo5",
+    "placeholder": "#d8e8e8",
+    "hash": "6f64cab622e4"
+  },
+  "/naujienos/mragowo6.jpg": {
+    "width": 1442,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo6",
+    "placeholder": "#081808",
+    "hash": "4c00a6b88ad9"
+  },
+  "/naujienos/mragowo7.jpg": {
+    "width": 1442,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo7",
+    "placeholder": "#98c8e8",
+    "hash": "38bcd06f0fdc"
+  },
+  "/naujienos/mragowo8.jpg": {
+    "width": 1920,
+    "height": 1441,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo8",
+    "placeholder": "#080808",
+    "hash": "af59474bb5af"
+  },
+  "/naujienos/mragowo9.jpg": {
+    "width": 1442,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/mragowo9",
+    "placeholder": "#c8d8f8",
+    "hash": "49bdc2c38238"
+  },
+  "/naujienos/neodenta.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/neodenta",
+    "placeholder": "#080808",
+    "hash": "f01a92442a7b"
+  },
+  "/naujienos/neodenta1.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/neodenta1",
+    "placeholder": "#080818",
+    "hash": "ce85c4f1c5e9"
+  },
+  "/naujienos/neodenta2.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/neodenta2",
+    "placeholder": "#d8e8f8",
+    "hash": "36acd24d9bac"
+  },
+  "/naujienos/neodenta3.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/neodenta3",
+    "placeholder": "#889868",
+    "hash": "fdabea83f559"
+  },
+  "/naujienos/neodenta4.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/neodenta4",
+    "placeholder": "#c8d8d8",
+    "hash": "dabf5dba548a"
+  },
+  "/naujienos/neodenta5.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/neodenta5",
+    "placeholder": "#d8e8e8",
+    "hash": "9b9b875ce680"
+  },
+  "/naujienos/remigijus1.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/remigijus1",
+    "placeholder": "#080808",
+    "hash": "5b80ce2a744b"
+  },
+  "/naujienos/rudens.jpg": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/rudens",
+    "placeholder": "#181818",
+    "hash": "40bc3f718d95"
+  },
+  "/naujienos/rudens1.jpg": {
+    "width": 2048,
+    "height": 1536,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/rudens1",
+    "placeholder": "#080808",
+    "hash": "bad216ade802"
+  },
+  "/naujienos/rudens2.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/rudens2",
+    "placeholder": "#687848",
+    "hash": "661508f626a4"
+  },
+  "/naujienos/rudens3.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/rudens3",
+    "placeholder": "#d8d8e8",
+    "hash": "1c2ba2afedcd"
+  },
+  "/naujienos/rudens4.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/rudens4",
+    "placeholder": "#d8d8e8",
+    "hash": "2e72dbaeda1b"
+  },
+  "/naujienos/sportfan.jpg": {
+    "width": 480,
+    "height": 394,
+    "widths": [
+      320
+    ],
+    "base": "/optimized/naujienos/sportfan",
+    "placeholder": "#d8d8c8",
+    "hash": "c611737bb17f"
+  },
+  "/naujienos/stovykla.jpg": {
+    "width": 1920,
+    "height": 1442,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/stovykla",
+    "placeholder": "#b8b8b8",
+    "hash": "e517cba35c46"
+  },
+  "/naujienos/stovykla2.jpg": {
+    "width": 1920,
+    "height": 1443,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/stovykla2",
+    "placeholder": "#989888",
+    "hash": "8e59d2804c9b"
+  },
+  "/naujienos/stovykla3.jpg": {
+    "width": 1920,
+    "height": 1442,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/stovykla3",
+    "placeholder": "#e8e8e8",
+    "hash": "a8f6adc16dff"
+  },
+  "/naujienos/summervictory.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/summervictory",
+    "placeholder": "#b8d8f8",
+    "hash": "ca14646e19ef"
+  },
+  "/naujienos/summervictory1.jpg": {
+    "width": 2048,
+    "height": 1363,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/summervictory1",
+    "placeholder": "#d8d8c8",
+    "hash": "df3132741b7b"
+  },
+  "/naujienos/summervictory2.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/summervictory2",
+    "placeholder": "#f8f8f8",
+    "hash": "41d1a3e9772f"
+  },
+  "/naujienos/summervictory3.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/summervictory3",
+    "placeholder": "#b8d8f8",
+    "hash": "39ceb9ab8ec3"
+  },
+  "/naujienos/summervictory4.jpg": {
+    "width": 2048,
+    "height": 1365,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/summervictory4",
+    "placeholder": "#f8f8f8",
+    "hash": "126b544e9327"
+  },
+  "/naujienos/talentai.jpg": {
+    "width": 1920,
+    "height": 1441,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/talentai",
+    "placeholder": "#a8c888",
+    "hash": "319970b026bb"
+  },
+  "/naujienos/zalgiris.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/zalgiris",
+    "placeholder": "#080808",
+    "hash": "15d0e9f58f3d"
+  },
+  "/naujienos/zalgiris1.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/zalgiris1",
+    "placeholder": "#587838",
+    "hash": "5126816497fb"
+  },
+  "/naujienos/zalgiris2.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/zalgiris2",
+    "placeholder": "#a8c888",
+    "hash": "65cc7545bc70"
+  },
+  "/naujienos/zalgiris3.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/zalgiris3",
+    "placeholder": "#587838",
+    "hash": "257ca8f890da"
+  },
+  "/naujienos/zalgiris4.jpg": {
+    "width": 1536,
+    "height": 2048,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/naujienos/zalgiris4",
+    "placeholder": "#889868",
+    "hash": "fcca87ade74f"
+  },
+  "/partners/brandus.png": {
+    "width": 200,
+    "height": 200,
+    "widths": [
+      200
+    ],
+    "base": "/optimized/partners/brandus",
+    "placeholder": "#f8f8f8",
+    "hash": "a5d722bdc3e2"
+  },
+  "/partners/camelia.png": {
+    "width": 424,
+    "height": 407,
+    "widths": [
+      320
+    ],
+    "base": "/optimized/partners/camelia",
+    "placeholder": "#f8f808",
+    "hash": "58fcc3818468"
+  },
+  "/partners/medus.png": {
+    "width": 603,
+    "height": 599,
+    "widths": [
+      320
+    ],
+    "base": "/optimized/partners/medus",
+    "placeholder": "#f8f8f8",
+    "hash": "84368250c87a"
+  },
+  "/partners/unomeda.png": {
+    "width": 1920,
+    "height": 1920,
+    "widths": [
+      320,
+      640,
+      960,
+      1280
+    ],
+    "base": "/optimized/partners/unomeda",
+    "placeholder": "#f8f8f8",
+    "hash": "faf29db4e180"
+  },
+  "/treneriai/bernota.jpg": {
+    "width": 400,
+    "height": 500,
+    "widths": [
+      320
+    ],
+    "base": "/optimized/treneriai/bernota",
+    "placeholder": "#e8e8e8",
+    "hash": "f4824e46a8ad"
+  },
+  "/treneriai/cinikas.jpg": {
+    "width": 736,
+    "height": 736,
+    "widths": [
+      320,
+      640
+    ],
+    "base": "/optimized/treneriai/cinikas",
+    "placeholder": "#f8f8f8",
+    "hash": "e4fb91ea725b"
+  },
+  "/treneriai/sipavicius.jpg": {
+    "width": 400,
+    "height": 500,
+    "widths": [
+      320
+    ],
+    "base": "/optimized/treneriai/sipavicius",
+    "placeholder": "#a8a8a8",
+    "hash": "a0bd488da176"
+  },
+  "/treneriai/zagas.jpg": {
+    "width": 400,
+    "height": 500,
+    "widths": [
+      320
+    ],
+    "base": "/optimized/treneriai/zagas",
+    "placeholder": "#e8d8d8",
+    "hash": "a972b511093b"
+  }
+}

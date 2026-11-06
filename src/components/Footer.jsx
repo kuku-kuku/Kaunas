@@ -1,64 +1,103 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { site, footerNav, legalNav } from '../content';
+import { Container, SocialLinks } from './ui';
+
+const linkClass = 'inline-flex min-h-[32px] items-center text-sm text-fg-muted hover:text-white transition-colors duration-200';
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-white py-12 px-6 md:px-12 lg:px-24">
-      <div className="max-w-7xl mx-auto">
-        {/* Grid struktūra – 2 kolonos per mobile, 4 per md ir aukščiau */}
+    <footer className="relative bg-surface border-t border-line">
+      {/* Large CTA typography */}
+      <Container className="pt-24 pb-16">
+        <p className="section-label mb-4">Prisijunk</p>
+        <h2 className="text-display text-display-lg text-white mb-8">
+          Padėkite auginti<br />
+          jaunąją kartą
+        </h2>
+        <div className="flex flex-wrap gap-4">
+          <Link to="/prisijunk" className="btn-academy">
+            Skirti 1,2% <span className="btn-arrow" aria-hidden="true">&rarr;</span>
+          </Link>
+          <Link to="/kontaktai" className="btn-blue">
+            Susisiekti <span className="btn-arrow" aria-hidden="true">&rarr;</span>
+          </Link>
+        </div>
+      </Container>
+
+      <Container>
+        <div className="h-px bg-line" />
+      </Container>
+
+      {/* Footer grid */}
+      <Container className="py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {/* FA Kaunas */}
-          <div className="col-span-2 md:col-span-1 text-center md:text-left space-y-3">
-            <h3 className="text-xl font-bold">FA KAUNAS</h3>
-            <p className="text-sm text-gray-400">
+          <div className="col-span-2 md:col-span-1 space-y-4">
+            <img src="/logo.webp" alt="FA Kaunas" width={59} height={56} loading="lazy" className="h-14 w-auto" />
+            <p className="text-sm text-fg-subtle leading-relaxed max-w-[240px]">
               Jaunimo futbolo akademija, ugdanti ne tik sportininkus, bet ir atsakingas asmenybes.
             </p>
           </div>
 
-          {/* Puslapiai */}
-          <div className="text-left space-y-3">
-            <h4 className="text-lg font-semibold">Puslapiai</h4>
-            <ul className="space-y-1 text-sm text-gray-300">
-              <li><Link to="/apie" className="hover:text-white">Apie mus</Link></li>
-              <li><Link to="/akademija/treneriai" className="hover:text-white">Treneriai</Link></li>
-              <li><Link to="/akademija/ugdymo-programa" className="hover:text-white">Ugdymo programa</Link></li>
-              <li><Link to="/naujienos" className="hover:text-white">Naujienos</Link></li>
-              <li><Link to="/kontaktai" className="hover:text-white">Kontaktai</Link></li>
-              <li><Link to="/prisijunk" className="hover:text-white">Parama ir rėmimas</Link></li>
+          {/* Navigation */}
+          <nav aria-labelledby="footer-nav-title">
+            <p id="footer-nav-title" className="section-label mb-4">Navigacija</p>
+            <ul className="space-y-1">
+              {footerNav.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to} className={linkClass}>{link.label}</Link>
+                </li>
+              ))}
             </ul>
+          </nav>
+
+          {/* Contact: full width on phones so the email address fits on one line */}
+          <div className="col-span-2 md:col-span-1">
+            <p className="section-label mb-4">Kontaktai</p>
+            <address className="not-italic space-y-1">
+              <p className="text-sm text-fg-muted min-h-[32px] flex items-center">{site.address.full}</p>
+              <a href={site.contact.emailHref} className={linkClass}>{site.contact.email}</a>
+              <br />
+              <a href={site.contact.phoneHref} className={linkClass}>{site.contact.phone}</a>
+            </address>
           </div>
 
-          {/* Kontaktai */}
-          <div className="text-left space-y-2">
-            <h4 className="text-lg font-semibold">Kontaktai</h4>
-            <p className="text-sm text-gray-300">Žeimenos g. 165, 49332 Kaunas</p>
-            <p className="text-sm text-gray-300">administracija@fakaunas.lt</p>
-            <p className="text-sm text-gray-300">+37066527501</p>
-          </div>
-
-          {/* Sekite mus */}
-          <div className="text-left space-y-3">
-            <h4 className="text-lg font-semibold">Sekite mus</h4>
-            <div className="flex gap-4">
-              <a href="https://www.facebook.com/people/FA-Kaunas/100087548214643/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-white text-xl">
-                <FaFacebookF />
-              </a>
-              <a href="https://www.instagram.com/fakaunas/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-white text-xl">
-                <FaInstagram />
-              </a>
-            </div>
+          {/* Social */}
+          <div>
+            <p className="section-label mb-4">Sekite mus</p>
+            <SocialLinks className="gap-3" linkClassName="border border-line text-fg-muted hover:text-white hover:border-white/40" size={15} />
           </div>
         </div>
-      </div>
+      </Container>
 
-      {/* Apatinė eilutė */}
-      <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
-        © {year} FA KAUNAS. Visos teisės saugomos. <br />
-        Padėkite auginti jaunąją kartą – skirkite 1,2% arba tapkite rėmėju.
-      </div>
+      {/* Bottom bar */}
+      <Container>
+        <div className="h-px bg-line" />
+      </Container>
+      <Container className="py-6">
+        <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
+          <p className="text-[11px] text-fg-subtle uppercase tracking-[0.1em]">
+            &copy; {year} {site.legalName}. Visos teisės saugomos.
+          </p>
+          <nav aria-label="Teisinė informacija">
+            <ul className="flex flex-wrap gap-x-6 gap-y-1">
+              {legalNav.map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    className="inline-flex min-h-[32px] items-center text-[11px] text-fg-subtle uppercase tracking-[0.1em] hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </Container>
     </footer>
   );
 }

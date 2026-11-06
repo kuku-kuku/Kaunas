@@ -1,227 +1,155 @@
-import React, { useState, useMemo } from "react";
-import { motion } from "framer-motion";
-import BackgroundWrapper from "../components/BackgroundWrapper";
+import React, { useCallback, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import Seo from "../components/Seo";
+import { Container, Reveal, MapEmbed } from "../components/ui";
+import { TextField, Honeypot } from "../components/form/Field";
+import { site, trialCta, facilities } from "../content";
+import { useForm, sendMail, isEmail, isPhone } from "../lib/useForm";
+
+const errorsText = {
+  name: "Įrašykite savo vardą.",
+  email: "Patikrinkite el. pašto adresą.",
+  phone: "Patikrinkite telefono numerį.",
+  message: "Parašykite bent kelis žodžius (min. 10 simbolių).",
+  send: "Nepavyko išsiųsti žinutės. Bandykite dar kartą arba parašykite tiesiogiai",
+};
 
 export default function Kontaktai() {
-  const [form, setForm] = useState({ name: "", email: "", message: "", website: "" });
-  const [status, setStatus] = useState({ loading: false, ok: null, msg: "" });
+  const successRef = useRef(null);
 
-  const isValidEmail = (v) => /\S+@\S+\.\S{2,}/.test(v.trim());
-  const errors = useMemo(() => {
+  const validate = useCallback((v) => {
     const e = {};
-    if (form.name.trim().length < 3) e.name = "Vardas per trumpas (min. 3 simboliai)";
-    if (!isValidEmail(form.email)) e.email = "Neteisingas el. pašto formatas";
-    if (form.message.trim().length < 10) e.message = "Žinutė per trumpa (min. 10 simbolių)";
-    if (form.website?.length > 0) e.spam = "Spam įtartina";
+    if (v.name.trim().length < 2) e.name = errorsText.name;
+    if (!isEmail(v.email)) e.email = errorsText.email;
+    if (v.phone.trim() && !isPhone(v.phone)) e.phone = errorsText.phone;
+    if (v.message.trim().length < 10) e.message = errorsText.message;
     return e;
-  }, [form]);
+  }, []);
 
-  const isFormValid = Object.keys(errors).length === 0;
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((p) => ({ ...p, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!isFormValid) return;
-    setStatus({ loading: true, ok: null, msg: "" });
-
-    try {
-      const res = await fetch("/api/mail", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message,
-        }),
-      });
-
-      let data = null;
-      try { data = await res.json(); } catch { data = null; }
-
-      if (!res.ok || !data?.ok) {
-        const details =
-          typeof data?.details === "object" ? JSON.stringify(data.details) : (data?.details || "");
-        const serverMsg = details || data?.error || "Nepavyko išsiųsti";
-        throw new Error(serverMsg);
+  const form = useForm({
+    initialValues: { name: "", email: "", phone: "", message: "", website: "" },
+    validate,
+    onSubmit: async (v) => {
+      if (v.website) return; // honeypot
+      try {
+        await sendMail({ name: v.name.trim(), email: v.email.trim(), phone: v.phone.trim(), message: v.message.trim() });
+      } catch {
+        throw new Error(errorsText.send);
       }
+    },
+  });
+  const { values, visibleError, status, field } = form;
+  const sending = status.state === "sending";
 
-      setStatus({ loading: false, ok: true, msg: "Žinutė išsiųsta! Atsakysime kuo greičiau." });
-      setForm({ name: "", email: "", message: "", website: "" });
-    } catch (err) {
-      setStatus({ loading: false, ok: false, msg: err.message || "Klaida siunčiant žinutę" });
-    }
-  };
+  useEffect(() => {
+    if (status.state === "success") successRef.current?.focus();
+  }, [status.state]);
+
+  const contactItems = [
+    { label: "Telefonas", value: site.contact.phone, href: site.contact.phoneHref },
+    { label: "El. paštas", value: site.contact.email, href: site.contact.emailHref },
+    { label: "Adresas", value: site.address.full, href: null },
+  ];
 
   return (
-    <main className="text-black font-sans">
-      {/* HERO */}
-      <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto text-center flex flex-col items-center"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold drop-shadow-md">Kontaktai</h1>
-          <p className="mt-4 text-lg font-light">Susisiekite su mumis – atsakysime į visus klausimus!</p>
-        </motion.div>
-      </section>
+    <main>
+      <Seo
+        title="Kontaktai"
+        description={`Susisiekite su FA Kaunas: ${site.contact.phone}, ${site.contact.email}, ${site.address.full}.`}
+      />
 
-      {/* TURINYS */}
-      <BackgroundWrapper>
-        <section className="min-h-screen px-6 py-24 text-black select-none">
-          <div className="max-w-7xl mx-auto space-y-16">
-            <motion.div
-              className="grid md:grid-cols-2 gap-12"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              {/* Forma */}
-              <div className="bg-[#f8fdff] p-8 rounded-xl shadow-md space-y-6">
-                <h2 className="text-2xl font-semibold text-[#007bb5]">Parašykite mums</h2>
-
-                {status.ok === true && (
-                  <div className="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-green-700">
-                    {status.msg}
-                  </div>
-                )}
-                {status.ok === false && (
-                  <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-red-700 break-words">
-                    {status.msg || "Įvyko klaida. Bandykite dar kartą."}
-                  </div>
-                )}
-
-                <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-                  {/* Honeypot */}
-                  <input
-                    type="text"
-                    name="website"
-                    value={form.website}
-                    onChange={handleChange}
-                    tabIndex="-1"
-                    autoComplete="off"
-                    className="hidden"
-                    aria-hidden="true"
-                  />
-
-                  <div>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Vardas"
-                      value={form.name}
-                      onChange={handleChange}
-                      className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 
-                        ${errors.name ? "border-red-300 focus:ring-red-300" : "border-gray-300 focus:ring-[#007bb5]"}`}
-                    />
-                    {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
-                  </div>
-
-                  <div>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="El. paštas"
-                      value={form.email}
-                      onChange={handleChange}
-                      className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 
-                        ${errors.email ? "border-red-300 focus:ring-red-300" : "border-gray-300 focus:ring-[#007bb5]"}`}
-                    />
-                    {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
-                  </div>
-
-                  <div>
-                    <textarea
-                      name="message"
-                      placeholder="Jūsų žinutė..."
-                      rows="4"
-                      value={form.message}
-                      onChange={handleChange}
-                      className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 
-                        ${errors.message ? "border-red-300 focus:ring-red-300" : "border-gray-300 focus:ring-[#007bb5]"}`}
-                    />
-                    {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={!isFormValid || status.loading}
-                    className={`w-full text-white font-semibold px-6 py-2 rounded-md transition 
-                      ${!isFormValid || status.loading
-                        ? "bg-[#007bb5]/60 cursor-not-allowed"
-                        : "bg-[#007bb5] hover:bg-[#00689f]"}`}
-                  >
-                    {status.loading ? "Siunčiama..." : "Siųsti žinutę"}
-                  </button>
-
-                  <p className="text-xs text-gray-500 text-center">
-                    Siųsdami sutinkate su duomenų tvarkymu pagal FA Kaunas privatumo politiką.
-                  </p>
-
-                  {/* Atsarginis variantas */}
-                  <p className="text-center text-sm text-gray-500">
-                    Arba parašykite tiesiogiai:{" "}
-                    <a
-                      className="text-[#007bb5] underline"
-                      href={`mailto:administracija@fakaunas.lt?subject=Kontaktas%20iš%20svetainės&body=Vardas:%20${encodeURIComponent(
-                        form.name || ""
-                      )}%0AEl.%20paštas:%20${encodeURIComponent(
-                        form.email || ""
-                      )}%0A%0AŽinutė:%0A${encodeURIComponent(form.message || "")}`}
-                    >
-                      administracija@fakaunas.lt
-                    </a>
-                  </p>
-                </form>
-              </div>
-
-              {/* Google Maps */}
-              <div className="w-full h-[400px]">
-                <iframe
-                  title="FA Kaunas lokacija"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2295.5365087714223!2d23.915254976763413!3d54.938988372840025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e722a202feec5d%3A0x9e8f7c28479d5d76!2s%C5%BDeimenos%20g.%20165%2C%2049332%20Kaunas!5e0!3m2!1slt!2slt!4v1721208852185!5m2!1slt!2slt"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="rounded-xl shadow-md"
-                ></iframe>
-              </div>
-            </motion.div>
-
-            {/* Kontaktinė info */}
-            <motion.div
-              className="text-lg space-y-3 text-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-            >
-              <p>
-                <strong>Telefonas:</strong>{" "}
-                <a href="tel:+37066527501" className="text-[#007bb5] hover:underline">
-                  +37066527501
-                </a>
-              </p>
-              <p>
-                <strong>El. paštas:</strong>{" "}
-                <a href="mailto:administracija@fakaunas.lt" className="text-[#007bb5] hover:underline">
-                  administracija@fakaunas.lt
-                </a>
-              </p>
-              <p>
-                <strong>Adresas:</strong> Žeimenos g. 165, 49332 Kaunas
-              </p>
-            </motion.div>
+      <section aria-labelledby="page-title" className="pb-section pt-32 md:pt-40">
+        <Container>
+          <div className="max-w-3xl">
+            <p className="section-label mb-5">Kontaktai</p>
+            <h1 id="page-title" className="text-display text-display-xl text-fg">Susisiekite</h1>
+            <p className="mt-6 text-lead text-fg-muted">Atsakysime į visus klausimus apie treniruotes, grupes ir akademiją.</p>
+            <p className="mt-4 text-fg-muted">
+              Norite atvesti vaiką į treniruotę?{" "}
+              <Link to={trialCta.to} className="text-accent-bright underline underline-offset-4 hover:text-white">
+                {trialCta.longLabel}
+              </Link>
+            </p>
           </div>
-        </section>
-      </BackgroundWrapper>
+
+          <div className="mt-14 grid gap-14 lg:grid-cols-12 lg:gap-16">
+            {/* ─── Form ─── */}
+            <Reveal delay={0.1} className="lg:col-span-7">
+              {status.state === "success" ? (
+                <div ref={successRef} tabIndex={-1} role="status" className="rounded-2xl border border-line bg-surface-raised p-7 outline-none md:p-10">
+                  <p className="text-eyebrow font-semibold uppercase text-success">Žinutė išsiųsta</p>
+                  <h2 className="mt-4 text-display text-display-md text-fg">Ačiū!</h2>
+                  <p className="mt-4 text-fg-muted">Atsakysime kuo greičiau.</p>
+                  <button type="button" onClick={form.reset} className="btn-academy mt-8">
+                    Rašyti naują žinutę
+                  </button>
+                </div>
+              ) : (
+                <form
+                  ref={form.formRef}
+                  onSubmit={form.handleSubmit}
+                  noValidate
+                  aria-labelledby="form-title"
+                  className="relative space-y-6 rounded-2xl border border-line bg-surface-raised p-6 md:p-10"
+                >
+                  <h2 id="form-title" className="font-display text-2xl font-extrabold uppercase text-fg">Parašykite mums</h2>
+                  <Honeypot value={values.website} onChange={field("website").onChange} />
+
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    <TextField {...field("name")} label="Vardas" autoComplete="name" required error={visibleError("name")} />
+                    <TextField {...field("email")} type="email" inputMode="email" label="El. paštas" autoComplete="email" required error={visibleError("email")} />
+                  </div>
+                  <TextField {...field("phone")} type="tel" inputMode="tel" label="Telefonas" autoComplete="tel" error={visibleError("phone")} />
+                  <TextField {...field("message")} as="textarea" rows={5} label="Žinutė" required error={visibleError("message")} />
+
+                  {status.state === "error" && (
+                    <p role="alert" className="rounded-lg border border-danger/40 bg-danger/10 px-5 py-4 text-sm text-fg">
+                      {status.message}{" "}
+                      <a href={site.contact.emailHref} className="underline underline-offset-4">{site.contact.email}</a>.
+                    </p>
+                  )}
+
+                  <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-sm text-fg-subtle">
+                      Siųsdami sutinkate su duomenų tvarkymu pagal{" "}
+                      <Link to="/privatumo-politika" className="underline underline-offset-4 hover:text-white">privatumo politiką</Link>.
+                    </p>
+                    <button type="submit" disabled={sending} className="btn-blue shrink-0 justify-center disabled:cursor-wait disabled:opacity-60">
+                      {sending ? "Siunčiama…" : "Siųsti žinutę"}
+                      {!sending && <span className="btn-arrow" aria-hidden="true">&rarr;</span>}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </Reveal>
+
+            {/* ─── Details + map ─── */}
+            <Reveal delay={0.15} className="space-y-6 lg:col-span-5">
+              <dl className="divide-y divide-line rounded-2xl border border-line">
+                {contactItems.map((item) => (
+                  <div key={item.label} className="p-6">
+                    <dt className="text-eyebrow uppercase text-fg-subtle">{item.label}</dt>
+                    <dd className="mt-2 text-lg text-fg">
+                      {item.href ? (
+                        <a href={item.href} className="hover:text-accent-bright">{item.value}</a>
+                      ) : (
+                        item.value
+                      )}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <MapEmbed
+                src={site.address.mapEmbed}
+                title="FA Kaunas žemėlapyje"
+                address={site.address.full}
+                mapsLink={facilities.mapsLink}
+                className="aspect-[4/3]"
+              />
+            </Reveal>
+          </div>
+        </Container>
+      </section>
     </main>
   );
 }

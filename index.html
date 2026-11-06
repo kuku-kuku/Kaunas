@@ -6,31 +6,42 @@
 
     <!-- Naršyklės tab -->
     <title>FA KAUNAS</title>
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta data-rh="true"
+      name="description"
+      content="FA Kaunas – jaunimo futbolo akademija Kaune. Treniruotės vaikams, UEFA licencijas turintys treneriai, turnyrai Lietuvoje ir užsienyje."
+    />
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Social sharing meta -->
-    <meta property="og:title" content="FA KAUNAS" />
-    <meta
+    <!-- Kritiniai šriftai (kiti kraunami pagal poreikį) -->
+    <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/barlow-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Default meta for crawlers without JS. data-rh lets react-helmet replace them per page. -->
+    <meta data-rh="true" property="og:title" content="FA KAUNAS" />
+    <meta data-rh="true"
       property="og:description"
       content="Oficialus FA KAUNAS futbolo akademijos puslapis. Nuo svajonės iki realybės!"
     />
-    <meta property="og:image" content="https://fakaunas.lt/logo.png" />
+    <meta data-rh="true" property="og:image" content="https://fakaunas.lt/og-default.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="https://fakaunas.lt" />
-    <meta property="og:type" content="website" />
+    <meta data-rh="true" property="og:url" content="https://fakaunas.lt" />
+    <meta data-rh="true" property="og:type" content="website" />
 
     <!-- Twitter kortelė -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="FA KAUNAS" />
-    <meta
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <meta data-rh="true" name="twitter:title" content="FA KAUNAS" />
+    <meta data-rh="true"
       name="twitter:description"
       content="Oficialus FA KAUNAS futbolo akademijos puslapis. Nuo svajonės iki realybės!"
     />
-    <meta name="twitter:image" content="https://fakaunas.lt/logo.png" />
+    <meta data-rh="true" name="twitter:image" content="https://fakaunas.lt/og-default.jpg" />
 
     <!-- Counter.dev -->
     <script
+      async
       src="https://cdn.counter.dev/script.js"
       data-id="05e3ca4a-ce8b-4051-b562-0053dab1612c"
       data-utcoffset="3"

@@ -1,88 +1,46 @@
-// src/App.jsx
-import React from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
-
-import Home from './pages/Home';
-import About from './pages/About';
-import Kontaktai from './pages/Kontaktai';
-import Naujiena from "./pages/naujienos/Naujiena";
-import Tikslai from './pages/apie/Tikslai';
-import EtikosKodeksas from './pages/apie/EtikosKodeksas';
-
-import Akademija from './pages/Akademija';
-import Treneriai from './pages/akademija/Treneriai';
-import UgdymoPrograma from './pages/akademija/UgdymoPrograma';
-
-import Prisijunk from './pages/Prisijunk';
-import Naujienos from './pages/Naujienos';
-import Stovykla2025 from './pages/naujienos/Stovykla2025';
-import HegelmanTurnyras from './pages/naujienos/HegelmanTurnyras';
-import SummerVictory2025 from './pages/naujienos/SummerVictory';
-import Neodenta2025 from './pages/naujienos/Neodenta2025';
-import KaffPrezidento2025 from './pages/naujienos/KaffPrezidento2025';
-
-import LFFTalentuCentras from './pages/naujienos/LFFTalentuCentras';
-import DobrecovaCup2025 from './pages/naujienos/DobrecovaCup2025';
-import VasarosStovyklaMragowo2025 from './pages/naujienos/VasarosStovyklaMragowo2025';
-import RudensTaure from './pages/naujienos/RudensTaure';
-import ZalgirisFutsalCup from './pages/naujienos/ZalgirisFutsalCup';
-import BalciaCup2025 from './pages/naujienos/BalciaCup2025';
-import SportfanTurnyras from './pages/naujienos/SportfanTurnyras';
-import KickOff2025 from './pages/naujienos/KickOff2025';
-import KaunoRajonoTaure2025 from './pages/naujienos/KaunoRajonoTaure2025';
-import AzuoloTaure2025 from './pages/naujienos/AzuoloTaure2025';
-import ResortNiegocinCup2025 from './pages/naujienos/ResortNiegocinCup2025';
-import NeodentaBlitzCup2025 from './pages/naujienos/NeodentaBlitzCup2025';
-import RemigijusMikalainis2025 from './pages/naujienos/RemigijusMikalainis2025';
-import KaunasFootballFest2025 from "./pages/naujienos/KaunasFootballFest2025";
-import KidsCupVilnius2025 from './pages/naujienos/KidsCupVilnius2025';
-import KaunasFootballFest2017FAKaunas from "./pages/naujienos/KaunasFootballFest2017FAKaunas";
-import IBRAFriendlyMatch from "./pages/naujienos/IBRAFriendlyMatch";
-import AzuolasTurnyras2015 from "./pages/naujienos/AzuolasTurnyras2015";
-
+import React, { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import BackgroundWrapper from './components/BackgroundWrapper';
 
-// ❌ Pašalinta: AdminNews ir NewsSingle importai
-// import AdminNews from './pages/AdminNews';
-// import NewsSingle from './pages/NewsSingle';
+// Home is eager (most visits land there); every other route is its own chunk.
+import Home from './pages/Home';
+const About = lazy(() => import('./pages/About'));
+const Kontaktai = lazy(() => import('./pages/Kontaktai'));
+const PrivatumoPolitika = lazy(() => import('./pages/PrivatumoPolitika'));
+const Registracija = lazy(() => import('./pages/Registracija'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const Tikslai = lazy(() => import('./pages/apie/Tikslai'));
+const EtikosKodeksas = lazy(() => import('./pages/apie/EtikosKodeksas'));
 
-function LayoutWrapper({ children }) {
-  const location = useLocation();
-  const isHome = location.pathname === '/';
+const Akademija = lazy(() => import('./pages/Akademija'));
+const Treneriai = lazy(() => import('./pages/akademija/Treneriai'));
+const UgdymoPrograma = lazy(() => import('./pages/akademija/UgdymoPrograma'));
+const Baze = lazy(() => import('./pages/akademija/Baze'));
 
-  return isHome ? (
-    children
-  ) : (
-    <BackgroundWrapper>
-      <div className="flex-grow">{children}</div>
-    </BackgroundWrapper>
-  );
-}
+const Prisijunk = lazy(() => import('./pages/Prisijunk'));
+const Naujienos = lazy(() => import('./pages/Naujienos'));
+const NewsArticle = lazy(() => import('./pages/naujienos/NewsArticle'));
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Fiksuotas logotipas kairėje */}
-      <Link
-        to="/"
-        className="fixed top-4 left-0 z-[9999] ml-2 
-                   w-[80px] sm:w-[100px] md:w-[120px] lg:w-[140px]"
-      >
-        <img
-          src="/logo.png"
-          alt="FA Kaunas logotipas"
-          className="w-full h-auto object-contain"
-        />
-      </Link>
-
+    // LazyMotion + `m` components load only the animation features we use (no layout
+    // animations), which keeps framer-motion small in the main bundle. `strict` makes a
+    // stray full `motion` import fail loudly.
+    // reducedMotion="user": framer-motion skips transform animations for visitors who
+    // ask their OS for reduced motion (CSS transitions are handled in index.css)
+    <LazyMotion features={domAnimation} strict>
+    <MotionConfig reducedMotion="user">
+    <div className="min-h-screen flex flex-col bg-surface">
+      <a href="#turinys" className="skip-link">Pereiti prie turinio</a>
       <Navbar />
       <ScrollToTop />
 
-      <LayoutWrapper>
+      <div id="turinys" tabIndex={-1} className="flex-grow outline-none">
+        <Suspense fallback={<div className="min-h-screen bg-surface" aria-busy="true" />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/apie" element={<About />} />
@@ -91,54 +49,24 @@ function App() {
           <Route path="/akademija" element={<Akademija />} />
           <Route path="/akademija/treneriai" element={<Treneriai />} />
           <Route path="/akademija/ugdymo-programa" element={<UgdymoPrograma />} />
+          <Route path="/akademija/baze" element={<Baze />} />
           <Route path="/prisijunk" element={<Prisijunk />} />
           <Route path="/naujienos" element={<Naujienos />} />
-          <Route path="/naujienos/:slug" element={<Naujiena />} />
-
-          {/* Statiniai naujienų puslapiai */}
-          <Route path="/naujienos/stovykla-2025" element={<Stovykla2025 />} />
-          <Route path="/naujienos/hegelman-turnyras" element={<HegelmanTurnyras />} />
-          <Route path="/naujienos/summer-victory" element={<SummerVictory2025 />} />
-          <Route path="/naujienos/dobrecova-cup-2025" element={<DobrecovaCup2025 />} />
-          <Route path="/naujienos/vasaros-stovykla-mragowo-2025" element={<VasarosStovyklaMragowo2025 />} />
-          <Route path="/naujienos/lff-talentu-centras" element={<LFFTalentuCentras />} />
-          <Route path="/naujienos/neodenta-2025" element={<Neodenta2025 />} />
-          <Route path="/naujienos/kaff-prezidento-2025" element={<KaffPrezidento2025 />} />
-          <Route path="/naujienos/rudens-taure" element={<RudensTaure />} />
-          <Route path="/naujienos/zalgiris-futsal-cup" element={<ZalgirisFutsalCup />} />
-          <Route path="/naujienos/balcia-cup-2025" element={<BalciaCup2025 />} />
-          <Route path="/naujienos/sportfan-turnyras" element={<SportfanTurnyras />} />
-          <Route path="/naujienos/kick-off-2025" element={<KickOff2025 />} />
-          <Route path="/naujienos/kauno-rajono-taure-2025" element={<KaunoRajonoTaure2025 />} />
-          <Route path="/naujienos/azuolo-rudens-taure-2025" element={<AzuoloTaure2025 />} />
-          <Route path="/naujienos/resort-niegocin-cup-2025" element={<ResortNiegocinCup2025 />} />
-          <Route path="/naujienos/neodenta-blitz-cup-2025" element={<NeodentaBlitzCup2025 />} />
-          <Route path="/naujienos/remigijus-mikalainis-2025" element={<RemigijusMikalainis2025 />} />
-          <Route path="/naujienos/kaunas-football-fest-2025" element={<KaunasFootballFest2025 />} />
-          <Route path="/naujienos/kids-cup-vilnius-2025" element={<KidsCupVilnius2025 />} />
-          <Route
-            path="/naujienos/kaunas-football-fest-2017"
-            element={<KaunasFootballFest2017FAKaunas />}
-          />
-          <Route
-            path="/naujienos/friendly-match-ibra"
-            element={<IBRAFriendlyMatch />}
-          />
-          <Route
-            path="/naujienos/azuolo-turnyras-2015"
-            element={<AzuolasTurnyras2015 />}
-          />
-          {/* ❌ Pašalintas dinaminis /:slug maršrutas ir Admin puslapis
-              <Route path="/naujienos/:slug" element={<NewsSingle />} />
-              <Route path="/admin" element={<AdminNews />} />
-          */}
+          {/* Archive articles (content/lt/articles.js) and CMS articles share one template */}
+          <Route path="/naujienos/:slug" element={<NewsArticle />} />
 
           <Route path="/kontaktai" element={<Kontaktai />} />
+          <Route path="/privatumo-politika" element={<PrivatumoPolitika />} />
+          <Route path="/registracija" element={<Registracija />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
-      </LayoutWrapper>
+        </Suspense>
+      </div>
 
       <Footer />
     </div>
+    </MotionConfig>
+    </LazyMotion>
   );
 }
 

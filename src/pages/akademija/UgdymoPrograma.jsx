@@ -1,163 +1,188 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import BackgroundWrapper from '../../components/BackgroundWrapper';
+import React, { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Seo from '../../components/Seo';
+import { Container, Section, SectionHeader, Reveal } from '../../components/ui';
+import TrialCta from '../../components/home/TrialCta';
+import { programsPage as page, methodology, coaches, pathway, trialCta } from '../../content';
+import { getGroupBands } from '../../lib/groups';
 
-export default function Ugdymas() {
-  const shouldReduce = useReducedMotion();
+const OTHER = 'kita';
 
-  // Tavo nurodytos grupės (palikta kaip buvo)
-  const grupes = [
-    {
-      metai: '2015 / 2016',
-      grupe: 'A',
-      vyrTreneris: 'Gabrielius Zagurskas',
-      asistentai: ['Marius Činikas'],
-    },
-    {
-      metai: '2015 / 2016',
-      grupe: 'B',
-      vyrTreneris: 'Lukas Sipavičius',
-      asistentai: ['Tomas Macelis'],
-    },
-    {
-      metai: '2017 / 2018',
-      grupe: null,
-      vyrTreneris: 'Marius Činikas',
-      asistentai: ['Ernestas Bernota'],
-    },
-    {
-      metai: '2019 / 2020 / 2021',
-      grupe: null,
-      vyrTreneris: 'Tomas Macelis',
-      asistentai: ['Lukas Sipavičius', 'Gabrielius Zagurskas'],
-    },
-  ];
+function coachLicence(name) {
+  return coaches.find((c) => c.vardas === name)?.licencija ?? null;
+}
 
-  const containerVariants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08 } },
-  };
+function CoachLine({ label, name }) {
+  const licence = coachLicence(name);
+  return (
+    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3">
+      <dt className="text-eyebrow uppercase text-fg-subtle">{label}</dt>
+      <dd className="flex items-center gap-3 text-fg">
+        {name}
+        {licence && (
+          <span className="rounded-full border border-line-strong px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-fg-muted">
+            {licence}
+          </span>
+        )}
+      </dd>
+    </div>
+  );
+}
 
-  const cardVariants = {
-    hidden: shouldReduce ? { opacity: 0 } : { opacity: 0, scale: 0.985, filter: 'blur(6px)' },
-    show: shouldReduce
-      ? { opacity: 1, transition: { duration: 0.25 } }
-      : { opacity: 1, scale: 1, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
-  };
-
-  const blockVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { duration: 0.5 } },
-  };
+function GroupFinder({ bands, selected, onSelect }) {
+  const years = useMemo(() => bands.flatMap((b) => b.years).sort((a, b) => a - b), [bands]);
+  const band = bands.find((b) => b.years.includes(selected));
 
   return (
-    <main className="text-black font-sans">
-      {/* HERO sekcija */}
-      <section className="bg-gradient-to-r from-[#0077cc] to-[#00bcd4] text-white py-24 px-6 md:px-12 lg:px-24">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto text-center flex flex-col items-center"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Ugdymo programa ir amžiaus grupės
-          </h1>
-          <p className="text-lg font-light max-w-2xl">
-            Susipažinkite su mūsų ugdymo principais ir treniruojamomis vaikų grupėmis.
-          </p>
-        </motion.div>
+    <div className="rounded-lg border border-line bg-surface-raised p-6 md:p-8">
+      <h2 id="finder-title" className="font-display text-2xl font-extrabold uppercase text-fg">{page.finder.title}</h2>
+      <fieldset className="mt-5">
+        <legend className="text-sm text-fg-muted">{page.finder.hint}</legend>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {[...years, OTHER].map((year) => {
+            const active = selected === year;
+            return (
+              <button
+                key={year}
+                type="button"
+                aria-pressed={active}
+                onClick={() => onSelect(active ? null : year)}
+                className={`min-h-[44px] min-w-[64px] rounded-full border px-4 font-mono text-sm transition-colors ${
+                  active
+                    ? 'border-accent bg-accent text-white'
+                    : 'border-line-strong text-fg-muted hover:border-white/40 hover:text-white'
+                }`}
+              >
+                {year === OTHER ? 'Kiti' : year}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      <p aria-live="polite" className="mt-6 min-h-[3rem] text-fg">
+        {selected === OTHER && <span className="text-fg-muted">{page.finder.noGroup}</span>}
+        {band && (
+          <a href={`#grupe-${band.id}`} className="group inline-flex items-center gap-2 underline-offset-4 hover:underline">
+            Tinkama grupė: <strong className="font-display text-xl font-extrabold uppercase text-accent-bright">{band.label}</strong>
+            <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">&darr;</span>
+          </a>
+        )}
+      </p>
+    </div>
+  );
+}
+
+export default function UgdymoPrograma() {
+  const bands = useMemo(() => getGroupBands(), []);
+  const [selectedYear, setSelectedYear] = useState(null);
+  const selectedBand = bands.find((b) => b.years.includes(selectedYear))?.id;
+
+  return (
+    <main>
+      <Seo title={page.seo.title} description={page.seo.description} />
+
+      {/* ═══ HEADER + FINDER ═══ */}
+      <section aria-labelledby="page-title" className="border-b border-line pb-section-sm pt-32 md:pt-40">
+        <Container className="grid gap-12 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <SectionHeader level={1} id="page-title" eyebrow={page.hero.eyebrow} title={page.hero.title} size="xl" intro={page.hero.lead} animate={false} />
+          </div>
+          <Reveal delay={0.1} className="lg:col-span-5">
+            <GroupFinder bands={bands} selected={selectedYear} onSelect={setSelectedYear} />
+          </Reveal>
+        </Container>
       </section>
 
-      {/* TURINYS */}
-      <BackgroundWrapper>
-        <section className="py-20 px-6 md:px-12 lg:px-24">
-          {/* Ugdymo metodika */}
-          <motion.div
-            variants={blockVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="max-w-6xl mx-auto mb-24"
-          >
-            <h2 className="text-3xl font-bold mb-6 text-[#007bb5] text-center">
-              Mūsų ugdymo metodika
-            </h2>
+      {/* ═══ GROUPS ═══ */}
+      <Section labelledBy="groups-title">
+        <SectionHeader id="groups-title" index={page.groups.index} eyebrow={page.groups.eyebrow} title={page.groups.title} size="lg" />
 
-            {/* Paliktas tiksliai tavo tekstas */}
-            <p className="text-lg text-gray-800 leading-relaxed mb-6 text-justify">
-              FA Kaunas jaunimo ugdymo programa orientuota į visapusišką vaiko tobulėjimą. Daug dėmesio skiriama ne tik
-              techniniams ir taktiniams futbolo aspektams, bet ir asmenybės vystymui bei vertybėms:
-            </p>
-
-            <ul className="list-disc list-inside text-gray-800 space-y-2 text-lg">
-              <li>Techninių įgūdžių tobulinimas</li>
-              <li>Taktinio mąstymo ugdymas</li>
-              <li>Psichologinis stabilumas ir bendravimas</li>
-              <li>Asmenybės ir vertybių formavimas</li>
-              <li>Fizinio pasirengimo lavinimas</li>
-            </ul>
-
-            {/* Subtili skiriamoji linija */}
-            <div className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
-          </motion.div>
-
-          {/* Amžiaus grupės */}
-          <motion.div
-            variants={blockVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <h2 className="text-3xl font-bold text-center mb-12 text-[#007bb5]">
-              Treniruojamos amžiaus grupės
-            </h2>
-
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
-            >
-              {grupes.map((g, idx) => (
-                <motion.article
-                  key={`${g.metai}-${g.vyrTreneris}-${idx}`}
-                  variants={cardVariants}
-                  className="bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-100 transition-all p-6"
-                >
-                  {/* Header: metai + pogrupis */}
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-2xl font-bold text-[#007bb5]">{g.metai}</h3>
-                    {g.grupe && (
-                      <span className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium bg-cyan-50 border-cyan-200 text-cyan-800">
-                        Grupė {g.grupe}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Vyr. treneris */}
-                  <p className="text-gray-800 mb-2">
-                    <span className="font-medium">Vyr. treneris:</span> {g.vyrTreneris}
+        <ol className="mt-16 border-t border-line">
+          {bands.map((band, i) => {
+            const highlighted = band.id === selectedBand;
+            return (
+              <Reveal
+                as="li"
+                key={band.id}
+                id={`grupe-${band.id}`}
+                className={`grid scroll-mt-28 gap-8 border-b border-line py-10 transition-colors duration-500 md:py-14 lg:grid-cols-12 lg:gap-10 ${
+                  highlighted ? 'bg-accent/[0.08] shadow-[inset_3px_0_0_theme(colors.accent.DEFAULT)]' : ''
+                }`}
+              >
+                <div className={`lg:col-span-4 ${highlighted ? 'pl-5' : ''} transition-[padding] duration-500`}>
+                  <span className="font-mono text-sm text-accent-bright">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 className="mt-4 font-display text-display-lg font-extrabold uppercase leading-none text-fg">{band.label}</h3>
+                  <p className="mt-3 text-eyebrow uppercase text-fg-subtle">
+                    Gimimo metai{band.teams.length > 1 ? ` · ${band.teams.length} komandos` : ''}
                   </p>
+                </div>
 
-                  {/* Asistentai */}
-                  {g.asistentai?.length > 0 && (
-                    <div className="mt-2">
-                      <p className="font-medium text-gray-800 mb-1">Trenerio asistentai:</p>
-                      <ul className="list-disc list-inside text-gray-700 space-y-1">
-                        {g.asistentai.map((v, i) => (
-                          <li key={i}>{v}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </motion.article>
-              ))}
-            </motion.div>
-          </motion.div>
-        </section>
-      </BackgroundWrapper>
+                <div className="space-y-6 lg:col-span-5">
+                  {band.teams.map((team) => (
+                    <dl key={team.vyrTreneris} className="divide-y divide-line rounded-lg border border-line px-5">
+                      {team.grupe && (
+                        <div className="py-3">
+                          <dt className="sr-only">Komanda</dt>
+                          <dd className="text-eyebrow font-semibold uppercase text-accent-bright">Komanda {team.grupe}</dd>
+                        </div>
+                      )}
+                      <CoachLine label="Vyr. treneris" name={team.vyrTreneris} />
+                      {team.asistentai?.map((a) => <CoachLine key={a} label="Asistentas" name={a} />)}
+                    </dl>
+                  ))}
+                  <p className="text-sm text-fg-subtle">{page.groups.scheduleNote}</p>
+                </div>
+
+                <div className="flex items-start lg:col-span-3 lg:justify-end">
+                  <Link to={`${trialCta.to}?grupe=${band.id}`} className={highlighted ? 'btn-blue' : 'btn-academy'}>
+                    {page.groups.cta}
+                    <span className="sr-only"> – {band.label} m. gimusių grupė</span>
+                    <span className="btn-arrow" aria-hidden="true">&rarr;</span>
+                  </Link>
+                </div>
+              </Reveal>
+            );
+          })}
+        </ol>
+
+        {/* Next step after the academy */}
+        <Reveal className="mt-10 flex flex-col gap-6 rounded-lg bg-surface-navy p-7 md:flex-row md:items-center md:justify-between md:p-10">
+          <div className="max-w-2xl">
+            <p className="text-eyebrow uppercase text-accent-bright">Kitas žingsnis</p>
+            <h3 className="mt-3 font-display text-display-sm font-extrabold uppercase text-fg">{pathway.next.title}</h3>
+            <p className="mt-3 text-fg-muted">{pathway.next.text}</p>
+          </div>
+          <Link to={pathway.next.to} className="btn-academy shrink-0">
+            Skaityti naujieną <span className="btn-arrow" aria-hidden="true">&rarr;</span>
+          </Link>
+        </Reveal>
+      </Section>
+
+      {/* ═══ METHODOLOGY ═══ */}
+      <Section labelledBy="method-title" tone="raised" divider>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <SectionHeader
+            id="method-title"
+            index={page.methodology.index}
+            eyebrow={page.methodology.eyebrow}
+            title={page.methodology.title}
+            intro={page.methodology.intro}
+            size="lg"
+            className="lg:col-span-5"
+          />
+          <ol className="border-t border-line lg:col-span-6 lg:col-start-7">
+            {methodology.map((item, i) => (
+              <Reveal as="li" key={item} delay={i * 0.06} className="flex items-baseline gap-6 border-b border-line py-6">
+                <span className="w-8 shrink-0 font-mono text-sm text-accent-bright">{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-display text-2xl font-semibold uppercase text-fg">{item}</span>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </Section>
+
+      <TrialCta />
     </main>
   );
 }
