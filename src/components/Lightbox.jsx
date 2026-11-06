@@ -15,6 +15,21 @@ export default function Lightbox({ images, index, alt, onIndexChange, onClose })
     if (!open && dialog.open) dialog.close();
   }, [open]);
 
+  // A modal <dialog> doesn't stop the page behind it from scrolling, so lock it while the
+  // viewer is open. Padding replaces the hidden scrollbar so the page doesn't shift sideways.
+  useEffect(() => {
+    if (!open) return undefined;
+    const html = document.documentElement;
+    const scrollbar = window.innerWidth - html.clientWidth;
+    const prev = { overflow: html.style.overflow, paddingRight: html.style.paddingRight };
+    html.style.overflow = 'hidden';
+    if (scrollbar > 0) html.style.paddingRight = `${scrollbar}px`;
+    return () => {
+      html.style.overflow = prev.overflow;
+      html.style.paddingRight = prev.paddingRight;
+    };
+  }, [open]);
+
   useEffect(() => {
     if (!open) return undefined;
     const onKey = (e) => {
@@ -34,7 +49,7 @@ export default function Lightbox({ images, index, alt, onIndexChange, onClose })
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
       aria-label="Nuotraukų peržiūra"
-      className="m-0 h-[100dvh] max-h-none w-screen max-w-none bg-transparent p-0 backdrop:bg-black/90"
+      className="m-0 h-[100dvh] max-h-none w-screen max-w-none overscroll-contain bg-transparent p-0 backdrop:bg-black/90"
     >
       {open && (
         <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-4 md:p-10">

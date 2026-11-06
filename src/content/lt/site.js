@@ -4,7 +4,8 @@
 export const site = {
   name: 'FA Kaunas',
   legalName: 'FA KAUNAS',
-  url: 'https://fakaunas.lt',
+  // Primary domain: Vercel redirects fakaunas.lt → www.fakaunas.lt, so canonical URLs use www
+  url: 'https://www.fakaunas.lt',
   slogan: 'Nuo svajonės iki realybės!',
   description:
     'FA Kaunas – jaunimo futbolo akademija Kaune. Treniruotės vaikams, UEFA licencijas turintys treneriai, turnyrai Lietuvoje ir užsienyje.',

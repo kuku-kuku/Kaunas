@@ -112,8 +112,9 @@ New photos: put them in `public/`, run `npm run images`, then commit `public/opt
 
 - `npm run build` = client build → server bundle → `scripts/prerender.mjs` (writes `dist/<page>.html`,
   `spa.html`, `sitemap.xml`, `robots.txt`). `npm run lint` must pass before committing.
-- `vercel.json` now uses `cleanUrls` and falls back to `/spa.html` (an empty shell) for routes that are
-  not prerendered, such as articles added in the CMS after the last deploy.
+- `vercel.json` now uses `cleanUrls` and falls back to `/spa` (the empty shell `spa.html`; with cleanUrls
+  Vercel only serves it at `/spa`) for routes that are
+  not prerendered, such as every article that comes from the CMS.
 - New dev dependencies: `eslint` (+ react, hooks, jsx-a11y plugins), `globals`, `sharp`. No new runtime
   dependencies.
 
@@ -137,7 +138,7 @@ privacy policy text, confirmed counters. See `TODO-content.md`.
   `src/pages/NewsSingle.jsx`. It is excluded from lint. The local `.env` contains `VITE_ADMIN_KEY`; delete
   the code and rotate that key.
 - `api/mail.js` allows any origin unless `ALLOWED_ORIGIN` is set, and has no rate limit (a honeypot field
-  is the only spam protection). Set `ALLOWED_ORIGIN=https://fakaunas.lt` and consider a simple rate limit.
+  is the only spam protection). Set `ALLOWED_ORIGIN=https://www.fakaunas.lt` (www is the primary domain) and consider a simple rate limit.
 - Optimised images (26 MB) are committed to git. Fine for now; if the photo library grows, generate them
   during the build or move images to the CMS/CDN.
 - Both `package-lock.json` (Railway/nixpacks) and `pnpm-lock.yaml` (Vercel) are kept in sync. Consider using
