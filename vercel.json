@@ -6,6 +6,6 @@
   "rewrites": [
     { "source": "/api/contact", "destination": "/api/mail" },
     { "source": "/api/:match*", "destination": "/api/:match*" },
-    { "source": "/(.*)", "destination": "/spa.html" }
+    { "source": "/(.*)", "destination": "/spa" }
   ]
 }

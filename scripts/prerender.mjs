@@ -1,7 +1,8 @@
 // Build step 3 of 3 (see package.json "build"): turns the client build into static HTML.
 //
 //   1. dist/index.html (client build, empty #root) is kept as dist/spa.html – the fallback
-//      Vercel serves for routes that are not prerendered (CMS-only news articles).
+//      Vercel serves for routes that are not prerendered (CMS-only news articles). With
+//      cleanUrls on, Vercel serves it at /spa, so vercel.json must rewrite to /spa, not /spa.html.
 //   2. Every route in entry-server's `prerenderRoutes` is rendered to HTML with its own
 //      <head> (title, description, Open Graph, JSON-LD) and written to dist/<route>.html.
 //      The browser then hydrates it (src/main.jsx).
@@ -13,7 +14,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
-const SITE = 'https://fakaunas.lt';
+// Must match site.url in src/content/lt/site.js (www is the primary domain)
+const SITE = 'https://www.fakaunas.lt';
 const NOINDEX = new Set(['/privatumo-politika']);
 
 const { render, prerenderRoutes, articleDates } = await import(
