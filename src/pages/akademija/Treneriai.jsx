@@ -27,7 +27,7 @@ function Profile({ coach, index }) {
         <Reveal className="lg:col-span-4">
           <div className="lg:sticky lg:top-28">
             <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-line max-w-[14rem] sm:max-w-sm lg:max-w-none">
-              <CoachPortrait coach={coach} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 384px, 100vw" initialsClassName="text-[8rem]" />
+              <CoachPortrait coach={coach} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 384px, 100vw" initialsClassName="text-6xl" />
             </div>
           </div>
         </Reveal>
@@ -40,7 +40,7 @@ function Profile({ coach, index }) {
             </h2>
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <LicenceBadge licence={coach.licencija} />
-              {coach.role && <span className="text-eyebrow uppercase text-accent-bright">{coach.role}</span>}
+              {coach.role && <span className="text-sm font-medium text-accent-bright">{coach.role}</span>}
             </div>
             <p className="mt-8 max-w-prose text-lead text-fg">{coach.trumpai}</p>
             {texts.map((b) => (
@@ -89,13 +89,13 @@ export default function Treneriai() {
                 <Reveal as="li" key={coach.slug} delay={i * 0.05}>
                   <a href={`#${coach.slug}`} className="group block">
                     <div className="relative aspect-[3/4] overflow-hidden rounded-lg border border-line">
-                      <CoachPortrait coach={coach} sizes="(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw" />
-                      <LicenceBadge licence={coach.licencija} className="absolute left-3 top-3 border-transparent bg-surface/80 backdrop-blur" />
+                      <CoachPortrait coach={coach} sizes="(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw" initialsClassName="text-3xl" />
+                      <LicenceBadge licence={coach.licencija} className="absolute right-3 top-3 border-transparent bg-surface/80 backdrop-blur" />
                     </div>
-                    <span className="mt-4 block font-display text-xl font-extrabold uppercase leading-tight text-fg transition-colors group-hover:text-accent-bright">
+                    <span className="mt-4 block px-0.5 font-display text-xl font-extrabold uppercase leading-tight text-fg transition-colors group-hover:text-accent-bright">
                       {coach.vardas}
                     </span>
-                    {coach.role && <span className="mt-1 block text-eyebrow uppercase text-accent-bright">{coach.role}</span>}
+                    {coach.role && <span className="mt-1.5 block px-0.5 text-sm leading-snug text-accent-bright">{coach.role}</span>}
                   </a>
                 </Reveal>
               ))}

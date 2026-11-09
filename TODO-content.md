@@ -13,7 +13,7 @@ All copy lives under `src/content/lt/`.
    should receive registrations, then send one real test registration from the deployed site
    (see "Trial registration flow").
 2. **Training schedule per group**: days, times, place. Parents look for this first (see "Programs").
-3. **Coach portraits and the new group list** (see "Coaches" and "Programs").
+3. **The new group list** (see "Programs").
 4. **Privacy policy text**: the forms link to it; the page is a placeholder and hidden from search engines.
 5. **Confirm the home page numbers** (see "Academy facts to confirm").
 
@@ -28,8 +28,7 @@ All copy lives under `src/content/lt/`.
       intensity, ball close-ups, a team huddle. At least 1080p. → `home.js` → `hero.video`
 - [ ] Hero stills: 3–5 landscape photos, at least 2400 px wide, with space for text on the left or bottom.
       The current `hero*.jpg` are 1920×756, which is too short for a full-screen hero on phones.
-- [ ] **Coach portraits** for all coaches except Remigijus Mikalainis: same background, light and framing, waist-up,
-      at least 1200 px tall. Use Remigijus' photo (club training top, plain wall) as the reference. → `coaches.js` → `portrait`
+- [x] Coach portraits (all six, added Nov 2026)
 - [ ] Facilities: each pitch, the winter/indoor venue, changing rooms, the entrance. → `facilities.js` → `venues.items`
       and `home.js` → `facilities.photos`
 - [ ] One action photo per age group (2015–2016, 2017–2018, 2019–2021)
@@ -58,8 +57,7 @@ max group size. Optional: U-label (e.g. U11).
 ## Coaches → `coaches.js`
 Current staff (updated Nov 2026): Gabrielius Zagurskas, Rokas Mazur, Lukas Čerkauskas, Eivydas Tumasas,
 Remigijus Mikalainis, Paulius Sirotavičius.
-- [ ] Portraits for everyone except Remigijus Mikalainis (put them in `public/treneriai/`, run
-      `npm run images`, set `portrait`). Until then an initials tile shows.
+- [x] Portraits for all six coaches (added Nov 2026)
 - [ ] Licences for Rokas Mazur, Lukas Čerkauskas, Eivydas Tumasas, Remigijus Mikalainis, Paulius Sirotavičius
       (only Gabrielius' UEFA A is on the site). → `licencija`
 - [ ] Eivydas Tumasas: a slightly longer bio and career list, if available

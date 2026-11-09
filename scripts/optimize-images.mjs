@@ -1,6 +1,6 @@
 // Image pipeline: `npm run images`
 //
-// For every JPEG/PNG under public/ (except the folders in SKIP_DIRS) it:
+// For every JPEG/PNG/WebP under public/ (except the folders in SKIP_DIRS) it:
 //   1. The first time it sees an image, shrinks the original in place to at most MAX_EDGE px
 //      on the long side and re-encodes it (mozjpeg / max-compression PNG), but only if that
 //      makes the file smaller. This file stays the <img> fallback for non-AVIF browsers.
@@ -25,9 +25,13 @@ const MANIFEST = path.join(ROOT, 'src', 'generated', 'images.json');
 
 const SKIP_DIRS = new Set(['optimized', 'fonts']);
 // Served as-is: browser icons, the logo (small PNG with alpha) and the social share image
-const SKIP_FILES = new Set(['logo.png', 'favicon-48.png', 'apple-touch-icon.png', 'og-default.jpg']);
+const SKIP_FILES = new Set(['logo.png', 'logo.webp', 'favicon-48.png', 'apple-touch-icon.png', 'og-default.jpg']);
 const MAX_EDGE = 1920;
 const AVIF = { quality: 50, effort: 4 };
+// Portraits: faces, fabric and cut-out edges need more detail than match photos, and full
+// colour resolution (4:4:4) keeps the transparent edges clean.
+const AVIF_PORTRAIT = { quality: 72, effort: 6, chromaSubsampling: '4:4:4' };
+const avifFor = (rel) => (rel.startsWith('treneriai/') ? AVIF_PORTRAIT : AVIF);
 const JPEG = { quality: 80, mozjpeg: true };
 
 // Hero-sized images at the public root get a 1920 variant; content images stop at 1280 and
@@ -35,8 +39,13 @@ const JPEG = { quality: 80, mozjpeg: true };
 // images on typical phones (≈410 CSS px at 2–2.6× density).
 const widthsFor = (rel) => (rel.includes('/') ? [320, 640, 960, 1280] : [640, 960, 1280, 1920]);
 const plannedWidths = (rel, width) => {
-  const w = widthsFor(rel).filter((x) => x <= width);
-  return w.length ? w : [width];
+  const all = widthsFor(rel);
+  const w = all.filter((x) => x <= width);
+  if (w.length === 0) return [width];
+  // Image is narrower than the next standard size (e.g. 944 px, no 960): add its own width so
+  // large displays still get the full resolution instead of stopping at 640
+  if (w.length < all.length && width > w[w.length - 1] * 1.1) w.push(width);
+  return w;
 };
 
 const force = process.argv.includes('--force');
@@ -48,7 +57,7 @@ async function walk(dir) {
     const full = path.join(dir, e.name);
     if (e.isDirectory()) {
       if (!SKIP_DIRS.has(e.name)) files.push(...(await walk(full)));
-    } else if (/\.(jpe?g|png)$/i.test(e.name) && !SKIP_FILES.has(e.name)) {
+    } else if (/\.(jpe?g|png|webp)$/i.test(e.name) && !SKIP_FILES.has(e.name)) {
       files.push(full);
     }
   }
@@ -62,11 +71,14 @@ const toHex = ({ r, g, b }) => '#' + [r, g, b].map((v) => v.toString(16).padStar
 async function shrinkOriginal(file, buf) {
   const img = sharp(buf, { failOn: 'none' }).rotate();
   const meta = await img.metadata();
-  const isPng = meta.format === 'png';
   const resized = img.resize({ width: MAX_EDGE, height: MAX_EDGE, fit: 'inside', withoutEnlargement: true });
-  const out = isPng
-    ? await resized.png({ compressionLevel: 9, adaptiveFiltering: true }).toBuffer()
-    : await resized.jpeg(JPEG).toBuffer();
+  // Keep the format (and transparency) of the source file
+  const out =
+    meta.format === 'png'
+      ? await resized.png({ compressionLevel: 9, adaptiveFiltering: true }).toBuffer()
+      : meta.format === 'webp'
+        ? await resized.webp({ quality: 86, alphaQuality: 90 }).toBuffer()
+        : await resized.jpeg(JPEG).toBuffer();
   if (out.length < buf.length) {
     await fs.writeFile(file, out);
     return out;
@@ -107,9 +119,14 @@ async function main() {
     const meta = await sharp(buf).metadata();
     const widths = plannedWidths(rel, meta.width);
 
+    // Sizes this image had before but no longer gets (the size list changed): remove them
+    for (const w of prev?.widths ?? []) {
+      if (!widths.includes(w)) await fs.rm(path.join(PUBLIC, `${prev.base}-${w}.avif`), { force: true });
+    }
+
     await fs.mkdir(path.dirname(path.join(PUBLIC, base)), { recursive: true });
     for (const w of widths) {
-      await sharp(buf).resize({ width: w, withoutEnlargement: true }).avif(AVIF).toFile(path.join(PUBLIC, `${base}-${w}.avif`));
+      await sharp(buf).resize({ width: w, withoutEnlargement: true }).avif(avifFor(rel)).toFile(path.join(PUBLIC, `${base}-${w}.avif`));
     }
 
     const { dominant } = await sharp(buf).stats();
@@ -125,11 +142,14 @@ async function main() {
     process.stdout.write(`✓ ${key} ${meta.width}×${meta.height} → ${widths.join('/')}\n`);
   }
 
-  // Drop variants whose source image no longer exists
+  // Drop variants whose source image no longer exists. A replacement source with the same name
+  // (rokas.jpg → rokas.webp) writes to the same paths, so never delete a path still in use.
+  const inUse = new Set(Object.values(next).flatMap((e) => e.widths.map((w) => `${e.base}-${w}.avif`)));
   for (const key of Object.keys(manifest)) {
     if (next[key]) continue;
     for (const w of manifest[key].widths) {
-      await fs.rm(path.join(PUBLIC, `${manifest[key].base}-${w}.avif`), { force: true });
+      const variant = `${manifest[key].base}-${w}.avif`;
+      if (!inUse.has(variant)) await fs.rm(path.join(PUBLIC, variant), { force: true });
     }
   }
 
