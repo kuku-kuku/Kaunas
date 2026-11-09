@@ -163,6 +163,22 @@
   }
 }
 
+/* Photo viewer (components/Lightbox.jsx): the dimmed backdrop fades in and out with the photo */
+dialog.lightbox::backdrop {
+  background: rgb(5 5 5 / 0.92);
+  backdrop-filter: blur(6px);
+  animation: lightbox-fade-in 0.25s ease-out;
+}
+dialog.lightbox[data-closing]::backdrop {
+  animation: lightbox-fade-out 0.22s ease-in forwards;
+}
+@keyframes lightbox-fade-in {
+  from { opacity: 0; }
+}
+@keyframes lightbox-fade-out {
+  to { opacity: 0; }
+}
+
 @layer utilities {
   .clip-reveal {
     clip-path: inset(0 100% 0 0);
