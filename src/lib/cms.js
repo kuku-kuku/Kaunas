@@ -29,10 +29,22 @@ function normalizeNewsItem(n) {
     obj?.data?.url ||
     null;
 
-  const coverUrl = pickUrl(n.coverImage);
-  const gallery = Array.isArray(n.gallery)
-    ? n.gallery.map((g) => ({ url: pickUrl(g) })).filter((x) => x.url)
-    : [];
+  // Strapi stores the original plus resized "formats" (thumbnail/small/medium/large).
+  // Keep size info and the formats so pages can load a fitting size instead of the original.
+  const media = (obj) => {
+    const m = obj?.data?.attributes ?? obj?.data ?? obj;
+    const url = pickUrl(obj);
+    if (!url) return null;
+    const formats = Object.values(m?.formats || {})
+      .filter((f) => f?.url && f?.width)
+      .map((f) => ({ url: f.url, width: f.width }));
+    if (m?.width) formats.push({ url, width: m.width });
+    formats.sort((a, b) => a.width - b.width);
+    return { url, width: m?.width || null, height: m?.height || null, formats };
+  };
+
+  const cover = media(n.coverImage);
+  const gallery = Array.isArray(n.gallery) ? n.gallery.map(media).filter(Boolean) : [];
 
   return {
     id: n.id,
@@ -47,7 +59,7 @@ function normalizeNewsItem(n) {
     highlight: n.highlight || null,           // ← PRIDĖTA!
     highlightQuote: n.highlightQuote || null,
 
-    coverImage: coverUrl ? { url: coverUrl } : null,
+    coverImage: cover,
     gallery,
 
     createdAt: n.createdAt,
@@ -74,6 +86,12 @@ async function fetchJson(url) {
   }
 
   return res.json();
+}
+
+// srcset string for a CMS image ({ formats: [{ url, width }] }), or undefined
+export function cmsSrcSet(image) {
+  if (!image?.formats?.length) return undefined;
+  return image.formats.map((f) => `${cmsUrl(f.url)} ${f.width}w`).join(', ');
 }
 
 export async function fetchNewsList() {

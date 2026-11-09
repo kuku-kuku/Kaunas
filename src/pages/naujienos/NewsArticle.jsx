@@ -5,7 +5,7 @@ import Lightbox from '../../components/Lightbox';
 import { Container, ResponsiveImage, RichText } from '../../components/ui';
 import { articles } from '../../content/lt/articles';
 import { site } from '../../content';
-import { fetchNewsBySlug, cmsUrl } from '../../lib/cms';
+import { fetchNewsBySlug, cmsUrl, cmsSrcSet } from '../../lib/cms';
 import { useNews, formatNewsDate, newsHref } from '../../lib/useNews';
 
 const SIGN_OFF = 'FA Kaunas – nuo svajonės iki realybės!';
@@ -53,9 +53,17 @@ function Body({ blocks }) {
 }
 
 function fromCms(n) {
-  const gallery = (n.gallery || []).map((g) => cmsUrl(g.url)).filter(Boolean);
-  const cover = cmsUrl(n.coverImage?.url);
+  // Size info per image URL, so the page can reserve space and pick a smaller CMS format
+  const media = {};
+  const add = (img) => {
+    const url = cmsUrl(img?.url);
+    if (url) media[url] = { width: img.width, height: img.height, srcSet: cmsSrcSet(img) };
+    return url;
+  };
+  const gallery = (n.gallery || []).map(add).filter(Boolean);
+  const cover = add(n.coverImage);
   return {
+    media,
     slug: n.slug,
     date: n.date,
     badge: n.badgeTitle || n.highlight || null,
@@ -169,19 +177,34 @@ export default function NewsArticle() {
         {/* ─── Cover ─── */}
         {cover && (
           <Container className="mt-12 md:mt-16">
+            {/* The whole photo is shown at its own shape (never cropped), height-capped so tall
+                photos don't fill the screen. Space beside narrower photos is filled with a blurred,
+                darkened copy of the same image. */}
             <button
               type="button"
               onClick={() => setLightbox(0)}
-              className="group block w-full overflow-hidden rounded-lg"
+              className="group relative flex w-full justify-center overflow-hidden rounded-lg bg-surface-raised"
               aria-label={`Didinti nuotrauką: ${alt}`}
             >
               <ResponsiveImage
                 src={cover}
+                alt=""
+                aria-hidden="true"
+                srcSet={article.media?.[cover]?.srcSet}
+                sizes="400px"
+                className="pointer-events-none absolute inset-0 block h-full w-full"
+                imgClassName="h-full w-full scale-125 object-cover opacity-50 blur-2xl"
+              />
+              <ResponsiveImage
+                src={cover}
                 alt={alt}
                 priority
+                srcSet={article.media?.[cover]?.srcSet}
+                width={article.media?.[cover]?.width}
+                height={article.media?.[cover]?.height}
                 sizes="(min-width: 1280px) 1280px, 100vw"
-                className="block aspect-[16/10] w-full md:aspect-[16/8]"
-                imgClassName="h-full w-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.02]"
+                className="relative block"
+                imgClassName="max-h-[75vh] w-auto max-w-full object-contain shadow-2xl shadow-black/40 transition-transform duration-700 ease-out-expo group-hover:scale-[1.01]"
               />
             </button>
           </Container>
@@ -215,10 +238,11 @@ export default function NewsArticle() {
                     >
                       <ResponsiveImage
                         src={src}
+                        srcSet={article.media?.[src]?.srcSet}
                         alt=""
                         sizes="(min-width: 768px) 33vw, 50vw"
                         className="block aspect-[4/3] w-full"
-                        imgClassName="h-full w-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.04]"
+                        imgClassName="h-full w-full object-cover object-[50%_30%] transition-transform duration-700 ease-out-expo group-hover:scale-[1.04]"
                       />
                     </button>
                   </li>
@@ -247,10 +271,11 @@ export default function NewsArticle() {
                       {n.image && (
                         <ResponsiveImage
                           src={n.image}
+            srcSet={n.imageSrcSet}
                           alt=""
                           sizes="(min-width: 768px) 33vw, 100vw"
                           className="block h-full w-full"
-                          imgClassName="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                          imgClassName="h-full w-full object-cover object-[50%_30%] transition-transform duration-700 group-hover:scale-[1.03]"
                         />
                       )}
                     </div>
