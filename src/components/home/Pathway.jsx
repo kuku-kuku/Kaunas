@@ -47,16 +47,18 @@ export default function Pathway() {
               <span className="mt-2 block font-body text-eyebrow font-medium uppercase text-fg-subtle">gimimo metai</span>
             </h3>
 
-            <dl className="mt-auto space-y-4 pt-10 text-sm">
-              {step.teams.map((team) => (
-                <div key={team.vyrTreneris}>
-                  <dt className="text-eyebrow uppercase text-fg-subtle">
-                    Vyr. treneris{team.grupe ? ` · grupė ${team.grupe}` : ''}
-                  </dt>
-                  <dd className="mt-1 text-fg">{team.vyrTreneris}</dd>
-                </div>
-              ))}
-            </dl>
+            {step.teams.some((t) => t.vyrTreneris) && (
+              <dl className="mt-auto space-y-4 pt-10 text-sm">
+                {step.teams.filter((t) => t.vyrTreneris).map((team) => (
+                  <div key={`${team.metai}-${team.grupe}`}>
+                    <dt className="text-eyebrow uppercase text-fg-subtle">
+                      Vyr. treneris{team.grupe ? ` · grupė ${team.grupe}` : ''}
+                    </dt>
+                    <dd className="mt-1 text-fg">{team.vyrTreneris}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
           </Reveal>
         ))}
 

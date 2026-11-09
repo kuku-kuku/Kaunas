@@ -13,7 +13,7 @@ All copy lives under `src/content/lt/`.
    should receive registrations, then send one real test registration from the deployed site
    (see "Trial registration flow").
 2. **Training schedule per group**: days, times, place. Parents look for this first (see "Programs").
-3. **Coach portraits**: five photos in the same style as Remigijus Mikalainis' (see "Photo & video shoot").
+3. **Coach portraits and the new group list** (see "Coaches" and "Programs").
 4. **Privacy policy text**: the forms link to it; the page is a placeholder and hidden from search engines.
 5. **Confirm the home page numbers** (see "Academy facts to confirm").
 
@@ -28,9 +28,8 @@ All copy lives under `src/content/lt/`.
       intensity, ball close-ups, a team huddle. At least 1080p. → `home.js` → `hero.video`
 - [ ] Hero stills: 3–5 landscape photos, at least 2400 px wide, with space for text on the left or bottom.
       The current `hero*.jpg` are 1920×756, which is too short for a full-screen hero on phones.
-- [ ] **Coach portraits** for Gabrielius Zagurskas, Marius Činikas, Lukas Sipavičius, Tomas Macelis and Ernestas
-      Bernota: same background, light and framing, waist-up, at least 1200 px tall. Use Remigijus Mikalainis'
-      photo (club training top, plain light wall, arms crossed) as the reference. → `coaches.js` → `portrait`
+- [ ] **Coach portraits** for all coaches except Remigijus Mikalainis: same background, light and framing, waist-up,
+      at least 1200 px tall. Use Remigijus' photo (club training top, plain wall) as the reference. → `coaches.js` → `portrait`
 - [ ] Facilities: each pitch, the winter/indoor venue, changing rooms, the entrance. → `facilities.js` → `venues.items`
       and `home.js` → `facilities.photos`
 - [ ] One action photo per age group (2015–2016, 2017–2018, 2019–2021)
@@ -40,13 +39,15 @@ All copy lives under `src/content/lt/`.
 After adding photos to `public/`, run `npm run images` to create the optimised versions.
 
 ## Academy facts to confirm
-- [ ] Home page counters: players ("100+") and age groups ("4", although the site lists 3 birth-year groups with
-      4 teams). The founding year (2022) is on the About page; the coach count updates automatically. → `stats.js`
+- [ ] Home page counters: players ("100+") and age groups ("4"; update together with the new group list). The founding year (2022) is on the About page; the coach count updates automatically. → `stats.js`
 - [ ] Other numbers worth showing: tournaments per season, international tournaments, national youth team call-ups
 - [ ] Alumni who moved to pro clubs or national youth teams (name, club, year, permission to publish) → `home.js` → `results`
 - [ ] Trophies / podium finishes to highlight
 
 ## Programs (per age group) → `groups.js`
+- [ ] **New group list**: which birth-year groups exist now and who coaches each one. The coach roles mention
+      2015, 2015–2017, 2019/2020 and 2021/2022, which don't match the groups on the site (2015–2016, 2017–2018,
+      2019–2021). Until this arrives the groups are shown without coach names.
 For each group: training days and times, place, season length, main focus, monthly fee (or "on request"),
 max group size. Optional: U-label (e.g. U11).
 - [ ] 2015–2016 (teams A and B)
@@ -55,15 +56,13 @@ max group size. Optional: U-label (e.g. U11).
 - [ ] Is there a group for children born after 2021? Separate goalkeeper sessions?
 
 ## Coaches → `coaches.js`
-For each coach: confirm role, licence and licence year, a 2–3 sentence bio and career highlights.
-Ages were removed from the site because they went out of date; add them back only if wanted.
-- [ ] Gabrielius Zagurskas
-- [ ] Marius Činikas
-- [ ] Lukas Sipavičius
-- [ ] Tomas Macelis
-- [ ] Ernestas Bernota
-- [ ] Remigijus Mikalainis (goalkeeper coach, joined 2025-12): licence and a fuller bio. His profile currently uses
-      the facts from the news article announcing his arrival.
+Current staff (updated Nov 2026): Gabrielius Zagurskas, Rokas Mazur, Lukas Čerkauskas, Eivydas Tumasas,
+Remigijus Mikalainis, Paulius Sirotavičius.
+- [ ] Portraits for everyone except Remigijus Mikalainis (put them in `public/treneriai/`, run
+      `npm run images`, set `portrait`). Until then an initials tile shows.
+- [ ] Licences for Rokas Mazur, Lukas Čerkauskas, Eivydas Tumasas, Remigijus Mikalainis, Paulius Sirotavičius
+      (only Gabrielius' UEFA A is on the site). → `licencija`
+- [ ] Eivydas Tumasas: a slightly longer bio and career list, if available
 
 ## Methodology / pathway → `home.js`, `programs.js`
 - [ ] The development pathway in your words: what each stage focuses on, youngest group to oldest

@@ -15,7 +15,7 @@ export const hero = {
   video: null,
   // Short proof points shown along the bottom of the hero (desktop)
   facts: [
-    { value: 'UEFA A · B · C', label: 'Licencijuoti treneriai' },
+    { value: 'A lyga', label: 'Treneriai su profesionalo patirtimi' },
     { value: 'LT · LV · PL', label: 'Turnyrai trijose šalyse' },
     { value: 'LFF', label: 'Auklėtiniai talentų centre' },
   ],
@@ -51,7 +51,7 @@ export const coachesSection = {
   index: '03',
   eyebrow: 'Treneriai',
   title: 'Treneriai su profesionalo patirtimi',
-  intro: 'Buvę profesionalūs futbolininkai ir jaunimo rinktinių nariai, turintys UEFA licencijas.',
+  intro: 'Buvę profesionalūs futbolininkai ir Lietuvos jaunimo rinktinių nariai.',
   link: { to: '/akademija/treneriai', label: 'Visi treneriai' },
 };
 
