@@ -107,6 +107,11 @@ async function main() {
     const meta = await sharp(buf).metadata();
     const widths = plannedWidths(rel, meta.width);
 
+    // Sizes this image had before but no longer gets (the size list changed): remove them
+    for (const w of prev?.widths ?? []) {
+      if (!widths.includes(w)) await fs.rm(path.join(PUBLIC, `${prev.base}-${w}.avif`), { force: true });
+    }
+
     await fs.mkdir(path.dirname(path.join(PUBLIC, base)), { recursive: true });
     for (const w of widths) {
       await sharp(buf).resize({ width: w, withoutEnlargement: true }).avif(AVIF).toFile(path.join(PUBLIC, `${base}-${w}.avif`));
