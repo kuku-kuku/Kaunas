@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { fetchNewsList, cmsUrl } from './cms';
+import { fetchNewsList, cmsUrl, cmsSrcSet } from './cms';
 import { staticNews } from '../content';
 
 function sortByDateDesc(arr) {
@@ -28,7 +28,7 @@ export function useNews() {
         const list = await fetchNewsList();
         const normalized = (list || []).map((n) => {
           const cover = n.coverImage?.url ? cmsUrl(n.coverImage.url) : null;
-          return { id: n.id, date: n.date, title: n.title, summary: n.excerpt || '', slug: n.slug, image: cover, source: 'cms' };
+          return { id: n.id, date: n.date, title: n.title, summary: n.excerpt || '', slug: n.slug, image: cover, imageSrcSet: cmsSrcSet(n.coverImage), source: 'cms' };
         });
         if (alive) setCmsItems(normalized);
       } catch (e) {

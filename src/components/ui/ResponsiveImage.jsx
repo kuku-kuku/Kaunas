@@ -4,7 +4,8 @@ import manifest from '../../generated/images.json';
 // Renders <picture> with AVIF sources at several widths when the image has been processed
 // by the image pipeline (`npm run images` → src/generated/images.json). Browsers without
 // AVIF get the original file, which the pipeline has already shrunk to ≤1920px.
-// Images not in the manifest (CMS / Cloudinary URLs) render as a plain <img>.
+// Images not in the manifest (CMS / Cloudinary URLs) render as a plain <img>; pass `srcSet`
+// (e.g. from cmsSrcSet) so the browser can pick a smaller CMS format instead of the original.
 //
 // Manifest entry, keyed by public path:
 //   "/hero.jpg": { width, height, widths: [640, 1280, 1920], base: "/optimized/hero", placeholder: "#1b2430" }
@@ -21,6 +22,7 @@ export default function ResponsiveImage({
   className = '',
   imgClassName = '',
   style,
+  srcSet: externalSrcSet,
   ...rest
 }) {
   const entry = manifest[src];
@@ -37,7 +39,17 @@ export default function ResponsiveImage({
   };
 
   if (!entry) {
-    return <img src={src} alt={alt} className={`${className} ${imgClassName}`.trim()} style={style} {...imgProps} />;
+    return (
+      <img
+        src={src}
+        srcSet={externalSrcSet}
+        sizes={externalSrcSet ? sizes : undefined}
+        alt={alt}
+        className={`${className} ${imgClassName}`.trim()}
+        style={style}
+        {...imgProps}
+      />
+    );
   }
 
   const srcSet = entry.widths.map((w) => `${entry.base}-${w}.avif ${w}w`).join(', ');

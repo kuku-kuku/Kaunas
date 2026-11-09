@@ -11,10 +11,11 @@ function NewsCard({ item, large = false }) {
         {item.image && (
           <ResponsiveImage
             src={item.image}
+            srcSet={item.imageSrcSet}
             alt=""
             sizes={large ? '(min-width: 1024px) 58vw, 100vw' : '(min-width: 1024px) 34vw, 100vw'}
             className="block h-full w-full"
-            imgClassName="h-full w-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.03]"
+            imgClassName="h-full w-full object-cover object-[50%_30%] transition-transform duration-700 ease-out-expo group-hover:scale-[1.03]"
           />
         )}
       </div>
