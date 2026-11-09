@@ -3,27 +3,34 @@ import { ResponsiveImage } from './ui';
 
 const initials = (name) => name.split(' ').map((p) => p[0]).join('');
 
-// Coach photo, or a typographic initials tile until a real portrait is shot.
+// Roster-style portrait: club-navy backdrop with the coach's initials, and the cut-out photo
+// (transparent background) standing in front. Without a portrait the backdrop shows alone.
 // Decorative by default (alt=""), because the coach's name is always printed next to it.
 export default function CoachPortrait({ coach, sizes, alt = '', initialsClassName = 'text-[4.5rem]' }) {
-  if (coach.portrait) {
-    return (
-      <ResponsiveImage
-        src={coach.portrait}
-        alt={alt}
-        sizes={sizes}
-        className="block h-full w-full"
-        imgClassName="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.03] lg:grayscale lg:group-hover:grayscale-0"
-      />
-    );
-  }
   return (
-    <div aria-hidden="true" className="flex h-full w-full items-end bg-gradient-to-br from-surface-navy to-surface-raised p-5">
+    <div className="relative h-full w-full overflow-hidden bg-gradient-to-b from-surface-navy via-surface-navy to-surface-raised">
+      {/* Soft club-blue glow behind the head */}
+      <div
+        aria-hidden="true"
+        className="absolute left-1/2 top-[18%] h-2/3 w-[120%] -translate-x-1/2 rounded-full bg-accent/20 blur-3xl"
+      />
       <span
-        className={`font-display font-extrabold uppercase leading-none text-white/10 transition-colors duration-500 group-hover:text-accent/40 ${initialsClassName}`}
+        aria-hidden="true"
+        className={`absolute inset-x-0 top-[6%] text-center font-display font-extrabold uppercase leading-none text-white/[0.07] transition-colors duration-500 group-hover:text-accent/30 ${initialsClassName}`}
       >
         {initials(coach.vardas)}
       </span>
+      {coach.portrait && (
+        <ResponsiveImage
+          src={coach.portrait}
+          alt={alt}
+          sizes={sizes}
+          className="absolute inset-0 block h-full w-full"
+          imgClassName="h-full w-full origin-bottom scale-[1.12] object-cover object-top transition-transform duration-700 group-hover:scale-[1.16]"
+          // Cut-outs are transparent: no placeholder colour behind them
+          style={{ backgroundColor: 'transparent' }}
+        />
+      )}
     </div>
   );
 }

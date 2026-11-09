@@ -1357,7 +1357,7 @@
     "placeholder": "#f8f8f8",
     "hash": "faf29db4e180"
   },
-  "/treneriai/eivydas.jpg": {
+  "/treneriai/eivydas.webp": {
     "width": 1086,
     "height": 1448,
     "widths": [
@@ -1366,10 +1366,10 @@
       960
     ],
     "base": "/optimized/treneriai/eivydas",
-    "placeholder": "#f8f8f8",
-    "hash": "5e94acab3c65"
+    "placeholder": "#181818",
+    "hash": "ff0d0b28538e"
   },
-  "/treneriai/lukas.jpg": {
+  "/treneriai/lukas.webp": {
     "width": 1086,
     "height": 1448,
     "widths": [
@@ -1378,10 +1378,10 @@
       960
     ],
     "base": "/optimized/treneriai/lukas",
-    "placeholder": "#f8f8f8",
-    "hash": "e3ec1b26d5d1"
+    "placeholder": "#181818",
+    "hash": "73088b8ec0e0"
   },
-  "/treneriai/paulius.jpg": {
+  "/treneriai/paulius.webp": {
     "width": 1086,
     "height": 1448,
     "widths": [
@@ -1390,10 +1390,10 @@
       960
     ],
     "base": "/optimized/treneriai/paulius",
-    "placeholder": "#f8f8f8",
-    "hash": "0659755ba5b1"
+    "placeholder": "#181818",
+    "hash": "f2ccd564a367"
   },
-  "/treneriai/remigijus.jpg": {
+  "/treneriai/remigijus.webp": {
     "width": 1086,
     "height": 1448,
     "widths": [
@@ -1402,10 +1402,10 @@
       960
     ],
     "base": "/optimized/treneriai/remigijus",
-    "placeholder": "#f8f8f8",
-    "hash": "26592b4ad9f1"
+    "placeholder": "#181818",
+    "hash": "1a78868b4e9f"
   },
-  "/treneriai/rokas.jpg": {
+  "/treneriai/rokas.webp": {
     "width": 1049,
     "height": 1318,
     "widths": [
@@ -1414,10 +1414,10 @@
       960
     ],
     "base": "/optimized/treneriai/rokas",
-    "placeholder": "#f8f8f8",
-    "hash": "8bc6e690458b"
+    "placeholder": "#282828",
+    "hash": "550bcdb24d0d"
   },
-  "/treneriai/zagurskas.jpg": {
+  "/treneriai/zagurskas.webp": {
     "width": 1086,
     "height": 1448,
     "widths": [
@@ -1426,7 +1426,7 @@
       960
     ],
     "base": "/optimized/treneriai/zagurskas",
-    "placeholder": "#f8f8f8",
-    "hash": "17c71a9548b1"
+    "placeholder": "#181818",
+    "hash": "07b117b14035"
   }
 }

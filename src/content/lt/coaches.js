@@ -1,7 +1,9 @@
 // Coach profiles, in display order after sorting by licence (see lib/coaches.js).
 // licencija / highlight are taken from each coach's own bio below; licencija: null shows no badge.
-// portrait: a path under public/ as a quoted string, e.g. '/treneriai/rokas.jpg'. After adding or
-// replacing a photo run `npm run images`. Coaches without a portrait show an initials tile.
+// portrait: a path under public/ as a quoted string, e.g. '/treneriai/rokas.webp'. Portraits are
+// cut-outs with a transparent background (WebP), shown in front of the club-navy card backdrop.
+// The original photos are kept in assets/originals/treneriai/. After adding or replacing a
+// portrait run `npm run images`. Coaches without a portrait show the backdrop with initials.
 // Bios are plain text: blank line = new paragraph; a line ending in ":" followed by "- " lines
 // becomes a titled list; a line ending in ":" followed by text becomes a titled paragraph.
 
@@ -13,7 +15,7 @@ export const coaches = [
     licencija: 'UEFA A',
     role: 'Akademijos įkūrėjas · 2015 vyr. treneris',
     highlight: 'LFF U19 rinktinės trenerio asistentas / analitikas',
-    portrait: '/treneriai/zagurskas.jpg',
+    portrait: '/treneriai/zagurskas.webp',
     trumpai: 'Buvęs profesionalus futbolininkas, nuo 2021 metų visą dėmesį skiriantis futbolininkų treniravimui.',
     aprasymas: `UEFA A licencija
 
@@ -52,7 +54,7 @@ Trenerio karjera:
     licencija: null,
     role: '2015–2017 vyr. treneris',
     highlight: 'Kauno „Žalgirio“ akademijos auklėtinis, 2 kartus elitinės U19 lygos čempionas',
-    portrait: '/treneriai/rokas.jpg',
+    portrait: '/treneriai/rokas.webp',
     trumpai: 'Vis dar aktyviai sportuojantis Rokas siekia perduoti savo įgytas žinias jauniesiems auklėtiniams.',
     aprasymas: `Treneris turi išskirtinę techninę bazę, kurią puikiai perteikia savo treniruojamiems vaikams.
 
@@ -77,7 +79,7 @@ Atstovavo klubams:
     licencija: null,
     role: '2019/2020 vyr. treneris · 2015–2017 trenerio asistentas',
     highlight: 'Lietuvos A lygos čempionas (2011, 2012), LFF taurės laimėtojas',
-    portrait: '/treneriai/lukas.jpg',
+    portrait: '/treneriai/lukas.webp',
     trumpai: 'Futbolas mano gyvenime nuo penkerių metų.',
     aprasymas: `Per profesionalaus futbolininko karjerą atstovavau Lietuvos A lygos klubams – Panevėžio „Ekranui“, Kauno „Stumbrui“, FK „Panevėžiui“ ir Kauno rajono „Hegelmann“. Taip pat vilkėjau Lietuvos jaunimo rinktinių marškinėlius ir įgijau tarptautinių varžybų patirties.
 
@@ -101,7 +103,7 @@ Sportiniai pasiekimai:
     licencija: null,
     role: '2021/2022 vyr. treneris · 2015–2017 trenerio asistentas',
     highlight: 'Jaunimo U19 čempionas; 3 sezonai LFF 2 lygoje su „Širvėna“',
-    portrait: '/treneriai/eivydas.jpg',
+    portrait: '/treneriai/eivydas.webp',
     trumpai: 'Jaunas, motyvuotas treneris, studijuojantis VDU sporto studijose.',
     aprasymas: `Kilęs iš Biržų, 3 sezonus LFF 2 lygoje atstovavo gimtojo miesto „Širvėną“, jaunimo U19 čempionas, bei kitų amžiaus grupių prizininkas.`,
   },
@@ -113,7 +115,7 @@ Sportiniai pasiekimai:
     licencija: null,
     role: 'Vartininkų treneris · 2015 trenerio asistentas',
     highlight: 'U-19 Lietuvos jaunimo rinktinė; žaidė FK „Sūduva“ ir Hedensted IF (Danija)',
-    portrait: '/treneriai/remigijus.jpg',
+    portrait: '/treneriai/remigijus.webp',
     trumpai: 'Buvęs vartininkas, karjerą baigęs 2020 metais. Nuo 2021 m. treniruoja jaunuosius vartininkus.',
     aprasymas: `Remigijus specializuojasi vartininkų treniravime, didelį dėmesį skiriantis visiems reikalingiems šios pozicijos žaidėjų aspektams, t.y. techninis, fizinis bei psichologinis vartininkų pasiruošimas.
 
@@ -137,7 +139,7 @@ Trenerio karjera:
     licencija: null,
     role: '2021/2022 trenerio asistentas',
     highlight: 'Lietuvos mažojo futbolo rinktinės narys (2022)',
-    portrait: '/treneriai/paulius.jpg',
+    portrait: '/treneriai/paulius.webp',
     trumpai: 'Sukauptą žaidybinę patirtį ir žinias siekia perduoti jauniesiems futbolininkams, daug dėmesio skirdamas techniniam pasirengimui, individualiam tobulėjimui, žaidimo supratimui ir meilei futbolui.',
     aprasymas: `Žaidėjo karjeros stotelės:
 - FK Nevėžis-2
