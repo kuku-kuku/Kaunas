@@ -8,7 +8,7 @@ export const site = {
   url: 'https://www.fakaunas.lt',
   slogan: 'Nuo svajonės iki realybės!',
   description:
-    'FA Kaunas – jaunimo futbolo akademija Kaune. Treniruotės vaikams, UEFA licencijas turintys treneriai, turnyrai Lietuvoje ir užsienyje.',
+    'FA Kaunas – jaunimo futbolo akademija Kaune. Treniruotės vaikams, patyrę treneriai, turnyrai Lietuvoje ir užsienyje.',
   foundingYear: 2022,
   // Paramos gavėjo kodas (VMI FR0512 forma)
   companyCode: '306181717',

@@ -119,15 +119,15 @@ export default function UgdymoPrograma() {
                 </div>
 
                 <div className="space-y-6 lg:col-span-5">
-                  {band.teams.map((team) => (
-                    <dl key={team.vyrTreneris} className="divide-y divide-line rounded-lg border border-line px-5">
+                  {band.teams.filter((t) => t.grupe || t.vyrTreneris || t.asistentai?.length).map((team) => (
+                    <dl key={`${team.metai}-${team.grupe}`} className="divide-y divide-line rounded-lg border border-line px-5">
                       {team.grupe && (
                         <div className="py-3">
                           <dt className="sr-only">Komanda</dt>
                           <dd className="text-eyebrow font-semibold uppercase text-accent-bright">Komanda {team.grupe}</dd>
                         </div>
                       )}
-                      <CoachLine label="Vyr. treneris" name={team.vyrTreneris} />
+                      {team.vyrTreneris && <CoachLine label="Vyr. treneris" name={team.vyrTreneris} />}
                       {team.asistentai?.map((a) => <CoachLine key={a} label="Asistentas" name={a} />)}
                     </dl>
                   ))}

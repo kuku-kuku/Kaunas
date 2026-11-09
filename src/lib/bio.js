@@ -3,6 +3,7 @@
 //   "UEFA A licencija"              → dropped (the licence is shown as a badge)
 //   "Some sentence…"                → { type: 'text', text }
 //   "Žaidėjo karjera:\n- A\n- B"    → { type: 'list', title: 'Žaidėjo karjera', items: ['A', 'B'] }
+//   "Išsilavinimas:\nStudijavo…"     → { type: 'text', title: 'Išsilavinimas', text: 'Studijavo…' }
 //
 // Keeping the source as plain text means bios stay easy to edit by hand.
 export function parseBio(text) {
@@ -18,6 +19,8 @@ export function parseBio(text) {
       blocks.push({ type: 'list', title: lines[0].slice(0, -1), items: lines.slice(1).map((l) => l.slice(2)) });
     } else if (lines.every(isItem)) {
       blocks.push({ type: 'list', title: null, items: lines.map((l) => l.slice(2)) });
+    } else if (lines.length > 1 && lines[0].endsWith(':')) {
+      blocks.push({ type: 'text', title: lines[0].slice(0, -1), text: lines.slice(1).join(' ') });
     } else {
       blocks.push({ type: 'text', text: lines.join(' ') });
     }

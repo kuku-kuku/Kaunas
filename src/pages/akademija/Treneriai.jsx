@@ -44,7 +44,10 @@ function Profile({ coach, index }) {
             </div>
             <p className="mt-8 max-w-prose text-lead text-fg">{coach.trumpai}</p>
             {texts.map((b) => (
-              <p key={b.text} className="mt-4 max-w-prose leading-relaxed text-fg-muted">{b.text}</p>
+              <div key={b.text} className="mt-4 max-w-prose">
+                {b.title && <h3 className="section-label mb-3 mt-8">{b.title}</h3>}
+                <p className="leading-relaxed text-fg-muted">{b.text}</p>
+              </div>
             ))}
           </Reveal>
 

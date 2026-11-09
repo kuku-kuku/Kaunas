@@ -132,7 +132,7 @@ export const ethicsSections = [
 export const academyPage = {
   seo: {
     title: 'Akademija',
-    description: 'FA Kaunas – daugiau nei futbolas: asmenybės ugdymas, UEFA licencijas turintys treneriai, aiški ugdymo programa ir profesionalūs analizės įrankiai.',
+    description: 'FA Kaunas – daugiau nei futbolas: asmenybės ugdymas, patyrę treneriai, aiški ugdymo programa ir profesionalūs analizės įrankiai.',
   },
   eyebrow: 'Akademija',
   title: 'Daugiau nei futbolas',
@@ -152,7 +152,7 @@ export const academyPage = {
     title: 'Sužinokite daugiau',
     links: [
       { to: '/akademija/ugdymo-programa', title: 'Ugdymo programa', text: 'Metodika ir treniruojamos amžiaus grupės. Raskite grupę pagal vaiko gimimo metus.' },
-      { to: '/akademija/treneriai', title: 'Treneriai', text: 'Buvę profesionalūs futbolininkai su UEFA A, B ir C licencijomis.' },
+      { to: '/akademija/treneriai', title: 'Treneriai', text: 'Buvę profesionalūs futbolininkai ir Lietuvos jaunimo rinktinių nariai.' },
       { to: '/akademija/baze', title: 'Bazė ir technologijos', text: 'Kur treniruojamės ir kaip naudojame Stats4Sport, VEO bei LiveTagPRO.' },
     ],
   },
