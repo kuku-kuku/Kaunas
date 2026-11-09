@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Seo from '../../components/Seo';
 import Lightbox from '../../components/Lightbox';
@@ -114,6 +114,11 @@ export default function NewsArticle() {
   const { article, loading } = useArticle(slug);
   const { items } = useNews();
   const [lightbox, setLightbox] = useState(null);
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+  const lightboxSrcSets = useMemo(
+    () => Object.fromEntries(Object.entries(article?.media ?? {}).map(([url, m]) => [url, m.srcSet]).filter(([, set]) => set)),
+    [article],
+  );
 
   if (loading) {
     return <main className="min-h-screen bg-surface pt-40" aria-busy="true" />;
@@ -289,7 +294,14 @@ export default function NewsArticle() {
         </section>
       )}
 
-      <Lightbox images={article.images} index={lightbox} alt={alt} onIndexChange={setLightbox} onClose={() => setLightbox(null)} />
+      <Lightbox
+        images={article.images}
+        srcSets={lightboxSrcSets}
+        index={lightbox}
+        alt={alt}
+        onIndexChange={setLightbox}
+        onClose={closeLightbox}
+      />
     </main>
   );
 }
