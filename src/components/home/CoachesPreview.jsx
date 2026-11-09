@@ -28,23 +28,25 @@ export default function CoachesPreview() {
         </Link>
       </div>
 
-      <ul className="mt-16 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:mt-20 lg:grid-cols-6 lg:gap-x-5">
+      <ul className="mt-16 grid grid-cols-2 gap-x-4 gap-y-12 lg:mt-20 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
         {sorted.map((coach, i) => (
           <Reveal as="li" key={coach.id} delay={i * 0.06}>
             <Link to={`${coachesSection.link.to}#${coach.slug}`} className="group block">
               <div className="relative aspect-[3/4] overflow-hidden rounded-lg border border-line">
-                <CoachPortrait coach={coach} sizes="(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw" />
+                <CoachPortrait coach={coach} sizes="(min-width: 1280px) 400px, (min-width: 1024px) 30vw, 50vw" initialsClassName="text-4xl lg:text-5xl" />
                 {coach.licencija && (
-                  <span className="absolute left-3 top-3 rounded-full bg-surface/80 px-3 py-1 text-eyebrow font-semibold uppercase text-white backdrop-blur">
+                  <span className="absolute right-3 top-3 rounded-full bg-surface/80 px-3 py-1 text-eyebrow font-semibold uppercase text-white backdrop-blur">
                     {coach.licencija}
                   </span>
                 )}
               </div>
-              <h3 className="mt-5 font-display text-xl font-extrabold uppercase leading-tight text-fg transition-colors group-hover:text-accent-bright">
-                {coach.vardas}
-              </h3>
-              {coach.role && <p className="mt-1 text-eyebrow uppercase text-accent-bright">{coach.role}</p>}
-              <p className="mt-2 text-sm leading-snug text-fg-muted">{coach.highlight}</p>
+              <div className="px-1 pt-5">
+                <h3 className="font-display text-xl font-extrabold uppercase leading-tight text-fg transition-colors group-hover:text-accent-bright md:text-2xl">
+                  {coach.vardas}
+                </h3>
+                {coach.role && <p className="mt-2 text-sm font-medium leading-snug text-accent-bright">{coach.role}</p>}
+                <p className="mt-3 border-t border-line pt-3 text-sm leading-relaxed text-fg-muted">{coach.highlight}</p>
+              </div>
             </Link>
           </Reveal>
         ))}

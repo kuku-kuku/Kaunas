@@ -5,7 +5,8 @@
     "widths": [
       640,
       960,
-      1280
+      1280,
+      1440
     ],
     "base": "/optimized/bendruomene",
     "placeholder": "#b8b8b8",
@@ -186,7 +187,8 @@
     "widths": [
       320,
       640,
-      960
+      960,
+      1080
     ],
     "base": "/optimized/naujienos/blitz3",
     "placeholder": "#885828",
@@ -209,7 +211,8 @@
     "widths": [
       320,
       640,
-      960
+      960,
+      1152
     ],
     "base": "/optimized/naujienos/blitz5",
     "placeholder": "#787868",
@@ -221,7 +224,8 @@
     "widths": [
       320,
       640,
-      960
+      960,
+      1080
     ],
     "base": "/optimized/naujienos/blitz6",
     "placeholder": "#e8b868",
@@ -337,7 +341,8 @@
     "widths": [
       320,
       640,
-      960
+      960,
+      1153
     ],
     "base": "/optimized/naujienos/ibra1",
     "placeholder": "#e8d8d8",
@@ -609,7 +614,8 @@
     "widths": [
       320,
       640,
-      960
+      960,
+      1240
     ],
     "base": "/optimized/naujienos/kff2017_1",
     "placeholder": "#080808",
@@ -1126,7 +1132,8 @@
     "width": 480,
     "height": 394,
     "widths": [
-      320
+      320,
+      480
     ],
     "base": "/optimized/naujienos/sportfan",
     "placeholder": "#d8d8c8",
@@ -1328,7 +1335,8 @@
     "width": 424,
     "height": 407,
     "widths": [
-      320
+      320,
+      424
     ],
     "base": "/optimized/partners/camelia",
     "placeholder": "#f8f808",
@@ -1338,7 +1346,8 @@
     "width": 603,
     "height": 599,
     "widths": [
-      320
+      320,
+      603
     ],
     "base": "/optimized/partners/medus",
     "placeholder": "#f8f8f8",
@@ -1358,75 +1367,75 @@
     "hash": "faf29db4e180"
   },
   "/treneriai/eivydas.webp": {
-    "width": 1086,
-    "height": 1448,
+    "width": 944,
+    "height": 1259,
     "widths": [
       320,
       640,
-      960
+      944
     ],
     "base": "/optimized/treneriai/eivydas",
-    "placeholder": "#181818",
-    "hash": "ff0d0b28538e"
+    "placeholder": "#080808",
+    "hash": "c630f99b44f4"
   },
   "/treneriai/lukas.webp": {
-    "width": 1086,
-    "height": 1448,
+    "width": 948,
+    "height": 1264,
     "widths": [
       320,
       640,
-      960
+      948
     ],
     "base": "/optimized/treneriai/lukas",
-    "placeholder": "#181818",
-    "hash": "73088b8ec0e0"
+    "placeholder": "#080808",
+    "hash": "3e9e2b88b0c3"
   },
   "/treneriai/paulius.webp": {
-    "width": 1086,
-    "height": 1448,
+    "width": 964,
+    "height": 1285,
     "widths": [
       320,
       640,
       960
     ],
     "base": "/optimized/treneriai/paulius",
-    "placeholder": "#181818",
-    "hash": "f2ccd564a367"
+    "placeholder": "#080808",
+    "hash": "4dd2037ce695"
   },
   "/treneriai/remigijus.webp": {
-    "width": 1086,
-    "height": 1448,
+    "width": 976,
+    "height": 1301,
     "widths": [
       320,
       640,
       960
     ],
     "base": "/optimized/treneriai/remigijus",
-    "placeholder": "#181818",
-    "hash": "1a78868b4e9f"
+    "placeholder": "#080808",
+    "hash": "561680bc0c5d"
   },
   "/treneriai/rokas.webp": {
-    "width": 1049,
-    "height": 1318,
+    "width": 880,
+    "height": 1173,
     "widths": [
       320,
       640,
-      960
+      880
     ],
     "base": "/optimized/treneriai/rokas",
-    "placeholder": "#282828",
-    "hash": "550bcdb24d0d"
+    "placeholder": "#080808",
+    "hash": "430c53e586da"
   },
   "/treneriai/zagurskas.webp": {
-    "width": 1086,
-    "height": 1448,
+    "width": 934,
+    "height": 1245,
     "widths": [
       320,
       640,
-      960
+      934
     ],
     "base": "/optimized/treneriai/zagurskas",
-    "placeholder": "#181818",
-    "hash": "07b117b14035"
+    "placeholder": "#080808",
+    "hash": "2f4f08bb8eea"
   }
 }

@@ -28,6 +28,10 @@ const SKIP_DIRS = new Set(['optimized', 'fonts']);
 const SKIP_FILES = new Set(['logo.png', 'logo.webp', 'favicon-48.png', 'apple-touch-icon.png', 'og-default.jpg']);
 const MAX_EDGE = 1920;
 const AVIF = { quality: 50, effort: 4 };
+// Portraits: faces, fabric and cut-out edges need more detail than match photos, and full
+// colour resolution (4:4:4) keeps the transparent edges clean.
+const AVIF_PORTRAIT = { quality: 72, effort: 6, chromaSubsampling: '4:4:4' };
+const avifFor = (rel) => (rel.startsWith('treneriai/') ? AVIF_PORTRAIT : AVIF);
 const JPEG = { quality: 80, mozjpeg: true };
 
 // Hero-sized images at the public root get a 1920 variant; content images stop at 1280 and
@@ -35,8 +39,13 @@ const JPEG = { quality: 80, mozjpeg: true };
 // images on typical phones (≈410 CSS px at 2–2.6× density).
 const widthsFor = (rel) => (rel.includes('/') ? [320, 640, 960, 1280] : [640, 960, 1280, 1920]);
 const plannedWidths = (rel, width) => {
-  const w = widthsFor(rel).filter((x) => x <= width);
-  return w.length ? w : [width];
+  const all = widthsFor(rel);
+  const w = all.filter((x) => x <= width);
+  if (w.length === 0) return [width];
+  // Image is narrower than the next standard size (e.g. 944 px, no 960): add its own width so
+  // large displays still get the full resolution instead of stopping at 640
+  if (w.length < all.length && width > w[w.length - 1] * 1.1) w.push(width);
+  return w;
 };
 
 const force = process.argv.includes('--force');
@@ -117,7 +126,7 @@ async function main() {
 
     await fs.mkdir(path.dirname(path.join(PUBLIC, base)), { recursive: true });
     for (const w of widths) {
-      await sharp(buf).resize({ width: w, withoutEnlargement: true }).avif(AVIF).toFile(path.join(PUBLIC, `${base}-${w}.avif`));
+      await sharp(buf).resize({ width: w, withoutEnlargement: true }).avif(avifFor(rel)).toFile(path.join(PUBLIC, `${base}-${w}.avif`));
     }
 
     const { dominant } = await sharp(buf).stats();
